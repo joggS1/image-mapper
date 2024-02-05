@@ -13,7 +13,7 @@ export default {
     'index': './src/index.ts',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'lib'),
     filename: 'index.js',
     library: {
       name: 'image-map-editor',

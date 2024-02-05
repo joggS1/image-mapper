@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
   "type": "module",
-  "repository": "image-map-editor",
-  "main": "dist/image-map-editor.js",
-  "module": "dist/image-map-editor.js",
-  "types": "dist/index.d.ts",
-  "source": "src/index.ts",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -16,7 +13,8 @@
     "build:dev": "webpack --config webpack.dev.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "demo": "webpack serve --config ./examples/node/webpack.config.js",
-    "jsdoc2md": "jsdoc2md -t readme.hbs index.js src/*.js > readme.md"
+    "jsdoc2md": "jsdoc2md -t readme.hbs index.js src/*.js > readme.md",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "xstate": "^4.23.3"
