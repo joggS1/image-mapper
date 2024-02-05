@@ -1,0 +1,37 @@
+{
+  "name": "image-map-editor",
+  "version": "1.0.0",
+  "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
+  "type": "module",
+  "repository": "image-map-editor",
+  "main": "dist/image-map-editor.js",
+  "module": "dist/image-map-editor.js",
+  "types": "dist/index.d.ts",
+  "source": "src/index.ts",
+  "exports": "./index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run test & npm run jsdoc2md & webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "demo": "webpack serve --config ./examples/node/webpack.config.js",
+    "jsdoc2md": "jsdoc2md -t readme.hbs index.js src/*.js > readme.md"
+  },
+  "dependencies": {
+    "xstate": "^4.23.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.2.3",
+    "jsdoc-to-markdown": "^7.1.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.1",
+    "webpack-merge": "^5.8.0"
+  }
+}
