@@ -8,7 +8,6 @@
   "module": "dist/image-map-editor.js",
   "types": "dist/index.d.ts",
   "source": "src/index.ts",
-  "exports": "./index.js",
   "publishConfig": {
     "access": "public"
   },
