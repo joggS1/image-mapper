@@ -8,14 +8,17 @@ import { fileURLToPath, URL } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
+  mode: 'production',
   entry: {
-    'image-map-editor': './src/index.ts',
+    'index': './src/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-    libraryTarget: 'umd',
-    library: 'image-map-editor',
+    filename: 'index.js',
+    library: {
+      name: 'image-map-editor',
+      type: 'umd',
+    },
     umdNamedDefine: true
   },
 
