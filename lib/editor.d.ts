@@ -1,0 +1,44 @@
+import createFSMService from './fsm.js';
+import { Handle } from './handle.js';
+import { EditorOptions, FigureOptions } from './types';
+declare class Editor {
+    width: number;
+    height: number;
+    svg: SVGSVGElement;
+    style: object;
+    fsmService: ReturnType<typeof createFSMService>;
+    componentDrawnHandler: EditorOptions['componentDrawnHandler'];
+    selectModeHandler: EditorOptions['selectModeHandler'];
+    viewClickHandler: EditorOptions['viewClickHandler'];
+    cgroup: SVGGElement;
+    hgroup: SVGGElement;
+    _cacheElementMapping: {
+        [key: string]: SVGAElement;
+    };
+    _idCounter: number;
+    _handleIdCounter: number;
+    constructor(svgEl: SVGSVGElement | string, options?: EditorOptions, style?: {});
+    loadImage(path: string, width: number | string, height: number | string): this;
+    setStyle(style: object): this;
+    rect(): void;
+    polygon(): void;
+    circle(): void;
+    ellipse(): void;
+    selectMode(): void;
+    selectComponent(component: string | any): SVGAElement | undefined;
+    removeComponent(component: string | any): SVGAElement | undefined;
+    on(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
+    off(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
+    getComponentById(id: string): SVGAElement;
+    import(data: string, idInterceptor: (id: string) => string): any;
+    export(escape?: boolean): string;
+    createRectangle(dim: FigureOptions, id: string): any;
+    createCircle(dim: FigureOptions, id: string): any;
+    createEllipse(dim: FigureOptions, id: string): any;
+    createPolygon(data: FigureOptions, id: string): any;
+    registerComponent(component: any, id?: string): any;
+    registerComponentHandle(handle: Handle): any;
+    unregisterComponent(component: any): void;
+}
+declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: {}) => Editor;
+export default _default;

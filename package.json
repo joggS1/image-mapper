@@ -13,8 +13,7 @@
     "build:dev": "webpack --config webpack.dev.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "demo": "webpack serve --config ./examples/node/webpack.config.js",
-    "jsdoc2md": "jsdoc2md -t readme.hbs index.js src/*.js > readme.md",
-    "postinstall": "webpack --config webpack.prod.js"
+    "jsdoc2md": "jsdoc2md -t readme.hbs index.js src/*.js > readme.md"
   },
   "dependencies": {
     "xstate": "^4.23.3"
