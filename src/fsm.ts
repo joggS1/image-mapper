@@ -1,4 +1,4 @@
-import { Handle } from './handle.js';
+import { Handle } from './handle';
 import { createMachine, assign, interpret, actions, send } from 'xstate';
 const { choose } = actions;
 
@@ -150,7 +150,7 @@ const drawingSpecificComponentStates = {
   },
 };
 
-const createFSM = (editor) => {
+const createFSM = (editor: any) => {
   return createMachine(
     {
       context: {
@@ -241,52 +241,53 @@ const createFSM = (editor) => {
     {
       actions: {
         createRectangle: assign({
-          unfinishedComponent: (context, e) =>
+          unfinishedComponent: (context, e: any) =>
             context._editor.createRectangle({ x: e.offsetX, y: e.offsetY }),
         }),
         createCircle: assign({
-          unfinishedComponent: (context, e) =>
+          unfinishedComponent: (context, e: any) =>
             context._editor.createCircle({ x: e.offsetX, y: e.offsetY }),
         }),
         createEllipse: assign({
-          unfinishedComponent: (context, e) =>
+          unfinishedComponent: (context, e: any) =>
             context._editor.createEllipse({ x: e.offsetX, y: e.offsetY }),
         }),
         createPolygon: assign({
-          unfinishedComponent: (context, e) =>
+          unfinishedComponent: (context, e: any) =>
             context._editor.createPolygon({ points: { x: e.offsetX, y: e.offsetY } }),
         }),
         discardUnfinished: (context, e) => {
           context._editor.unregisterComponent(context.unfinishedComponent);
         },
-        resizeUnfinished: (context, e) => {
+        resizeUnfinished: (context: any, e) => {
           context.unfinishedComponent.resize(e.offsetX, e.offsetY);
         },
         selectUnfinished: (context, e) => {
           context._editor.selectComponent(context.unfinishedComponent);
         },
         validComponentFinished: (context, e) => {
-          const c = context.unfinishedComponent;
+          const c: any = context.unfinishedComponent;
           context._editor.componentDrawnHandler &&
             context._editor.componentDrawnHandler(c, c.element.id);
         },
         // polygons only
-        addPoint: (context, e) => {
+        addPoint: (context: any, e) => {
           context.unfinishedComponent.addPoint(e.offsetX, e.offsetY);
           context._editor.selectComponent(context.unfinishedComponent); // send('selectUnfinished'); ?
         },
         // polygons only
-        moveLastPoint: (context, e) => {
+        moveLastPoint: (context: any, e) => {
           context.unfinishedComponent.moveLastPoint(e.offsetX, e.offsetY);
         },
         mouseDownInSelectModeAssign: assign({
           mouseDownInSelectModeObject: (context, e) => e.component,
         }),
         mouseDownInSelectModeUnassign: assign({
+          //@ts-ignore
           mouseDownInSelectModeObject: null,
         }),
         mouseDownInSelectModeObjectMove: (context, e) => {
-          const mouseDownObj = context.mouseDownInSelectModeObject;
+          const mouseDownObj: any = context.mouseDownInSelectModeObject;
           mouseDownObj && mouseDownObj.move && mouseDownObj.move(e.movementX, e.movementY);
         },
         selectComponent: (context, e) => {
@@ -306,11 +307,10 @@ const createFSM = (editor) => {
       },
       guards: {
         isHandle: (context, e) => e.component instanceof Handle,
-        unfinishedIsValid: (context, e) => context.unfinishedComponent.isValid(),
+        unfinishedIsValid: (context: any, e) => context.unfinishedComponent.isValid(),
       },
     },
   );
 };
 
-const createFSMService = (editor) => interpret(createFSM(editor));
-export default createFSMService;
+export const createFSMService = (editor: any) => interpret(createFSM(editor));

@@ -1,5 +1,4 @@
-export default createFSMService;
-declare function createFSMService(editor: any): import("xstate").Interpreter<{
+export declare const createFSMService: (editor: any) => import("xstate").Interpreter<{
     unfinishedComponent: undefined;
     mouseDownInSelectModeObject: undefined;
     _editor: any;

@@ -1,29 +1,25 @@
-export function Polygon(editorOwner: any, points: any): void;
-export class Polygon {
-    constructor(editorOwner: any, points: any);
+import { PolygonOptions, PolygonPoints } from './types/editor';
+declare class Polygon {
     editorOwner: any;
     element: SVGPolygonElement;
-    points: any[];
+    points: PolygonPoints;
     includeAttributes: string[];
-    style: {};
+    style: Record<string, any>;
     isSelected: boolean;
     isFrozen: boolean;
-    freeze(freeze: any): this;
+    constructor(editorOwner: any, points: PolygonPoints);
+    freeze(freeze: boolean): this;
     updateElementPoints(): this;
-    addPoint(x: any, y: any): this;
-    moveLastPoint(x: any, y: any): this;
-    move(deltaX: any, deltaY: any): this;
+    addPoint(x: number, y: number): this;
+    moveLastPoint(x: number, y: number): this;
+    move(deltaX: number, deltaY: number): this;
     isValid(): boolean;
-    setHandlesVisibility(visible: any): this;
-    setIsSelected(isSelected: any): this;
+    setHandlesVisibility(visible: boolean): this;
+    setIsSelected(isSelected: boolean): this;
     getHandles(): any[];
     setStyle(style: any): this;
-    setDataAttributes(attributes: any): this;
-    export(): {
-        points: {
-            x: any;
-            y: any;
-        }[];
-    };
-    _logWarnOnOpOnFrozen(op: any): void;
+    setDataAttributes(attributes: Record<string, string | number>): this;
+    export(): PolygonOptions;
+    private _logWarnOnOpOnFrozen;
 }
+export { Polygon };

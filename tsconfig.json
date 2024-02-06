@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "module": "esnext",
+    "module": "ES6",
     "lib": ["dom", "esnext"],
+    "downlevelIteration": true,
     "moduleResolution": "node",
     "jsx": "react",
     "sourceMap": true,
@@ -17,6 +18,6 @@
     "noUnusedParameters": false,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "example", "src/test"]
+  "include": ["src",  "src/test"],
+  "exclude": ["node_modules", "dist", "example", "babel.config.js", "jest.config.js"]
 }

@@ -1,1 +1,2 @@
-export function onChange(object: any, onChange: any, thisArg: any): any;
+declare const onChange: (object: object, onChange: any, thisArg: any) => any;
+export { onChange };

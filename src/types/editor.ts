@@ -7,6 +7,9 @@ export interface EditorOptions {
   selectModeHandler?: () => void,
   viewClickHandler?: (component: SVGElement, componentId: string) => void,
 }
+
+export type PolygonPoints = Array<{x: number, y: number}>
+
 export type FigureOptions = {
   x: number,
   y: number,
@@ -14,5 +17,22 @@ export type FigureOptions = {
   height: number,
 } & Record<string, string | number>
 export type PolygonOptions = {
-  points: number[]
+  points: PolygonPoints
 } & Record<string, string | number>
+
+export type SVGTagNames = 'circle' | 'ellipse' | 'polygon' | 'rect'
+
+export type Dimensions = {
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+}
+
+export type PropChangeListener = {
+  x: (currX: number, prevX: number, dim: Dimensions) => void;
+  y: (currY: number, prevY: number, dim: Dimensions) => void;
+  width: (currWidth: number, prevWidth: number, dim: Dimensions) => void;
+  height: (currHeight: number, prevHeight: number, dim: Dimensions) => void;
+}
+

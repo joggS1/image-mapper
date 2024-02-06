@@ -3,12 +3,12 @@
  */
 
 import editorFactory from '../editor';
-import { SVG_NS } from '../constants.js';
-import { doc } from '../globals.js';
-import { Rectangle } from '../rect.js';
-import { Circle } from '../circle.js';
-import { Ellipse } from '../ellipse.js';
-import { Polygon } from '../polygon.js';
+import { SVG_NS } from '../constants';
+import { doc } from '../globals';
+import { Rectangle } from '../rect';
+import { Circle } from '../circle';
+import { Ellipse } from '../ellipse';
+import { Polygon } from '../polygon';
 
 describe('Components', () => {
   const editorConstr = editorFactory();
@@ -16,9 +16,13 @@ describe('Components', () => {
   const editor = editorConstr(svgEl);
 
   const components = [
+    //@ts-ignore
     new Rectangle(editor),
+    //@ts-ignore
     new Circle(editor),
+    //@ts-ignore
     new Ellipse(editor),
+    //@ts-ignore
     new Polygon(editor),
   ];
 

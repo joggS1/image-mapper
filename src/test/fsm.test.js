@@ -3,9 +3,10 @@
  */
 
 import { jest } from '@jest/globals';
-import createFSMService from '../fsm.js';
+import {createFSMService} from '../fsm';
 
 describe('State machine', () => {
+  //@ts-ignore
   const fsmService = createFSMService({
     selectComponent: jest.fn(),
     createRectangle: () => ({ isValid: jest.fn() }),

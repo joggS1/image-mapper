@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { onChange } from '../onChangeProxy.js';
+import { onChange } from '../onChangeProxy';
 
 describe('onChange with handler function', () => {
   const mockHandler = jest.fn();

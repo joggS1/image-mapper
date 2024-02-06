@@ -1,15 +1,16 @@
-import { SVG_NS, XLINK_NS } from './constants.js';
-import { root, doc } from './globals.js';
-import createFSMService from './fsm.js';
-import { addEventListeners, removeEventListeners } from './events.js';
-import { onChange } from './onChangeProxy.js';
-import { Polygon } from './polygon.js';
-import { Rectangle } from './rect.js';
-import { Circle } from './circle.js';
-import { Ellipse } from './ellipse.js';
-import { Handle } from './handle.js';
-import { getDefaultStyle } from './style.js';
-import { EditorOptions, FigureOptions } from './types';
+
+import { root, doc } from './globals';
+import {createFSMService} from './fsm';
+import { addEventListeners, removeEventListeners } from './events';
+import { onChange } from './onChangeProxy';
+import { Polygon } from './polygon';
+import { Rectangle } from './rect';
+import { Circle } from './circle';
+import { Ellipse } from './ellipse';
+import { Handle } from './handle';
+import { getDefaultStyle } from './style';
+import { EditorOptions, FigureOptions, PolygonOptions } from './types';
+import { SVG_NS, XLINK_NS } from './constants';
 
 
 class Editor  {
@@ -84,15 +85,18 @@ class Editor  {
     this.svg.appendChild(this.cgroup);
     this.svg.appendChild(this.hgroup);
 
+    //@ts-ignore
     this._cacheElementMapping = onChange({}, (prop: any, newComponent: any, prevComponent: any) => {
       if (newComponent) {
         if (newComponent instanceof Handle) {
-          this.hgroup.appendChild(newComponent.element);
+           //@ts-ignore
+          this.hgroup.appendChild(newComponent.element!);
         } else {
           this.cgroup.appendChild(newComponent.element);
         }
       } else {
         if (prevComponent instanceof Handle) {
+          //@ts-ignore
           this.hgroup.removeChild(prevComponent.element);
         } else {
           this.cgroup.removeChild(prevComponent.element);
@@ -233,7 +237,7 @@ class Editor  {
     return this.registerComponent(new Ellipse(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
   };
 
-  public createPolygon(data: FigureOptions, id: string) {
+  public createPolygon(data: PolygonOptions, id: string) {
     const {points, ...attributes} = data
     return this.registerComponent(new Polygon(this, points).setStyle(this.style).setDataAttributes(attributes), id);
   };
@@ -250,7 +254,7 @@ class Editor  {
     return component;
   };
 
-  public registerComponentHandle (handle: Handle) {
+  public registerComponentHandle (handle: typeof Handle) {
     //@ts-ignore
     return this.registerComponent(handle.setStyle(this.style.handle, this.style.handleHover));
   };
@@ -389,11 +393,6 @@ const deepMerge = (target: any, ...sources: any): object => {
 
   return deepMerge(target, ...sources);
 };
-
-
-
-
-
 
 
 export default (isView?: boolean) => {

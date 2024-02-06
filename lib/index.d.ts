@@ -1,3 +1,4 @@
+import { PolygonOptions, FigureOptions } from './types';
 export declare const editor: (svgEl: string | SVGSVGElement, options?: import("./types").EditorOptions, style?: {}) => {
     width: number;
     height: number;
@@ -39,12 +40,12 @@ export declare const editor: (svgEl: string | SVGSVGElement, options?: import(".
     getComponentById(id: string): SVGAElement;
     import(data: string, idInterceptor: (id: string) => string): any;
     export(escape?: boolean | undefined): string;
-    createRectangle(dim: import("./types").FigureOptions, id: string): any;
-    createCircle(dim: import("./types").FigureOptions, id: string): any;
-    createEllipse(dim: import("./types").FigureOptions, id: string): any;
-    createPolygon(data: import("./types").FigureOptions, id: string): any;
+    createRectangle(dim: FigureOptions, id: string): any;
+    createCircle(dim: FigureOptions, id: string): any;
+    createEllipse(dim: FigureOptions, id: string): any;
+    createPolygon(data: PolygonOptions, id: string): any;
     registerComponent(component: any, id?: string | undefined): any;
-    registerComponentHandle(handle: import("./handle").Handle): any;
+    registerComponentHandle(handle: typeof import("./handle").Handle): any;
     unregisterComponent(component: any): void;
 };
 export declare const view: (svgEl: string | SVGSVGElement, options?: import("./types").EditorOptions, style?: {}) => {
@@ -88,12 +89,12 @@ export declare const view: (svgEl: string | SVGSVGElement, options?: import("./t
     getComponentById(id: string): SVGAElement;
     import(data: string, idInterceptor: (id: string) => string): any;
     export(escape?: boolean | undefined): string;
-    createRectangle(dim: import("./types").FigureOptions, id: string): any;
-    createCircle(dim: import("./types").FigureOptions, id: string): any;
-    createEllipse(dim: import("./types").FigureOptions, id: string): any;
-    createPolygon(data: import("./types").FigureOptions, id: string): any;
+    createRectangle(dim: FigureOptions, id: string): any;
+    createCircle(dim: FigureOptions, id: string): any;
+    createEllipse(dim: FigureOptions, id: string): any;
+    createPolygon(data: PolygonOptions, id: string): any;
     registerComponent(component: any, id?: string | undefined): any;
-    registerComponentHandle(handle: import("./handle").Handle): any;
+    registerComponentHandle(handle: typeof import("./handle").Handle): any;
     unregisterComponent(component: any): void;
 };
 declare const _default: {
@@ -138,12 +139,12 @@ declare const _default: {
         getComponentById(id: string): SVGAElement;
         import(data: string, idInterceptor: (id: string) => string): any;
         export(escape?: boolean | undefined): string;
-        createRectangle(dim: import("./types").FigureOptions, id: string): any;
-        createCircle(dim: import("./types").FigureOptions, id: string): any;
-        createEllipse(dim: import("./types").FigureOptions, id: string): any;
-        createPolygon(data: import("./types").FigureOptions, id: string): any;
+        createRectangle(dim: FigureOptions, id: string): any;
+        createCircle(dim: FigureOptions, id: string): any;
+        createEllipse(dim: FigureOptions, id: string): any;
+        createPolygon(data: PolygonOptions, id: string): any;
         registerComponent(component: any, id?: string | undefined): any;
-        registerComponentHandle(handle: import("./handle").Handle): any;
+        registerComponentHandle(handle: typeof import("./handle").Handle): any;
         unregisterComponent(component: any): void;
     };
     view: (svgEl: string | SVGSVGElement, options?: import("./types").EditorOptions, style?: {}) => {
@@ -187,13 +188,14 @@ declare const _default: {
         getComponentById(id: string): SVGAElement;
         import(data: string, idInterceptor: (id: string) => string): any;
         export(escape?: boolean | undefined): string;
-        createRectangle(dim: import("./types").FigureOptions, id: string): any;
-        createCircle(dim: import("./types").FigureOptions, id: string): any;
-        createEllipse(dim: import("./types").FigureOptions, id: string): any;
-        createPolygon(data: import("./types").FigureOptions, id: string): any;
+        createRectangle(dim: FigureOptions, id: string): any;
+        createCircle(dim: FigureOptions, id: string): any;
+        createEllipse(dim: FigureOptions, id: string): any;
+        createPolygon(data: PolygonOptions, id: string): any;
         registerComponent(component: any, id?: string | undefined): any;
-        registerComponentHandle(handle: import("./handle").Handle): any;
+        registerComponentHandle(handle: typeof import("./handle").Handle): any;
         unregisterComponent(component: any): void;
     };
 };
 export default _default;
+export type { PolygonOptions, FigureOptions, };

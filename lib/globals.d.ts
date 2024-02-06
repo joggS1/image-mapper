@@ -1,2 +1,3 @@
-export const root: Window & typeof globalThis;
-export const doc: Document;
+declare const root: Window & typeof globalThis;
+declare const doc: Document;
+export { root, doc };

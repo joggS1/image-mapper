@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
   "type": "module",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -19,12 +19,16 @@
     "xstate": "^4.23.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.23.9",
+    "@types/jest": "^29.5.12",
+    "babel-jest": "^29.7.0",
     "cross-env": "^7.0.3",
-    "jest": "^27.2.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jsdoc-to-markdown": "^7.1.0",
+    "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.49.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.1",

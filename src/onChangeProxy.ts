@@ -1,6 +1,6 @@
-const onChange = (object, onChange, thisArg) => {
+const onChange = (object: object, onChange: any, thisArg: any) => {
   const handler = {
-    defineProperty(target, property, descriptor) {
+    defineProperty(target: any, property: any, descriptor: any) {
       if (!Object.is(descriptor.value, target[property])) {
         if (typeof onChange === 'function') {
           // propName, newValue, previousValue, updatedObject

@@ -1,4 +1,4 @@
-export function getDefaultStyle(): {
+declare const getDefaultStyle: () => {
     component: {
         fill: string;
         stroke: string;
@@ -35,5 +35,6 @@ export function getDefaultStyle(): {
         opacity: number;
     };
 };
-export function setStyle(element: any, style: any): void;
-export function addHover(element: any, defaultStyle: any, hoverStyle: any): void;
+declare const setStyle: (element: any, style: any) => void;
+declare const addHover: (element: any, defaultStyle: any, hoverStyle: any) => void;
+export { getDefaultStyle, setStyle, addHover };

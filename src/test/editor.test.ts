@@ -4,13 +4,14 @@
 
 import { jest } from '@jest/globals';
 import editorFactory from '../editor';
-import { SVG_NS } from '../constants.js';
-import { doc } from '../globals.js';
+import { SVG_NS } from '../constants';
+import { doc } from '../globals';
 
 describe('Editor', () => {
+  //@ts-ignore
   const editorConstr = editorFactory();
 
-  const makeValidPolygon = (editor) => {
+  const makeValidPolygon = (editor: any) => {
     editor.polygon();
 
     // Making valid polygon (having at least three points)
@@ -43,13 +44,13 @@ describe('Editor', () => {
     const editor = editorConstr('svgidother', { width: 1337 });
     expect(editor.svg).toBeInstanceOf(SVGElement);
     expect(editor.svg.id).toEqual('svgidother');
-    expect(editor.svg.getAttribute('width')).toEqual('1337');
+    expect(editor.svg.getAttribute('width')).toEqual('1337px');
   });
 
   test('drawing component should cache a new valid component', () => {
     const editor = editorConstr('svgid');
     makeValidPolygon(editor);
-    const polygon = editor.getComponentById('polygon_1');
+    const polygon: any = editor.getComponentById('polygon_1');
 
     expect(polygon.element instanceof SVGElement).toBeTruthy();
     expect(polygon.element.tagName).toEqual('polygon');
@@ -132,7 +133,7 @@ describe('View', () => {
 
     // Now import the data to the view
     view.import(editor.export(), (id) => id + '_test-import');
-    const viewRect = view.getComponentById('rect_1_test-import');
+    const viewRect: any = view.getComponentById('rect_1_test-import');
 
     expect(viewRect.element instanceof SVGElement).toBeTruthy();
     expect(viewRect.element.tagName).toEqual('rect');

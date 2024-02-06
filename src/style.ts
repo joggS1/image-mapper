@@ -1,4 +1,4 @@
-import { addEventListeners } from './events.js';
+import { addEventListeners } from './events';
 
 const componentDefault = {
   fill: 'rgb(102, 102, 102)',
@@ -49,10 +49,10 @@ const getDefaultStyle = () => ({
   handleHover: Object.assign({}, handleHoverDefault),
 });
 
-const setStyle = (element, style) =>
+const setStyle = (element: any, style: any) =>
   Object.entries(style).forEach(([attr, value]) => element.setAttribute(attr, value));
 
-const addHover = (element, defaultStyle, hoverStyle) => {
+const addHover = (element: any, defaultStyle: any, hoverStyle: any) => {
   addEventListeners(element, 'mouseenter touchstart', () => setStyle(element, hoverStyle));
   addEventListeners(element, 'mouseleave touchend touchleave', () =>
     setStyle(element, defaultStyle),

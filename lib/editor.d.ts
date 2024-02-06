@@ -1,6 +1,6 @@
-import createFSMService from './fsm.js';
-import { Handle } from './handle.js';
-import { EditorOptions, FigureOptions } from './types';
+import { createFSMService } from './fsm';
+import { Handle } from './handle';
+import { EditorOptions, FigureOptions, PolygonOptions } from './types';
 declare class Editor {
     width: number;
     height: number;
@@ -35,9 +35,9 @@ declare class Editor {
     createRectangle(dim: FigureOptions, id: string): any;
     createCircle(dim: FigureOptions, id: string): any;
     createEllipse(dim: FigureOptions, id: string): any;
-    createPolygon(data: FigureOptions, id: string): any;
+    createPolygon(data: PolygonOptions, id: string): any;
     registerComponent(component: any, id?: string): any;
-    registerComponentHandle(handle: Handle): any;
+    registerComponentHandle(handle: typeof Handle): any;
     unregisterComponent(component: any): void;
 }
 declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: {}) => Editor;
