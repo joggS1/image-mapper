@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
+    "outDir": "./lib",
     "module": "ES6",
     "lib": ["dom", "esnext"],
     "downlevelIteration": true,
