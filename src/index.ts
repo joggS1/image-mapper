@@ -2,9 +2,9 @@ import editorFactory from './editor';
 
 import { PolygonOptions, FigureOptions } from './types';
 
-export const editor = editorFactory(false);
+const editor = editorFactory(false);
 
-export const view = editorFactory(true);
+const view = editorFactory(true);
 
 export default {
   editor,

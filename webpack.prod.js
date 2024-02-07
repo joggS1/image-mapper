@@ -2,36 +2,32 @@
 // const { merge } = wpmerge;
 // import common from './webpack.common.js';
 import path, { dirname } from 'path';
-import { fileURLToPath, URL } from 'url';
+import { fileURLToPath } from 'url';
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
   mode: 'production',
-  entry: {
-    'index': './src/index.ts',
-  },
+  entry: './src/index.ts',
+
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'index.js',
-    library: {
-      name: 'image-map-editor',
-      type: 'umd',
-    },
-    umdNamedDefine: true
+    library: 'image-map-editor',
+    libraryTarget:'umd'
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts']
   },
   devtool: 'source-map',
   module: {
     rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader',
-      exclude: /node_modules/,
+      exclude: /node_modules/
 
     }]
   }
-}
+};
