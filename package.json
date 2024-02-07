@@ -26,7 +26,7 @@
     "jsdoc-to-markdown": "^7.1.0",
     "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
+    "typescript": "^4.8.2",
     "typescript-transform-paths": "^3.4.6"
   }
 }
