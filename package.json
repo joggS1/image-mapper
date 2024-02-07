@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "dependencies": {
     "xstate": "^4.23.3"
