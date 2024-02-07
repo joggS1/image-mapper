@@ -9,8 +9,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "./node_modules/typescript/bin/tsc",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "tsc": "./node_modules/typescript/bin/tsc",
+    "build": "tsc",
     "postinstall": "npm run build"
   },
   "dependencies": {
