@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -13,7 +14,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { CornerShapedElement } from "./factory";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Rectangle = void 0;
+var factory_1 = require("./factory");
 var Rectangle = /** @class */ (function (_super) {
     __extends(Rectangle, _super);
     function Rectangle(editorOwner, x, y, width, height) {
@@ -40,5 +43,5 @@ var Rectangle = /** @class */ (function (_super) {
         return _this;
     }
     return Rectangle;
-}(CornerShapedElement));
-export { Rectangle };
+}(factory_1.CornerShapedElement));
+exports.Rectangle = Rectangle;

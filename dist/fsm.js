@@ -1,6 +1,9 @@
-import { Handle } from './handle';
-import { createMachine, assign, interpret, actions, send } from 'xstate';
-var choose = actions.choose;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createFSMService = void 0;
+var handle_1 = require("./handle");
+var xstate_1 = require("xstate");
+var choose = xstate_1.actions.choose;
 /*
   Machine
   -------
@@ -147,7 +150,7 @@ var drawingSpecificComponentStates = {
     },
 };
 var createFSM = function (editor) {
-    return createMachine({
+    return (0, xstate_1.createMachine)({
         context: {
             unfinishedComponent: undefined,
             mouseDownInSelectModeObject: undefined,
@@ -195,17 +198,17 @@ var createFSM = function (editor) {
                         // We use send on the 'mouseDownInSelectModeUnassign' action to overcome this limitation.
                         on: {
                             KEYDOWN_ESC: {
-                                actions: ['unselectAll', send('mouseDownInSelectModeUnassign')],
+                                actions: ['unselectAll', (0, xstate_1.send)('mouseDownInSelectModeUnassign')],
                             },
                             KEYDOWN_DEL: {
-                                actions: ['deleteComponent', send('mouseDownInSelectModeUnassign')],
+                                actions: ['deleteComponent', (0, xstate_1.send)('mouseDownInSelectModeUnassign')],
                             },
                             mouseDownInSelectModeUnassign: {
                                 actions: 'mouseDownInSelectModeUnassign',
                             },
                         },
                         entry: 'selectModeEntry',
-                        exit: ['unselectAll', send('mouseDownInSelectModeUnassign')],
+                        exit: ['unselectAll', (0, xstate_1.send)('mouseDownInSelectModeUnassign')],
                     },
                     drawMode: {
                         initial: undefined,
@@ -234,22 +237,22 @@ var createFSM = function (editor) {
         },
     }, {
         actions: {
-            createRectangle: assign({
+            createRectangle: (0, xstate_1.assign)({
                 unfinishedComponent: function (context, e) {
                     return context._editor.createRectangle({ x: e.offsetX, y: e.offsetY });
                 },
             }),
-            createCircle: assign({
+            createCircle: (0, xstate_1.assign)({
                 unfinishedComponent: function (context, e) {
                     return context._editor.createCircle({ x: e.offsetX, y: e.offsetY });
                 },
             }),
-            createEllipse: assign({
+            createEllipse: (0, xstate_1.assign)({
                 unfinishedComponent: function (context, e) {
                     return context._editor.createEllipse({ x: e.offsetX, y: e.offsetY });
                 },
             }),
-            createPolygon: assign({
+            createPolygon: (0, xstate_1.assign)({
                 unfinishedComponent: function (context, e) {
                     return context._editor.createPolygon({ points: { x: e.offsetX, y: e.offsetY } });
                 },
@@ -277,10 +280,10 @@ var createFSM = function (editor) {
             moveLastPoint: function (context, e) {
                 context.unfinishedComponent.moveLastPoint(e.offsetX, e.offsetY);
             },
-            mouseDownInSelectModeAssign: assign({
+            mouseDownInSelectModeAssign: (0, xstate_1.assign)({
                 mouseDownInSelectModeObject: function (context, e) { return e.component; },
             }),
-            mouseDownInSelectModeUnassign: assign({
+            mouseDownInSelectModeUnassign: (0, xstate_1.assign)({
                 //@ts-ignore
                 mouseDownInSelectModeObject: null,
             }),
@@ -304,9 +307,10 @@ var createFSM = function (editor) {
             },
         },
         guards: {
-            isHandle: function (context, e) { return e.component instanceof Handle; },
+            isHandle: function (context, e) { return e.component instanceof handle_1.Handle; },
             unfinishedIsValid: function (context, e) { return context.unfinishedComponent.isValid(); },
         },
     });
 };
-export var createFSMService = function (editor) { return interpret(createFSM(editor)); };
+var createFSMService = function (editor) { return (0, xstate_1.interpret)(createFSM(editor)); };
+exports.createFSMService = createFSMService;

@@ -1,3 +1,4 @@
+"use strict";
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -25,17 +26,19 @@ var __values = (this && this.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-import { SVG_NS, dataRegex } from './constants';
-import { doc } from './globals';
-import { Handle } from './handle';
-import { onChange } from './onChangeProxy';
-import { addHover, setStyle } from './style';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Polygon = void 0;
+var constants_1 = require("./constants");
+var globals_1 = require("./globals");
+var handle_1 = require("./handle");
+var onChangeProxy_1 = require("./onChangeProxy");
+var style_1 = require("./style");
 var Polygon = /** @class */ (function () {
     function Polygon(editorOwner, points) {
         var _this = this;
         this.includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
         this.editorOwner = editorOwner;
-        this.element = doc.createElementNS(SVG_NS, 'polygon');
+        this.element = globals_1.doc.createElementNS(constants_1.SVG_NS, 'polygon');
         this.points = []; // proxied points
         this.includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
         points && [points].flat().forEach(function (p) { return _this.addPoint(p.x, p.y); });
@@ -58,14 +61,14 @@ var Polygon = /** @class */ (function () {
         var _this = this;
         var point = { x: x, y: y };
         //@ts-ignore
-        var pointProxy = onChange(point, function (prop, newValue, prevValue, obj) {
+        var pointProxy = (0, onChangeProxy_1.onChange)(point, function (prop, newValue, prevValue, obj) {
             _this._logWarnOnOpOnFrozen('Point moved on');
             _this.updateElementPoints();
             obj.handle['setAttr' + prop.toUpperCase()](newValue);
         });
         // don't observe handle assignment
         //@ts-ignore
-        point.handle = new Handle(x, y, function (deltaX, deltaY) {
+        point.handle = new handle_1.Handle(x, y, function (deltaX, deltaY) {
             pointProxy.x += deltaX;
             pointProxy.y += deltaY;
         }, this.isFrozen);
@@ -106,7 +109,7 @@ var Polygon = /** @class */ (function () {
         this.isSelected = isSelected = isSelected !== undefined ? !!isSelected : true;
         this.setHandlesVisibility(isSelected);
         this.style &&
-            setStyle(this.element, isSelected ? this.style.componentSelect.on : this.style.componentSelect.off);
+            (0, style_1.setStyle)(this.element, isSelected ? this.style.componentSelect.on : this.style.componentSelect.off);
         return this;
     };
     ;
@@ -116,10 +119,10 @@ var Polygon = /** @class */ (function () {
     ;
     Polygon.prototype.setStyle = function (style) {
         this.style = style;
-        setStyle(this.element, style.component);
-        setStyle(this.element, style.componentHover.off);
-        setStyle(this.element, style.componentSelect.off);
-        addHover(this.element, style.componentHover.off, style.componentHover.on);
+        (0, style_1.setStyle)(this.element, style.component);
+        (0, style_1.setStyle)(this.element, style.componentHover.off);
+        (0, style_1.setStyle)(this.element, style.componentSelect.off);
+        (0, style_1.addHover)(this.element, style.componentHover.off, style.componentHover.on);
         return this;
     };
     ;
@@ -139,7 +142,7 @@ var Polygon = /** @class */ (function () {
         try {
             for (var _b = __values(this.element.attributes), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var attribute = _c.value;
-                if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {
+                if (attribute.name in this.includeAttributes || constants_1.dataRegex.test(attribute.name)) {
                     data[attribute.name] = attribute.value;
                 }
             }
@@ -162,4 +165,4 @@ var Polygon = /** @class */ (function () {
     ;
     return Polygon;
 }());
-export { Polygon };
+exports.Polygon = Polygon;
