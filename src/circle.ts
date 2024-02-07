@@ -1,7 +1,6 @@
 import { CornerShapedElement } from './factory';
 import { Dimensions } from './types';
 class Circle extends CornerShapedElement {
-  public element: SVGCircleElement;
   constructor (editorOwner: any, x: number, y: number, width?: number, height?: number) {
     super('circle', {
       // move

@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.onChange = void 0;
 var onChange = function (object, onChange, thisArg) {
     var handler = {
         defineProperty: function (target, property, descriptor) {
@@ -20,4 +17,4 @@ var onChange = function (object, onChange, thisArg) {
     };
     return new Proxy(object, handler);
 };
-exports.onChange = onChange;
+export { onChange };

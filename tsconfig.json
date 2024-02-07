@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "CommonJS",
+    "module": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "downlevelIteration": true,
     "isolatedModules": true,
-    "jsx": "react",
     "declaration": true,
     "outDir": "./dist",
     "baseUrl": "src",

@@ -1,7 +1,6 @@
 import { CornerShapedElement } from "./factory";
 
 class Rectangle extends CornerShapedElement {
-  element: SVGRectElement;
   constructor(editorOwner: any, x: number, y: number, width?: number, height?: number) {
     super('rect', {
       x:  (x, prevX, dim) => {

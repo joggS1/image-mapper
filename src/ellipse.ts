@@ -2,7 +2,6 @@ import { CornerShapedElement } from "./factory";
 
 
 class Ellipse extends CornerShapedElement {
-  element: SVGEllipseElement;
   constructor(editorOwner: any, x: number, y: number, width?: number, height?: number) {
     super('ellipse', {
       x:  (x, prevX, dim) => {

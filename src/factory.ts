@@ -13,19 +13,23 @@ export class CornerShapedElement {
   svgElementName: SVGTagNames
   private includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
   public element: SVGRectElement | SVGCircleElement | SVGPolygonElement | SVGEllipseElement | SVGElement;
-  dim: Dimensions;
+  dim: Dimensions = {
+    x: 0,
+    height: 0,
+    width: 0,
+    y: 0
+  };
   handles: any;
-  style: Record<string, any>;
-  isSelected: boolean;
+  style: Record<string, any> = {};
+  isSelected: boolean = false;
   private propChangeListener: PropChangeListener
-  isFrozen: boolean;
+  isFrozen: boolean = false;
   constructor(svgElementName: SVGTagNames, propChangeListener: PropChangeListener) {
     this.propChangeListener = propChangeListener;
     this.svgElementName = svgElementName
-  }
-
-  public add(editorOwner: any, x: number, y: number, width: number = 0, height: number = 0) {
     this.element = doc.createElementNS(SVG_NS, this.svgElementName);
+  }
+  public add(editorOwner: any, x: number, y: number, width: number = 0, height: number = 0) {
     this.editorOwner = editorOwner;
     //svgElementName, propChangeListener
     this.dim = onChange({
@@ -46,7 +50,7 @@ export class CornerShapedElement {
       // move
       x: (x: number, prevX: number, dim: Dimensions) => {
         this._logWarnOnOpOnFrozen('Dimension property x changed on');
-
+        //@ts-ignore
         this.propChangeListener.x.call(this, ...[x, prevX, dim]);
         this.handles[0].setAttrX(x);
         this.handles[1].setAttrX(x);
@@ -56,7 +60,7 @@ export class CornerShapedElement {
       // move
       y:  (y: number, prevY: number, dim: Dimensions) =>  {
         this._logWarnOnOpOnFrozen('Dimension property y changed on');
-
+        //@ts-ignore
         this.propChangeListener.y.call(this, ...[y, prevY, dim]);
         this.handles[0].setAttrY(y);
         this.handles[1].setAttrY(y + dim.height);
@@ -66,7 +70,7 @@ export class CornerShapedElement {
       // resize
       width:  (width: number, prevWidth: number, dim: Dimensions) => {
         this._logWarnOnOpOnFrozen('Dimension property width changed on');
-
+        //@ts-ignore
         this.propChangeListener.width.call(this, ...[width, prevWidth, dim]);
         this.handles[2].setAttrX(dim.x + width);
         this.handles[3].setAttrX(dim.x + width);
@@ -74,7 +78,7 @@ export class CornerShapedElement {
       // resize
       height:  (height: number, prevHeight: number, dim: Dimensions) => {
         this._logWarnOnOpOnFrozen('Dimension property height changed on');
-
+        //@ts-ignore
         this.propChangeListener.height.call(this, ...[height, prevHeight, dim]);
         this.handles[1].setAttrY(dim.y + height);
         this.handles[3].setAttrY(dim.y + height);
@@ -200,7 +204,7 @@ export class CornerShapedElement {
   };
   public setDataAttributes (attributes: Record<string, string | number>) {
     for (let key in attributes) {
-      this.element.setAttribute(key, String(attributes[key]));
+      this.element?.setAttribute(key, String(attributes[key]));
     }
     return this;
   };
@@ -213,7 +217,7 @@ export class CornerShapedElement {
       width,
       height
     };
-    for (let attribute of this.element.attributes) {
+    for (let attribute of this.element?.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {
         data[attribute.name] = attribute.value;
       }
@@ -224,7 +228,7 @@ export class CornerShapedElement {
 
   private _logWarnOnOpOnFrozen (op: string) {
     if (this.isFrozen) {
-      console.warn(`${op} frozen ${this.element.tagName} with id ${this.element.id}`);
+      console.warn(`${op} frozen ${this.element?.tagName} with id ${this.element?.id}`);
       }
     };
   }

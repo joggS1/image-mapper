@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Circle = void 0;
-var factory_1 = require("./factory");
+import { CornerShapedElement } from './factory';
 var Circle = /** @class */ (function (_super) {
     __extends(Circle, _super);
     function Circle(editorOwner, x, y, width, height) {
@@ -48,5 +45,5 @@ var Circle = /** @class */ (function (_super) {
         return _this;
     }
     return Circle;
-}(factory_1.CornerShapedElement));
-exports.Circle = Circle;
+}(CornerShapedElement));
+export { Circle };

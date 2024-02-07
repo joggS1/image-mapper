@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Ellipse = void 0;
-var factory_1 = require("./factory");
+import { CornerShapedElement } from "./factory";
 var Ellipse = /** @class */ (function (_super) {
     __extends(Ellipse, _super);
     function Ellipse(editorOwner, x, y, width, height) {
@@ -43,5 +40,5 @@ var Ellipse = /** @class */ (function (_super) {
         return _this;
     }
     return Ellipse;
-}(factory_1.CornerShapedElement));
-exports.Ellipse = Ellipse;
+}(CornerShapedElement));
+export { Ellipse };

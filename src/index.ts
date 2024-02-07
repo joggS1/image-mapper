@@ -2,13 +2,16 @@ import editorFactory from './editor';
 
 import { PolygonOptions, FigureOptions } from './types';
 
-const editor = editorFactory(false);
+export const editor = editorFactory(false);
 
-const view = editorFactory(true);
+export const view = editorFactory(true);
 
-export {
+export default {
   editor,
-  view,
+  view
+}
+
+export type {
   PolygonOptions,
   FigureOptions,
 }
