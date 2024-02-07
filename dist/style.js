@@ -1,20 +1,7 @@
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-import { addEventListeners } from './events';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addHover = exports.setStyle = exports.getDefaultStyle = void 0;
+var events_1 = require("./events");
 var componentDefault = {
     fill: 'rgb(102, 102, 102)',
     stroke: 'rgb(51, 51, 51)',
@@ -58,17 +45,18 @@ var getDefaultStyle = function () { return ({
     handle: Object.assign({}, handleDefault),
     handleHover: Object.assign({}, handleHoverDefault),
 }); };
+exports.getDefaultStyle = getDefaultStyle;
 var setStyle = function (element, style) {
     return Object.entries(style).forEach(function (_a) {
-        var _b = __read(_a, 2), attr = _b[0], value = _b[1];
+        var attr = _a[0], value = _a[1];
         return element.setAttribute(attr, value);
     });
 };
+exports.setStyle = setStyle;
 var addHover = function (element, defaultStyle, hoverStyle) {
-    addEventListeners(element, 'mouseenter touchstart', function () { return setStyle(element, hoverStyle); });
-    addEventListeners(element, 'mouseleave touchend touchleave', function () {
+    (0, events_1.addEventListeners)(element, 'mouseenter touchstart', function () { return setStyle(element, hoverStyle); });
+    (0, events_1.addEventListeners)(element, 'mouseleave touchend touchleave', function () {
         return setStyle(element, defaultStyle);
     });
 };
-export { getDefaultStyle, setStyle, addHover };
-//# sourceMappingURL=style.js.map
+exports.addHover = addHover;

@@ -1,3 +1,4 @@
+"use strict";
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -7,39 +8,14 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CornerShapedElement = void 0;
 //@ts-ignore
-import { SVG_NS, dataRegex } from './constants';
-import { doc } from './globals';
-import { Handle } from './handle';
-import { onChange } from './onChangeProxy';
-import { addHover, setStyle } from './style';
+var constants_1 = require("./constants");
+var globals_1 = require("./globals");
+var handle_1 = require("./handle");
+var onChangeProxy_1 = require("./onChangeProxy");
+var style_1 = require("./style");
 var CornerShapedElement = /** @class */ (function () {
     function CornerShapedElement(svgElementName, propChangeListener) {
         this.includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
@@ -51,10 +27,10 @@ var CornerShapedElement = /** @class */ (function () {
         var _this = this;
         if (width === void 0) { width = 0; }
         if (height === void 0) { height = 0; }
-        this.element = doc.createElementNS(SVG_NS, this.svgElementName);
+        this.element = globals_1.doc.createElementNS(constants_1.SVG_NS, this.svgElementName);
         this.editorOwner = editorOwner;
         //svgElementName, propChangeListener
-        this.dim = onChange({
+        this.dim = (0, onChangeProxy_1.onChange)({
             x: x,
             y: y,
             width: 0,
@@ -108,26 +84,26 @@ var CornerShapedElement = /** @class */ (function () {
         }, this);
         this.handles = [
             //@ts-ignore
-            new Handle(x, y, function (deltaX, deltaY) {
+            new handle_1.Handle(x, y, function (deltaX, deltaY) {
                 _this.dim.x += deltaX;
                 _this.dim.width -= deltaX;
                 _this.dim.y += deltaY;
                 _this.dim.height -= deltaY;
             }, this.isFrozen),
             //@ts-ignore
-            new Handle(x, y, function (deltaX, deltaY) {
+            new handle_1.Handle(x, y, function (deltaX, deltaY) {
                 _this.dim.x += deltaX;
                 _this.dim.width -= deltaX;
                 _this.dim.height += deltaY;
             }, this.isFrozen),
             //@ts-ignore
-            new Handle(x, y, function (deltaX, deltaY) {
+            new handle_1.Handle(x, y, function (deltaX, deltaY) {
                 _this.dim.width += deltaX;
                 _this.dim.y += deltaY;
                 _this.dim.height -= deltaY;
             }, this.isFrozen),
             //@ts-ignore
-            new Handle(x, y, function (deltaX, deltaY) {
+            new handle_1.Handle(x, y, function (deltaX, deltaY) {
                 _this.dim.width += deltaX;
                 _this.dim.height += deltaY;
             }, this.isFrozen)
@@ -136,7 +112,7 @@ var CornerShapedElement = /** @class */ (function () {
             _this.editorOwner.registerComponentHandle(h);
         });
         // we want to resize when importing shape data too
-        _a = __read([width, height], 2), this.dim.width = _a[0], this.dim.height = _a[1];
+        _a = [width, height], this.dim.width = _a[0], this.dim.height = _a[1];
         this.style = {};
         this.isSelected = false;
         this.isFrozen = false;
@@ -173,7 +149,7 @@ var CornerShapedElement = /** @class */ (function () {
         this.isSelected = isSelected = isSelected !== undefined ? !!isSelected : true;
         this.setHandlesVisibility(isSelected);
         this.style &&
-            setStyle(this.element, isSelected ? this.style.componentSelect.on : this.style.componentSelect.off);
+            (0, style_1.setStyle)(this.element, isSelected ? this.style.componentSelect.on : this.style.componentSelect.off);
         return this;
     };
     ;
@@ -183,10 +159,10 @@ var CornerShapedElement = /** @class */ (function () {
     ;
     CornerShapedElement.prototype.setStyle = function (style) {
         this.style = style;
-        setStyle(this.element, style.component);
-        setStyle(this.element, style.componentHover.off);
-        setStyle(this.element, style.componentSelect.off);
-        addHover(this.element, style.componentHover.off, style.componentHover.on);
+        (0, style_1.setStyle)(this.element, style.component);
+        (0, style_1.setStyle)(this.element, style.componentHover.off);
+        (0, style_1.setStyle)(this.element, style.componentSelect.off);
+        (0, style_1.addHover)(this.element, style.componentHover.off, style.componentHover.on);
         return this;
     };
     ;
@@ -198,28 +174,18 @@ var CornerShapedElement = /** @class */ (function () {
     };
     ;
     CornerShapedElement.prototype.export = function () {
-        var e_1, _a;
-        var _b = this.dim, x = _b.x, y = _b.y, width = _b.width, height = _b.height;
+        var _a = this.dim, x = _a.x, y = _a.y, width = _a.width, height = _a.height;
         var data = {
             x: x,
             y: y,
             width: width,
             height: height
         };
-        try {
-            for (var _c = __values(this.element.attributes), _d = _c.next(); !_d.done; _d = _c.next()) {
-                var attribute = _d.value;
-                if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {
-                    data[attribute.name] = attribute.value;
-                }
+        for (var _i = 0, _b = this.element.attributes; _i < _b.length; _i++) {
+            var attribute = _b[_i];
+            if (attribute.name in this.includeAttributes || constants_1.dataRegex.test(attribute.name)) {
+                data[attribute.name] = attribute.value;
             }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-            }
-            finally { if (e_1) throw e_1.error; }
         }
         return data;
     };
@@ -232,5 +198,4 @@ var CornerShapedElement = /** @class */ (function () {
     ;
     return CornerShapedElement;
 }());
-export { CornerShapedElement };
-//# sourceMappingURL=factory.js.map
+exports.CornerShapedElement = CornerShapedElement;

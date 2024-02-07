@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.removeEventListeners = exports.addEventListeners = void 0;
 var addEventListeners = function (targets, eventTypes, handler) {
     [targets].flat().forEach(function (target) {
         eventTypes.split(' ').forEach(function (eventType) {
@@ -7,6 +10,7 @@ var addEventListeners = function (targets, eventTypes, handler) {
         });
     });
 };
+exports.addEventListeners = addEventListeners;
 var removeEventListeners = function (targets, eventTypes, handler) {
     [targets].flat().forEach(function (target) {
         eventTypes.split(' ').forEach(function (eventType) {
@@ -14,5 +18,4 @@ var removeEventListeners = function (targets, eventTypes, handler) {
         });
     });
 };
-export { addEventListeners, removeEventListeners };
-//# sourceMappingURL=events.js.map
+exports.removeEventListeners = removeEventListeners;

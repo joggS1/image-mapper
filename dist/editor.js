@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -9,22 +10,6 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -34,37 +19,38 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-import { root, doc } from './globals';
-import { createFSMService } from './fsm';
-import { addEventListeners, removeEventListeners } from './events';
-import { onChange } from './onChangeProxy';
-import { Polygon } from './polygon';
-import { Rectangle } from './rect';
-import { Circle } from './circle';
-import { Ellipse } from './ellipse';
-import { Handle } from './handle';
-import { getDefaultStyle } from './style';
-import { SVG_NS, XLINK_NS } from './constants';
+Object.defineProperty(exports, "__esModule", { value: true });
+var globals_1 = require("./globals");
+var fsm_1 = require("./fsm");
+var events_1 = require("./events");
+var onChangeProxy_1 = require("./onChangeProxy");
+var polygon_1 = require("./polygon");
+var rect_1 = require("./rect");
+var circle_1 = require("./circle");
+var ellipse_1 = require("./ellipse");
+var handle_1 = require("./handle");
+var style_1 = require("./style");
+var constants_1 = require("./constants");
 var Editor = /** @class */ (function () {
     function Editor(svgEl, options, style) {
         var _a, _b, _c;
         if (options === void 0) { options = {}; }
         if (style === void 0) { style = {}; }
         var _this = this;
-        _a = __read([
+        _a = [
             options.width,
             options.height,
             options.componentDrawnHandler, // applies to Editor only
             options.selectModeHandler, // applies to Editor only
             options.viewClickHandler, // applies to View only
-        ], 5), _b = _a[0], this.width = _b === void 0 ? 1200 : _b, _c = _a[1], this.height = _c === void 0 ? 600 : _c, this.componentDrawnHandler = _a[2], this.selectModeHandler = _a[3], this.viewClickHandler = _a[4];
-        this.style = deepMerge(getDefaultStyle(), style);
-        this.fsmService = createFSMService(this).start();
+        ], _b = _a[0], this.width = _b === void 0 ? 1200 : _b, _c = _a[1], this.height = _c === void 0 ? 600 : _c, this.componentDrawnHandler = _a[2], this.selectModeHandler = _a[3], this.viewClickHandler = _a[4];
+        this.style = deepMerge((0, style_1.getDefaultStyle)(), style);
+        this.fsmService = (0, fsm_1.createFSMService)(this).start();
         this.svg = svgEl;
         if (typeof svgEl === 'string') {
-            this.svg = doc.getElementById(svgEl);
+            this.svg = globals_1.doc.getElementById(svgEl);
             if (!this.svg) {
-                this.svg = doc.createElementNS(SVG_NS, 'svg');
+                this.svg = globals_1.doc.createElementNS(constants_1.SVG_NS, 'svg');
                 this.svg.setAttribute('version', '1.1');
                 this.svg.setAttribute('id', svgEl);
                 // this.svg.setAttribute("shape-rendering", "crispEdges");
@@ -74,7 +60,7 @@ var Editor = /** @class */ (function () {
                 this.svg.setAttribute('preserveAspectRatio', 'xMinYMin');
                 var svg_1 = this.svg;
                 window.addEventListener('load', function load() {
-                    doc.body.appendChild(svg_1);
+                    globals_1.doc.body.appendChild(svg_1);
                 }, { once: true });
             }
         }
@@ -83,14 +69,14 @@ var Editor = /** @class */ (function () {
         }
         if (!this.svg)
             throw new Error('No SVG element provided');
-        this.cgroup = doc.createElementNS(SVG_NS, 'g');
-        this.hgroup = doc.createElementNS(SVG_NS, 'g');
+        this.cgroup = globals_1.doc.createElementNS(constants_1.SVG_NS, 'g');
+        this.hgroup = globals_1.doc.createElementNS(constants_1.SVG_NS, 'g');
         this.svg.appendChild(this.cgroup);
         this.svg.appendChild(this.hgroup);
         //@ts-ignore
-        this._cacheElementMapping = onChange({}, function (prop, newComponent, prevComponent) {
+        this._cacheElementMapping = (0, onChangeProxy_1.onChange)({}, function (prop, newComponent, prevComponent) {
             if (newComponent) {
-                if (newComponent instanceof Handle) {
+                if (newComponent instanceof handle_1.Handle) {
                     //@ts-ignore
                     _this.hgroup.appendChild(newComponent.element);
                 }
@@ -99,7 +85,7 @@ var Editor = /** @class */ (function () {
                 }
             }
             else {
-                if (prevComponent instanceof Handle) {
+                if (prevComponent instanceof handle_1.Handle) {
                     //@ts-ignore
                     _this.hgroup.removeChild(prevComponent.element);
                 }
@@ -117,8 +103,8 @@ var Editor = /** @class */ (function () {
     ;
     Editor.prototype.loadImage = function (path, width, height) {
         var _a;
-        var image = doc.createElementNS(SVG_NS, 'image');
-        image.setAttributeNS(XLINK_NS, 'href', path);
+        var image = globals_1.doc.createElementNS(constants_1.SVG_NS, 'image');
+        image.setAttributeNS(constants_1.XLINK_NS, 'href', path);
         width && image.setAttribute('width', String(width));
         height && image.setAttribute('height', String(height));
         (_a = this.svg) === null || _a === void 0 ? void 0 : _a.prepend(image);
@@ -177,12 +163,12 @@ var Editor = /** @class */ (function () {
     };
     ;
     Editor.prototype.on = function (eventTypes, handler) {
-        addEventListeners(this.svg, eventTypes, handler);
+        (0, events_1.addEventListeners)(this.svg, eventTypes, handler);
         return this;
     };
     ;
     Editor.prototype.off = function (eventTypes, handler) {
-        removeEventListeners(this.svg, eventTypes, handler);
+        (0, events_1.removeEventListeners)(this.svg, eventTypes, handler);
         return this;
     };
     ;
@@ -219,11 +205,11 @@ var Editor = /** @class */ (function () {
             idCounter: this._idCounter,
             components: Object.entries(this._cacheElementMapping)
                 .filter(function (_a) {
-                var _b = __read(_a, 2), id = _b[0], component = _b[1];
-                return !(component instanceof Handle);
+                var id = _a[0], component = _a[1];
+                return !(component instanceof handle_1.Handle);
             })
                 .map(function (_a) {
-                var _b = __read(_a, 2), id = _b[0], component = _b[1];
+                var id = _a[0], component = _a[1];
                 return ({
                     id: id,
                     type: component.element.tagName,
@@ -237,26 +223,26 @@ var Editor = /** @class */ (function () {
     ;
     Editor.prototype.createRectangle = function (dim, id) {
         var x = dim.x, y = dim.y, width = dim.width, height = dim.height, attributes = __rest(dim, ["x", "y", "width", "height"]);
-        return this.registerComponent(new Rectangle(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
+        return this.registerComponent(new rect_1.Rectangle(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
     };
     ;
     Editor.prototype.createCircle = function (dim, id) {
         var x = dim.x, y = dim.y, width = dim.width, height = dim.height, attributes = __rest(dim, ["x", "y", "width", "height"]);
-        return this.registerComponent(new Circle(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
+        return this.registerComponent(new circle_1.Circle(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
     };
     ;
     Editor.prototype.createEllipse = function (dim, id) {
         var x = dim.x, y = dim.y, width = dim.width, height = dim.height, attributes = __rest(dim, ["x", "y", "width", "height"]);
-        return this.registerComponent(new Ellipse(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
+        return this.registerComponent(new ellipse_1.Ellipse(this, x, y, width, height).setStyle(this.style).setDataAttributes(attributes), id);
     };
     ;
     Editor.prototype.createPolygon = function (data, id) {
         var points = data.points, attributes = __rest(data, ["points"]);
-        return this.registerComponent(new Polygon(this, points).setStyle(this.style).setDataAttributes(attributes), id);
+        return this.registerComponent(new polygon_1.Polygon(this, points).setStyle(this.style).setDataAttributes(attributes), id);
     };
     ;
     Editor.prototype.registerComponent = function (component, id) {
-        if (component instanceof Handle) {
+        if (component instanceof handle_1.Handle) {
             id = 'handle_' + this._handleIdCounter++;
         }
         else {
@@ -283,7 +269,7 @@ var Editor = /** @class */ (function () {
 }());
 var addEditorListeners = function (editor) {
     var prevTouch; // used by touchmove
-    addEventListeners(editor.svg, 'mousedown touchstart', function (e) {
+    (0, events_1.addEventListeners)(editor.svg, 'mousedown touchstart', function (e) {
         var _a;
         e.preventDefault(); // avoid both mouse and touch event on devices firing both
         var storedComponent = editor.getComponentById(e.target.id);
@@ -298,14 +284,14 @@ var addEditorListeners = function (editor) {
         });
         prevTouch = touch;
     });
-    addEventListeners(editor.svg, 'mouseup touchend mouseleave touchleave', function (e) {
+    (0, events_1.addEventListeners)(editor.svg, 'mouseup touchend mouseleave touchleave', function (e) {
         e.preventDefault(); // avoid both mouse and touch event on devices firing both
         editor.fsmService.send({
             type: 'MT_UP',
         });
         prevTouch = null;
     });
-    addEventListeners(editor.svg, 'mousemove touchmove', function (e) {
+    (0, events_1.addEventListeners)(editor.svg, 'mousemove touchmove', function (e) {
         var _a;
         var touchBCR = (_a = editor.svg) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect();
         var touch = e.targetTouches && e.targetTouches[0];
@@ -318,7 +304,7 @@ var addEditorListeners = function (editor) {
         });
         prevTouch = touch;
     });
-    addEventListeners(root.window, 'keydown', function (e) {
+    (0, events_1.addEventListeners)(globals_1.root.window, 'keydown', function (e) {
         switch (e.key) {
             case 'Escape':
                 editor.fsmService.send('KEYDOWN_ESC');
@@ -365,7 +351,7 @@ var addEditorListeners = function (editor) {
     return editor;
 };
 var addViewListeners = function (view) {
-    addEventListeners(view.cgroup, 'click touchstart', function (e) {
+    (0, events_1.addEventListeners)(view.cgroup, 'click touchstart', function (e) {
         e.preventDefault(); // avoid both touch and pointer event on devices firing both
         view.viewClickHandler && view.viewClickHandler(e, e.target.id);
     });
@@ -381,7 +367,7 @@ var deepMerge = function (target) {
     }
     var source = sources.shift();
     Object.entries(source).forEach(function (_a) {
-        var _b = __read(_a, 2), key = _b[0], value = _b[1];
+        var key = _a[0], value = _a[1];
         if (Object.getPrototypeOf(value) === Object.prototype) {
             deepMerge(target[key], value);
         }
@@ -389,9 +375,9 @@ var deepMerge = function (target) {
             target[key] = value;
         }
     });
-    return deepMerge.apply(void 0, __spreadArray([target], __read(sources), false));
+    return deepMerge.apply(void 0, __spreadArray([target], sources, false));
 };
-export default (function (isView) {
+exports.default = (function (isView) {
     return function EditorConstructor(svgEl, options, style) {
         if (options === void 0) { options = {}; }
         if (style === void 0) { style = {}; }
@@ -400,4 +386,3 @@ export default (function (isView) {
             : addEditorListeners(new Editor(svgEl, options, style));
     };
 });
-//# sourceMappingURL=editor.js.map
