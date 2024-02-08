@@ -3,19 +3,26 @@
   "version": "1.0.0",
   "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "main":"./dist/image-map-editor.umd.js",
+  "module":"./dist/image-map-editor.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/image-map-editor.es.js",
+      "require": "./dist/image-map-editor.umd.js"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "build": "tsc",
+    "build": "vite build && tsc --emitDeclarationOnly",
     "prepare": "husky",
     "format": "prettier --write **/*.{ts,tsx}",
-    "demo": "webpack serve --config ./examples/node/webpack.config.js",
-    "postinstall": "npm run build"
+    "demo": "webpack serve --config ./examples/node/webpack.config.js"
   },
   "dependencies": {
     "xstate": "^4.23.3"
@@ -35,9 +42,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^4.8.2",
     "typescript-transform-paths": "^3.4.6",
-    "webpack": "^5.90.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "vite": "^5.1.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
