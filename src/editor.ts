@@ -82,6 +82,7 @@ export class Editor {
 
     //@ts-ignore
     this._cacheElementMapping = onChange({}, (prop: any, newComponent: any, prevComponent: any) => {
+      console.log(prop, newComponent, prevComponent);
       if (newComponent) {
         if (newComponent instanceof Handle) {
           //@ts-ignore

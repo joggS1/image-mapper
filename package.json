@@ -29,7 +29,7 @@
     "build": "vite build && tsc --emitDeclarationOnly",
     "prepare": "husky",
     "format": "prettier --write **/*.{ts,tsx}",
-    "demo": "webpack serve --config ./examples/node/webpack.config.js"
+    "demo": "node ./startdemo.js"
   },
   "dependencies": {
     "xstate": "^4.23.3"
