@@ -1,23 +1,12 @@
-export declare const createFSMService: (editor: any) => import('xstate').Interpreter<
-  {
+export declare const createFSMService: (editor: any) => import("xstate").Interpreter<{
     unfinishedComponent: undefined;
     mouseDownInSelectModeObject: undefined;
     _editor: any;
-  },
-  any,
-  import('xstate').AnyEventObject,
-  {
+}, any, import("xstate").AnyEventObject, {
     value: any;
     context: {
-      unfinishedComponent: undefined;
-      mouseDownInSelectModeObject: undefined;
-      _editor: any;
+        unfinishedComponent: undefined;
+        mouseDownInSelectModeObject: undefined;
+        _editor: any;
     };
-  },
-  import('xstate').ResolveTypegenMeta<
-    import('xstate').TypegenDisabled,
-    import('xstate').AnyEventObject,
-    import('xstate').BaseActionObject,
-    import('xstate').ServiceMap
-  >
->;
+}, import("xstate").ResolveTypegenMeta<import("xstate").TypegenDisabled, import("xstate").AnyEventObject, import("xstate").BaseActionObject, import("xstate").ServiceMap>>;
