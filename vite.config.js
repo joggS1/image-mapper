@@ -1,7 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 
-const LIB_NAME = 'image-map-editor';
+const LIB_NAME = 'image-mapper';
 
 export default defineConfig({
   build: {
@@ -9,7 +9,6 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: LIB_NAME,
       fileName: (format) => `${LIB_NAME}.${format}.js`,
-      formats: ['es']
     },
     rollupOptions: {
       external: [
