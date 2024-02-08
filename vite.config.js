@@ -8,7 +8,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: LIB_NAME,
-      fileName: (format) => `${LIB_NAME}.${format}.js`
+      fileName: (format) => `${LIB_NAME}.${format}.js`,
+      formats: ['es']
     },
     rollupOptions: {
       external: [

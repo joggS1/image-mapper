@@ -4,9 +4,10 @@
   "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
   "type": "module",
   "license": "MIT",
-  "main":"./dist/image-map-editor.umd.js",
+  "main":"./dist/image-map-editor.es.js",
   "module":"./dist/image-map-editor.es.js",
   "types": "./dist/ts/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/image-map-editor.es.js",
