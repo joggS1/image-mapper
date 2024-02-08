@@ -1,35 +1,18 @@
-name: Publish
+name: Publish Package to npmjs
 on:
-  workflow_run:
-    workflows: [CI]
-    branches: [main]
-    types: [completed]
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
-
-permissions:
-  contents: write
-  pull-requests: write
-
+  release:
+    types: [published]
 jobs:
-  publish:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          version: 7
+      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.x
-          cache: "yarn"
-
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
       - run: yarn install --frozen-lockfile
-      - name: Create Release Pull Request or Publish
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: yarn release
       - run: yarn publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
