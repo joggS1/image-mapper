@@ -1,7 +1,7 @@
-import { Circle } from '@/circle';
-import { Ellipse } from '@/ellipse';
-import { Polygon } from '@/polygon';
-import { Rectangle } from '@/rect';
+import { Circle } from '../circle';
+import { Ellipse } from '../ellipse';
+import { Polygon } from '../polygon';
+import { Rectangle } from '../rect';
 
 export interface EditorOptions {
   width?: number;

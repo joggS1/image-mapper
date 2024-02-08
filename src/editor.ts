@@ -153,7 +153,7 @@ export class Editor {
         if (c !== component && !c.isFrozen) {
           if (c.setIsSelected) {
             c.setIsSelected(false);
-            c.getHandles().forEach((handle) => {
+            c.getHandles().forEach((handle: any) => {
               this.unregisterComponent(handle);
             });
             c.clearHandles();

@@ -13,9 +13,6 @@
     "declaration": true,
     "outDir": "./dist",
     "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"]
-    },
     "plugins": [
       {
         "transform": "typescript-transform-paths"
