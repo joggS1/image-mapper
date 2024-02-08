@@ -23,7 +23,7 @@ describe('Components', () => {
     //@ts-ignore
     new Ellipse(editor),
     //@ts-ignore
-    new Polygon(editor),
+    new Polygon(editor)
   ];
 
   test('has element', () => {

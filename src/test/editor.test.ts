@@ -67,9 +67,9 @@ describe('Editor', () => {
     expect(componentDrawnHandler).toBeCalledTimes(1);
     expect(componentDrawnHandler).toBeCalledWith(
       expect.objectContaining({
-        element: expect.any(SVGElement),
+        element: expect.any(SVGElement)
       }),
-      'polygon_1',
+      'polygon_1'
     );
   });
 
@@ -123,12 +123,12 @@ describe('View', () => {
     editor.fsmService.send({
       type: 'MT_DOWN',
       offsetX: 0,
-      offsetY: 0,
+      offsetY: 0
     });
     editor.fsmService.send({
       type: 'MT_MOVE',
       offsetX: 1,
-      offsetY: 1,
+      offsetY: 1
     });
 
     // Now import the data to the view

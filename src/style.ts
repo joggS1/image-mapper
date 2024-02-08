@@ -3,30 +3,30 @@ import { addEventListeners } from './events';
 const componentDefault = {
   fill: 'rgb(102, 102, 102)',
   stroke: 'rgb(51, 51, 51)',
-  cursor: 'pointer',
+  cursor: 'pointer'
 };
 
 const componentHoverDefault = {
   off: {
     'stroke-width': 1,
-    opacity: 0.5,
+    opacity: 0.5
   },
   on: {
     'stroke-width': 2,
-    opacity: 0.6,
-  },
+    opacity: 0.6
+  }
 };
 
 // TODO: should not be overridden by unhovering
 const componentSelectDefault = {
   off: {
     'stroke-dasharray': 'none', // alt. 'initial'
-    'stroke-linejoin': 'miter',
+    'stroke-linejoin': 'miter'
   },
   on: {
     'stroke-dasharray': '4 3',
-    'stroke-linejoin': 'round',
-  },
+    'stroke-linejoin': 'round'
+  }
 };
 
 const handleDefault = {
@@ -34,11 +34,11 @@ const handleDefault = {
   stroke: 'rgb(51, 51, 51)',
   'stroke-width': 1,
   opacity: 0.3,
-  cursor: 'pointer',
+  cursor: 'pointer'
 };
 
 const handleHoverDefault = {
-  opacity: 0.6,
+  opacity: 0.6
 };
 
 const getDefaultStyle = () => ({
@@ -46,7 +46,7 @@ const getDefaultStyle = () => ({
   componentHover: Object.assign({}, componentHoverDefault),
   componentSelect: Object.assign({}, componentSelectDefault),
   handle: Object.assign({}, handleDefault),
-  handleHover: Object.assign({}, handleHoverDefault),
+  handleHover: Object.assign({}, handleHoverDefault)
 });
 
 const setStyle = (element: any, style: any) =>
@@ -55,7 +55,7 @@ const setStyle = (element: any, style: any) =>
 const addHover = (element: any, defaultStyle: any, hoverStyle: any) => {
   addEventListeners(element, 'mouseenter touchstart', () => setStyle(element, hoverStyle));
   addEventListeners(element, 'mouseleave touchend touchleave', () =>
-    setStyle(element, defaultStyle),
+    setStyle(element, defaultStyle)
   );
 };
 

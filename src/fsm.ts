@@ -48,34 +48,34 @@ const idleDrawModeStates = {
     on: {
       MT_DOWN: {
         actions: ['createRectangle', 'selectUnfinished'],
-        target: '#drawing.rect.mouseIsDown',
-      },
-    },
+        target: '#drawing.rect.mouseIsDown'
+      }
+    }
   },
   circle: {
     on: {
       MT_DOWN: {
         actions: ['createCircle', 'selectUnfinished'],
-        target: '#drawing.circle.mouseIsDown',
-      },
-    },
+        target: '#drawing.circle.mouseIsDown'
+      }
+    }
   },
   ellipse: {
     on: {
       MT_DOWN: {
         actions: ['createEllipse', 'selectUnfinished'],
-        target: '#drawing.ellipse.mouseIsDown',
-      },
-    },
+        target: '#drawing.ellipse.mouseIsDown'
+      }
+    }
   },
   polygon: {
     on: {
       MT_DOWN: {
         actions: ['createPolygon', 'selectUnfinished'],
-        target: '#drawing.polygon.mouseIsDown',
-      },
-    },
-  },
+        target: '#drawing.polygon.mouseIsDown'
+      }
+    }
+  }
 };
 
 const drawingSpecificComponentStates = {
@@ -86,11 +86,11 @@ const drawingSpecificComponentStates = {
           MT_UP: '#idle.drawMode.rect', // consider selection if mouse has not moved
           KEYDOWN_ESC: '#idle.drawMode.rect',
           MT_MOVE: {
-            actions: 'resizeUnfinished',
-          },
-        },
-      },
-    },
+            actions: 'resizeUnfinished'
+          }
+        }
+      }
+    }
   },
   circle: {
     states: {
@@ -99,11 +99,11 @@ const drawingSpecificComponentStates = {
           MT_UP: '#idle.drawMode.circle', // consider selection if mouse has not moved
           KEYDOWN_ESC: '#idle.drawMode.circle',
           MT_MOVE: {
-            actions: 'resizeUnfinished',
-          },
-        },
-      },
-    },
+            actions: 'resizeUnfinished'
+          }
+        }
+      }
+    }
   },
   ellipse: {
     states: {
@@ -112,42 +112,42 @@ const drawingSpecificComponentStates = {
           MT_UP: '#idle.drawMode.ellipse', // consider selection if mouse has not moved
           KEYDOWN_ESC: '#idle.drawMode.ellipse',
           MT_MOVE: {
-            actions: 'resizeUnfinished',
-          },
-        },
-      },
-    },
+            actions: 'resizeUnfinished'
+          }
+        }
+      }
+    }
   },
   polygon: {
     on: {
-      KEYDOWN_ESC: '#idle.drawMode.polygon',
+      KEYDOWN_ESC: '#idle.drawMode.polygon'
     },
     states: {
       mouseIsDown: {
         on: {
           MT_UP: 'mouseIsUp',
           MT_MOVE: {
-            actions: 'moveLastPoint',
-          },
-        },
+            actions: 'moveLastPoint'
+          }
+        }
       },
       mouseIsUp: {
         on: {
           MT_DOWN: [
             {
               cond: 'isHandle',
-              target: '#idle.drawMode.polygon',
+              target: '#idle.drawMode.polygon'
             },
             {
               // else
               actions: 'addPoint',
-              target: 'mouseIsDown',
-            },
-          ],
-        },
-      },
-    },
-  },
+              target: 'mouseIsDown'
+            }
+          ]
+        }
+      }
+    }
+  }
 };
 
 const createFSM = (editor: any) => {
@@ -156,7 +156,7 @@ const createFSM = (editor: any) => {
       context: {
         unfinishedComponent: undefined,
         mouseDownInSelectModeObject: undefined,
-        _editor: editor,
+        _editor: editor
       },
       predictableActionArguments: true,
       on: {
@@ -164,7 +164,7 @@ const createFSM = (editor: any) => {
         MODE_DRAW_RECT: 'idle.drawMode.rect',
         MODE_DRAW_CIRCLE: 'idle.drawMode.circle',
         MODE_DRAW_ELLIPSE: 'idle.drawMode.ellipse',
-        MODE_DRAW_POLYGON: 'idle.drawMode.polygon',
+        MODE_DRAW_POLYGON: 'idle.drawMode.polygon'
       },
       initial: 'idle',
       states: {
@@ -179,47 +179,47 @@ const createFSM = (editor: any) => {
                   on: {
                     MT_DOWN: {
                       actions: ['selectComponent', 'mouseDownInSelectModeAssign'],
-                      target: 'mouseIsDown',
+                      target: 'mouseIsDown'
                     },
                     KEYDOWN_ARRAY: {
-                      actions: 'mouseDownInSelectModeObjectMove',
-                    },
-                  },
+                      actions: 'mouseDownInSelectModeObjectMove'
+                    }
+                  }
                 },
                 mouseIsDown: {
                   on: {
                     MT_UP: 'mouseIsUp',
                     MT_MOVE: {
-                      actions: 'mouseDownInSelectModeObjectMove',
-                    },
-                  },
-                },
+                      actions: 'mouseDownInSelectModeObjectMove'
+                    }
+                  }
+                }
               },
               // https://xstate.js.org/docs/guides/actions.html#action-order:
               // In XState version 4.x, assign actions have priority and are executed before any other actions.
               // We use send on the 'mouseDownInSelectModeUnassign' action to overcome this limitation.
               on: {
                 KEYDOWN_ESC: {
-                  actions: ['unselectAll', send('mouseDownInSelectModeUnassign')],
+                  actions: ['unselectAll', send('mouseDownInSelectModeUnassign')]
                 },
                 KEYDOWN_DEL: {
-                  actions: ['deleteComponent', send('mouseDownInSelectModeUnassign')],
+                  actions: ['deleteComponent', send('mouseDownInSelectModeUnassign')]
                 },
                 mouseDownInSelectModeUnassign: {
-                  actions: 'mouseDownInSelectModeUnassign',
-                },
+                  actions: 'mouseDownInSelectModeUnassign'
+                }
               },
               entry: 'selectModeEntry',
-              exit: ['unselectAll', send('mouseDownInSelectModeUnassign')],
+              exit: ['unselectAll', send('mouseDownInSelectModeUnassign')]
             },
             drawMode: {
               initial: undefined,
               states: idleDrawModeStates,
               on: {
-                KEYDOWN_ESC: '#idle.selectMode',
-              },
-            },
-          },
+                KEYDOWN_ESC: '#idle.selectMode'
+              }
+            }
+          }
         },
         drawing: {
           id: 'drawing',
@@ -228,33 +228,33 @@ const createFSM = (editor: any) => {
           exit: choose([
             {
               cond: 'unfinishedIsValid',
-              actions: ['unselectAll', 'validComponentFinished'],
+              actions: ['unselectAll', 'validComponentFinished']
             },
             {
               // else
-              actions: 'discardUnfinished',
-            },
-          ]),
-        },
-      },
+              actions: 'discardUnfinished'
+            }
+          ])
+        }
+      }
     },
     {
       actions: {
         createRectangle: assign({
           unfinishedComponent: (context, e: any) =>
-            context._editor.createRectangle({ x: e.offsetX, y: e.offsetY }),
+            context._editor.createRectangle({ x: e.offsetX, y: e.offsetY })
         }),
         createCircle: assign({
           unfinishedComponent: (context, e: any) =>
-            context._editor.createCircle({ x: e.offsetX, y: e.offsetY }),
+            context._editor.createCircle({ x: e.offsetX, y: e.offsetY })
         }),
         createEllipse: assign({
           unfinishedComponent: (context, e: any) =>
-            context._editor.createEllipse({ x: e.offsetX, y: e.offsetY }),
+            context._editor.createEllipse({ x: e.offsetX, y: e.offsetY })
         }),
         createPolygon: assign({
           unfinishedComponent: (context, e: any) =>
-            context._editor.createPolygon({ points: { x: e.offsetX, y: e.offsetY } }),
+            context._editor.createPolygon({ points: { x: e.offsetX, y: e.offsetY } })
         }),
         discardUnfinished: (context, e) => {
           context._editor.unregisterComponent(context.unfinishedComponent);
@@ -280,11 +280,11 @@ const createFSM = (editor: any) => {
           context.unfinishedComponent.moveLastPoint(e.offsetX, e.offsetY);
         },
         mouseDownInSelectModeAssign: assign({
-          mouseDownInSelectModeObject: (context, e) => e.component,
+          mouseDownInSelectModeObject: (context, e) => e.component
         }),
         mouseDownInSelectModeUnassign: assign({
           //@ts-ignore
-          mouseDownInSelectModeObject: null,
+          mouseDownInSelectModeObject: null
         }),
         mouseDownInSelectModeObjectMove: (context, e) => {
           const mouseDownObj: any = context.mouseDownInSelectModeObject;
@@ -303,13 +303,13 @@ const createFSM = (editor: any) => {
         },
         selectModeEntry: (context, e) => {
           context._editor.selectModeHandler && context._editor.selectModeHandler();
-        },
+        }
       },
       guards: {
         isHandle: (context, e) => e.component instanceof Handle,
-        unfinishedIsValid: (context: any, e) => context.unfinishedComponent.isValid(),
-      },
-    },
+        unfinishedIsValid: (context: any, e) => context.unfinishedComponent.isValid()
+      }
+    }
   );
 };
 

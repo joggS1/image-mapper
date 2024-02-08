@@ -12,7 +12,7 @@ const onChange = (object: object, onChange: any, thisArg: any) => {
         }
       }
       return Reflect.defineProperty(target, property, descriptor);
-    },
+    }
   };
 
   return new Proxy(object, handler);

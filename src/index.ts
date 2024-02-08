@@ -9,10 +9,6 @@ export const view = editorFactory(true);
 export default {
   editor,
   view
-}
+};
 
-export type {
-  PolygonOptions,
-  FigureOptions,
-}
-
+export type { PolygonOptions, FigureOptions };
