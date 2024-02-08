@@ -1,7 +1,8 @@
+import { Editor } from './editor';
 import { CornerShapedElement } from './factory';
 import { Dimensions } from './types';
 class Circle extends CornerShapedElement {
-  constructor (editorOwner: any, x: number, y: number, width?: number, height?: number) {
+  constructor(editorOwner: Editor, x: number, y: number, width?: number, height?: number) {
     super('circle', {
       // move
       x: (x: number, prevX: number, dim: Dimensions) => {
@@ -13,12 +14,18 @@ class Circle extends CornerShapedElement {
       },
       // resize
       width: (width: number, prevWidth: number, dim: Dimensions) => {
-        this?.element?.setAttribute('r', String(Math.min(Math.abs(width), Math.abs(dim.height)) / 2));
+        this?.element?.setAttribute(
+          'r',
+          String(Math.min(Math.abs(width), Math.abs(dim.height)) / 2)
+        );
         this?.element?.setAttribute('cx', String(dim.x + width / 2));
       },
       // resize
       height: (height: number, prevHeight: number, dim: Dimensions) => {
-        this?.element?.setAttribute('r', String(Math.min(Math.abs(height), Math.abs(dim.width)) / 2));
+        this?.element?.setAttribute(
+          'r',
+          String(Math.min(Math.abs(height), Math.abs(dim.width)) / 2)
+        );
         this?.element?.setAttribute('cy', String(dim.y + height / 2));
       }
     });
