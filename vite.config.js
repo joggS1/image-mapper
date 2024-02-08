@@ -1,6 +1,5 @@
 import path from 'path';
 import { defineConfig } from 'vite';
-import { fileURLToPath } from 'node:url';
 
 const LIB_NAME = 'image-map-editor';
 
@@ -16,11 +15,8 @@ export default defineConfig({
         new URL('examples/*', import.meta.url),
         new URL('public', import.meta.url),
         'src/test',
-        /node_modules/
       ],
-      output: {
-        exports: 'named'
-      }
+
     }
   }
 });
