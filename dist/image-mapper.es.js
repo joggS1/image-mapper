@@ -153,21 +153,21 @@ function j(n, t, e) {
       (s || !(r in t)) && (s || (s = Array.prototype.slice.call(t, 0, r)), s[r] = t[r]);
   return n.concat(s || Array.prototype.slice.call(t));
 }
-var C;
+var N;
 (function(n) {
   n.Start = "xstate.start", n.Stop = "xstate.stop", n.Raise = "xstate.raise", n.Send = "xstate.send", n.Cancel = "xstate.cancel", n.NullEvent = "", n.Assign = "xstate.assign", n.After = "xstate.after", n.DoneState = "done.state", n.DoneInvoke = "done.invoke", n.Log = "xstate.log", n.Init = "xstate.init", n.Invoke = "xstate.invoke", n.ErrorExecution = "error.execution", n.ErrorCommunication = "error.communication", n.ErrorPlatform = "error.platform", n.ErrorCustom = "xstate.error", n.Update = "xstate.update", n.Pure = "xstate.pure", n.Choose = "xstate.choose";
-})(C || (C = {}));
+})(N || (N = {}));
 var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var Lt = C.Start, Wt = C.Stop, yt = C.Raise, Ct = C.Send, oe = C.Cancel, Me = C.NullEvent, Xt = C.Assign, dn = C.After, vn = C.DoneState, $t = C.Log, _e = C.Init, kt = C.Invoke, pn = C.ErrorExecution, Qt = C.ErrorPlatform, ae = C.ErrorCustom, Vt = C.Update, Ce = C.Choose, Ne = C.Pure;
+var Lt = N.Start, Wt = N.Stop, yt = N.Raise, Nt = N.Send, oe = N.Cancel, Me = N.NullEvent, Xt = N.Assign, dn = N.After, vn = N.DoneState, $t = N.Log, _e = N.Init, kt = N.Invoke, pn = N.ErrorExecution, Qt = N.ErrorPlatform, ae = N.ErrorCustom, Vt = N.Update, Ne = N.Choose, Ce = N.Pure;
 const yn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   after: dn,
   assign: Xt,
   cancel: oe,
-  choose: Ce,
+  choose: Ne,
   doneState: vn,
   error: ae,
   errorExecution: pn,
@@ -176,14 +176,14 @@ const yn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   invoke: kt,
   log: $t,
   nullEvent: Me,
-  pure: Ne,
+  pure: Ce,
   raise: yt,
-  send: Ct,
+  send: Nt,
   start: Lt,
   stop: Wt,
   update: Vt
 }, Symbol.toStringTag, { value: "Module" }));
-var Te = ".", ve = {}, Zt = "xstate.guard", gn = "", L = process.env.NODE_ENV === "production", Nt;
+var Te = ".", ve = {}, Zt = "xstate.guard", gn = "", L = process.env.NODE_ENV === "production", Ct;
 function ue(n, t, e) {
   e === void 0 && (e = Te);
   var r = At(n, e), i = At(t, e);
@@ -466,9 +466,9 @@ function An(n) {
 var Z = /* @__PURE__ */ function() {
   return typeof Symbol == "function" && Symbol.observable || "@@observable";
 }();
-Nt = {}, Nt[Z] = function() {
+Ct = {}, Ct[Z] = function() {
   return this;
-}, Nt[Symbol.observable] = function() {
+}, Ct[Symbol.observable] = function() {
   return this;
 };
 function st(n) {
@@ -550,7 +550,7 @@ function Tt(n, t) {
   return "".concat(n, ":invocation[").concat(t, "]");
 }
 function ee(n) {
-  return (n.type === yt || n.type === Ct && n.to === et.Internal) && typeof n.delay != "number";
+  return (n.type === yt || n.type === Nt && n.to === et.Internal) && typeof n.delay != "number";
 }
 var it = /* @__PURE__ */ U({
   type: _e
@@ -633,7 +633,7 @@ function ze(n, t, e, r) {
 function ot(n, t) {
   return {
     to: t ? t.to : void 0,
-    type: Ct,
+    type: Nt,
     event: _(n) ? n : Jt(n),
     delay: t ? t.delay : void 0,
     // TODO: don't auto-generate IDs here like that
@@ -663,12 +663,12 @@ function ce(n, t) {
     to: et.Parent
   }));
 }
-function Cn(n, t, e) {
+function Nn(n, t, e) {
   return ot(t, d(d({}, e), {
     to: n
   }));
 }
-function Nn() {
+function Cn() {
   return ce(Vt);
 }
 function Tn(n, t) {
@@ -707,7 +707,7 @@ var Fe = function(n, t, e) {
 function We(n) {
   var t = Kt(n);
   return {
-    type: C.Start,
+    type: N.Start,
     activity: t,
     exec: void 0
   };
@@ -715,7 +715,7 @@ function We(n) {
 function Xe(n) {
   var t = _(n) ? n : Kt(n);
   return {
-    type: C.Stop,
+    type: N.Stop,
     activity: t,
     exec: void 0
   };
@@ -724,7 +724,7 @@ function $e(n, t, e) {
   var r = _(n.activity) ? n.activity(t, e.data) : n.activity, i = typeof r == "string" ? {
     id: r
   } : r, s = {
-    type: C.Stop,
+    type: N.Stop,
     activity: i
   };
   return s;
@@ -740,10 +740,10 @@ function jn(n) {
 }
 function Je(n, t) {
   var e = t ? "#".concat(t) : "";
-  return "".concat(C.After, "(").concat(n, ")").concat(e);
+  return "".concat(N.After, "(").concat(n, ")").concat(e);
 }
 function xt(n, t) {
-  var e = "".concat(C.DoneState, ".").concat(n), r = {
+  var e = "".concat(N.DoneState, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -752,7 +752,7 @@ function xt(n, t) {
   }, r;
 }
 function Dt(n, t) {
-  var e = "".concat(C.DoneInvoke, ".").concat(n), r = {
+  var e = "".concat(N.DoneInvoke, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -761,7 +761,7 @@ function Dt(n, t) {
   }, r;
 }
 function vt(n, t) {
-  var e = "".concat(C.ErrorPlatform, ".").concat(n), r = {
+  var e = "".concat(N.ErrorPlatform, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -771,7 +771,7 @@ function vt(n, t) {
 }
 function Rn(n) {
   return {
-    type: C.Pure,
+    type: N.Pure,
     get: n
   };
 }
@@ -805,7 +805,7 @@ function kn(n, t) {
 }
 function Yn(n) {
   return {
-    type: C.Choose,
+    type: N.Choose,
     conds: n
   };
 }
@@ -844,7 +844,7 @@ function Mt(n, t, e, r, i, s, o) {
         var m = ze(p, a, r, n.options.delays);
         return s && typeof m.delay == "number" && s(m, a, r), m;
       }
-      case Ct:
+      case Nt:
         var g = Ue(p, a, r, n.options.delays);
         if (!L) {
           var w = p.delay;
@@ -859,26 +859,26 @@ function Mt(n, t, e, r, i, s, o) {
         var b = Fe(p, a, r);
         return s == null || s(b, a, r), b;
       }
-      case Ce: {
-        var P = p, N = (S = P.conds.find(function(nt) {
+      case Ne: {
+        var P = p, C = (S = P.conds.find(function(nt) {
           var Q = Re(nt.cond, n.options.guards);
           return !Q || Le(n, Q, a, r, s ? void 0 : t);
         })) === null || S === void 0 ? void 0 : S.actions;
-        if (!N)
+        if (!C)
           return [];
         var D = A(Mt(n, t, a, r, [{
           type: y,
-          actions: q(V(N), n.options.actions)
+          actions: q(V(C), n.options.actions)
         }], s, o), 2), T = D[0], O = D[1];
         return a = O, c == null || c.push(a), T;
       }
-      case Ne: {
-        var N = p.get(a, r.data);
-        if (!N)
+      case Ce: {
+        var C = p.get(a, r.data);
+        if (!C)
           return [];
         var k = A(Mt(n, t, a, r, [{
           type: y,
-          actions: q(V(N), n.options.actions)
+          actions: q(V(C), n.options.actions)
         }], s, o), 2), x = k[0], I = k[1];
         return a = I, c == null || c.push(a), x;
       }
@@ -914,9 +914,9 @@ function Mt(n, t, e, r, i, s, o) {
         var b = w.value, P = f(y.type, b);
         P && (m = m.concat(P));
       }
-    } catch (N) {
+    } catch (C) {
       p = {
-        error: N
+        error: C
       };
     } finally {
       try {
@@ -926,8 +926,8 @@ function Mt(n, t, e, r, i, s, o) {
           throw p.error;
       }
     }
-    return h.forEach(function(N) {
-      s(N, a, r);
+    return h.forEach(function(C) {
+      s(C, a, r);
     }), h.length = 0, m;
   }
   var v = R(i.map(l));
@@ -959,8 +959,8 @@ const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   respond: Tn,
   send: ot,
   sendParent: ce,
-  sendTo: Cn,
-  sendUpdate: Nn,
+  sendTo: Nn,
+  sendUpdate: Cn,
   start: We,
   stop: Xe,
   toActionObject: pt,
@@ -1085,10 +1085,10 @@ function Et(n, t) {
       else if (p.type === "parallel")
         try {
           for (var b = (o = void 0, E(_t(p))), P = b.next(); !P.done; P = b.next()) {
-            var N = P.value;
-            l.has(N) || (l.add(N), f.get(N) ? f.get(N).forEach(function(k) {
+            var C = P.value;
+            l.has(C) || (l.add(C), f.get(C) ? f.get(C).forEach(function(k) {
               return l.add(k);
-            }) : N.initialStateNodes.forEach(function(k) {
+            }) : C.initialStateNodes.forEach(function(k) {
               return l.add(k);
             }));
           }
@@ -1517,7 +1517,7 @@ Event: `
             r.defer(S);
             break;
           }
-          case Ct:
+          case Nt:
             var m = h;
             if (typeof m.delay == "number") {
               r.defer(m);
@@ -1537,8 +1537,8 @@ Event: `
               !r.machine.config.predictableActionArguments && !r.state.activities[g.id || g.type]
             )
               break;
-            if (g.type === C.Invoke) {
-              var w = ke(g.src), b = r.machine.options.services ? r.machine.options.services[w.type] : void 0, P = g.id, N = g.data;
+            if (g.type === N.Invoke) {
+              var w = ke(g.src), b = r.machine.options.services ? r.machine.options.services[w.type] : void 0, P = g.id, C = g.data;
               L || F(
                 !("forward" in g),
                 // tslint:disable-next-line:max-line-length
@@ -1549,7 +1549,7 @@ Event: `
                 L || F(!1, "No service found for invocation '".concat(g.src, "' in machine '").concat(r.machine.id, "'."));
                 return;
               }
-              var T = N ? zt(N, f, l) : void 0;
+              var T = C ? zt(C, f, l) : void 0;
               if (typeof b == "string")
                 return;
               var O = _(b) ? b(f, l.data, {
@@ -1688,8 +1688,8 @@ Event: `
       if (this.state.done) {
         var P = t.configuration.find(function(O) {
           return O.type === "final" && O.parent === f.machine;
-        }), N = P && P.doneData ? zt(P.doneData, t.context, e) : void 0;
-        this._doneEvent = Dt(this.id, N);
+        }), C = P && P.doneData ? zt(P.doneData, t.context, e) : void 0;
+        this._doneEvent = Dt(this.id, C);
         try {
           for (var D = E(this.doneListeners), T = D.next(); !T.done; T = D.next()) {
             var p = T.value;
@@ -1824,8 +1824,8 @@ Event: `
       this.initialized = !1, this.status = Y.Stopped, this._initialState = void 0;
       try {
         for (var b = E(Object.keys(this.delayedEventsMap)), P = b.next(); !P.done; P = b.next()) {
-          var N = P.value;
-          this.clock.clearTimeout(this.delayedEventsMap[N]);
+          var C = P.value;
+          this.clock.clearTimeout(this.delayedEventsMap[C]);
         }
       } catch (D) {
         c = {
@@ -2665,7 +2665,7 @@ var dt = "", re = "#", St = "*", ct = {}, ht = function(n) {
       });
       var b = Array.from(y).sort(function(x, I) {
         return x.order - I.order;
-      }), P = new Set(r.exitSet), N = R(b.map(function(x) {
+      }), P = new Set(r.exitSet), C = R(b.map(function(x) {
         var I = [];
         if (x.type !== "final")
           return I;
@@ -2691,7 +2691,7 @@ var dt = "", re = "#", St = "*", ct = {}, ht = function(n) {
         };
       }).concat({
         type: "state_done",
-        actions: N.map(function(x) {
+        actions: C.map(function(x) {
           return Ye(x);
         })
       }), T = Array.from(P).map(function(x) {
@@ -2751,7 +2751,7 @@ var dt = "", re = "#", St = "*", ct = {}, ht = function(n) {
         for (var w = E(m), b = w.next(); !b.done; b = w.next()) {
           var P = b.value;
           try {
-            for (var N = (a = void 0, E(P.actions)), D = N.next(); !D.done; D = N.next()) {
+            for (var C = (a = void 0, E(P.actions)), D = C.next(); !D.done; D = C.next()) {
               var T = D.value;
               T.type === Lt ? g[T.activity.id || T.activity.type] = T : T.type === Wt && (g[T.activity.id || T.activity.type] = !1);
             }
@@ -2761,7 +2761,7 @@ var dt = "", re = "#", St = "*", ct = {}, ht = function(n) {
             };
           } finally {
             try {
-              D && !D.done && (c = N.return) && c.call(N);
+              D && !D.done && (c = C.return) && c.call(C);
             } finally {
               if (a)
                 throw a.error;
@@ -3765,7 +3765,7 @@ class Oe {
     if (!this.svg)
       throw new Error("No SVG element provided");
     this.cgroup = G.createElementNS(rt, "g"), this.hgroup = G.createElementNS(rt, "g"), this.svg.appendChild(this.cgroup), this.svg.appendChild(this.hgroup), this._cacheElementMapping = le({}, (i, s, o) => {
-      s ? s instanceof B ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof B ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((u) => {
+      console.log(i, s, o), s ? s instanceof B ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof B ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((u) => {
         this.unregisterComponent(u);
       }));
     }), this._idCounter = 1, this._handleIdCounter = 1;

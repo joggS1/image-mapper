@@ -118,36 +118,44 @@ export class CornerShapedElement {
           this._logWarnOnOpOnFrozen('Dimension property x changed on');
           //@ts-ignore
           this.propChangeListener.x.call(this, ...[x, prevX, dim]);
-          this.handles[0].setAttrX(x);
-          this.handles[1].setAttrX(x);
-          this.handles[2].setAttrX(x + dim.width);
-          this.handles[3].setAttrX(x + dim.width);
+          if (this.handles.length) {
+            this.handles[0].setAttrX(x);
+            this.handles[1].setAttrX(x);
+            this.handles[2].setAttrX(x + dim.width);
+            this.handles[3].setAttrX(x + dim.width);
+          }
         },
         // move
         y: (y: number, prevY: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property y changed on');
           //@ts-ignore
           this.propChangeListener.y.call(this, ...[y, prevY, dim]);
-          this.handles[0].setAttrY(y);
-          this.handles[1].setAttrY(y + dim.height);
-          this.handles[2].setAttrY(y);
-          this.handles[3].setAttrY(y + dim.height);
+          if (this.handles.length) {
+            this.handles[0].setAttrY(y);
+            this.handles[1].setAttrY(y + dim.height);
+            this.handles[2].setAttrY(y);
+            this.handles[3].setAttrY(y + dim.height);
+          }
         },
         // resize
         width: (width: number, prevWidth: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property width changed on');
           //@ts-ignore
           this.propChangeListener.width.call(this, ...[width, prevWidth, dim]);
-          this.handles[2].setAttrX(dim.x + width);
-          this.handles[3].setAttrX(dim.x + width);
+          if (this.handles.length) {
+            this.handles[2].setAttrX(dim.x + width);
+            this.handles[3].setAttrX(dim.x + width);
+          }
         },
         // resize
         height: (height: number, prevHeight: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property height changed on');
           //@ts-ignore
           this.propChangeListener.height.call(this, ...[height, prevHeight, dim]);
-          this.handles[1].setAttrY(dim.y + height);
-          this.handles[3].setAttrY(dim.y + height);
+          if (this.handles.length) {
+            this.handles[1].setAttrY(dim.y + height);
+            this.handles[3].setAttrY(dim.y + height);
+          }
         }
       },
       this
@@ -209,9 +217,17 @@ export class CornerShapedElement {
   }
 
   public clearHandles() {
+    this.handles.forEach((handle: any) => this.editorOwner?.unregisterComponent(handle));
     this.handles = [];
   }
 
+  public scale(scale: number) {
+    this.dim.width = this.dim.width * scale;
+    this.dim.height = this.dim.height * scale;
+    this.dim.x = this.dim.x * scale;
+    this.dim.y = this.dim.y * scale;
+    return this;
+  }
   public setStyle(style: any) {
     this.style = style;
     setStyle(this.element, style.component);
@@ -229,12 +245,9 @@ export class CornerShapedElement {
   }
 
   public export() {
-    const { x, y, width, height } = this.dim;
+    console.log(this.editorOwner?.initialSizes);
     const data: FigureOptions = {
-      x,
-      y,
-      width,
-      height
+      ...(this.editorOwner?.initialSizes.get(this.element.id) as FigureOptions)
     };
     for (let attribute of this.element?.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {

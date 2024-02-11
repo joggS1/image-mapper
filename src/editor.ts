@@ -21,9 +21,12 @@ export class Editor {
   componentDrawnHandler: EditorOptions['componentDrawnHandler'];
   selectModeHandler: EditorOptions['selectModeHandler'];
   viewClickHandler: EditorOptions['viewClickHandler'];
+  image?: SVGImageElement;
   cgroup: SVGGElement;
   hgroup: SVGGElement;
   _cacheElementMapping: Record<string, Component>;
+  initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions> =
+    new Map();
   _idCounter: number;
   _handleIdCounter: number;
 
@@ -81,42 +84,56 @@ export class Editor {
     this.svg.appendChild(this.hgroup);
 
     //@ts-ignore
-    this._cacheElementMapping = onChange({}, (prop: any, newComponent: any, prevComponent: any) => {
-      console.log(prop, newComponent, prevComponent);
-      if (newComponent) {
-        if (newComponent instanceof Handle) {
-          //@ts-ignore
-          this.hgroup.appendChild(newComponent.element!);
+    this._cacheElementMapping = onChange(
+      {},
+      (prop: any, newComponent: Component, prevComponent: Component) => {
+        if (newComponent) {
+          if (newComponent instanceof Handle) {
+            //@ts-ignore
+            this.hgroup.appendChild(newComponent.element!);
+          } else {
+            this.cgroup.appendChild(newComponent.element);
+          }
         } else {
-          this.cgroup.appendChild(newComponent.element);
-        }
-      } else {
-        if (prevComponent instanceof Handle) {
-          //@ts-ignore
-          this.hgroup.removeChild(prevComponent.element);
-        } else if (prevComponent) {
-          this.cgroup.removeChild(prevComponent.element);
-          prevComponent.getHandles().forEach((h: any) => {
-            this.unregisterComponent(h);
-          });
+          if (prevComponent instanceof Handle) {
+            //@ts-ignore
+            this.hgroup.removeChild(prevComponent.element);
+          } else if (prevComponent) {
+            this.cgroup.removeChild(prevComponent.element);
+            prevComponent.getHandles().forEach((h: any) => {
+              this.unregisterComponent(h);
+            });
+          }
         }
       }
-    });
+    );
     this._idCounter = 1;
     this._handleIdCounter = 1;
   }
-  public loadImage(path: string, width: number | string, height: number | string) {
-    const image = doc.createElementNS(SVG_NS, 'image');
-    image.setAttributeNS(XLINK_NS, 'href', path);
-    width && image.setAttribute('width', String(width));
-    height && image.setAttribute('height', String(height));
-    this.svg?.prepend(image);
+  public loadImage(path: string, width: number, height: number) {
+    this.image = doc.createElementNS(SVG_NS, 'image');
+    this.image.setAttributeNS(XLINK_NS, 'href', path);
+    width && this.image.setAttribute('width', String(width));
+    height && this.image.setAttribute('height', String(height));
+    this.svg?.prepend(this.image);
     return this;
   }
 
   public setStyle(style: object) {
     this.style = deepMerge(this.style, style);
     return this;
+  }
+  public setScale(scale: number) {
+    for (const key in this._cacheElementMapping) {
+      this._cacheElementMapping[key]?.scale?.(scale);
+    }
+    if (this.image && this.image.getAttribute('width') && this.image.getAttribute('height')) {
+      const height = this.image.getAttribute('height');
+      const width = this.image.getAttribute('width');
+
+      width && this.image.setAttribute('width', String(+width * scale));
+      height && this.image.setAttribute('height', String(+height * scale));
+    }
   }
   public rect() {
     this.fsmService.send('MODE_DRAW_RECT');
@@ -209,7 +226,10 @@ export class Editor {
             return null;
         }
       })
-      .filter((c: any) => c);
+      .filter((c: Component) => {
+        c?.clearHandles?.();
+        return !!c;
+      });
   }
   public export(escape?: boolean) {
     const data = {
@@ -259,11 +279,19 @@ export class Editor {
     );
   }
 
-  public registerComponent(component: any, id?: string) {
+  public registerComponent(component: Component, id?: string) {
     if (component instanceof Handle) {
       id = 'handle_' + this._handleIdCounter++;
     } else {
       id = id || component.element.tagName + '_' + this._idCounter++;
+    }
+    if (!this.initialSizes.has(id)) {
+      this.initialSizes.set(
+        id,
+        component instanceof Polygon
+          ? [...component.points.map((p) => ({ ...p }))]
+          : Object.assign({}, component.dim)
+      );
     }
 
     this._cacheElementMapping[id] = component;
