@@ -5,7 +5,7 @@ import { doc } from './globals';
 import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
-import { Dimensions, FigureOptions, PropChangeListener, SVGTagNames } from './types/editor';
+import { Dimensions, FigureOptions, PropChangeListener, Style, SVGTagNames } from './types';
 
 function generateHandles(this: CornerShapedElement) {
   const { x, y, width, height } = this.dim;
@@ -228,7 +228,7 @@ export class CornerShapedElement {
     this.dim.y = this.dim.y * scale;
     return this;
   }
-  public setStyle(style: any) {
+  public setStyle(style: Style) {
     this.style = style;
     setStyle(this.element, style.component);
     setStyle(this.element, style.componentHover.off);
@@ -245,7 +245,6 @@ export class CornerShapedElement {
   }
 
   public export() {
-    console.log(this.editorOwner?.initialSizes);
     const data: FigureOptions = {
       ...(this.editorOwner?.initialSizes.get(this.element.id) as FigureOptions)
     };

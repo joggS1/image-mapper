@@ -5,6 +5,7 @@ import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
 import { PolygonOptions, PolygonPoint } from './types/editor';
+import { Style } from './types';
 
 function generateHandle(this: Polygon, x: number, y: number, point: PolygonPoint) {
   return new Handle(
@@ -127,7 +128,7 @@ class Polygon {
       p.handle = null;
     });
   }
-  setStyle(style: any) {
+  setStyle(style: Style) {
     this.style = style;
     setStyle(this.element, style.component);
     setStyle(this.element, style.componentHover.off);
