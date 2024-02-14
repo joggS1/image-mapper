@@ -1,6 +1,6 @@
-import editorFactory from './editor';
+import editorFactory, { Editor } from './editor';
 
-import { PolygonOptions, FigureOptions } from './types';
+import { PolygonOptions, FigureOptions, Style } from './types';
 
 export const editor = editorFactory(false);
 
@@ -11,4 +11,4 @@ export default {
   view
 };
 
-export type { PolygonOptions, FigureOptions };
+export type { PolygonOptions, FigureOptions, Editor, Style };

@@ -5,7 +5,8 @@ import {
   ComponentStylesSelect,
   ComponentStylesHover,
   HandleStylesHover,
-  HandleStyles
+  HandleStyles,
+  StylesUnion
 } from './types';
 
 const componentDefault: ComponentStyles = {
@@ -16,11 +17,11 @@ const componentDefault: ComponentStyles = {
 
 const componentHoverDefault: ComponentStylesHover = {
   off: {
-    'stroke-width': 1,
+    'stroke-width': '1',
     opacity: 0.5
   },
   on: {
-    'stroke-width': 2,
+    'stroke-width': '2',
     opacity: 0.6
   }
 };
@@ -40,7 +41,7 @@ const componentSelectDefault: ComponentStylesSelect = {
 const handleDefault: HandleStyles = {
   fill: 'rgb(255, 255, 255)',
   stroke: 'rgb(51, 51, 51)',
-  'stroke-width': 1,
+  'stroke-width': '1',
   opacity: 0.3,
   cursor: 'pointer'
 };
@@ -57,7 +58,7 @@ const getDefaultStyle = (): Style => ({
   handleHover: Object.assign({}, handleHoverDefault)
 });
 
-const setStyle = (element: SVGElement, style: any) =>
+const setStyle = (element: SVGElement, style: StylesUnion) =>
   Object.entries(style).forEach(([attr, value]) => element.setAttribute(attr, String(value)));
 
 const addHover = (

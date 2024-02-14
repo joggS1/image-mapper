@@ -1,38 +1,16 @@
-type ComponentStyles = {
-  fill: string;
-  stroke: string;
-  cursor: string;
-};
+import { SvgPropertiesHyphen } from 'csstype';
+
+type ComponentStyles = SvgPropertiesHyphen;
 type ComponentStylesHover = {
-  off: {
-    'stroke-width': number;
-    opacity: number;
-  };
-  on: {
-    'stroke-width': number;
-    opacity: number;
-  };
+  off: SvgPropertiesHyphen;
+  on: SvgPropertiesHyphen;
 };
 type ComponentStylesSelect = {
-  off: {
-    'stroke-dasharray': string;
-    'stroke-linejoin': string;
-  };
-  on: {
-    'stroke-dasharray': string;
-    'stroke-linejoin': string;
-  };
+  off: SvgPropertiesHyphen;
+  on: SvgPropertiesHyphen;
 };
-type HandleStyles = {
-  fill: string;
-  stroke: string;
-  cursor: string;
-  'stroke-width': number;
-  opacity: number;
-};
-type HandleStylesHover = {
-  opacity: number;
-};
+type HandleStyles = SvgPropertiesHyphen;
+type HandleStylesHover = SvgPropertiesHyphen;
 
 type Style = {
   component: ComponentStyles;
@@ -42,11 +20,20 @@ type Style = {
   handleHover: HandleStylesHover;
 };
 
+type StylesUnion =
+  | ComponentStyles
+  | ComponentStylesHover[keyof ComponentStylesHover]
+  | HandleStyles
+  | HandleStylesHover
+  | ComponentStylesSelect[keyof ComponentStylesSelect];
+
 export type {
   Style,
   ComponentStyles,
   ComponentStylesHover,
   HandleStylesHover,
   ComponentStylesSelect,
-  HandleStyles
+  HandleStyles,
+  StylesUnion,
+  SvgPropertiesHyphen as SVGstyles
 };

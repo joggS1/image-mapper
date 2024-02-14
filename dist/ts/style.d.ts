@@ -1,40 +1,6 @@
-declare const getDefaultStyle: () => {
-    component: {
-        fill: string;
-        stroke: string;
-        cursor: string;
-    };
-    componentHover: {
-        off: {
-            'stroke-width': number;
-            opacity: number;
-        };
-        on: {
-            'stroke-width': number;
-            opacity: number;
-        };
-    };
-    componentSelect: {
-        off: {
-            'stroke-dasharray': string;
-            'stroke-linejoin': string;
-        };
-        on: {
-            'stroke-dasharray': string;
-            'stroke-linejoin': string;
-        };
-    };
-    handle: {
-        fill: string;
-        stroke: string;
-        'stroke-width': number;
-        opacity: number;
-        cursor: string;
-    };
-    handleHover: {
-        opacity: number;
-    };
-};
-declare const setStyle: (element: any, style: any) => void;
-declare const addHover: (element: any, defaultStyle: any, hoverStyle: any) => void;
+import { Style, ComponentStyles, ComponentStylesSelect, ComponentStylesHover, HandleStylesHover, HandleStyles } from './types';
+type StylesUnion = ComponentStyles | ComponentStylesHover[keyof ComponentStylesHover] | HandleStyles | HandleStylesHover | ComponentStylesSelect[keyof ComponentStylesSelect];
+declare const getDefaultStyle: () => Style;
+declare const setStyle: (element: SVGElement, style: StylesUnion) => void;
+declare const addHover: (element: SVGElement, defaultStyle: ComponentStylesHover['off'], hoverStyle: ComponentStylesHover['on']) => void;
 export { getDefaultStyle, setStyle, addHover };

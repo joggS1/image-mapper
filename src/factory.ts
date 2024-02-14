@@ -84,7 +84,7 @@ export class CornerShapedElement {
     y: 0
   };
   handles: Handle[] = [];
-  style: Record<string, any> = {};
+  style?: Style;
   isSelected: boolean = false;
   private propChangeListener: PropChangeListener;
   isFrozen: boolean = false;
@@ -165,7 +165,6 @@ export class CornerShapedElement {
     // we want to resize when importing shape data too
     [this.dim.width, this.dim.height] = [width, height];
 
-    this.style = {};
     this.isSelected = false;
     this.isFrozen = false;
   }

@@ -1,11 +1,11 @@
 import { createFSMService } from './fsm';
 import { Handle } from './handle';
-import { Component, EditorOptions, FigureOptions, PolygonOptions } from './types';
+import { Component, EditorOptions, FigureOptions, PolygonOptions, Style } from './types';
 export declare class Editor {
     width: number;
     height: number;
     svg: SVGSVGElement;
-    style: object;
+    style: Style;
     fsmService: ReturnType<typeof createFSMService>;
     componentDrawnHandler: EditorOptions['componentDrawnHandler'];
     selectModeHandler: EditorOptions['selectModeHandler'];

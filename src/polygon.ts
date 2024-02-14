@@ -24,7 +24,7 @@ class Polygon {
   element: SVGPolygonElement;
   points: Array<PolygonPoint>;
   includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
-  style: Record<string, any>;
+  style?: Style;
   isSelected: boolean;
   isFrozen: boolean;
   constructor(editorOwner: Editor, points: PolygonPoint[]) {
@@ -33,7 +33,6 @@ class Polygon {
     this.points = []; // proxied points
     this.includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
     points && [points].flat().forEach((p) => this.addPoint(p.x, p.y));
-    this.style = {};
     this.isSelected = false;
     this.isFrozen = false;
   }

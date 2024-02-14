@@ -8,7 +8,7 @@ import { Circle } from './circle';
 import { Ellipse } from './ellipse';
 import { Handle } from './handle';
 import { getDefaultStyle } from './style';
-import { Component, EditorOptions, FigureOptions, PolygonOptions } from './types';
+import { Component, EditorOptions, FigureOptions, PolygonOptions, Style } from './types';
 import { SVG_NS, XLINK_NS } from './constants';
 
 export class Editor {
@@ -16,7 +16,7 @@ export class Editor {
   height: number;
   //@ts-ignore
   svg: SVGSVGElement;
-  style: object;
+  style: Style;
   fsmService: ReturnType<typeof createFSMService>;
   componentDrawnHandler: EditorOptions['componentDrawnHandler'];
   selectModeHandler: EditorOptions['selectModeHandler'];
@@ -30,7 +30,7 @@ export class Editor {
   _idCounter: number;
   _handleIdCounter: number;
 
-  constructor(svgEl: SVGSVGElement | string, options: EditorOptions = {}, style = {}) {
+  constructor(svgEl: SVGSVGElement | string, options: EditorOptions = {}, style?: Style) {
     [
       this.width = 1200,
       this.height = 600,
@@ -204,7 +204,7 @@ export class Editor {
     return this._cacheElementMapping && this._cacheElementMapping[id];
   }
 
-  public import(data: string, idInterceptor: (id: string) => string) {
+  public import(data: string, idInterceptor?: (id: string) => string) {
     const jsData = JSON.parse(data);
     this._idCounter = jsData.idCounter;
 
@@ -214,13 +214,13 @@ export class Editor {
 
         switch (c.type) {
           case 'rect':
-            return this.createRectangle(c.data, id); // c.data = dim object
+            return this.createRectangle(c.data, id);
           case 'circle':
-            return this.createCircle(c.data, id); // c.data = dim object
+            return this.createCircle(c.data, id);
           case 'ellipse':
-            return this.createEllipse(c.data, id); // c.data = dim object
+            return this.createEllipse(c.data, id);
           case 'polygon':
-            return this.createPolygon(c.data, id); // c.data = array of points
+            return this.createPolygon(c.data, id);
           default:
             console.error('Unknown type', c.type);
             return null;
@@ -420,7 +420,7 @@ const addViewListeners = (view: Editor) => {
   return view;
 };
 
-const deepMerge = (target: any, ...sources: any): object => {
+const deepMerge = (target: any, ...sources: any): any => {
   if (!sources.length || !sources[0]) {
     return target;
   }
@@ -441,7 +441,7 @@ export default (isView?: boolean) => {
   return function EditorConstructor(
     svgEl: SVGSVGElement | string,
     options: EditorOptions = {},
-    style = {}
+    style?: Style
   ) {
     return isView
       ? addViewListeners(new Editor(svgEl, options, style))

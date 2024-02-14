@@ -1,6 +1,6 @@
 import { Editor } from './editor';
 import { Handle } from './handle';
-import { Dimensions, FigureOptions, PropChangeListener, SVGTagNames } from './types/editor';
+import { Dimensions, FigureOptions, PropChangeListener, Style, SVGTagNames } from './types';
 export declare class CornerShapedElement {
     editorOwner: Editor | null;
     svgElementName: SVGTagNames;
@@ -23,7 +23,7 @@ export declare class CornerShapedElement {
     getHandles(): Handle[];
     clearHandles(): void;
     scale(scale: number): this;
-    setStyle(style: any): this;
+    setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): FigureOptions;
     private _logWarnOnOpOnFrozen;

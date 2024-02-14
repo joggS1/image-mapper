@@ -1,6 +1,7 @@
 import { Editor } from './editor';
 import { Handle } from './handle';
 import { PolygonOptions, PolygonPoint } from './types/editor';
+import { Style } from './types';
 declare class Polygon {
     editorOwner: Editor;
     element: SVGPolygonElement;
@@ -21,7 +22,7 @@ declare class Polygon {
     setIsSelected(isSelected: boolean): this;
     getHandles(): (Handle | null | undefined)[];
     clearHandles(): void;
-    setStyle(style: any): this;
+    setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): PolygonOptions;
     private _logWarnOnOpOnFrozen;
