@@ -14,6 +14,7 @@ export declare class Editor {
     cgroup: SVGGElement;
     hgroup: SVGGElement;
     _cacheElementMapping: Record<string, Component>;
+    private imageSizes;
     initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
     _idCounter: number;
     _handleIdCounter: number;
