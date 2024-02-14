@@ -8,7 +8,7 @@ export declare class CornerShapedElement {
     element: SVGRectElement | SVGCircleElement | SVGPolygonElement | SVGEllipseElement | SVGElement;
     dim: Dimensions;
     handles: Handle[];
-    style: Record<string, any>;
+    style?: Style;
     isSelected: boolean;
     private propChangeListener;
     isFrozen: boolean;
