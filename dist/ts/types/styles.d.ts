@@ -17,4 +17,5 @@ type Style = {
     handle: HandleStyles;
     handleHover: HandleStylesHover;
 };
-export type { Style, ComponentStyles, ComponentStylesHover, HandleStylesHover, ComponentStylesSelect, HandleStyles, SvgPropertiesHyphen as SVGstyles };
+type StylesUnion = ComponentStyles | ComponentStylesHover[keyof ComponentStylesHover] | HandleStyles | HandleStylesHover | ComponentStylesSelect[keyof ComponentStylesSelect];
+export type { Style, ComponentStyles, ComponentStylesHover, HandleStylesHover, ComponentStylesSelect, HandleStyles, StylesUnion, SvgPropertiesHyphen as SVGstyles };

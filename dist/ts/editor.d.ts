@@ -17,7 +17,7 @@ export declare class Editor {
     initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
     _idCounter: number;
     _handleIdCounter: number;
-    constructor(svgEl: SVGSVGElement | string, options?: EditorOptions, style?: {});
+    constructor(svgEl: SVGSVGElement | string, options?: EditorOptions, style?: Style);
     loadImage(path: string, width: number, height: number): this;
     setStyle(style: object): this;
     setScale(scale: number): void;
@@ -31,7 +31,7 @@ export declare class Editor {
     on(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
     off(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
     getComponentById(id: string): Component;
-    import(data: string, idInterceptor: (id: string) => string): any;
+    import(data: string, idInterceptor?: (id: string) => string): any;
     export(escape?: boolean): string;
     createRectangle(dim: FigureOptions, id: string): Component;
     createCircle(dim: FigureOptions, id: string): Component;
@@ -41,5 +41,5 @@ export declare class Editor {
     registerComponentHandle(handle: Handle): Component;
     unregisterComponent(component: any): void;
 }
-declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: {}) => Editor;
+declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: Style) => Editor;
 export default _default;

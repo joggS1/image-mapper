@@ -7,7 +7,7 @@ declare class Polygon {
     element: SVGPolygonElement;
     points: Array<PolygonPoint>;
     includeAttributes: string[];
-    style: Record<string, any>;
+    style?: Style;
     isSelected: boolean;
     isFrozen: boolean;
     constructor(editorOwner: Editor, points: PolygonPoint[]);

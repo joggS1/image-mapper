@@ -18,11 +18,11 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
   cursor: "pointer"
 }, hn = {
   off: {
-    "stroke-width": 1,
+    "stroke-width": "1",
     opacity: 0.5
   },
   on: {
-    "stroke-width": 2,
+    "stroke-width": "2",
     opacity: 0.6
   }
 }, cn = {
@@ -38,7 +38,7 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
 }, ln = {
   fill: "rgb(255, 255, 255)",
   stroke: "rgb(51, 51, 51)",
-  "stroke-width": 1,
+  "stroke-width": "1",
   opacity: 0.3,
   cursor: "pointer"
 }, fn = {
@@ -49,7 +49,7 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
   componentSelect: Object.assign({}, cn),
   handle: Object.assign({}, ln),
   handleHover: Object.assign({}, fn)
-}), J = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, r)), ie = (n, t, e) => {
+}), J = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, String(r))), ie = (n, t, e) => {
   tt(n, "mouseenter touchstart", () => J(n, e)), tt(
     n,
     "mouseleave touchend touchleave",
@@ -3439,7 +3439,7 @@ function xe(n, t, e) {
 }
 class Ee {
   constructor(t, e) {
-    this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], this.editorOwner = t, this.element = G.createElementNS(rt, "polygon"), this.points = [], this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], e && [e].flat().forEach((r) => this.addPoint(r.x, r.y)), this.style = {}, this.isSelected = !1, this.isFrozen = !1;
+    this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], this.editorOwner = t, this.element = G.createElementNS(rt, "polygon"), this.points = [], this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], e && [e].flat().forEach((r) => this.addPoint(r.x, r.y)), this.isSelected = !1, this.isFrozen = !1;
   }
   freeze(t) {
     return this.isFrozen = t !== void 0 ? !!t : !0, this.getHandles().forEach((e) => e.freeze(t)), this;
@@ -3568,7 +3568,7 @@ class fe {
       height: 0,
       width: 0,
       y: 0
-    }, this.handles = [], this.style = {}, this.isSelected = !1, this.isFrozen = !1, this.propChangeListener = e, this.svgElementName = t, this.element = G.createElementNS(rt, this.svgElementName);
+    }, this.handles = [], this.isSelected = !1, this.isFrozen = !1, this.propChangeListener = e, this.svgElementName = t, this.element = G.createElementNS(rt, this.svgElementName);
   }
   add(t, e, r, i = 0, s = 0) {
     this.editorOwner = t, this.dim = le(
@@ -3606,7 +3606,7 @@ class fe {
         }
       },
       this
-    ), Oe.call(this), [this.dim.width, this.dim.height] = [i, s], this.style = {}, this.isSelected = !1, this.isFrozen = !1;
+    ), Oe.call(this), [this.dim.width, this.dim.height] = [i, s], this.isSelected = !1, this.isFrozen = !1;
   }
   freeze(t) {
     return this.isFrozen = t !== void 0 ? !!t : !0, this.handles.forEach((e) => e.freeze(t)), this;
@@ -3652,13 +3652,12 @@ class fe {
     return this;
   }
   export() {
-    var e, r, i;
-    console.log((e = this.editorOwner) == null ? void 0 : e.initialSizes);
+    var e, r;
     const t = {
-      ...(r = this.editorOwner) == null ? void 0 : r.initialSizes.get(this.element.id)
+      ...(e = this.editorOwner) == null ? void 0 : e.initialSizes.get(this.element.id)
     };
-    for (let s of (i = this.element) == null ? void 0 : i.attributes)
-      (s.name in this.includeAttributes || Me.test(s.name)) && (t[s.name] = s.value);
+    for (let i of (r = this.element) == null ? void 0 : r.attributes)
+      (i.name in this.includeAttributes || Me.test(i.name)) && (t[i.name] = i.value);
     return t;
   }
   _logWarnOnOpOnFrozen(t) {
@@ -3741,7 +3740,7 @@ class yr extends fe {
   }
 }
 class Ae {
-  constructor(t, e = {}, r = {}) {
+  constructor(t, e = {}, r) {
     if (this.initialSizes = /* @__PURE__ */ new Map(), [
       this.width = 1200,
       this.height = 600,
@@ -3982,7 +3981,7 @@ const gr = (n) => {
   return Object.entries(e).forEach(([r, i]) => {
     Object.getPrototypeOf(i) === Object.prototype ? Ht(n[r], i) : n[r] = i;
   }), Ht(n, ...t);
-}, nn = (n) => function(e, r = {}, i = {}) {
+}, nn = (n) => function(e, r = {}, i) {
   return n ? mr(new Ae(e, r, i)) : gr(new Ae(e, r, i));
 }, wr = nn(!1), Sr = nn(!0), br = {
   editor: wr,
