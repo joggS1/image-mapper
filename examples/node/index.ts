@@ -12,11 +12,6 @@ myEditor.loadImage('image.svg', 700, 350);
 //@ts-ignore
 myEditor.on('mouseup', (e) => console.log('mouseup event', e));
 myEditor.polygon();
-
-setInterval(() => {
-  console.log(myEditor.export());
-}, 2000);
-
 // View
 const myView = view('view', {
   width: 800,

@@ -1,20 +1,16 @@
 import { Editor } from './editor';
 import { Handle } from './handle';
-import { PolygonOptions, PolygonPoints } from './types/editor';
-type Point = {
-    x: number;
-    y: number;
-    handle?: Handle | null;
-};
+import { PolygonOptions, PolygonPoint } from './types/editor';
+import { Style } from './types';
 declare class Polygon {
     editorOwner: Editor;
     element: SVGPolygonElement;
-    points: Array<Point>;
+    points: Array<PolygonPoint>;
     includeAttributes: string[];
-    style: Record<string, any>;
+    style?: Style;
     isSelected: boolean;
     isFrozen: boolean;
-    constructor(editorOwner: Editor, points: PolygonPoints);
+    constructor(editorOwner: Editor, points: PolygonPoint[]);
     freeze(freeze: boolean): this;
     updateElementPoints(): this;
     addPoint(x: number, y: number): this;
@@ -22,10 +18,11 @@ declare class Polygon {
     move(deltaX: number, deltaY: number): this;
     isValid(): boolean;
     setHandlesVisibility(visible: boolean): this;
+    scale(scale: number): this;
     setIsSelected(isSelected: boolean): this;
     getHandles(): (Handle | null | undefined)[];
     clearHandles(): void;
-    setStyle(style: any): this;
+    setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): PolygonOptions;
     private _logWarnOnOpOnFrozen;

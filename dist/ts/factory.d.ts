@@ -1,6 +1,6 @@
 import { Editor } from './editor';
 import { Handle } from './handle';
-import { Dimensions, FigureOptions, PropChangeListener, SVGTagNames } from './types/editor';
+import { Dimensions, FigureOptions, PropChangeListener, Style, SVGTagNames } from './types';
 export declare class CornerShapedElement {
     editorOwner: Editor | null;
     svgElementName: SVGTagNames;
@@ -8,7 +8,7 @@ export declare class CornerShapedElement {
     element: SVGRectElement | SVGCircleElement | SVGPolygonElement | SVGEllipseElement | SVGElement;
     dim: Dimensions;
     handles: Handle[];
-    style: Record<string, any>;
+    style?: Style;
     isSelected: boolean;
     private propChangeListener;
     isFrozen: boolean;
@@ -22,7 +22,8 @@ export declare class CornerShapedElement {
     setIsSelected(isSelected: boolean): this;
     getHandles(): Handle[];
     clearHandles(): void;
-    setStyle(style: any): this;
+    scale(scale: number): this;
+    setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): FigureOptions;
     private _logWarnOnOpOnFrozen;

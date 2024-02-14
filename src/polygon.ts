@@ -4,15 +4,10 @@ import { doc } from './globals';
 import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
-import { PolygonOptions, PolygonPoints } from './types/editor';
+import { PolygonOptions, PolygonPoint } from './types/editor';
+import { Style } from './types';
 
-type Point = {
-  x: number;
-  y: number;
-  handle?: Handle | null;
-};
-
-function generateHandle(this: Polygon, x: number, y: number, point: Point) {
+function generateHandle(this: Polygon, x: number, y: number, point: PolygonPoint) {
   return new Handle(
     x,
     y,
@@ -27,18 +22,17 @@ function generateHandle(this: Polygon, x: number, y: number, point: Point) {
 class Polygon {
   editorOwner: Editor;
   element: SVGPolygonElement;
-  points: Array<Point>;
+  points: Array<PolygonPoint>;
   includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
-  style: Record<string, any>;
+  style?: Style;
   isSelected: boolean;
   isFrozen: boolean;
-  constructor(editorOwner: Editor, points: PolygonPoints) {
+  constructor(editorOwner: Editor, points: PolygonPoint[]) {
     this.editorOwner = editorOwner;
     this.element = doc.createElementNS(SVG_NS, 'polygon');
     this.points = []; // proxied points
     this.includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
     points && [points].flat().forEach((p) => this.addPoint(p.x, p.y));
-    this.style = {};
     this.isSelected = false;
     this.isFrozen = false;
   }
@@ -54,7 +48,7 @@ class Polygon {
   }
 
   addPoint(x: number, y: number) {
-    const point: Point = { x, y };
+    const point: PolygonPoint = { x, y };
     //@ts-ignore
     const pointProxy = onChange(point, (prop: string, newValue: any, prevValue: any, obj: any) => {
       if (prop !== 'handle') {
@@ -79,7 +73,6 @@ class Polygon {
     return this;
   }
 
-  // TODO: move by transform:translate instead?
   move(deltaX: number, deltaY: number) {
     this.points.forEach((p) => {
       p.x += deltaX;
@@ -103,6 +96,14 @@ class Polygon {
     });
     return this;
   }
+  public scale(scale: number) {
+    this.points.forEach((p, index) => {
+      p.x *= scale;
+      p.y *= scale;
+    });
+    this.updateElementPoints();
+    return this;
+  }
 
   setIsSelected(isSelected: boolean) {
     this._logWarnOnOpOnFrozen('Select/unselect performed on');
@@ -120,13 +121,13 @@ class Polygon {
   getHandles() {
     return this.points.map((p) => p.handle);
   }
-  public clearHandles() {
+  clearHandles() {
     this.points.forEach((p) => {
       this.editorOwner?.unregisterComponent(p.handle);
       p.handle = null;
     });
   }
-  setStyle(style: any) {
+  setStyle(style: Style) {
     this.style = style;
     setStyle(this.element, style.component);
     setStyle(this.element, style.componentHover.off);
@@ -145,7 +146,7 @@ class Polygon {
   export() {
     //@ts-ignore
     const data: PolygonOptions = {
-      points: this.points.map((p) => ({ x: p.x, y: p.y }))
+      points: this.editorOwner?.initialSizes.get(this.element.id) as PolygonOptions['points']
     };
     for (let attribute of this.element.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {

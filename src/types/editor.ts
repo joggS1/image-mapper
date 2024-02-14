@@ -1,3 +1,4 @@
+import { Handle } from 'src/handle';
 import { Circle } from '../circle';
 import { Ellipse } from '../ellipse';
 import { Polygon } from '../polygon';
@@ -13,7 +14,11 @@ export interface EditorOptions {
   viewClickHandler?: (component: SVGElement, componentId: string) => void;
 }
 
-export type PolygonPoints = Array<{ x: number; y: number }>;
+export type PolygonPoint = {
+  x: number;
+  y: number;
+  handle?: Handle | null;
+};
 
 export type FigureOptions = {
   x: number;
@@ -22,7 +27,7 @@ export type FigureOptions = {
   height: number;
 } & Record<string, string | number>;
 export type PolygonOptions = {
-  points: PolygonPoints;
+  points: Array<PolygonPoint>;
 } & Record<string, string | number>;
 
 export type SVGTagNames = 'circle' | 'ellipse' | 'polygon' | 'rect';

@@ -5,7 +5,7 @@ import { doc } from './globals';
 import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
-import { Dimensions, FigureOptions, PropChangeListener, SVGTagNames } from './types/editor';
+import { Dimensions, FigureOptions, PropChangeListener, Style, SVGTagNames } from './types';
 
 function generateHandles(this: CornerShapedElement) {
   const { x, y, width, height } = this.dim;
@@ -84,7 +84,7 @@ export class CornerShapedElement {
     y: 0
   };
   handles: Handle[] = [];
-  style: Record<string, any> = {};
+  style?: Style;
   isSelected: boolean = false;
   private propChangeListener: PropChangeListener;
   isFrozen: boolean = false;
@@ -118,36 +118,44 @@ export class CornerShapedElement {
           this._logWarnOnOpOnFrozen('Dimension property x changed on');
           //@ts-ignore
           this.propChangeListener.x.call(this, ...[x, prevX, dim]);
-          this.handles[0].setAttrX(x);
-          this.handles[1].setAttrX(x);
-          this.handles[2].setAttrX(x + dim.width);
-          this.handles[3].setAttrX(x + dim.width);
+          if (this.handles.length) {
+            this.handles[0].setAttrX(x);
+            this.handles[1].setAttrX(x);
+            this.handles[2].setAttrX(x + dim.width);
+            this.handles[3].setAttrX(x + dim.width);
+          }
         },
         // move
         y: (y: number, prevY: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property y changed on');
           //@ts-ignore
           this.propChangeListener.y.call(this, ...[y, prevY, dim]);
-          this.handles[0].setAttrY(y);
-          this.handles[1].setAttrY(y + dim.height);
-          this.handles[2].setAttrY(y);
-          this.handles[3].setAttrY(y + dim.height);
+          if (this.handles.length) {
+            this.handles[0].setAttrY(y);
+            this.handles[1].setAttrY(y + dim.height);
+            this.handles[2].setAttrY(y);
+            this.handles[3].setAttrY(y + dim.height);
+          }
         },
         // resize
         width: (width: number, prevWidth: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property width changed on');
           //@ts-ignore
           this.propChangeListener.width.call(this, ...[width, prevWidth, dim]);
-          this.handles[2].setAttrX(dim.x + width);
-          this.handles[3].setAttrX(dim.x + width);
+          if (this.handles.length) {
+            this.handles[2].setAttrX(dim.x + width);
+            this.handles[3].setAttrX(dim.x + width);
+          }
         },
         // resize
         height: (height: number, prevHeight: number, dim: Dimensions) => {
           this._logWarnOnOpOnFrozen('Dimension property height changed on');
           //@ts-ignore
           this.propChangeListener.height.call(this, ...[height, prevHeight, dim]);
-          this.handles[1].setAttrY(dim.y + height);
-          this.handles[3].setAttrY(dim.y + height);
+          if (this.handles.length) {
+            this.handles[1].setAttrY(dim.y + height);
+            this.handles[3].setAttrY(dim.y + height);
+          }
         }
       },
       this
@@ -157,7 +165,6 @@ export class CornerShapedElement {
     // we want to resize when importing shape data too
     [this.dim.width, this.dim.height] = [width, height];
 
-    this.style = {};
     this.isSelected = false;
     this.isFrozen = false;
   }
@@ -209,10 +216,18 @@ export class CornerShapedElement {
   }
 
   public clearHandles() {
+    this.handles.forEach((handle: any) => this.editorOwner?.unregisterComponent(handle));
     this.handles = [];
   }
 
-  public setStyle(style: any) {
+  public scale(scale: number) {
+    this.dim.width = this.dim.width * scale;
+    this.dim.height = this.dim.height * scale;
+    this.dim.x = this.dim.x * scale;
+    this.dim.y = this.dim.y * scale;
+    return this;
+  }
+  public setStyle(style: Style) {
     this.style = style;
     setStyle(this.element, style.component);
     setStyle(this.element, style.componentHover.off);
@@ -229,12 +244,8 @@ export class CornerShapedElement {
   }
 
   public export() {
-    const { x, y, width, height } = this.dim;
     const data: FigureOptions = {
-      x,
-      y,
-      width,
-      height
+      ...(this.editorOwner?.initialSizes.get(this.element.id) as FigureOptions)
     };
     for (let attribute of this.element?.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {

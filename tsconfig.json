@@ -9,19 +9,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "downlevelIteration": true,
+    "noEmit": true,
     "isolatedModules": true,
-    "declaration": true,
-    "outDir": "./dist/ts",
-    "baseUrl": "src",
-    "plugins": [
-      {
-        "transform": "typescript-transform-paths"
-      },
-      {
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
-    ]
+    "baseUrl": ".",
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "example", "babel.config.js", "jest.config.js", "src/test"]
