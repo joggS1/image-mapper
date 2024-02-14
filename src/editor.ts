@@ -25,6 +25,7 @@ export class Editor {
   cgroup: SVGGElement;
   hgroup: SVGGElement;
   _cacheElementMapping: Record<string, Component>;
+  private scale = 1;
   private imageSizes = {
     width: 0,
     height: 0
@@ -131,14 +132,16 @@ export class Editor {
     return this;
   }
   public setScale(scale: number) {
+    const newScale = scale / this.scale;
     for (const key in this._cacheElementMapping) {
-      this._cacheElementMapping[key]?.scale?.(scale);
+      this._cacheElementMapping[key]?.scale?.(newScale);
     }
     if (this.image && this.image.getAttribute('width') && this.image.getAttribute('height')) {
       const { width, height } = this.imageSizes;
       width && this.image.setAttribute('width', String(width * scale));
       height && this.image.setAttribute('height', String(height * scale));
     }
+    this.scale = scale;
   }
   public rect() {
     this.fsmService.send('MODE_DRAW_RECT');
