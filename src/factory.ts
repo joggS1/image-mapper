@@ -221,10 +221,13 @@ export class CornerShapedElement {
   }
 
   public scale(scale: number) {
-    this.dim.width = this.dim.width * scale;
-    this.dim.height = this.dim.height * scale;
-    this.dim.x = this.dim.x * scale;
-    this.dim.y = this.dim.y * scale;
+    const { width, x, height, y } = this?.editorOwner?.initialSizes.get(
+      this.element.id
+    ) as FigureOptions;
+    this.dim.width = ~~(width * scale);
+    this.dim.height = ~~(height * scale);
+    this.dim.x = ~~(x * scale);
+    this.dim.y = ~~(y * scale);
     return this;
   }
   public setStyle(style: Style) {

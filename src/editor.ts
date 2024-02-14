@@ -25,6 +25,10 @@ export class Editor {
   cgroup: SVGGElement;
   hgroup: SVGGElement;
   _cacheElementMapping: Record<string, Component>;
+  private imageSizes = {
+    width: 0,
+    height: 0
+  };
   initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions> =
     new Map();
   _idCounter: number;
@@ -113,8 +117,11 @@ export class Editor {
   public loadImage(path: string, width: number, height: number) {
     this.image = doc.createElementNS(SVG_NS, 'image');
     this.image.setAttributeNS(XLINK_NS, 'href', path);
+    this.imageSizes.width = width;
+    this.imageSizes.height = height;
     width && this.image.setAttribute('width', String(width));
     height && this.image.setAttribute('height', String(height));
+
     this.svg?.prepend(this.image);
     return this;
   }
@@ -128,11 +135,9 @@ export class Editor {
       this._cacheElementMapping[key]?.scale?.(scale);
     }
     if (this.image && this.image.getAttribute('width') && this.image.getAttribute('height')) {
-      const height = this.image.getAttribute('height');
-      const width = this.image.getAttribute('width');
-
-      width && this.image.setAttribute('width', String(+width * scale));
-      height && this.image.setAttribute('height', String(+height * scale));
+      const { width, height } = this.imageSizes;
+      width && this.image.setAttribute('width', String(width * scale));
+      height && this.image.setAttribute('height', String(height * scale));
     }
   }
   public rect() {
@@ -236,10 +241,10 @@ export class Editor {
       idCounter: this._idCounter,
       components: Object.entries(this._cacheElementMapping)
         .filter(([id, component]) => !(component instanceof Handle))
-        .map(([id, component]: [string, any]) => ({
+        .map(([id, component]) => ({
           id,
           type: component.element.tagName,
-          data: (component as any).export()
+          data: component.export()
         }))
     };
 
