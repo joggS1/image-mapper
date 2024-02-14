@@ -97,9 +97,10 @@ class Polygon {
     return this;
   }
   public scale(scale: number) {
+    const points = this.editorOwner?.initialSizes.get(this.element.id) as PolygonPoint[];
     this.points.forEach((p, index) => {
-      p.x *= scale;
-      p.y *= scale;
+      p.x = ~~(points[index].x * scale);
+      p.y = ~~(points[index].y * scale);
     });
     this.updateElementPoints();
     return this;
