@@ -3478,7 +3478,7 @@ class Ee {
   }
   scale(t) {
     return this.points.forEach((e, r) => {
-      e.x = ~~(e.x * t), e.y = ~~(e.y * t);
+      e.x = e.x * t, e.y = e.y * t;
     }), this.updateElementPoints(), this;
   }
   setIsSelected(t) {
@@ -3640,7 +3640,7 @@ class fe {
     }), this.handles = [];
   }
   scale(t) {
-    return this.dim.width = ~~(this.dim.width * t), this.dim.height = ~~(this.dim.height * t), this.dim.x = ~~(this.dim.x * t), this.dim.y = ~~(this.dim.y * t), this;
+    return this.dim.width = this.dim.width * t, this.dim.height = this.dim.height * t, this.dim.x = this.dim.x * t, this.dim.y = this.dim.y * t, this;
   }
   setStyle(t) {
     return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), ie(this.element, t.componentHover.off, t.componentHover.on), this;
