@@ -198,12 +198,12 @@ export class Editor {
     return component as SVGAElement | undefined;
   }
 
-  public on(eventTypes: Array<Event['type']>, handler: (e: Event) => {}) {
+  public on(eventTypes: string, handler: (e: Event) => any) {
     addEventListeners(this.svg, eventTypes, handler);
     return this;
   }
 
-  public off(eventTypes: Array<Event['type']>, handler: (e: Event) => {}) {
+  public off(eventTypes: string, handler: (e: Event) => {}) {
     removeEventListeners(this.svg, eventTypes, handler);
     return this;
   }

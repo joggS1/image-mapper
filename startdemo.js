@@ -3,8 +3,22 @@ import { build, createServer } from 'vite';
 (async () => {
   await build({
     root: './public_',
+    mode: 'development',
+    esbuild: {
+      keepNames: true,
+      minifyIdentifiers: false,
+    },
     build: {
       watch: true,
+
+      terserOptions: {
+        compress: {
+          keep_fnames: "*",
+          keep_classnames: "*",
+          keep_fargs: "*",
+          keep_infinity: "*"
+        }
+      },
       rollupOptions: {
         input: './examples/node/index.ts',
         output: {

@@ -98,8 +98,8 @@ class Polygon {
   }
   public scale(scale: number) {
     this.points.forEach((p, index) => {
-      p.x = ~~(p.x * scale);
-      p.y = ~~(p.y * scale);
+      p.x = p.x * scale;
+      p.y = p.y * scale;
     });
     this.updateElementPoints();
     return this;
