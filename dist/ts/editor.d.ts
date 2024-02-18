@@ -1,6 +1,6 @@
 import { createFSMService } from './fsm';
 import { Handle } from './handle';
-import { Component, EditorOptions, FigureOptions, PolygonOptions, Style } from './types';
+import { Component, EditorMode, EditorOptions, FigureOptions, MouseButtons, PolygonOptions, Style } from './types';
 export declare class Editor {
     width: number;
     height: number;
@@ -9,15 +9,20 @@ export declare class Editor {
     fsmService: ReturnType<typeof createFSMService>;
     componentDrawnHandler: EditorOptions['componentDrawnHandler'];
     selectModeHandler: EditorOptions['selectModeHandler'];
-    viewClickHandler: EditorOptions['viewClickHandler'];
+    clickHandler: EditorOptions['clickHandler'];
+    selectHandler: EditorOptions['selectHandler'];
     image?: SVGImageElement;
+    mode?: EditorMode;
+    /** components */
     cgroup: SVGGElement;
+    /** handles */
     hgroup: SVGGElement;
     _cacheElementMapping: Record<string, Component>;
     private imageSizes;
     initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
     _idCounter: number;
     _handleIdCounter: number;
+    mouseButtons: MouseButtons[];
     constructor(svgEl: SVGSVGElement | string, options?: EditorOptions, style?: Style);
     loadImage(path: string, width: number, height: number): this;
     setStyle(style: object): this;
