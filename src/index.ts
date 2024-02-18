@@ -1,14 +1,17 @@
 import editorFactory, { Editor } from './editor';
 
-import { PolygonOptions, FigureOptions, Style } from './types';
+import { FigureOptions, MouseButtons, PolygonOptions, Style } from './types';
 
-export const editor = editorFactory(false);
+const editor = editorFactory(false);
 
-export const view = editorFactory(true);
+const view = editorFactory(true);
 
 export default {
   editor,
-  view
+  view,
+  MouseButtons
 };
+
+export { editor, view, MouseButtons };
 
 export type { PolygonOptions, FigureOptions, Editor, Style };

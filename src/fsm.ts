@@ -302,6 +302,7 @@ const createFSM = (editor: any) => {
           context._editor.selectComponent(null);
         },
         selectModeEntry: (context, e) => {
+          context._editor.mode = 'select';
           context._editor.selectModeHandler && context._editor.selectModeHandler();
         }
       },

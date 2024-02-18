@@ -1,22 +1,24 @@
 // $ npm run demo
 
-import { editor, view } from '../../src';
+import { editor, view, MouseButtons } from '../../src';
 
 // Editor
 const myEditor = editor('editor', {
   width: 800,
   height: 400,
-  selectModeHandler: () => console.log('Editor is now in select mode')
+  selectModeHandler: () => console.log('Editor is now in select mode'),
+  mouseButtons: [MouseButtons.LMB]
 });
 myEditor.loadImage('image.svg', 700, 350);
-//@ts-ignore
-myEditor.on('mouseup', (e) => console.log('mouseup event', e));
-myEditor.polygon();
+
+myEditor.ellipse();
 // View
 const myView = view('view', {
   width: 800,
   height: 400,
-  viewClickHandler: (e, id) => console.log('User clicked on', id)
+  clickHandler: (e, id, centerCoords) => {
+    console.log('User clicked on', id);
+  }
 });
 myView.loadImage('image.png', 700, 350);
 myView.import(
