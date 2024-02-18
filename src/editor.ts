@@ -449,7 +449,7 @@ const addViewListeners = (view: Editor) => {
     e.preventDefault(); // avoid both touch and pointer event on devices firing both
 
     view.clickHandler &&
-      view.clickHandler(e, e.target.id, view.selectComponent(e.target.id).getCenterCoords());
+      view.clickHandler(e, e.target.id, view.selectComponent(e.target.id)?.getCenterCoords());
   });
 
   return view;
