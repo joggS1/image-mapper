@@ -5,7 +5,7 @@ export declare class CornerShapedElement {
     editorOwner: Editor | null;
     svgElementName: SVGTagNames;
     private includeAttributes;
-    element: SVGRectElement | SVGCircleElement | SVGPolygonElement | SVGEllipseElement | SVGElement;
+    element: SVGRectElement | SVGCircleElement | SVGEllipseElement | SVGElement;
     dim: Dimensions;
     handles: Handle[];
     style?: Style;
@@ -21,6 +21,10 @@ export declare class CornerShapedElement {
     setHandlesVisibility(visible: boolean): this;
     setIsSelected(isSelected: boolean): this;
     getHandles(): Handle[];
+    getCenterCoords(): {
+        x: number;
+        y: number;
+    };
     clearHandles(): void;
     scale(scale: number): this;
     setStyle(style: Style): this;

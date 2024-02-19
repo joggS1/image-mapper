@@ -1,4 +1,4 @@
-import { root, doc } from './globals';
+import { doc, root } from './globals';
 import { createFSMService } from './fsm';
 import { addEventListeners, removeEventListeners } from './events';
 import { onChange } from './onChangeProxy';
@@ -8,7 +8,15 @@ import { Circle } from './circle';
 import { Ellipse } from './ellipse';
 import { Handle } from './handle';
 import { getDefaultStyle } from './style';
-import { Component, EditorOptions, FigureOptions, PolygonOptions, Style } from './types';
+import {
+  Component,
+  EditorMode,
+  EditorOptions,
+  FigureOptions,
+  MouseButtons,
+  PolygonOptions,
+  Style
+} from './types';
 import { SVG_NS, XLINK_NS } from './constants';
 
 export class Editor {
@@ -20,9 +28,13 @@ export class Editor {
   fsmService: ReturnType<typeof createFSMService>;
   componentDrawnHandler: EditorOptions['componentDrawnHandler'];
   selectModeHandler: EditorOptions['selectModeHandler'];
-  viewClickHandler: EditorOptions['viewClickHandler'];
+  clickHandler: EditorOptions['clickHandler'];
+  selectHandler: EditorOptions['selectHandler'];
   image?: SVGImageElement;
+  mode?: EditorMode;
+  /** components */
   cgroup: SVGGElement;
+  /** handles */
   hgroup: SVGGElement;
   _cacheElementMapping: Record<string, Component>;
   private scale = 1;
@@ -34,6 +46,7 @@ export class Editor {
     new Map();
   _idCounter: number;
   _handleIdCounter: number;
+  mouseButtons: MouseButtons[] = [MouseButtons.LMB, MouseButtons.MMB, MouseButtons.RMB];
 
   constructor(svgEl: SVGSVGElement | string, options: EditorOptions = {}, style?: Style) {
     [
@@ -41,14 +54,17 @@ export class Editor {
       this.height = 600,
       this.componentDrawnHandler,
       this.selectModeHandler,
-      this.viewClickHandler
+      this.clickHandler,
+      this.selectHandler
     ] = [
       options.width,
       options.height,
       options.componentDrawnHandler, // applies to Editor only
       options.selectModeHandler, // applies to Editor only
-      options.viewClickHandler // applies to View only
+      options.clickHandler, // applies to View only
+      options.selectHandler
     ];
+    options.mouseButtons && (this.mouseButtons = options.mouseButtons);
 
     this.style = deepMerge(getDefaultStyle(), style);
 
@@ -115,6 +131,7 @@ export class Editor {
     this._idCounter = 1;
     this._handleIdCounter = 1;
   }
+
   public loadImage(path: string, width: number, height: number) {
     this.image = doc.createElementNS(SVG_NS, 'image');
     this.image.setAttributeNS(XLINK_NS, 'href', path);
@@ -131,6 +148,7 @@ export class Editor {
     this.style = deepMerge(this.style, style);
     return this;
   }
+
   public setScale(scale: number) {
     const newScale = scale / this.scale;
     for (const key in this._cacheElementMapping) {
@@ -143,24 +161,32 @@ export class Editor {
     }
     this.scale = scale;
   }
+
   public rect() {
+    this.mode = 'rect';
     this.fsmService.send('MODE_DRAW_RECT');
   }
 
   public polygon() {
+    this.mode = 'polygon';
     this.fsmService.send('MODE_DRAW_POLYGON');
   }
 
   public circle() {
+    this.mode = 'circle';
     this.fsmService.send('MODE_DRAW_CIRCLE');
   }
 
   public ellipse() {
+    this.mode = 'ellipse';
     this.fsmService.send('MODE_DRAW_ELLIPSE');
   }
+
   public selectMode() {
+    this.mode = 'select';
     this.fsmService.send('MODE_SELECT');
   }
+
   public selectComponent(component: Component | string) {
     let _component: Component;
     if (typeof component === 'string') {
@@ -174,6 +200,7 @@ export class Editor {
     if (!_component || _component.setIsSelected) {
       Object.values(this._cacheElementMapping).forEach((c) => {
         if (c === component) {
+          this.selectHandler && this.selectHandler(c);
           c.setIsSelected && c.setIsSelected(true);
         }
         if (c !== component && !c.isFrozen) {
@@ -239,6 +266,7 @@ export class Editor {
         return !!c;
       });
   }
+
   public export(escape?: boolean) {
     const data = {
       idCounter: this._idCounter,
@@ -327,6 +355,7 @@ const addEditorListeners = (editor: Editor) => {
   addEventListeners(editor.svg, 'mousedown touchstart', (e: any) => {
     e.preventDefault(); // avoid both mouse and touch event on devices firing both
 
+    if (e instanceof MouseEvent && !(e.button in editor.mouseButtons)) return;
     const storedComponent = editor.getComponentById(e.target.id) as any;
     const componentTarget = storedComponent && storedComponent.isFrozen ? null : storedComponent;
 
@@ -422,7 +451,8 @@ const addViewListeners = (view: Editor) => {
   addEventListeners(view.cgroup, 'click touchstart', (e: any) => {
     e.preventDefault(); // avoid both touch and pointer event on devices firing both
 
-    view.viewClickHandler && view.viewClickHandler(e, e.target.id);
+    view.clickHandler &&
+      view.clickHandler(e, e.target.id, view.selectComponent(e.target.id)?.getCenterCoords());
   });
 
   return view;

@@ -1,4 +1,4 @@
-import { Handle } from 'src/handle';
+import { Handle } from '../handle';
 import { Circle } from '../circle';
 import { Ellipse } from '../ellipse';
 import { Polygon } from '../polygon';
@@ -10,7 +10,13 @@ export interface EditorOptions {
     componentDrawnHandler?: (component: SVGElement, componentId: string) => void;
     /** applies to Editor only  */
     selectModeHandler?: () => void;
-    viewClickHandler?: (component: SVGElement, componentId: string) => void;
+    /** View mode click handler */
+    clickHandler?: (component: Event, componentId: string, centerCoords: {
+        x: number;
+        y: number;
+    }) => void;
+    selectHandler?: (component: Component) => void;
+    mouseButtons?: MouseButtons[];
 }
 export type PolygonPoint = {
     x: number;
@@ -40,3 +46,9 @@ export type PropChangeListener = {
     height: (currHeight: number, prevHeight: number, dim: Dimensions) => void;
 };
 export type Component = Circle | Rectangle | Polygon | Ellipse;
+export type EditorMode = SVGTagNames | 'select';
+export declare enum MouseButtons {
+    LMB = 1,
+    RMB = 2,
+    MMB = 4
+}

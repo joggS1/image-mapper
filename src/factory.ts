@@ -11,7 +11,6 @@ function generateHandles(this: CornerShapedElement) {
   const { x, y, width, height } = this.dim;
 
   this.handles = [
-    //@ts-ignore
     new Handle(
       x,
       y,
@@ -24,7 +23,6 @@ function generateHandles(this: CornerShapedElement) {
       },
       this.isFrozen
     ),
-    //@ts-ignore
 
     new Handle(
       x,
@@ -37,7 +35,6 @@ function generateHandles(this: CornerShapedElement) {
       },
       this.isFrozen
     ),
-    //@ts-ignore
 
     new Handle(
       x + width,
@@ -50,7 +47,6 @@ function generateHandles(this: CornerShapedElement) {
       },
       this.isFrozen
     ),
-    //@ts-ignore
 
     new Handle(
       x + width,
@@ -71,12 +67,7 @@ export class CornerShapedElement {
   editorOwner: Editor | null = null;
   svgElementName: SVGTagNames;
   private includeAttributes = ['fill', 'stroke', 'opacity', 'stroke-width'];
-  public element:
-    | SVGRectElement
-    | SVGCircleElement
-    | SVGPolygonElement
-    | SVGEllipseElement
-    | SVGElement;
+  public element: SVGRectElement | SVGCircleElement | SVGEllipseElement | SVGElement;
   dim: Dimensions = {
     x: 0,
     height: 0,
@@ -179,7 +170,6 @@ export class CornerShapedElement {
     this.dim.height = y - this.dim.y;
     return this;
   }
-
   public move(deltaX: number, deltaY: number) {
     this.dim.x += deltaX;
     this.dim.y += deltaY;
@@ -213,6 +203,13 @@ export class CornerShapedElement {
 
   public getHandles() {
     return this.handles;
+  }
+
+  public getCenterCoords() {
+    return {
+      x: this.dim.x + this.dim.width / 2,
+      y: this.dim.y + this.dim.height / 2
+    };
   }
 
   public clearHandles() {

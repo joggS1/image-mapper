@@ -102,15 +102,15 @@ describe('View', () => {
   const editorConstr = editorFactory();
   const viewConstr = editorFactory(true);
 
-  test('should get callback on viewClickHandler', () => {
-    const viewClickHandler = jest.fn();
-    const view = viewConstr('view', { viewClickHandler });
+  test('should get callback on clickHandler', () => {
+    const clickHandler = jest.fn();
+    const view = viewConstr('view', { clickHandler });
 
     const mouseEvent = new MouseEvent('click'); // we skip testing target as it is readonly in MouseEvent
     view.cgroup.dispatchEvent(mouseEvent);
 
-    expect(viewClickHandler).toBeCalledTimes(1);
-    expect(viewClickHandler).toBeCalledWith(mouseEvent, '');
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(clickHandler).toHaveBeenCalledWith(mouseEvent, '', undefined);
   });
 
   test('should be able to import Editor`s exported data', () => {

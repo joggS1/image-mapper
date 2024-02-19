@@ -18,6 +18,7 @@ declare class Polygon {
     move(deltaX: number, deltaY: number): this;
     isValid(): boolean;
     setHandlesVisibility(visible: boolean): this;
+    getCenterCoords(): PolygonPoint;
     scale(scale: number): this;
     setIsSelected(isSelected: boolean): this;
     getHandles(): (Handle | null | undefined)[];

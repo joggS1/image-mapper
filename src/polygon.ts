@@ -1,4 +1,4 @@
-import { SVG_NS, dataRegex } from './constants';
+import { dataRegex, SVG_NS } from './constants';
 import { Editor } from './editor';
 import { doc } from './globals';
 import { Handle } from './handle';
@@ -27,6 +27,7 @@ class Polygon {
   style?: Style;
   isSelected: boolean;
   isFrozen: boolean;
+
   constructor(editorOwner: Editor, points: PolygonPoint[]) {
     this.editorOwner = editorOwner;
     this.element = doc.createElementNS(SVG_NS, 'polygon');
@@ -36,6 +37,7 @@ class Polygon {
     this.isSelected = false;
     this.isFrozen = false;
   }
+
   freeze(freeze: boolean) {
     this.isFrozen = freeze !== undefined ? !!freeze : true;
     this.getHandles().forEach((handle: any) => handle.freeze(freeze));
@@ -96,6 +98,18 @@ class Polygon {
     });
     return this;
   }
+
+  public getCenterCoords() {
+    return this.points.reduce(
+      (acc, point) => {
+        acc.x += point.x / this.points.length;
+        acc.y += point.y / this.points.length;
+        return acc;
+      },
+      { x: 0, y: 0 }
+    );
+  }
+
   public scale(scale: number) {
     this.points.forEach((p, index) => {
       p.x = p.x * scale;
@@ -121,12 +135,14 @@ class Polygon {
   getHandles() {
     return this.points.map((p) => p.handle);
   }
+
   clearHandles() {
     this.points.forEach((p) => {
       this.editorOwner?.unregisterComponent(p.handle);
       p.handle = null;
     });
   }
+
   setStyle(style: Style) {
     this.style = style;
     setStyle(this.element, style.component);
@@ -136,6 +152,7 @@ class Polygon {
     addHover(this.element, style.componentHover.off, style.componentHover.on);
     return this;
   }
+
   setDataAttributes(attributes: Record<string, string | number>) {
     for (let key in attributes) {
       this.element.setAttribute(key, String(attributes[key]));
