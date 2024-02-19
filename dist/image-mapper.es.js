@@ -3483,10 +3483,8 @@ class Oe {
     );
   }
   scale(t) {
-    var r;
-    const e = (r = this.editorOwner) == null ? void 0 : r.initialSizes.get(this.element.id);
-    return this.points.forEach((i, s) => {
-      i.x = ~~(e[s].x * t), i.y = ~~(e[s].y * t);
+    return this.points.forEach((e, r) => {
+      e.x = e.x * t, e.y = e.y * t;
     }), this.updateElementPoints(), this;
   }
   setIsSelected(t) {
@@ -3650,11 +3648,7 @@ class de {
     }), this.handles = [];
   }
   scale(t) {
-    var o;
-    const { width: e, x: r, height: i, y: s } = (o = this == null ? void 0 : this.editorOwner) == null ? void 0 : o.initialSizes.get(
-      this.element.id
-    );
-    return this.dim.width = ~~(e * t), this.dim.height = ~~(i * t), this.dim.x = ~~(r * t), this.dim.y = ~~(s * t), this;
+    return this.dim.width = this.dim.width * t, this.dim.height = this.dim.height * t, this.dim.x = this.dim.x * t, this.dim.y = this.dim.y * t, this;
   }
   setStyle(t) {
     return this.style = t, B(this.element, t.component), B(this.element, t.componentHover.off), B(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
@@ -3756,7 +3750,7 @@ class gr extends de {
 var Dt = /* @__PURE__ */ ((n) => (n[n.LMB = 1] = "LMB", n[n.RMB = 2] = "RMB", n[n.MMB = 4] = "MMB", n))(Dt || {});
 class Me {
   constructor(t, e = {}, r) {
-    if (this.imageSizes = {
+    if (this.scale = 1, this.imageSizes = {
       width: 0,
       height: 0
     }, this.initialSizes = /* @__PURE__ */ new Map(), this.mouseButtons = [Dt.LMB, Dt.MMB, Dt.RMB], [
@@ -3809,13 +3803,15 @@ class Me {
     return this.style = Wt(this.style, t), this;
   }
   setScale(t) {
-    var e, r;
-    for (const i in this._cacheElementMapping)
-      (r = (e = this._cacheElementMapping[i]) == null ? void 0 : e.scale) == null || r.call(e, t);
+    var r, i;
+    const e = t / this.scale;
+    for (const s in this._cacheElementMapping)
+      (i = (r = this._cacheElementMapping[s]) == null ? void 0 : r.scale) == null || i.call(r, e);
     if (this.image && this.image.getAttribute("width") && this.image.getAttribute("height")) {
-      const { width: i, height: s } = this.imageSizes;
-      i && this.image.setAttribute("width", String(i * t)), s && this.image.setAttribute("height", String(s * t));
+      const { width: s, height: o } = this.imageSizes;
+      s && this.image.setAttribute("width", String(s * t)), o && this.image.setAttribute("height", String(o * t));
     }
+    this.scale = t;
   }
   rect() {
     this.mode = "rect", this.fsmService.send("MODE_DRAW_RECT");

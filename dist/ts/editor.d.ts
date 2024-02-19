@@ -18,6 +18,7 @@ export declare class Editor {
     /** handles */
     hgroup: SVGGElement;
     _cacheElementMapping: Record<string, Component>;
+    private scale;
     private imageSizes;
     initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
     _idCounter: number;
@@ -34,8 +35,8 @@ export declare class Editor {
     selectMode(): void;
     selectComponent(component: Component | string): Component;
     removeComponent(component: string | any): SVGAElement | undefined;
-    on(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
-    off(eventTypes: Array<Event['type']>, handler: (e: Event) => {}): this;
+    on(eventTypes: string, handler: (e: Event) => any): this;
+    off(eventTypes: string, handler: (e: Event) => {}): this;
     getComponentById(id: string): Component;
     import(data: string, idInterceptor?: (id: string) => string): any;
     export(escape?: boolean): string;
