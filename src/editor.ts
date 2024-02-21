@@ -37,6 +37,8 @@ export class Editor {
   /** handles */
   hgroup: SVGGElement;
   _cacheElementMapping: Record<string, Component>;
+  deleteHandler?: EditorOptions['deleteHandler'];
+  idGenerator: EditorOptions['idGenerator'];
   private scale = 1;
   private imageSizes = {
     width: 0,
@@ -55,14 +57,18 @@ export class Editor {
       this.componentDrawnHandler,
       this.selectModeHandler,
       this.clickHandler,
-      this.selectHandler
+      this.selectHandler,
+      this.idGenerator,
+      this.deleteHandler
     ] = [
       options.width,
       options.height,
       options.componentDrawnHandler, // applies to Editor only
       options.selectModeHandler, // applies to Editor only
       options.clickHandler, // applies to View only
-      options.selectHandler
+      options.selectHandler,
+      options.idGenerator,
+      options.deleteHandler
     ];
     options.mouseButtons && (this.mouseButtons = options.mouseButtons);
 
@@ -200,7 +206,6 @@ export class Editor {
     if (!_component || _component.setIsSelected) {
       Object.values(this._cacheElementMapping).forEach((c) => {
         if (c === component) {
-          this.selectHandler && this.selectHandler(c);
           c.setIsSelected && c.setIsSelected(true);
         }
         if (c !== component && !c.isFrozen) {
@@ -319,7 +324,7 @@ export class Editor {
     if (component instanceof Handle) {
       id = 'handle_' + this._handleIdCounter++;
     } else {
-      id = id || component.element.tagName + '_' + this._idCounter++;
+      id = id || this.idGenerator?.() || component.element.tagName + '_' + this._idCounter++;
     }
     if (!this.initialSizes.has(id)) {
       this.initialSizes.set(
@@ -340,12 +345,14 @@ export class Editor {
     return this.registerComponent(handle.setStyle(this.style.handle, this.style.handleHover));
   }
 
-  public unregisterComponent(component: any) {
+  public unregisterComponent(component: string | Component) {
+    component = typeof component === 'string' ? this.selectComponent(component) : component;
     if (!component) return;
     component._logWarnOnOpOnFrozen && component._logWarnOnOpOnFrozen('Deleting');
     //@ts-ignore
     this._cacheElementMapping[component.element.id] = null; // tell observer
     delete this._cacheElementMapping[component.element.id];
+    this?.deleteHandler?.(component?.element?.id);
   }
 }
 
@@ -356,8 +363,9 @@ const addEditorListeners = (editor: Editor) => {
     e.preventDefault(); // avoid both mouse and touch event on devices firing both
 
     if (e instanceof MouseEvent && !(e.button in editor.mouseButtons)) return;
-    const storedComponent = editor.getComponentById(e.target.id) as any;
+    const storedComponent = editor.getComponentById(e.target.id);
     const componentTarget = storedComponent && storedComponent.isFrozen ? null : storedComponent;
+    editor.selectHandler?.(e.target.id, componentTarget!);
 
     const touchBCR = editor.svg?.getBoundingClientRect()!;
     const touch = e.targetTouches && e.targetTouches[0];

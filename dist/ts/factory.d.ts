@@ -30,5 +30,5 @@ export declare class CornerShapedElement {
     setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): FigureOptions;
-    private _logWarnOnOpOnFrozen;
+    _logWarnOnOpOnFrozen(op: string): void;
 }

@@ -26,6 +26,6 @@ declare class Polygon {
     setStyle(style: Style): this;
     setDataAttributes(attributes: Record<string, string | number>): this;
     export(): PolygonOptions;
-    private _logWarnOnOpOnFrozen;
+    _logWarnOnOpOnFrozen(op: string): void;
 }
 export { Polygon };

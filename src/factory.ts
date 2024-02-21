@@ -252,7 +252,7 @@ export class CornerShapedElement {
     return data;
   }
 
-  private _logWarnOnOpOnFrozen(op: string) {
+  public _logWarnOnOpOnFrozen(op: string) {
     if (this.isFrozen) {
       console.warn(`${op} frozen ${this.element?.tagName} with id ${this.element?.id}`);
     }

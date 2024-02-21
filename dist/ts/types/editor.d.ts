@@ -15,7 +15,9 @@ export interface EditorOptions {
         x: number;
         y: number;
     }) => void;
-    selectHandler?: (component: Component) => void;
+    idGenerator?: () => string;
+    deleteHandler?: (componentId: string) => void;
+    selectHandler?: (componentId: string, component: Component) => void;
     mouseButtons?: MouseButtons[];
 }
 export type PolygonPoint = {

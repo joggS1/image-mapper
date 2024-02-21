@@ -3759,7 +3759,9 @@ class Me {
       this.componentDrawnHandler,
       this.selectModeHandler,
       this.clickHandler,
-      this.selectHandler
+      this.selectHandler,
+      this.idGenerator,
+      this.deleteHandler
     ] = [
       e.width,
       e.height,
@@ -3769,7 +3771,9 @@ class Me {
       // applies to Editor only
       e.clickHandler,
       // applies to View only
-      e.selectHandler
+      e.selectHandler,
+      e.idGenerator,
+      e.deleteHandler
     ], e.mouseButtons && (this.mouseButtons = e.mouseButtons), this.style = Wt(vn(), r), this.fsmService = vr(this).start(), this.svg = t, typeof t == "string") {
       if (this.svg = G.getElementById(t), !this.svg) {
         this.svg = G.createElementNS(rt, "svg"), this.svg.setAttribute("version", "1.1"), this.svg.setAttribute("id", t), this.svg.setAttribute("width", this.width + "px"), this.svg.setAttribute("height", this.height + "px"), this.svg.setAttribute("viewBox", `0, 0, ${this.width} ${this.height}`), this.svg.setAttribute("preserveAspectRatio", "xMinYMin");
@@ -3831,7 +3835,7 @@ class Me {
   selectComponent(t) {
     let e;
     return typeof t == "string" ? e = this.getComponentById(t) : e = t, (!e || e.setIsSelected) && Object.values(this._cacheElementMapping).forEach((r) => {
-      r === t && (this.selectHandler && this.selectHandler(r), r.setIsSelected && r.setIsSelected(!0)), r !== t && !r.isFrozen && r.setIsSelected && (r.setIsSelected(!1), r.getHandles().forEach((i) => {
+      r === t && r.setIsSelected && r.setIsSelected(!0), r !== t && !r.isFrozen && r.setIsSelected && (r.setIsSelected(!1), r.getHandles().forEach((i) => {
         this.unregisterComponent(i);
       }), r.clearHandles());
     }), e;
@@ -3909,25 +3913,29 @@ class Me {
     );
   }
   registerComponent(t, e) {
-    return t instanceof K ? e = "handle_" + this._handleIdCounter++ : e = e || t.element.tagName + "_" + this._idCounter++, this.initialSizes.has(e) || this.initialSizes.set(
+    var r;
+    return t instanceof K ? e = "handle_" + this._handleIdCounter++ : e = e || ((r = this.idGenerator) == null ? void 0 : r.call(this)) || t.element.tagName + "_" + this._idCounter++, this.initialSizes.has(e) || this.initialSizes.set(
       e,
-      t instanceof Oe ? [...t.points.map((r) => ({ ...r }))] : Object.assign({}, t.dim)
+      t instanceof Oe ? [...t.points.map((i) => ({ ...i }))] : Object.assign({}, t.dim)
     ), this._cacheElementMapping[e] = t, t.element.id = e, t;
   }
   registerComponentHandle(t) {
     return this.registerComponent(t.setStyle(this.style.handle, this.style.handleHover));
   }
   unregisterComponent(t) {
-    t && (t._logWarnOnOpOnFrozen && t._logWarnOnOpOnFrozen("Deleting"), this._cacheElementMapping[t.element.id] = null, delete this._cacheElementMapping[t.element.id]);
+    var e, r;
+    t = typeof t == "string" ? this.selectComponent(t) : t, t && (t._logWarnOnOpOnFrozen && t._logWarnOnOpOnFrozen("Deleting"), this._cacheElementMapping[t.element.id] = null, delete this._cacheElementMapping[t.element.id], (r = this == null ? void 0 : this.deleteHandler) == null || r.call(this, (e = t == null ? void 0 : t.element) == null ? void 0 : e.id));
   }
 }
 const mr = (n) => {
   let t;
   return tt(n.svg, "mousedown touchstart", (e) => {
-    var u;
+    var u, a;
     if (e.preventDefault(), e instanceof MouseEvent && !(e.button in n.mouseButtons))
       return;
-    const r = n.getComponentById(e.target.id), i = r && r.isFrozen ? null : r, s = (u = n.svg) == null ? void 0 : u.getBoundingClientRect(), o = e.targetTouches && e.targetTouches[0];
+    const r = n.getComponentById(e.target.id), i = r && r.isFrozen ? null : r;
+    (u = n.selectHandler) == null || u.call(n, e.target.id, i);
+    const s = (a = n.svg) == null ? void 0 : a.getBoundingClientRect(), o = e.targetTouches && e.targetTouches[0];
     n.fsmService.send({
       type: "MT_DOWN",
       component: i,
