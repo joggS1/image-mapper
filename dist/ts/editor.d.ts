@@ -18,6 +18,8 @@ export declare class Editor {
     /** handles */
     hgroup: SVGGElement;
     _cacheElementMapping: Record<string, Component>;
+    deleteHandler?: EditorOptions['deleteHandler'];
+    idGenerator: EditorOptions['idGenerator'];
     private scale;
     private imageSizes;
     initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
@@ -46,7 +48,7 @@ export declare class Editor {
     createPolygon(data: PolygonOptions, id: string): Component;
     registerComponent(component: Component, id?: string): Component;
     registerComponentHandle(handle: Handle): Component;
-    unregisterComponent(component: any): void;
+    unregisterComponent(component: string | Component): void;
 }
 declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: Style) => Editor;
 export default _default;
