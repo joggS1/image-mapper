@@ -17,7 +17,9 @@ export interface EditorOptions {
     componentId: string,
     centerCoords: { x: number; y: number }
   ) => void;
-  selectHandler?: (component: Component) => void;
+  idGenerator?: () => string;
+  deleteHandler?: (componentId: string) => void;
+  selectHandler?: (componentId: string, component: Component) => void;
   mouseButtons?: MouseButtons[];
 }
 

@@ -4,7 +4,7 @@ import { doc } from './globals';
 import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
-import { PolygonOptions, PolygonPoint } from './types/editor';
+import { Component, PolygonOptions, PolygonPoint } from './types/editor';
 import { Style } from './types';
 
 function generateHandle(this: Polygon, x: number, y: number, point: PolygonPoint) {
@@ -138,7 +138,7 @@ class Polygon {
 
   clearHandles() {
     this.points.forEach((p) => {
-      this.editorOwner?.unregisterComponent(p.handle);
+      this.editorOwner?.unregisterComponent(p.handle as unknown as Component);
       p.handle = null;
     });
   }
@@ -173,7 +173,7 @@ class Polygon {
     return data;
   }
 
-  private _logWarnOnOpOnFrozen(op: string) {
+  public _logWarnOnOpOnFrozen(op: string) {
     if (this.isFrozen) {
       console.warn(`${op} frozen ${this.element.tagName} with id ${this.element.id}`);
     }
