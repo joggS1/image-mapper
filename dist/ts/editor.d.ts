@@ -20,9 +20,8 @@ export declare class Editor {
     _cacheElementMapping: Record<string, Component>;
     deleteHandler?: EditorOptions['deleteHandler'];
     idGenerator: EditorOptions['idGenerator'];
-    private scale;
+    scale: number;
     private imageSizes;
-    initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions>;
     _idCounter: number;
     _handleIdCounter: number;
     mouseButtons: MouseButtons[];
@@ -40,8 +39,15 @@ export declare class Editor {
     on(eventTypes: string, handler: (e: Event) => any): this;
     off(eventTypes: string, handler: (e: Event) => {}): this;
     getComponentById(id: string): Component;
-    import(data: string, idInterceptor?: (id: string) => string): any;
-    export(escape?: boolean): string;
+    import(data: any, idInterceptor?: (id: string) => string): any;
+    export(escape?: boolean): {
+        idCounter: number;
+        components: {
+            id: string;
+            type: string;
+            data: FigureOptions | PolygonOptions;
+        }[];
+    };
     createRectangle(dim: FigureOptions, id: string): Component;
     createCircle(dim: FigureOptions, id: string): Component;
     createEllipse(dim: FigureOptions, id: string): Component;
