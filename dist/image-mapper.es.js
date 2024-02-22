@@ -49,14 +49,14 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
   componentSelect: Object.assign({}, ln),
   handle: Object.assign({}, fn),
   handleHover: Object.assign({}, dn)
-}), B = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, String(r))), se = (n, t, e) => {
-  tt(n, "mouseenter touchstart", () => B(n, e)), tt(
+}), J = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, String(r))), se = (n, t, e) => {
+  tt(n, "mouseenter touchstart", () => J(n, e)), tt(
     n,
     "mouseleave touchend touchleave",
-    () => B(n, t)
+    () => J(n, t)
   );
 };
-class K {
+class B {
   constructor(t, e, r, i) {
     this.x = t, this.y = e, this.moveHandler = r, this.element = G.createElementNS(rt, "circle"), this.element.setAttribute("cx", String(t)), this.element.setAttribute("cy", String(e)), this.element.setAttribute("r", String(5)), this.element.setAttribute("visibility", "hidden"), this.isFrozen = i !== void 0 ? !!i : !1;
   }
@@ -79,7 +79,7 @@ class K {
     return t = t !== void 0 ? !!t : !0, this.element.setAttribute("visibility", t ? "visible" : "hidden"), this;
   }
   setStyle(t, e) {
-    return B(this.element, t), se(this.element, t, e), this;
+    return J(this.element, t), se(this.element, t, e), this;
   }
 }
 /*! *****************************************************************************
@@ -1231,7 +1231,7 @@ function qn(n, t) {
   });
   return r;
 }
-var J = (
+var K = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t) {
@@ -1740,7 +1740,7 @@ Event: `
         return this;
       this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = k.Running;
       var r = t === void 0 ? this.initialState : ft(this, function() {
-        return Gn(t) ? e.machine.resolveState(t) : e.machine.resolveState(J.from(t, e.machine.context));
+        return Gn(t) ? e.machine.resolveState(t) : e.machine.resolveState(K.from(t, e.machine.context));
       });
       return this.options.devTools && this.attachDev(), this.scheduler.initialize(function() {
         e.update(r, it);
@@ -1857,7 +1857,7 @@ Event: `
             })), u = A(_t(t.machine, t.state, t.state.context, i, [{
               type: "exit",
               actions: o
-            }], t.machine.config.predictableActionArguments ? t._exec : void 0, t.machine.config.predictableActionArguments || t.machine.config.preserveActionOrder), 2), a = u[0], h = u[1], c = new J({
+            }], t.machine.config.predictableActionArguments ? t._exec : void 0, t.machine.config.predictableActionArguments || t.machine.config.preserveActionOrder), 2), a = u[0], h = u[1], c = new K({
               value: t.state.value,
               context: h,
               _event: i,
@@ -2484,7 +2484,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var e, r = this;
       if (!t)
         return [];
-      var i = t instanceof J ? t.value : At(t, this.delimiter);
+      var i = t instanceof K ? t.value : At(t, this.delimiter);
       if (D(i)) {
         var s = this.getStateNode(i).initial;
         return s !== void 0 ? this.getStateNodes((e = {}, e[i] = s, e)) : [this, this.states[i]];
@@ -2497,8 +2497,8 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var e = je(t);
       return this.events.includes(e);
     }, n.prototype.resolveState = function(t) {
-      var e = t instanceof J ? t : J.create(t), r = Array.from(Et([], this.getStateNodes(e.value)));
-      return new J(d(d({}, e), {
+      var e = t instanceof K ? t : K.create(t), r = Array.from(Et([], this.getStateNodes(e.value)));
+      return new K(d(d({}, e), {
         value: this.resolve(e.value),
         configuration: r,
         done: Lt(r, this),
@@ -2722,11 +2722,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
     }, n.prototype.transition = function(t, e, r, i) {
       t === void 0 && (t = this.initialState);
       var s = H(e), o;
-      if (t instanceof J)
-        o = r === void 0 ? t : this.resolveState(J.from(t, r));
+      if (t instanceof K)
+        o = r === void 0 ? t : this.resolveState(K.from(t, r));
       else {
         var u = D(t) ? this.resolve(Yt(this.getResolvedPath(t))) : this.resolve(t), a = r ?? this.machine.context;
-        o = this.resolveState(J.from(u, a));
+        o = this.resolveState(K.from(u, a));
       }
       if (!L && s.name === St)
         throw new Error("An event cannot have the wildcard type ('".concat(St, "')"));
@@ -2785,7 +2785,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         return $.type === zt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === kt;
       }), Gt = mt.reduce(function($, at) {
         return $[at.activity.id] = Wn(at.activity, c.machine, x, s), $;
-      }, e ? d({}, e.children) : {}), nt = new J({
+      }, e ? d({}, e.children) : {}), nt = new K({
         value: p || e.value,
         context: x,
         _event: s,
@@ -3415,7 +3415,7 @@ const { choose: cr } = Fn, lr = {
       }
     },
     guards: {
-      isHandle: (t, e) => e.component instanceof K,
+      isHandle: (t, e) => e.component instanceof B,
       unfinishedIsValid: (t, e) => t.unfinishedComponent.isValid()
     }
   }
@@ -3428,7 +3428,7 @@ const { choose: cr } = Fn, lr = {
   return new Proxy(n, r);
 };
 function Ee(n, t, e) {
-  return new K(
+  return new B(
     n,
     t,
     (r, i) => {
@@ -3488,7 +3488,7 @@ class Oe {
     }), this.updateElementPoints(), this;
   }
   setIsSelected(t) {
-    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && B(
+    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && J(
       this.element,
       t ? this.style.componentSelect.on : this.style.componentSelect.off
     ), this;
@@ -3503,7 +3503,7 @@ class Oe {
     });
   }
   setStyle(t) {
-    return this.style = t, B(this.element, t.component), B(this.element, t.componentHover.off), B(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     for (let e in t)
@@ -3526,7 +3526,7 @@ class Oe {
 function Ae() {
   const { x: n, y: t, width: e, height: r } = this.dim;
   this.handles = [
-    new K(
+    new B(
       n,
       t,
       (i, s) => {
@@ -3534,7 +3534,7 @@ function Ae() {
       },
       this.isFrozen
     ),
-    new K(
+    new B(
       n,
       t + r,
       (i, s) => {
@@ -3542,7 +3542,7 @@ function Ae() {
       },
       this.isFrozen
     ),
-    new K(
+    new B(
       n + e,
       t,
       (i, s) => {
@@ -3550,7 +3550,7 @@ function Ae() {
       },
       this.isFrozen
     ),
-    new K(
+    new B(
       n + e,
       t + r,
       (i, s) => {
@@ -3627,7 +3627,7 @@ class de {
     return t && !((e = this.handles) != null && e.length) && Ae.call(this), (r = this.handles) == null || r.forEach((i) => i == null ? void 0 : i.setVisible(t)), this;
   }
   setIsSelected(t) {
-    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && B(
+    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && J(
       this.element,
       t ? this.style.componentSelect.on : this.style.componentSelect.off
     ), this;
@@ -3651,7 +3651,7 @@ class de {
     return this.dim.width = this.dim.width * t, this.dim.height = this.dim.height * t, this.dim.x = this.dim.x * t, this.dim.y = this.dim.y * t, this;
   }
   setStyle(t) {
-    return this.style = t, B(this.element, t.component), B(this.element, t.componentHover.off), B(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     var e;
@@ -3793,7 +3793,7 @@ class Me {
     this.cgroup = G.createElementNS(rt, "g"), this.hgroup = G.createElementNS(rt, "g"), this.svg.appendChild(this.cgroup), this.svg.appendChild(this.hgroup), this._cacheElementMapping = fe(
       {},
       (i, s, o) => {
-        s ? s instanceof K ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof K ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((u) => {
+        s ? s instanceof B ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof B ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((u) => {
           this.unregisterComponent(u);
         }));
       }
@@ -3835,8 +3835,9 @@ class Me {
   selectComponent(t) {
     let e;
     return typeof t == "string" ? e = this.getComponentById(t) : e = t, (!e || e.setIsSelected) && Object.values(this._cacheElementMapping).forEach((r) => {
-      r === t && r.setIsSelected && r.setIsSelected(!0), r !== t && !r.isFrozen && r.setIsSelected && (r.setIsSelected(!1), r.getHandles().forEach((i) => {
-        this.unregisterComponent(i);
+      var i;
+      r === t && ((i = this.selectHandler) == null || i.call(this, r.element.id, r), r.setIsSelected && r.setIsSelected(!0)), r !== t && !r.isFrozen && r.setIsSelected && (r.setIsSelected(!1), r.getHandles().forEach((s) => {
+        this.unregisterComponent(s);
       }), r.clearHandles());
     }), e;
   }
@@ -3876,7 +3877,7 @@ class Me {
   export(t) {
     const e = {
       idCounter: this._idCounter,
-      components: Object.entries(this._cacheElementMapping).filter(([i, s]) => !(s instanceof K)).map(([i, s]) => ({
+      components: Object.entries(this._cacheElementMapping).filter(([i, s]) => !(s instanceof B)).map(([i, s]) => ({
         id: i,
         type: s.element.tagName,
         data: s.export()
@@ -3914,7 +3915,7 @@ class Me {
   }
   registerComponent(t, e) {
     var r;
-    return t instanceof K ? e = "handle_" + this._handleIdCounter++ : e = e || ((r = this.idGenerator) == null ? void 0 : r.call(this)) || t.element.tagName + "_" + this._idCounter++, this.initialSizes.has(e) || this.initialSizes.set(
+    return t instanceof B ? e = "handle_" + this._handleIdCounter++ : e = e || ((r = this.idGenerator) == null ? void 0 : r.call(this)) || t.element.tagName + "_" + this._idCounter++, this.initialSizes.has(e) || this.initialSizes.set(
       e,
       t instanceof Oe ? [...t.points.map((i) => ({ ...i }))] : Object.assign({}, t.dim)
     ), this._cacheElementMapping[e] = t, t.element.id = e, t;
@@ -3923,19 +3924,17 @@ class Me {
     return this.registerComponent(t.setStyle(this.style.handle, this.style.handleHover));
   }
   unregisterComponent(t) {
-    var e, r;
-    t = typeof t == "string" ? this.selectComponent(t) : t, t && (t._logWarnOnOpOnFrozen && t._logWarnOnOpOnFrozen("Deleting"), this._cacheElementMapping[t.element.id] = null, delete this._cacheElementMapping[t.element.id], (r = this == null ? void 0 : this.deleteHandler) == null || r.call(this, (e = t == null ? void 0 : t.element) == null ? void 0 : e.id));
+    var e, r, i;
+    t = typeof t == "string" ? this.selectComponent(t) : t, t && (!(t instanceof B) && ((e = t.isValid) != null && e.call(t)) && ((i = this.deleteHandler) == null || i.call(this, (r = t == null ? void 0 : t.element) == null ? void 0 : r.id, t)), t._logWarnOnOpOnFrozen && t._logWarnOnOpOnFrozen("Deleting"), this._cacheElementMapping[t.element.id] = null, delete this._cacheElementMapping[t.element.id]);
   }
 }
 const mr = (n) => {
   let t;
   return tt(n.svg, "mousedown touchstart", (e) => {
-    var u, a;
+    var u;
     if (e.preventDefault(), e instanceof MouseEvent && !(e.button in n.mouseButtons))
       return;
-    const r = n.getComponentById(e.target.id), i = r && r.isFrozen ? null : r;
-    (u = n.selectHandler) == null || u.call(n, e.target.id, i);
-    const s = (a = n.svg) == null ? void 0 : a.getBoundingClientRect(), o = e.targetTouches && e.targetTouches[0];
+    const r = n.getComponentById(e.target.id), i = r && r.isFrozen ? null : r, s = (u = n.svg) == null ? void 0 : u.getBoundingClientRect(), o = e.targetTouches && e.targetTouches[0];
     n.fsmService.send({
       type: "MT_DOWN",
       component: i,
