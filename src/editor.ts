@@ -18,6 +18,7 @@ import {
   Style
 } from './types';
 import { SVG_NS, XLINK_NS } from './constants';
+import { deCamelCase } from './utils';
 
 export class Editor {
   width: number;
@@ -250,16 +251,20 @@ export class Editor {
     return jsData.components
       .map((c: any) => {
         const id = idInterceptor ? idInterceptor(c.id) : c.id;
-
+        const data: any = {};
+        for (let key in c.data) {
+          data[deCamelCase(key)] = c.data[key];
+        }
+        c.data?.entries?.().map(([key, value]: [string, any]) => ({ [deCamelCase(key)]: value }));
         switch (c.type) {
           case 'rect':
-            return this.createRectangle(c.data, id);
+            return this.createRectangle(data, id);
           case 'circle':
-            return this.createCircle(c.data, id);
+            return this.createCircle(data, id);
           case 'ellipse':
-            return this.createEllipse(c.data, id);
+            return this.createEllipse(data, id);
           case 'polygon':
-            return this.createPolygon(c.data, id);
+            return this.createPolygon(data, id);
           default:
             console.error('Unknown type', c.type);
             return null;
