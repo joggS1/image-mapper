@@ -163,7 +163,10 @@ class Polygon {
   export() {
     //@ts-ignore
     const data: PolygonOptions = {
-      points: this.editorOwner?.initialSizes.get(this.element.id) as PolygonOptions['points']
+      points: this.points.map((point) => ({
+        x: point.x / (this.editorOwner?.scale || 1),
+        y: point.y / (this.editorOwner?.scale || 1)
+      }))
     };
     for (let attribute of this.element.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {

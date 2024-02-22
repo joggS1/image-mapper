@@ -39,13 +39,11 @@ export class Editor {
   _cacheElementMapping: Record<string, Component>;
   deleteHandler?: EditorOptions['deleteHandler'];
   idGenerator: EditorOptions['idGenerator'];
-  private scale = 1;
+  public scale = 1;
   private imageSizes = {
     width: 0,
     height: 0
   };
-  initialSizes: Map<Component['element']['id'], PolygonOptions['points'] | FigureOptions> =
-    new Map();
   _idCounter: number;
   _handleIdCounter: number;
   mouseButtons: MouseButtons[] = [MouseButtons.LMB, MouseButtons.MMB, MouseButtons.RMB];
@@ -245,8 +243,8 @@ export class Editor {
     return this._cacheElementMapping && this._cacheElementMapping[id];
   }
 
-  public import(data: string, idInterceptor?: (id: string) => string) {
-    const jsData = JSON.parse(data);
+  public import(data: any, idInterceptor?: (id: string) => string) {
+    const jsData = typeof data === 'string' ? JSON.parse(data) : data;
     this._idCounter = jsData.idCounter;
 
     return jsData.components
@@ -285,8 +283,7 @@ export class Editor {
         }))
     };
 
-    const result = JSON.stringify(data);
-    return escape ? result.replace(/[\"]/g, '\\"') : result;
+    return data;
   }
 
   public createRectangle(dim: FigureOptions, id: string) {
@@ -327,15 +324,6 @@ export class Editor {
     } else {
       id = id || this.idGenerator?.() || component.element.tagName + '_' + this._idCounter++;
     }
-    if (!this.initialSizes.has(id)) {
-      this.initialSizes.set(
-        id,
-        component instanceof Polygon
-          ? [...component.points.map((p) => ({ ...p }))]
-          : Object.assign({}, component.dim)
-      );
-    }
-
     this._cacheElementMapping[id] = component;
     component.element.id = id;
     return component;

@@ -1,4 +1,4 @@
-const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/2000/svg", an = "http://www.w3.org/1999/xlink", _e = new RegExp(/^data-[a-zA-Z]+/), tt = function(n, t, e) {
+const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/2000/svg", on = "http://www.w3.org/1999/xlink", Me = new RegExp(/^data-[a-zA-Z]+/), tt = function(n, t, e) {
   [n].flat().forEach((r) => {
     t.split(" ").forEach((i) => {
       r.addEventListener(i, e, {
@@ -6,17 +6,17 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
       });
     });
   });
-}, un = function(n, t, e) {
+}, an = function(n, t, e) {
   [n].flat().forEach((r) => {
     t.split(" ").forEach((i) => {
       r.removeEventListener(i, e);
     });
   });
-}, hn = {
+}, un = {
   fill: "rgb(102, 102, 102)",
   stroke: "rgb(51, 51, 51)",
   cursor: "pointer"
-}, cn = {
+}, hn = {
   off: {
     "stroke-width": "1",
     opacity: 0.5
@@ -25,7 +25,7 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
     "stroke-width": "2",
     opacity: 0.6
   }
-}, ln = {
+}, cn = {
   off: {
     "stroke-dasharray": "none",
     // alt. 'initial'
@@ -35,25 +35,25 @@ const De = window || void 0, G = De.window.document, rt = "http://www.w3.org/200
     "stroke-dasharray": "4 3",
     "stroke-linejoin": "round"
   }
-}, fn = {
+}, ln = {
   fill: "rgb(255, 255, 255)",
   stroke: "rgb(51, 51, 51)",
   "stroke-width": "1",
   opacity: 0.3,
   cursor: "pointer"
-}, dn = {
+}, fn = {
   opacity: 0.6
-}, vn = () => ({
-  component: Object.assign({}, hn),
-  componentHover: Object.assign({}, cn),
-  componentSelect: Object.assign({}, ln),
-  handle: Object.assign({}, fn),
-  handleHover: Object.assign({}, dn)
-}), J = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, String(r))), se = (n, t, e) => {
-  tt(n, "mouseenter touchstart", () => J(n, e)), tt(
+}, dn = () => ({
+  component: Object.assign({}, un),
+  componentHover: Object.assign({}, hn),
+  componentSelect: Object.assign({}, cn),
+  handle: Object.assign({}, ln),
+  handleHover: Object.assign({}, fn)
+}), K = (n, t) => Object.entries(t).forEach(([e, r]) => n.setAttribute(e, String(r))), se = (n, t, e) => {
+  tt(n, "mouseenter touchstart", () => K(n, e)), tt(
     n,
     "mouseleave touchend touchleave",
-    () => J(n, t)
+    () => K(n, t)
   );
 };
 class B {
@@ -79,7 +79,7 @@ class B {
     return t = t !== void 0 ? !!t : !0, this.element.setAttribute("visibility", t ? "visible" : "hidden"), this;
   }
   setStyle(t, e) {
-    return J(this.element, t), se(this.element, t, e), this;
+    return K(this.element, t), se(this.element, t, e), this;
   }
 }
 /*! *****************************************************************************
@@ -161,39 +161,39 @@ var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var zt = C.Start, Xt = C.Stop, yt = C.Raise, Nt = C.Send, ae = C.Cancel, Ce = C.NullEvent, $t = C.Assign, pn = C.After, yn = C.DoneState, Vt = C.Log, Ne = C.Init, kt = C.Invoke, gn = C.ErrorExecution, Zt = C.ErrorPlatform, ue = C.ErrorCustom, Bt = C.Update, Te = C.Choose, Pe = C.Pure;
-const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+var kt = C.Start, Xt = C.Stop, yt = C.Raise, Nt = C.Send, ae = C.Cancel, _e = C.NullEvent, $t = C.Assign, vn = C.After, pn = C.DoneState, Vt = C.Log, Ce = C.Init, Yt = C.Invoke, yn = C.ErrorExecution, Zt = C.ErrorPlatform, ue = C.ErrorCustom, Bt = C.Update, Ne = C.Choose, Te = C.Pure;
+const gn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  after: pn,
+  after: vn,
   assign: $t,
   cancel: ae,
-  choose: Te,
-  doneState: yn,
+  choose: Ne,
+  doneState: pn,
   error: ue,
-  errorExecution: gn,
+  errorExecution: yn,
   errorPlatform: Zt,
-  init: Ne,
-  invoke: kt,
+  init: Ce,
+  invoke: Yt,
   log: Vt,
-  nullEvent: Ce,
-  pure: Pe,
+  nullEvent: _e,
+  pure: Te,
   raise: yt,
   send: Nt,
-  start: zt,
+  start: kt,
   stop: Xt,
   update: Bt
 }, Symbol.toStringTag, { value: "Module" }));
-var Ie = ".", pe = {}, te = "xstate.guard", wn = "", L = process.env.NODE_ENV === "production", Tt;
+var Pe = ".", pe = {}, te = "xstate.guard", mn = "", L = process.env.NODE_ENV === "production", Tt;
 function he(n, t, e) {
-  e === void 0 && (e = Ie);
+  e === void 0 && (e = Pe);
   var r = At(n, e), i = At(t, e);
-  return D(i) ? D(r) ? i === r : !1 : D(r) ? r in i : Object.keys(r).every(function(s) {
+  return M(i) ? M(r) ? i === r : !1 : M(r) ? r in i : Object.keys(r).every(function(s) {
     return s in i ? he(r[s], i[s]) : !1;
   });
 }
-function je(n) {
+function Ie(n) {
   try {
-    return D(n) || typeof n == "number" ? "".concat(n) : n.type;
+    return M(n) || typeof n == "number" ? "".concat(n) : n.type;
   } catch {
     throw new Error("Events must be strings or objects with a string event.type property.");
   }
@@ -205,20 +205,20 @@ function ee(n, t) {
     throw new Error("'".concat(n, "' is not a valid state path."));
   }
 }
-function Sn(n) {
+function wn(n) {
   return typeof n == "object" && "value" in n && "context" in n && "event" in n && "_event" in n;
 }
 function At(n, t) {
-  if (Sn(n))
+  if (wn(n))
     return n.value;
   if (gt(n))
-    return Yt(n);
+    return zt(n);
   if (typeof n != "string")
     return n;
   var e = ee(n, t);
-  return Yt(e);
+  return zt(e);
 }
-function Yt(n) {
+function zt(n) {
   if (n.length === 1)
     return n[0];
   for (var t = {}, e = t, r = 0; r < n.length - 1; r++)
@@ -253,7 +253,7 @@ function ye(n, t, e) {
   }
   return s;
 }
-var bn = function(n) {
+var Sn = function(n) {
   return function(t) {
     var e, r, i = t;
     try {
@@ -276,7 +276,7 @@ var bn = function(n) {
     return i;
   };
 };
-function xn(n, t) {
+function bn(n, t) {
   return function(e) {
     var r, i, s = e;
     try {
@@ -302,7 +302,7 @@ function xn(n, t) {
 function jt(n) {
   if (!n)
     return [[]];
-  if (D(n))
+  if (M(n))
     return [[n]];
   var t = R(Object.keys(n).map(function(e) {
     var r = n[e];
@@ -316,11 +316,11 @@ function R(n) {
   var t;
   return (t = []).concat.apply(t, j([], A(n), !1));
 }
-function Re(n) {
+function je(n) {
   return gt(n) ? n : [n];
 }
 function V(n) {
-  return n === void 0 ? [] : Re(n);
+  return n === void 0 ? [] : je(n);
 }
 function Ht(n, t, e) {
   var r, i;
@@ -346,16 +346,16 @@ function Ht(n, t, e) {
   }
   return s;
 }
-function En(n) {
+function xn(n) {
   return /^(done|error)\./.test(n);
 }
 function ge(n) {
   return !!(n instanceof Promise || n !== null && (_(n) || typeof n == "object") && _(n.then));
 }
-function On(n) {
+function En(n) {
   return n !== null && typeof n == "object" && "transition" in n && typeof n.transition == "function";
 }
-function An(n, t) {
+function On(n, t) {
   var e, r, i = A([[], []], 2), s = i[0], o = i[1];
   try {
     for (var u = E(n), a = u.next(); !a.done; a = u.next()) {
@@ -376,22 +376,22 @@ function An(n, t) {
   }
   return [s, o];
 }
-function Le(n, t) {
+function Re(n, t) {
   return bt(n.states, function(e, r) {
     if (e) {
-      var i = (D(t) ? void 0 : t[r]) || (e ? e.current : void 0);
+      var i = (M(t) ? void 0 : t[r]) || (e ? e.current : void 0);
       if (i)
         return {
           current: i,
-          states: Le(e, i)
+          states: Re(e, i)
         };
     }
   });
 }
-function Mn(n, t) {
+function An(n, t) {
   return {
     current: t,
-    states: Le(n, t)
+    states: Re(n, t)
   };
 }
 function me(n, t, e, r) {
@@ -441,12 +441,12 @@ function gt(n) {
 function _(n) {
   return typeof n == "function";
 }
-function D(n) {
+function M(n) {
   return typeof n == "string";
 }
-function ze(n, t) {
+function Le(n, t) {
   if (n)
-    return D(n) ? {
+    return M(n) ? {
       type: te,
       name: n,
       predicate: t ? t[n] : void 0
@@ -474,18 +474,18 @@ Tt = {}, Tt[Z] = function() {
 function st(n) {
   return !!n && "__xstatenode" in n;
 }
-function _n(n) {
+function Mn(n) {
   return !!n && typeof n.send == "function";
 }
-function Jt(n, t) {
-  return D(n) || typeof n == "number" ? d({
+function Kt(n, t) {
+  return M(n) || typeof n == "number" ? d({
     type: n
   }, t) : n;
 }
 function H(n, t) {
-  if (!D(n) && "$$type" in n && n.$$type === "scxml")
+  if (!M(n) && "$$type" in n && n.$$type === "scxml")
     return n;
-  var e = Jt(n);
+  var e = Kt(n);
   return d({
     name: e.type,
     data: e,
@@ -494,7 +494,7 @@ function H(n, t) {
   }, t);
 }
 function ut(n, t) {
-  var e = Re(t).map(function(r) {
+  var e = je(t).map(function(r) {
     return typeof r > "u" || typeof r == "string" || st(r) ? {
       target: r,
       event: n
@@ -504,11 +504,11 @@ function ut(n, t) {
   });
   return e;
 }
-function Cn(n) {
-  if (!(n === void 0 || n === wn))
+function _n(n) {
+  if (!(n === void 0 || n === mn))
     return V(n);
 }
-function Nn(n, t, e) {
+function Cn(n, t, e) {
   if (!L) {
     var r = n.stack ? " Stacktrace was '".concat(n.stack, "'") : "";
     if (n === t)
@@ -553,14 +553,14 @@ function ne(n) {
   return (n.type === yt || n.type === Nt && n.to === et.Internal) && typeof n.delay != "number";
 }
 var it = /* @__PURE__ */ H({
-  type: Ne
+  type: Ce
 });
 function Ut(n, t) {
   return t && t[n] || void 0;
 }
 function pt(n, t) {
   var e;
-  if (D(n) || typeof n == "number") {
+  if (M(n) || typeof n == "number") {
     var r = Ut(n, t);
     _(r) ? e = {
       type: n,
@@ -599,27 +599,27 @@ var q = function(n, t) {
     return pt(r, t);
   });
 };
-function Kt(n) {
+function Jt(n) {
   var t = pt(n);
   return d(d({
-    id: D(n) ? n : t.id
+    id: M(n) ? n : t.id
   }, t), {
     type: t.type
   });
 }
-function He(n, t) {
+function ze(n, t) {
   return {
     type: yt,
-    event: typeof n == "function" ? n : Jt(n),
+    event: typeof n == "function" ? n : Kt(n),
     delay: t ? t.delay : void 0,
     id: t == null ? void 0 : t.id
   };
 }
-function Ue(n, t, e, r) {
+function He(n, t, e, r) {
   var i = {
     _event: e
   }, s = H(_(n.event) ? n.event(t, e.data, i) : n.event), o;
-  if (D(n.delay)) {
+  if (M(n.delay)) {
     var u = r && r[n.delay];
     o = _(u) ? u(t, e.data, i) : u;
   } else
@@ -634,18 +634,18 @@ function ot(n, t) {
   return {
     to: t ? t.to : void 0,
     type: Nt,
-    event: _(n) ? n : Jt(n),
+    event: _(n) ? n : Kt(n),
     delay: t ? t.delay : void 0,
     // TODO: don't auto-generate IDs here like that
     // there is too big chance of the ID collision
-    id: t && t.id !== void 0 ? t.id : _(n) ? n.name : je(n)
+    id: t && t.id !== void 0 ? t.id : _(n) ? n.name : Ie(n)
   };
 }
-function Fe(n, t, e, r) {
+function Ue(n, t, e, r) {
   var i = {
     _event: e
   }, s = H(_(n.event) ? n.event(t, e.data, i) : n.event), o;
-  if (D(n.delay)) {
+  if (M(n.delay)) {
     var u = r && r[n.delay];
     o = _(u) ? u(t, e.data, i) : u;
   } else
@@ -663,15 +663,15 @@ function ce(n, t) {
     to: et.Parent
   }));
 }
-function Tn(n, t, e) {
+function Nn(n, t, e) {
   return ot(t, d(d({}, e), {
     to: n
   }));
 }
-function Pn() {
+function Tn() {
   return ce(Bt);
 }
-function In(n, t) {
+function Pn(n, t) {
   return ot(n, d(d({}, t), {
     to: function(e, r, i) {
       var s = i._event;
@@ -679,48 +679,48 @@ function In(n, t) {
     }
   }));
 }
-var jn = function(n, t) {
+var In = function(n, t) {
   return {
     context: n,
     event: t
   };
 };
-function Rn(n, t) {
-  return n === void 0 && (n = jn), {
+function jn(n, t) {
+  return n === void 0 && (n = In), {
     type: Vt,
     label: t,
     expr: n
   };
 }
-var We = function(n, t, e) {
+var Fe = function(n, t, e) {
   return d(d({}, n), {
-    value: D(n.expr) ? n.expr : n.expr(t, e.data, {
+    value: M(n.expr) ? n.expr : n.expr(t, e.data, {
       _event: e
     })
   });
-}, Xe = function(n) {
+}, We = function(n) {
   return {
     type: ae,
     sendId: n
   };
 };
-function $e(n) {
-  var t = Kt(n);
+function Xe(n) {
+  var t = Jt(n);
   return {
     type: C.Start,
     activity: t,
     exec: void 0
   };
 }
-function Ve(n) {
-  var t = _(n) ? n : Kt(n);
+function $e(n) {
+  var t = _(n) ? n : Jt(n);
   return {
     type: C.Stop,
     activity: t,
     exec: void 0
   };
 }
-function Be(n, t, e) {
+function Ve(n, t, e) {
   var r = _(n.activity) ? n.activity(t, e.data) : n.activity, i = typeof r == "string" ? {
     id: r
   } : r, s = {
@@ -729,13 +729,13 @@ function Be(n, t, e) {
   };
   return s;
 }
-var Je = function(n) {
+var Be = function(n) {
   return {
     type: $t,
     assignment: n
   };
 };
-function Ln(n) {
+function Rn(n) {
   return typeof n == "object" && "type" in n;
 }
 function Ke(n, t) {
@@ -751,7 +751,7 @@ function xt(n, t) {
     return e;
   }, r;
 }
-function Mt(n, t) {
+function Dt(n, t) {
   var e = "".concat(C.DoneInvoke, ".").concat(n), r = {
     type: e,
     data: t
@@ -769,7 +769,7 @@ function vt(n, t) {
     return e;
   }, r;
 }
-function zn(n) {
+function Ln(n) {
   return {
     type: C.Pure,
     get: n
@@ -803,13 +803,13 @@ function Yn(n, t) {
     to: et.Parent
   }));
 }
-function Hn(n) {
+function zn(n) {
   return {
     type: C.Choose,
     conds: n
   };
 }
-var Un = function(n) {
+var Hn = function(n) {
   var t, e, r = [];
   try {
     for (var i = E(n), s = i.next(); !s.done; s = i.next())
@@ -836,54 +836,54 @@ var Un = function(n) {
 };
 function _t(n, t, e, r, i, s, o) {
   o === void 0 && (o = !1);
-  var u = o ? [] : Un(i), a = u.length ? me(e, r, u, t) : e, h = o ? [e] : void 0, c = [];
+  var u = o ? [] : Hn(i), a = u.length ? me(e, r, u, t) : e, h = o ? [e] : void 0, c = [];
   function f(y, p) {
     var S;
     switch (p.type) {
       case yt: {
-        var m = Ue(p, a, r, n.options.delays);
+        var m = He(p, a, r, n.options.delays);
         return s && typeof m.delay == "number" && s(m, a, r), m;
       }
       case Nt:
-        var g = Fe(p, a, r, n.options.delays);
+        var g = Ue(p, a, r, n.options.delays);
         if (!L) {
           var w = p.delay;
           U(
-            !D(w) || typeof g.delay == "number",
+            !M(w) || typeof g.delay == "number",
             // tslint:disable-next-line:max-line-length
             "No delay reference for delay expression '".concat(w, "' was found on machine '").concat(n.id, "'")
           );
         }
         return s && g.to !== et.Internal && (y === "entry" ? c.push(g) : s(g, a, r)), g;
       case Vt: {
-        var b = We(p, a, r);
+        var b = Fe(p, a, r);
         return s == null || s(b, a, r), b;
       }
-      case Te: {
+      case Ne: {
         var P = p, N = (S = P.conds.find(function(nt) {
-          var Q = ze(nt.cond, n.options.guards);
+          var Q = Le(nt.cond, n.options.guards);
           return !Q || ke(n, Q, a, r, s ? void 0 : t);
         })) === null || S === void 0 ? void 0 : S.actions;
         if (!N)
           return [];
-        var M = A(_t(n, t, a, r, [{
+        var D = A(_t(n, t, a, r, [{
           type: y,
           actions: q(V(N), n.options.actions)
-        }], s, o), 2), T = M[0], O = M[1];
+        }], s, o), 2), T = D[0], O = D[1];
         return a = O, h == null || h.push(a), T;
       }
-      case Pe: {
+      case Te: {
         var N = p.get(a, r.data);
         if (!N)
           return [];
-        var z = A(_t(n, t, a, r, [{
+        var k = A(_t(n, t, a, r, [{
           type: y,
           actions: q(V(N), n.options.actions)
-        }], s, o), 2), x = z[0], I = z[1];
+        }], s, o), 2), x = k[0], I = k[1];
         return a = I, h == null || h.push(a), x;
       }
       case Xt: {
-        var b = Be(p, a, r);
+        var b = Ve(p, a, r);
         return s == null || s(b, e, r), b;
       }
       case $t: {
@@ -891,20 +891,20 @@ function _t(n, t, e, r, i, s, o) {
         break;
       }
       default:
-        var Y = pt(p, n.options.actions), F = Y.exec;
+        var z = pt(p, n.options.actions), F = z.exec;
         if (s)
-          s(Y, a, r);
+          s(z, a, r);
         else if (F && h) {
-          var mt = h.length - 1, Gt = d(d({}, Y), {
+          var mt = h.length - 1, Gt = d(d({}, z), {
             exec: function(nt) {
               for (var Q = [], W = 1; W < arguments.length; W++)
                 Q[W - 1] = arguments[W];
               F.apply(void 0, j([h[mt]], A(Q), !1));
             }
           });
-          Y = Gt;
+          z = Gt;
         }
-        return Y;
+        return z;
     }
   }
   function l(y) {
@@ -933,46 +933,46 @@ function _t(n, t, e, r, i, s, o) {
   var v = R(i.map(l));
   return [v, a];
 }
-const Fn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  actionTypes: mn,
+  actionTypes: gn,
   after: Ke,
-  assign: Je,
-  cancel: Xe,
-  choose: Hn,
+  assign: Be,
+  cancel: We,
+  choose: zn,
   done: xt,
-  doneInvoke: Mt,
+  doneInvoke: Dt,
   error: vt,
   escalate: Yn,
   forwardTo: kn,
   getActionFunction: Ut,
   initEvent: it,
-  isActionObject: Ln,
-  log: Rn,
-  pure: zn,
-  raise: He,
+  isActionObject: Rn,
+  log: jn,
+  pure: Ln,
+  raise: ze,
   resolveActions: _t,
-  resolveLog: We,
-  resolveRaise: Ue,
-  resolveSend: Fe,
-  resolveStop: Be,
-  respond: In,
+  resolveLog: Fe,
+  resolveRaise: He,
+  resolveSend: Ue,
+  resolveStop: Ve,
+  respond: Pn,
   send: ot,
   sendParent: ce,
-  sendTo: Tn,
-  sendUpdate: Pn,
-  start: $e,
-  stop: Ve,
+  sendTo: Nn,
+  sendUpdate: Tn,
+  start: Xe,
+  stop: $e,
   toActionObject: pt,
   toActionObjects: q,
-  toActivityDefinition: Kt
+  toActivityDefinition: Jt
 }, Symbol.toStringTag, { value: "Module" }));
 var we = [], ft = function(n, t) {
   we.push(n);
   var e = t(n);
   return we.pop(), e;
 };
-function Ge(n) {
+function Je(n) {
   var t;
   return t = {
     id: n,
@@ -995,12 +995,12 @@ function Ge(n) {
     return this;
   }, t;
 }
-function Wn(n, t, e, r) {
-  var i, s = Ye(n.src), o = (i = t == null ? void 0 : t.options.services) === null || i === void 0 ? void 0 : i[s.type], u = n.data ? Ht(n.data, e, r) : void 0, a = o ? qe(o, n.id, u) : Ge(n.id);
+function Fn(n, t, e, r) {
+  var i, s = Ye(n.src), o = (i = t == null ? void 0 : t.options.services) === null || i === void 0 ? void 0 : i[s.type], u = n.data ? Ht(n.data, e, r) : void 0, a = o ? Ge(o, n.id, u) : Je(n.id);
   return a.meta = n, a;
 }
-function qe(n, t, e) {
-  var r = Ge(t);
+function Ge(n, t, e) {
+  var r = Je(t);
   if (r.deferred = !0, st(n)) {
     var i = r.state = ft(void 0, function() {
       return (e ? n.withContext(e) : n).initialState;
@@ -1011,17 +1011,17 @@ function qe(n, t, e) {
   }
   return r;
 }
-function Xn(n) {
+function Wn(n) {
   try {
     return typeof n.send == "function";
   } catch {
     return !1;
   }
 }
-function $n(n) {
-  return Xn(n) && "id" in n;
+function Xn(n) {
+  return Wn(n) && "id" in n;
 }
-function Vn(n) {
+function $n(n) {
   var t;
   return d((t = {
     subscribe: function() {
@@ -1040,19 +1040,19 @@ function Vn(n) {
 var Ft = function(n) {
   return n.type === "atomic" || n.type === "final";
 };
-function Qe(n) {
+function qe(n) {
   return Object.keys(n.states).map(function(t) {
     return n.states[t];
   });
 }
 function Ct(n) {
-  return Qe(n).filter(function(t) {
+  return qe(n).filter(function(t) {
     return t.type !== "history";
   });
 }
-function Ze(n) {
+function Qe(n) {
   var t = [n];
-  return Ft(n) ? t : t.concat(R(Ct(n).map(Ze)));
+  return Ft(n) ? t : t.concat(R(Ct(n).map(Qe)));
 }
 function Et(n, t) {
   var e, r, i, s, o, u, a, h, c = new Set(n), f = re(c), l = new Set(t);
@@ -1077,24 +1077,24 @@ function Et(n, t) {
     for (var g = E(l), w = g.next(); !w.done; w = g.next()) {
       var p = w.value;
       if (p.type === "compound" && (!m.get(p) || !m.get(p).length))
-        f.get(p) ? f.get(p).forEach(function(z) {
-          return l.add(z);
-        }) : p.initialStateNodes.forEach(function(z) {
-          return l.add(z);
+        f.get(p) ? f.get(p).forEach(function(k) {
+          return l.add(k);
+        }) : p.initialStateNodes.forEach(function(k) {
+          return l.add(k);
         });
       else if (p.type === "parallel")
         try {
           for (var b = (o = void 0, E(Ct(p))), P = b.next(); !P.done; P = b.next()) {
             var N = P.value;
-            l.has(N) || (l.add(N), f.get(N) ? f.get(N).forEach(function(z) {
-              return l.add(z);
-            }) : N.initialStateNodes.forEach(function(z) {
-              return l.add(z);
+            l.has(N) || (l.add(N), f.get(N) ? f.get(N).forEach(function(k) {
+              return l.add(k);
+            }) : N.initialStateNodes.forEach(function(k) {
+              return l.add(k);
             }));
           }
-        } catch (z) {
+        } catch (k) {
           o = {
-            error: z
+            error: k
           };
         } finally {
           try {
@@ -1118,7 +1118,7 @@ function Et(n, t) {
     }
   }
   try {
-    for (var M = E(l), T = M.next(); !T.done; T = M.next())
+    for (var D = E(l), T = D.next(); !T.done; T = D.next())
       for (var p = T.value, S = p.parent; S && !l.has(S); )
         l.add(S), S = S.parent;
   } catch (O) {
@@ -1127,7 +1127,7 @@ function Et(n, t) {
     };
   } finally {
     try {
-      T && !T.done && (h = M.return) && h.call(M);
+      T && !T.done && (h = D.return) && h.call(D);
     } finally {
       if (a)
         throw a.error;
@@ -1135,7 +1135,7 @@ function Et(n, t) {
   }
   return l;
 }
-function tn(n, t) {
+function Ze(n, t) {
   var e = t.get(n);
   if (!e)
     return {};
@@ -1149,7 +1149,7 @@ function tn(n, t) {
   }
   var i = {};
   return e.forEach(function(s) {
-    i[s.key] = tn(s, t);
+    i[s.key] = Ze(s, t);
   }), i;
 }
 function re(n) {
@@ -1173,16 +1173,16 @@ function re(n) {
   }
   return r;
 }
-function Bn(n, t) {
+function Vn(n, t) {
   var e = Et([n], t);
-  return tn(n, re(e));
+  return Ze(n, re(e));
 }
 function Ot(n, t) {
   return Array.isArray(n) ? n.some(function(e) {
     return e === t;
   }) : n instanceof Set ? n.has(t) : !1;
 }
-function Jn(n) {
+function Bn(n) {
   return j([], A(new Set(R(j([], A(n.map(function(t) {
     return t.ownEvents;
   })), !1)))), !1);
@@ -1204,22 +1204,22 @@ function Se(n) {
     return t.tags;
   })));
 }
-function en(n, t) {
+function tn(n, t) {
   if (n === t)
     return !0;
   if (n === void 0 || t === void 0)
     return !1;
-  if (D(n) || D(t))
+  if (M(n) || M(t))
     return n === t;
   var e = Object.keys(n), r = Object.keys(t);
   return e.length === r.length && e.every(function(i) {
-    return en(n[i], t[i]);
+    return tn(n[i], t[i]);
   });
 }
-function Gn(n) {
+function Jn(n) {
   return typeof n != "object" || n === null ? !1 : "value" in n && "_event" in n;
 }
-function qn(n, t) {
+function Gn(n, t) {
   var e = n.exec, r = d(d({}, n), {
     exec: e !== void 0 ? function() {
       return e(t.context, t.event, {
@@ -1231,14 +1231,14 @@ function qn(n, t) {
   });
   return r;
 }
-var K = (
+var J = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t) {
       var e = this, r;
       this.actions = [], this.activities = pe, this.meta = {}, this.events = [], this.value = t.value, this.context = t.context, this._event = t._event, this._sessionid = t._sessionid, this.event = this._event.data, this.historyValue = t.historyValue, this.history = t.history, this.actions = t.actions || [], this.activities = t.activities || pe, this.meta = Kn(t.configuration), this.events = t.events || [], this.matches = this.matches.bind(this), this.toStrings = this.toStrings.bind(this), this.configuration = t.configuration, this.transitions = t.transitions, this.children = t.children, this.done = !!t.done, this.tags = (r = Array.isArray(t.tags) ? new Set(t.tags) : t.tags) !== null && r !== void 0 ? r : /* @__PURE__ */ new Set(), this.machine = t.machine, Object.defineProperty(this, "nextEvents", {
         get: function() {
-          return Jn(e.configuration);
+          return Bn(e.configuration);
         }
       });
     }
@@ -1298,7 +1298,7 @@ var K = (
       return n.from(t, e);
     }, n.prototype.toStrings = function(t, e) {
       var r = this;
-      if (t === void 0 && (t = this.value), e === void 0 && (e = "."), D(t))
+      if (t === void 0 && (t = this.value), e === void 0 && (e = "."), M(t))
         return [t];
       var i = Object.keys(t);
       return i.concat.apply(i, j([], A(i.map(function(s) {
@@ -1329,13 +1329,13 @@ var K = (
       });
     }, n;
   }()
-), Qn = {
+), qn = {
   deferEvents: !1
 }, be = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t) {
-      this.processingEvent = !1, this.queue = [], this.initialized = !1, this.options = d(d({}, Qn), t);
+      this.processingEvent = !1, this.queue = [], this.initialized = !1, this.options = d(d({}, qn), t);
     }
     return n.prototype.initialize = function(t) {
       if (this.initialized = !0, t) {
@@ -1370,9 +1370,9 @@ var K = (
       }
     }, n;
   }()
-), qt = /* @__PURE__ */ new Map(), Zn = 0, wt = {
+), qt = /* @__PURE__ */ new Map(), Qn = 0, wt = {
   bookId: function() {
-    return "x:".concat(Zn++);
+    return "x:".concat(Qn++);
   },
   register: function(n, t) {
     return qt.set(n, t), n;
@@ -1395,18 +1395,18 @@ function le() {
     return global;
   L || console.warn("XState could not find a global object in this environment. Please let the maintainers know and raise an issue here: https://github.com/statelyai/xstate/issues");
 }
-function tr() {
+function Zn() {
   var n = le();
   if (n && "__xstate__" in n)
     return n.__xstate__;
 }
-function er(n) {
+function tr(n) {
   if (le()) {
-    var t = tr();
+    var t = Zn();
     t && t.register(n);
   }
 }
-function nr(n, t) {
+function er(n, t) {
   t === void 0 && (t = {});
   var e = n.initialState, r = /* @__PURE__ */ new Set(), i = [], s = !1, o = function() {
     if (!s) {
@@ -1418,7 +1418,7 @@ function nr(n, t) {
       }
       s = !1;
     }
-  }, u = Vn({
+  }, u = $n({
     id: t.id,
     send: function(h) {
       i.push(h), o();
@@ -1442,27 +1442,27 @@ function nr(n, t) {
   };
   return e = n.start ? n.start(a) : e, u;
 }
-var rr = {
+var nr = {
   sync: !1,
   autoForward: !1
-}, k;
+}, Y;
 (function(n) {
   n[n.NotStarted = 0] = "NotStarted", n[n.Running = 1] = "Running", n[n.Stopped = 2] = "Stopped";
-})(k || (k = {}));
-var ir = (
+})(Y || (Y = {}));
+var rr = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t, e) {
       e === void 0 && (e = n.defaultOptions);
       var r = this;
-      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = k.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
+      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = Y.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
         if (gt(c))
           return r.batch(c), r.state;
-        var l = H(Jt(c, f));
-        if (r.status === k.Stopped)
+        var l = H(Kt(c, f));
+        if (r.status === Y.Stopped)
           return L || U(!1, 'Event "'.concat(l.name, '" was sent to stopped service "').concat(r.machine.id, `". This service has already reached its final state, and will not transition.
 Event: `).concat(JSON.stringify(l.data))), r.state;
-        if (r.status !== k.Running && !r.options.deferEvents)
+        if (r.status !== Y.Running && !r.options.deferEvents)
           throw new Error('Event "'.concat(l.name, '" was sent to uninitialized service "').concat(
             r.machine.id,
             `". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.
@@ -1474,7 +1474,7 @@ Event: `
           r.update(v, l);
         }), r._state;
       }, this.sendTo = function(c, f, l) {
-        var v = r.parent && (f === et.Parent || r.parent.id === f), y = v ? r.parent : D(f) ? f === et.Internal ? r : r.children.get(f) || wt.get(f) : _n(f) ? f : void 0;
+        var v = r.parent && (f === et.Parent || r.parent.id === f), y = v ? r.parent : M(f) ? f === et.Internal ? r : r.children.get(f) || wt.get(f) : Mn(f) ? f : void 0;
         if (!y) {
           if (!v)
             throw new Error("Unable to send event to child '".concat(f, "' from service '").concat(r.id, "'."));
@@ -1482,7 +1482,7 @@ Event: `
           return;
         }
         if ("machine" in y) {
-          if (r.status !== k.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
+          if (r.status !== Y.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
           r.state.done) {
             var p = d(d({}, c), {
               name: c.name === ue ? "".concat(vt(r.id)) : c.name,
@@ -1528,8 +1528,8 @@ Event: `
           case ae:
             r.cancel(c.sendId);
             break;
-          case zt: {
-            if (r.status !== k.Running)
+          case kt: {
+            if (r.status !== Y.Running)
               return;
             var g = c.activity;
             if (
@@ -1544,7 +1544,7 @@ Event: `
                 // tslint:disable-next-line:max-line-length
                 "`forward` property is deprecated (found in invocation of '".concat(g.src, "' in in machine '").concat(r.machine.id, "'). ") + "Please use `autoForward` instead."
               );
-              var M = "autoForward" in g ? g.autoForward : !!g.forward;
+              var D = "autoForward" in g ? g.autoForward : !!g.forward;
               if (!b) {
                 L || U(!1, "No service found for invocation '".concat(g.src, "' in machine '").concat(r.machine.id, "'."));
                 return;
@@ -1559,10 +1559,10 @@ Event: `
               }) : b;
               if (!O)
                 return;
-              var z = void 0;
-              st(O) && (O = T ? O.withContext(T) : O, z = {
-                autoForward: M
-              }), r.spawn(O, P, z);
+              var k = void 0;
+              st(O) && (O = T ? O.withContext(T) : O, k = {
+                autoForward: D
+              }), r.spawn(O, P, k);
             } else
               r.spawnActivity(g);
             break;
@@ -1572,8 +1572,8 @@ Event: `
             break;
           }
           case Vt:
-            var x = c, I = x.label, Y = x.value;
-            I ? r.logger(I, Y) : r.logger(Y);
+            var x = c, I = x.label, z = x.value;
+            I ? r.logger(I, z) : r.logger(z);
             break;
           default:
             L || U(!1, "No implementation found for action type '".concat(c.type, "'"));
@@ -1599,7 +1599,7 @@ Event: `
        * @deprecated Use `.getSnapshot()` instead.
        */
       get: function() {
-        return L || U(this.status !== k.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
+        return L || U(this.status !== Y.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
       },
       enumerable: !1,
       configurable: !0
@@ -1689,9 +1689,9 @@ Event: `
         var P = t.configuration.find(function(O) {
           return O.type === "final" && O.parent === f.machine;
         }), N = P && P.doneData ? Ht(P.doneData, t.context, e) : void 0;
-        this._doneEvent = Mt(this.id, N);
+        this._doneEvent = Dt(this.id, N);
         try {
-          for (var M = E(this.doneListeners), T = M.next(); !T.done; T = M.next()) {
+          for (var D = E(this.doneListeners), T = D.next(); !T.done; T = D.next()) {
             var p = T.value;
             p(this._doneEvent);
           }
@@ -1701,7 +1701,7 @@ Event: `
           };
         } finally {
           try {
-            T && !T.done && (c = M.return) && c.call(M);
+            T && !T.done && (c = D.return) && c.call(D);
           } finally {
             if (h)
               throw h.error;
@@ -1710,14 +1710,14 @@ Event: `
         this._stop(), this._stopChildren(), wt.free(this.sessionId);
       }
     }, n.prototype.onTransition = function(t) {
-      return this.listeners.add(t), this.status === k.Running && t(this.state, this.state.event), this;
+      return this.listeners.add(t), this.status === Y.Running && t(this.state, this.state.event), this;
     }, n.prototype.subscribe = function(t, e, r) {
       var i = this, s = Rt(t, e, r);
-      this.listeners.add(s.next), this.status !== k.NotStarted && s.next(this.state);
+      this.listeners.add(s.next), this.status !== Y.NotStarted && s.next(this.state);
       var o = function() {
         i.doneListeners.delete(o), i.stopListeners.delete(o), s.complete();
       };
-      return this.status === k.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
+      return this.status === Y.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
         unsubscribe: function() {
           i.listeners.delete(s.next), i.doneListeners.delete(o), i.stopListeners.delete(o);
         }
@@ -1731,16 +1731,16 @@ Event: `
     }, n.prototype.onStop = function(t) {
       return this.stopListeners.add(t), this;
     }, n.prototype.onDone = function(t) {
-      return this.status === k.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
+      return this.status === Y.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
     }, n.prototype.off = function(t) {
       return this.listeners.delete(t), this.eventListeners.delete(t), this.sendListeners.delete(t), this.stopListeners.delete(t), this.doneListeners.delete(t), this.contextListeners.delete(t), this;
     }, n.prototype.start = function(t) {
       var e = this;
-      if (this.status === k.Running)
+      if (this.status === Y.Running)
         return this;
-      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = k.Running;
+      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = Y.Running;
       var r = t === void 0 ? this.initialState : ft(this, function() {
-        return Gn(t) ? e.machine.resolveState(t) : e.machine.resolveState(K.from(t, e.machine.context));
+        return Jn(t) ? e.machine.resolveState(t) : e.machine.resolveState(J.from(t, e.machine.context));
       });
       return this.options.devTools && this.attachDev(), this.scheduler.initialize(function() {
         e.update(r, it);
@@ -1756,9 +1756,9 @@ Event: `
           var v = l.value;
           this.listeners.delete(v);
         }
-      } catch (M) {
+      } catch (D) {
         t = {
-          error: M
+          error: D
         };
       } finally {
         try {
@@ -1773,9 +1773,9 @@ Event: `
           var v = p.value;
           v(), this.stopListeners.delete(v);
         }
-      } catch (M) {
+      } catch (D) {
         r = {
-          error: M
+          error: D
         };
       } finally {
         try {
@@ -1790,9 +1790,9 @@ Event: `
           var v = m.value;
           this.contextListeners.delete(v);
         }
-      } catch (M) {
+      } catch (D) {
         s = {
-          error: M
+          error: D
         };
       } finally {
         try {
@@ -1807,9 +1807,9 @@ Event: `
           var v = w.value;
           this.doneListeners.delete(v);
         }
-      } catch (M) {
+      } catch (D) {
         u = {
-          error: M
+          error: D
         };
       } finally {
         try {
@@ -1821,15 +1821,15 @@ Event: `
       }
       if (!this.initialized)
         return this;
-      this.initialized = !1, this.status = k.Stopped, this._initialState = void 0;
+      this.initialized = !1, this.status = Y.Stopped, this._initialState = void 0;
       try {
         for (var b = E(Object.keys(this.delayedEventsMap)), P = b.next(); !P.done; P = b.next()) {
           var N = P.value;
           this.clock.clearTimeout(this.delayedEventsMap[N]);
         }
-      } catch (M) {
+      } catch (D) {
         h = {
-          error: M
+          error: D
         };
       } finally {
         try {
@@ -1857,7 +1857,7 @@ Event: `
             })), u = A(_t(t.machine, t.state, t.state.context, i, [{
               type: "exit",
               actions: o
-            }], t.machine.config.predictableActionArguments ? t._exec : void 0, t.machine.config.predictableActionArguments || t.machine.config.preserveActionOrder), 2), a = u[0], h = u[1], c = new K({
+            }], t.machine.config.predictableActionArguments ? t._exec : void 0, t.machine.config.predictableActionArguments || t.machine.config.preserveActionOrder), 2), a = u[0], h = u[1], c = new J({
               value: t.state.value,
               context: h,
               _event: i,
@@ -1883,10 +1883,10 @@ Event: `
       }), this;
     }, n.prototype.batch = function(t) {
       var e = this;
-      if (this.status === k.NotStarted && this.options.deferEvents)
+      if (this.status === Y.NotStarted && this.options.deferEvents)
         L || U(!1, "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, `" and are deferred. Make sure .start() is called for this service.
 Event: `).concat(JSON.stringify(event)));
-      else if (this.status !== k.Running)
+      else if (this.status !== Y.Running)
         throw new Error(
           // tslint:disable-next-line:max-line-length
           "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, '". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.')
@@ -1899,7 +1899,7 @@ Event: `).concat(JSON.stringify(event)));
             e.forward(y), o = ft(e, function() {
               return e.machine.transition(o, y, void 0, r || void 0);
             }), a.push.apply(a, j([], A(e.machine.config.predictableActionArguments ? o.actions : o.actions.map(function(p) {
-              return qn(p, o);
+              return Gn(p, o);
             })), !1)), u = u || !!o.changed;
           };
           try {
@@ -1975,13 +1975,13 @@ Event: `).concat(JSON.stringify(event)));
       var e = this.children.get(t);
       e && (this.removeChild(t), _(e.stop) && e.stop());
     }, n.prototype.spawn = function(t, e, r) {
-      if (this.status !== k.Running)
-        return qe(t, e);
+      if (this.status !== Y.Running)
+        return Ge(t, e);
       if (ge(t))
         return this.spawnPromise(Promise.resolve(t), e);
       if (_(t))
         return this.spawnCallback(t, e);
-      if ($n(t))
+      if (Xn(t))
         return this.spawnActor(t, e);
       if (Dn(t))
         return this.spawnObservable(t, e);
@@ -1989,7 +1989,7 @@ Event: `).concat(JSON.stringify(event)));
         return this.spawnMachine(t, d(d({}, r), {
           id: e
         }));
-      if (On(t))
+      if (En(t))
         return this.spawnBehavior(t, e);
       throw new Error('Unable to spawn entity "'.concat(e, '" of type "').concat(typeof t, '".'));
     }, n.prototype.spawnMachine = function(t, e) {
@@ -1998,7 +1998,7 @@ Event: `).concat(JSON.stringify(event)));
       var i = new n(t, d(d({}, this.options), {
         parent: this,
         id: e.id || t.id
-      })), s = d(d({}, rr), e);
+      })), s = d(d({}, nr), e);
       s.sync && i.onTransition(function(u) {
         r.send(Bt, {
           state: u,
@@ -2012,7 +2012,7 @@ Event: `).concat(JSON.stringify(event)));
         }));
       }).start(), o;
     }, n.prototype.spawnBehavior = function(t, e) {
-      var r = nr(t, {
+      var r = er(t, {
         id: e,
         parent: this
       });
@@ -2020,7 +2020,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype.spawnPromise = function(t, e) {
       var r, i = this, s = !1, o;
       t.then(function(a) {
-        s || (o = a, i.removeChild(e), i.send(H(Mt(e, a), {
+        s || (o = a, i.removeChild(e), i.send(H(Dt(e, a), {
           origin: e
         })));
       }, function(a) {
@@ -2032,7 +2032,7 @@ Event: `).concat(JSON.stringify(event)));
               origin: e
             }));
           } catch (c) {
-            Nn(a, c, e), i.devTools && i.devTools.send(h, i.state), i.machine.strict && i.stop();
+            Cn(a, c, e), i.devTools && i.devTools.send(h, i.state), i.machine.strict && i.stop();
           }
         }
       });
@@ -2124,7 +2124,7 @@ Event: `).concat(JSON.stringify(event)));
           origin: e
         }));
       }, function() {
-        i.removeChild(e), i.send(H(Mt(e), {
+        i.removeChild(e), i.send(H(Dt(e), {
           origin: e
         }));
       }), u = (r = {
@@ -2204,7 +2204,7 @@ Event: `).concat(JSON.stringify(event)));
             }, e ? e.features : void 0)
           }), this.machine), this.devTools.init(this.state);
         }
-        er(this);
+        tr(this);
       }
     }, n.prototype.toJSON = function() {
       return {
@@ -2213,7 +2213,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype[Z] = function() {
       return this;
     }, n.prototype.getSnapshot = function() {
-      return this.status === k.NotStarted ? this.initialState : this._state;
+      return this.status === Y.NotStarted ? this.initialState : this._state;
     }, n.defaultOptions = {
       execute: !0,
       deferEvents: !0,
@@ -2227,14 +2227,14 @@ Event: `).concat(JSON.stringify(event)));
       },
       logger: /* @__PURE__ */ console.log.bind(console),
       devTools: !1
-    }, n.interpret = nn, n;
+    }, n.interpret = en, n;
   }()
 );
-function nn(n, t) {
-  var e = new ir(n, t);
+function en(n, t) {
+  var e = new rr(n, t);
   return e;
 }
-function sr(n) {
+function ir(n) {
   if (typeof n == "string") {
     var t = {
       type: n
@@ -2247,21 +2247,21 @@ function sr(n) {
 }
 function It(n) {
   return d(d({
-    type: kt
+    type: Yt
   }, n), {
     toJSON: function() {
       n.onDone, n.onError;
       var t = oe(n, ["onDone", "onError"]);
       return d(d({}, t), {
-        type: kt,
-        src: sr(n.src)
+        type: Yt,
+        src: ir(n.src)
       });
     }
   });
 }
 var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
   return n[0] === ie;
-}, or = function() {
+}, sr = function() {
   return {
     actions: {},
     guards: {},
@@ -2269,12 +2269,12 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
     activities: {},
     delays: {}
   };
-}, ar = function(n, t, e) {
+}, or = function(n, t, e) {
   var r = e.slice(0, -1).some(function(s) {
-    return !("cond" in s) && !("in" in s) && (D(s.target) || st(s.target));
+    return !("cond" in s) && !("in" in s) && (M(s.target) || st(s.target));
   }), i = t === dt ? "the transient event" : "event '".concat(t, "'");
   U(!r, "One or more transitions for ".concat(i, " on state '").concat(n.id, "' are unreachable. ") + "Make sure that the default transition is the last one defined.");
-}, ur = (
+}, ar = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t, e, r, i) {
@@ -2289,7 +2289,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         transitions: void 0,
         candidates: {},
         delayedTransitions: void 0
-      }, this.idMap = {}, this.tags = [], this.options = Object.assign(or(), e), this.parent = i == null ? void 0 : i.parent, this.key = this.config.key || (i == null ? void 0 : i.key) || this.config.id || "(machine)", this.machine = this.parent ? this.parent.machine : this, this.path = this.parent ? this.parent.path.concat(this.key) : [], this.delimiter = this.config.delimiter || (this.parent ? this.parent.delimiter : Ie), this.id = this.config.id || j([this.machine.key], A(this.path), !1).join(this.delimiter), this.version = this.parent ? this.parent.version : this.config.version, this.type = this.config.type || (this.config.parallel ? "parallel" : this.config.states && Object.keys(this.config.states).length ? "compound" : this.config.history ? "history" : "atomic"), this.schema = this.parent ? this.machine.schema : (o = this.config.schema) !== null && o !== void 0 ? o : {}, this.description = this.config.description, L || U(!("parallel" in this.config), 'The "parallel" property is deprecated and will be removed in version 4.1. '.concat(this.config.parallel ? "Replace with `type: 'parallel'`" : "Use `type: '".concat(this.type, "'`"), " in the config for state node '").concat(this.id, "' instead.")), this.initial = this.config.initial, this.states = this.config.states ? bt(this.config.states, function(h, c) {
+      }, this.idMap = {}, this.tags = [], this.options = Object.assign(sr(), e), this.parent = i == null ? void 0 : i.parent, this.key = this.config.key || (i == null ? void 0 : i.key) || this.config.id || "(machine)", this.machine = this.parent ? this.parent.machine : this, this.path = this.parent ? this.parent.path.concat(this.key) : [], this.delimiter = this.config.delimiter || (this.parent ? this.parent.delimiter : Pe), this.id = this.config.id || j([this.machine.key], A(this.path), !1).join(this.delimiter), this.version = this.parent ? this.parent.version : this.config.version, this.type = this.config.type || (this.config.parallel ? "parallel" : this.config.states && Object.keys(this.config.states).length ? "compound" : this.config.history ? "history" : "atomic"), this.schema = this.parent ? this.machine.schema : (o = this.config.schema) !== null && o !== void 0 ? o : {}, this.description = this.config.description, L || U(!("parallel" in this.config), 'The "parallel" property is deprecated and will be removed in version 4.1. '.concat(this.config.parallel ? "Replace with `type: 'parallel'`" : "Use `type: '".concat(this.type, "'`"), " in the config for state node '").concat(this.id, "' instead.")), this.initial = this.config.initial, this.states = this.config.states ? bt(this.config.states, function(h, c) {
         var f, l = new n(h, {}, void 0, {
           parent: s,
           key: c
@@ -2301,7 +2301,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         var c, f;
         h.order = u++;
         try {
-          for (var l = E(Qe(h)), v = l.next(); !v.done; v = l.next()) {
+          for (var l = E(qe(h)), v = l.next(); !v.done; v = l.next()) {
             var y = v.value;
             a(y);
           }
@@ -2333,7 +2333,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             src: v,
             id: v
           });
-        } else if (D(h.src)) {
+        } else if (M(h.src)) {
           var v = h.id || Pt(s.id, c);
           return It(d(d({}, h), {
             id: v,
@@ -2355,11 +2355,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
           }));
         }
       }), this.activities = V(this.config.activities).concat(this.invoke).map(function(h) {
-        return Kt(h);
+        return Jt(h);
       }), this.transition = this.transition.bind(this), this.tags = V(this.config.tags);
     }
     return n.prototype._init = function() {
-      this.__cache.transitions || Ze(this).forEach(function(t) {
+      this.__cache.transitions || Qe(this).forEach(function(t) {
         return t.on;
       });
     }, n.prototype.withConfig = function(t, e) {
@@ -2457,14 +2457,14 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         var u = _(s) ? "".concat(t.id, ":delay[").concat(o, "]") : s, a = Ke(u, t.id);
         return t.onEntry.push(ot(a, {
           delay: s
-        })), t.onExit.push(Xe(a)), a;
+        })), t.onExit.push(We(a)), a;
       }, i = gt(e) ? e.map(function(s, o) {
         var u = r(s.delay, o);
         return d(d({}, s), {
           event: u
         });
       }) : R(Object.keys(e).map(function(s, o) {
-        var u = e[s], a = D(u) ? {
+        var u = e[s], a = M(u) ? {
           target: u
         } : u, h = isNaN(+s) ? s : +s, c = r(h, o);
         return V(a).map(function(f) {
@@ -2484,8 +2484,8 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var e, r = this;
       if (!t)
         return [];
-      var i = t instanceof K ? t.value : At(t, this.delimiter);
-      if (D(i)) {
+      var i = t instanceof J ? t.value : At(t, this.delimiter);
+      if (M(i)) {
         var s = this.getStateNode(i).initial;
         return s !== void 0 ? this.getStateNodes((e = {}, e[i] = s, e)) : [this, this.states[i]];
       }
@@ -2494,11 +2494,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         return r.getStateNode(a).getStateNodes(i[a]);
       }))), !1)), u;
     }, n.prototype.handles = function(t) {
-      var e = je(t);
+      var e = Ie(t);
       return this.events.includes(e);
     }, n.prototype.resolveState = function(t) {
-      var e = t instanceof K ? t : K.create(t), r = Array.from(Et([], this.getStateNodes(e.value)));
-      return new K(d(d({}, e), {
+      var e = t instanceof J ? t : J.create(t), r = Array.from(Et([], this.getStateNodes(e.value)));
+      return new J(d(d({}, e), {
         value: this.resolve(e.value),
         configuration: r,
         done: Lt(r, this),
@@ -2557,19 +2557,19 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         }))
       };
     }, n.prototype._transition = function(t, e, r) {
-      return D(t) ? this.transitionLeafNode(t, e, r) : Object.keys(t).length === 1 ? this.transitionCompoundNode(t, e, r) : this.transitionParallelNode(t, e, r);
+      return M(t) ? this.transitionLeafNode(t, e, r) : Object.keys(t).length === 1 ? this.transitionCompoundNode(t, e, r) : this.transitionParallelNode(t, e, r);
     }, n.prototype.getTransitionData = function(t, e) {
       return this._transition(t.value, t, H(e));
     }, n.prototype.next = function(t, e) {
       var r, i, s = this, o = e.name, u = [], a = [], h;
       try {
         for (var c = E(this.getCandidates(o)), f = c.next(); !f.done; f = c.next()) {
-          var l = f.value, v = l.cond, y = l.in, p = t.context, S = y ? D(y) && ct(y) ? (
+          var l = f.value, v = l.cond, y = l.in, p = t.context, S = y ? M(y) && ct(y) ? (
             // Check if in state by ID
             t.matches(At(this.getStateNodeById(y).path, this.delimiter))
           ) : (
             // Check if in state by relative grandparent
-            he(At(y, this.delimiter), bn(this.path.slice(0, -2))(t.value))
+            he(At(y, this.delimiter), Sn(this.path.slice(0, -2))(t.value))
           ) : !0, m = !1;
           try {
             m = !v || ke(this.machine, v, p, e, t);
@@ -2669,44 +2669,44 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         var I = [];
         if (x.type !== "final")
           return I;
-        var Y = x.parent;
-        if (!Y.parent)
+        var z = x.parent;
+        if (!z.parent)
           return I;
         I.push(
           xt(x.id, x.doneData),
           // TODO: deprecate - final states should not emit done events for their own state.
-          xt(Y.id, x.doneData ? Ht(x.doneData, i, s) : void 0)
+          xt(z.id, x.doneData ? Ht(x.doneData, i, s) : void 0)
         );
-        var F = Y.parent;
+        var F = z.parent;
         return F.type === "parallel" && Ct(F).every(function(mt) {
           return Lt(r.configuration, mt);
         }) && I.push(xt(F.id)), I;
-      })), M = b.map(function(x) {
-        var I = x.onEntry, Y = x.activities.map(function(F) {
-          return $e(F);
+      })), D = b.map(function(x) {
+        var I = x.onEntry, z = x.activities.map(function(F) {
+          return Xe(F);
         });
         return {
           type: "entry",
-          actions: q(u ? j(j([], A(I), !1), A(Y), !1) : j(j([], A(Y), !1), A(I), !1), l.machine.options.actions)
+          actions: q(u ? j(j([], A(I), !1), A(z), !1) : j(j([], A(z), !1), A(I), !1), l.machine.options.actions)
         };
       }).concat({
         type: "state_done",
         actions: N.map(function(x) {
-          return He(x);
+          return ze(x);
         })
       }), T = Array.from(P).map(function(x) {
         return {
           type: "exit",
           actions: q(j(j([], A(x.onExit), !1), A(x.activities.map(function(I) {
-            return Ve(I);
+            return $e(I);
           })), !1), l.machine.options.actions)
         };
       }), O = T.concat({
         type: "transition",
         actions: q(r.actions, this.machine.options.actions)
-      }).concat(M);
+      }).concat(D);
       if (e) {
-        var z = q(R(j([], A(t), !1).sort(function(x, I) {
+        var k = q(R(j([], A(t), !1).sort(function(x, I) {
           return I.order - x.order;
         }).map(function(x) {
           return x.onExit;
@@ -2715,22 +2715,22 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         });
         return O.concat({
           type: "stop",
-          actions: z
+          actions: k
         });
       }
       return O;
     }, n.prototype.transition = function(t, e, r, i) {
       t === void 0 && (t = this.initialState);
       var s = H(e), o;
-      if (t instanceof K)
-        o = r === void 0 ? t : this.resolveState(K.from(t, r));
+      if (t instanceof J)
+        o = r === void 0 ? t : this.resolveState(J.from(t, r));
       else {
-        var u = D(t) ? this.resolve(Yt(this.getResolvedPath(t))) : this.resolve(t), a = r ?? this.machine.context;
-        o = this.resolveState(K.from(u, a));
+        var u = M(t) ? this.resolve(zt(this.getResolvedPath(t))) : this.resolve(t), a = r ?? this.machine.context;
+        o = this.resolveState(J.from(u, a));
       }
       if (!L && s.name === St)
         throw new Error("An event cannot have the wildcard type ('".concat(St, "')"));
-      if (this.strict && !this.events.includes(s.name) && !En(s.name))
+      if (this.strict && !this.events.includes(s.name) && !xn(s.name))
         throw new Error("Machine '".concat(this.id, "' does not accept event '").concat(s.name, "'"));
       var h = this._transition(o.value, o, s) || {
         transitions: [],
@@ -2746,14 +2746,14 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
     }, n.prototype.resolveTransition = function(t, e, r, i, s) {
       var o, u, a, h, c = this;
       s === void 0 && (s = it);
-      var f = t.configuration, l = !e || t.transitions.length > 0, v = l ? t.configuration : e ? e.configuration : [], y = Lt(v, this), p = l ? Bn(this.machine, f) : void 0, S = e ? e.historyValue ? e.historyValue : t.source ? this.machine.historyValue(e.value) : void 0 : void 0, m = this.getActions(new Set(v), y, t, r, s, e, i), g = e ? d({}, e.activities) : {};
+      var f = t.configuration, l = !e || t.transitions.length > 0, v = l ? t.configuration : e ? e.configuration : [], y = Lt(v, this), p = l ? Vn(this.machine, f) : void 0, S = e ? e.historyValue ? e.historyValue : t.source ? this.machine.historyValue(e.value) : void 0 : void 0, m = this.getActions(new Set(v), y, t, r, s, e, i), g = e ? d({}, e.activities) : {};
       try {
         for (var w = E(m), b = w.next(); !b.done; b = w.next()) {
           var P = b.value;
           try {
-            for (var N = (a = void 0, E(P.actions)), M = N.next(); !M.done; M = N.next()) {
-              var T = M.value;
-              T.type === zt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
+            for (var N = (a = void 0, E(P.actions)), D = N.next(); !D.done; D = N.next()) {
+              var T = D.value;
+              T.type === kt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
             }
           } catch ($) {
             a = {
@@ -2761,7 +2761,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             };
           } finally {
             try {
-              M && !M.done && (h = N.return) && h.call(N);
+              D && !D.done && (h = N.return) && h.call(N);
             } finally {
               if (a)
                 throw a.error;
@@ -2780,18 +2780,18 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             throw o.error;
         }
       }
-      var O = A(_t(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), z = O[0], x = O[1], I = A(An(z, ne), 2), Y = I[0], F = I[1], mt = z.filter(function($) {
+      var O = A(_t(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), k = O[0], x = O[1], I = A(On(k, ne), 2), z = I[0], F = I[1], mt = k.filter(function($) {
         var at;
-        return $.type === zt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === kt;
+        return $.type === kt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === Yt;
       }), Gt = mt.reduce(function($, at) {
-        return $[at.activity.id] = Wn(at.activity, c.machine, x, s), $;
-      }, e ? d({}, e.children) : {}), nt = new K({
+        return $[at.activity.id] = Fn(at.activity, c.machine, x, s), $;
+      }, e ? d({}, e.children) : {}), nt = new J({
         value: p || e.value,
         context: x,
         _event: s,
         // Persist _sessionid between states
         _sessionid: e ? e._sessionid : null,
-        historyValue: p ? S ? Mn(S, p) : void 0 : e ? e.historyValue : void 0,
+        historyValue: p ? S ? An(S, p) : void 0 : e ? e.historyValue : void 0,
         history: !p || t.source ? e : void 0,
         actions: p ? F : [],
         activities: p ? g : e ? e.activities : {},
@@ -2814,13 +2814,13 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var X = nt;
       if (!y)
         for (ve && (X = this.resolveRaisedTransition(X, {
-          type: Ce
-        }, s, i)); Y.length; ) {
-          var sn = Y.shift();
-          X = this.resolveRaisedTransition(X, sn._event, s, i);
+          type: _e
+        }, s, i)); z.length; ) {
+          var rn = z.shift();
+          X = this.resolveRaisedTransition(X, rn._event, s, i);
         }
-      var on = X.changed || (W ? !!X.actions.length || Q || typeof W.value != typeof X.value || !en(X.value, W.value) : void 0);
-      return X.changed = on, X.history = W, X;
+      var sn = X.changed || (W ? !!X.actions.length || Q || typeof W.value != typeof X.value || !tn(X.value, W.value) : void 0);
+      return X.changed = sn, X.history = W, X;
     }, n.prototype.getStateNode = function(t) {
       if (ct(t))
         return this.machine.getStateNodeById(t);
@@ -2861,7 +2861,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             return s ? r.getStateNode(o).resolve(t[o] || s) : ht;
           });
         case "compound":
-          if (D(t)) {
+          if (M(t)) {
             var i = this.getStateNode(t);
             return i.type === "parallel" || i.type === "compound" ? (e = {}, e[t] = i.initialStateValue, e) : t;
           }
@@ -2933,7 +2933,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         var t;
         if (this.type === "history") {
           var e = this.config;
-          D(e.target) ? t = ct(e.target) ? Yt(this.machine.getStateNodeById(e.target).path.slice(this.path.length - 1)) : e.target : t = e.target;
+          M(e.target) ? t = ct(e.target) ? zt(this.machine.getStateNodeById(e.target).path.slice(this.path.length - 1)) : e.target : t = e.target;
         }
         return t;
       },
@@ -2974,7 +2974,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
           states: ye(this.states, function(e, r) {
             if (!t)
               return e.historyValue();
-            var i = D(t) ? void 0 : t[r];
+            var i = M(t) ? void 0 : t[r];
             return e.historyValue(i || e.initialStateValue);
           }, function(e) {
             return !e.history;
@@ -2991,8 +2991,8 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
           return r.getFromRelativePath(o);
         })) : r.initialStateNodes;
       }
-      var s = xn(r.path, "states")(t).current;
-      return D(s) ? [r.getStateNode(s)] : R(jt(s).map(function(o) {
+      var s = bn(r.path, "states")(t).current;
+      return M(s) ? [r.getStateNode(s)] : R(jt(s).map(function(o) {
         return e.history === "deep" ? r.getFromRelativePath(o) : [r.states[o[0]]];
       }));
     }, Object.defineProperty(n.prototype, "stateIds", {
@@ -3075,7 +3075,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var e = this;
       if (t !== void 0)
         return t.map(function(r) {
-          if (!D(r))
+          if (!M(r))
             return r;
           var i = r[0] === e.delimiter;
           if (i && !e.parent)
@@ -3093,11 +3093,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             return e.getStateNodeByPath(s);
         });
     }, n.prototype.formatTransition = function(t) {
-      var e = this, r = Cn(t.target), i = "internal" in t ? t.internal : r ? r.some(function(a) {
-        return D(a) && a[0] === e.delimiter;
+      var e = this, r = _n(t.target), i = "internal" in t ? t.internal : r ? r.some(function(a) {
+        return M(a) && a[0] === e.delimiter;
       }) : !0, s = this.machine.options.guards, o = this.resolveTarget(r), u = d(d({}, t), {
         actions: q(V(t.actions)),
-        cond: ze(t.cond, s),
+        cond: Le(t.cond, s),
         target: o,
         source: this,
         internal: i,
@@ -3123,14 +3123,14 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         i = R(Object.keys(h).map(function(g) {
           !L && g === dt && U(!1, "Empty string transition configs (e.g., `{ on: { '': ... }}`) for transient transitions are deprecated. Specify the transition in the `{ always: ... }` property instead. " + 'Please check the `on` configuration for "#'.concat(r.id, '".'));
           var w = ut(g, h[g]);
-          return L || ar(r, g, w), w;
+          return L || or(r, g, w), w;
         }).concat(ut(St, a)));
       }
       var c = this.config.always ? ut("", this.config.always) : [], f = this.config.onDone ? ut(String(xt(this.id)), this.config.onDone) : [];
       L || U(!(this.config.onDone && !this.parent), 'Root nodes cannot have an ".onDone" transition. Please check the config of "'.concat(this.id, '".'));
       var l = R(this.invoke.map(function(g) {
         var w = [];
-        return g.onDone && w.push.apply(w, j([], A(ut(String(Mt(g.id)), g.onDone)), !1)), g.onError && w.push.apply(w, j([], A(ut(String(vt(g.id)), g.onError)), !1)), w;
+        return g.onDone && w.push.apply(w, j([], A(ut(String(Dt(g.id)), g.onDone)), !1)), g.onError && w.push.apply(w, j([], A(ut(String(vt(g.id)), g.onError)), !1)), w;
       })), v = this.after, y = R(j(j(j(j([], A(f), !1), A(l), !1), A(i), !1), A(c), !1).map(function(g) {
         return V(g).map(function(w) {
           return r.formatTransition(w);
@@ -3157,11 +3157,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
     }, n;
   }()
 ), xe = !1;
-function hr(n, t) {
-  return !L && !("predictableActionArguments" in n) && !xe && (xe = !0, console.warn("It is highly recommended to set `predictableActionArguments` to `true` when using `createMachine`. https://xstate.js.org/docs/guides/actions.html")), new ur(n, t);
+function ur(n, t) {
+  return !L && !("predictableActionArguments" in n) && !xe && (xe = !0, console.warn("It is highly recommended to set `predictableActionArguments` to `true` when using `createMachine`. https://xstate.js.org/docs/guides/actions.html")), new ar(n, t);
 }
-var lt = Je, Qt = ot;
-const { choose: cr } = Fn, lr = {
+var lt = Be, Qt = ot;
+const { choose: hr } = Un, cr = {
   rect: {
     on: {
       MT_DOWN: {
@@ -3194,7 +3194,7 @@ const { choose: cr } = Fn, lr = {
       }
     }
   }
-}, fr = {
+}, lr = {
   rect: {
     states: {
       mouseIsDown: {
@@ -3267,7 +3267,7 @@ const { choose: cr } = Fn, lr = {
       }
     }
   }
-}, dr = (n) => hr(
+}, fr = (n) => ur(
   {
     context: {
       unfinishedComponent: void 0,
@@ -3330,7 +3330,7 @@ const { choose: cr } = Fn, lr = {
           },
           drawMode: {
             initial: void 0,
-            states: lr,
+            states: cr,
             on: {
               KEYDOWN_ESC: "#idle.selectMode"
             }
@@ -3340,8 +3340,8 @@ const { choose: cr } = Fn, lr = {
       drawing: {
         id: "drawing",
         initial: void 0,
-        states: fr,
-        exit: cr([
+        states: lr,
+        exit: hr([
           {
             cond: "unfinishedIsValid",
             actions: ["unselectAll", "validComponentFinished"]
@@ -3419,7 +3419,7 @@ const { choose: cr } = Fn, lr = {
       unfinishedIsValid: (t, e) => t.unfinishedComponent.isValid()
     }
   }
-), vr = (n) => nn(dr(n)), fe = (n, t, e) => {
+), dr = (n) => en(fr(n)), fe = (n, t, e) => {
   const r = {
     defineProperty(i, s, o) {
       return Object.is(o.value, i[s]) || (typeof t == "function" ? t.call(e || this, s, o.value, i[s], n) : t[s].call(e || this, o.value, i[s], n)), Reflect.defineProperty(i, s, o);
@@ -3437,7 +3437,7 @@ function Ee(n, t, e) {
     this.isFrozen
   );
 }
-class Oe {
+class vr {
   constructor(t, e) {
     this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], this.editorOwner = t, this.element = G.createElementNS(rt, "polygon"), this.points = [], this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], e && [e].flat().forEach((r) => this.addPoint(r.x, r.y)), this.isSelected = !1, this.isFrozen = !1;
   }
@@ -3488,7 +3488,7 @@ class Oe {
     }), this.updateElementPoints(), this;
   }
   setIsSelected(t) {
-    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && J(
+    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && K(
       this.element,
       t ? this.style.componentSelect.on : this.style.componentSelect.off
     ), this;
@@ -3503,7 +3503,7 @@ class Oe {
     });
   }
   setStyle(t) {
-    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, K(this.element, t.component), K(this.element, t.componentHover.off), K(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     for (let e in t)
@@ -3511,19 +3511,24 @@ class Oe {
     return this;
   }
   export() {
-    var e;
     const t = {
-      points: (e = this.editorOwner) == null ? void 0 : e.initialSizes.get(this.element.id)
+      points: this.points.map((e) => {
+        var r, i;
+        return {
+          x: e.x / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1),
+          y: e.y / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1)
+        };
+      })
     };
-    for (let r of this.element.attributes)
-      (r.name in this.includeAttributes || _e.test(r.name)) && (t[r.name] = r.value);
+    for (let e of this.element.attributes)
+      (e.name in this.includeAttributes || Me.test(e.name)) && (t[e.name] = e.value);
     return t;
   }
   _logWarnOnOpOnFrozen(t) {
     this.isFrozen && console.warn(`${t} frozen ${this.element.tagName} with id ${this.element.id}`);
   }
 }
-function Ae() {
+function Oe() {
   const { x: n, y: t, width: e, height: r } = this.dim;
   this.handles = [
     new B(
@@ -3608,7 +3613,7 @@ class de {
         }
       },
       this
-    ), Ae.call(this), [this.dim.width, this.dim.height] = [i, s], this.isSelected = !1, this.isFrozen = !1;
+    ), Oe.call(this), [this.dim.width, this.dim.height] = [i, s], this.isSelected = !1, this.isFrozen = !1;
   }
   freeze(t) {
     return this.isFrozen = t !== void 0 ? !!t : !0, this.handles.forEach((e) => e.freeze(t)), this;
@@ -3624,10 +3629,10 @@ class de {
   }
   setHandlesVisibility(t) {
     var e, r;
-    return t && !((e = this.handles) != null && e.length) && Ae.call(this), (r = this.handles) == null || r.forEach((i) => i == null ? void 0 : i.setVisible(t)), this;
+    return t && !((e = this.handles) != null && e.length) && Oe.call(this), (r = this.handles) == null || r.forEach((i) => i == null ? void 0 : i.setVisible(t)), this;
   }
   setIsSelected(t) {
-    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && J(
+    return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && K(
       this.element,
       t ? this.style.componentSelect.on : this.style.componentSelect.off
     ), this;
@@ -3651,7 +3656,7 @@ class de {
     return this.dim.width = this.dim.width * t, this.dim.height = this.dim.height * t, this.dim.x = this.dim.x * t, this.dim.y = this.dim.y * t, this;
   }
   setStyle(t) {
-    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, K(this.element, t.component), K(this.element, t.componentHover.off), K(this.element, t.componentSelect.off), se(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     var e;
@@ -3660,12 +3665,15 @@ class de {
     return this;
   }
   export() {
-    var e, r;
+    var e, r, i, s, o;
     const t = {
-      ...(e = this.editorOwner) == null ? void 0 : e.initialSizes.get(this.element.id)
+      width: this.dim.width / (((e = this.editorOwner) == null ? void 0 : e.scale) || 1),
+      height: this.dim.height / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1),
+      x: this.dim.x / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1),
+      y: this.dim.y / (((s = this.editorOwner) == null ? void 0 : s.scale) || 1)
     };
-    for (let i of (r = this.element) == null ? void 0 : r.attributes)
-      (i.name in this.includeAttributes || _e.test(i.name)) && (t[i.name] = i.value);
+    for (let u of (o = this.element) == null ? void 0 : o.attributes)
+      (u.name in this.includeAttributes || Me.test(u.name)) && (t[u.name] = u.value);
     return t;
   }
   _logWarnOnOpOnFrozen(t) {
@@ -3747,13 +3755,13 @@ class gr extends de {
     }), this.add(t, e, r, i, s);
   }
 }
-var Dt = /* @__PURE__ */ ((n) => (n[n.LMB = 1] = "LMB", n[n.RMB = 2] = "RMB", n[n.MMB = 4] = "MMB", n))(Dt || {});
-class Me {
+var Mt = /* @__PURE__ */ ((n) => (n[n.LMB = 1] = "LMB", n[n.RMB = 2] = "RMB", n[n.MMB = 4] = "MMB", n))(Mt || {});
+class Ae {
   constructor(t, e = {}, r) {
     if (this.scale = 1, this.imageSizes = {
       width: 0,
       height: 0
-    }, this.initialSizes = /* @__PURE__ */ new Map(), this.mouseButtons = [Dt.LMB, Dt.MMB, Dt.RMB], [
+    }, this.mouseButtons = [Mt.LMB, Mt.MMB, Mt.RMB], [
       this.width = 1200,
       this.height = 600,
       this.componentDrawnHandler,
@@ -3774,7 +3782,7 @@ class Me {
       e.selectHandler,
       e.idGenerator,
       e.deleteHandler
-    ], e.mouseButtons && (this.mouseButtons = e.mouseButtons), this.style = Wt(vn(), r), this.fsmService = vr(this).start(), this.svg = t, typeof t == "string") {
+    ], e.mouseButtons && (this.mouseButtons = e.mouseButtons), this.style = Wt(dn(), r), this.fsmService = dr(this).start(), this.svg = t, typeof t == "string") {
       if (this.svg = G.getElementById(t), !this.svg) {
         this.svg = G.createElementNS(rt, "svg"), this.svg.setAttribute("version", "1.1"), this.svg.setAttribute("id", t), this.svg.setAttribute("width", this.width + "px"), this.svg.setAttribute("height", this.height + "px"), this.svg.setAttribute("viewBox", `0, 0, ${this.width} ${this.height}`), this.svg.setAttribute("preserveAspectRatio", "xMinYMin");
         const i = this.svg;
@@ -3801,7 +3809,7 @@ class Me {
   }
   loadImage(t, e, r) {
     var i;
-    return this.image = G.createElementNS(rt, "image"), this.image.setAttributeNS(an, "href", t), this.imageSizes.width = e, this.imageSizes.height = r, e && this.image.setAttribute("width", String(e)), r && this.image.setAttribute("height", String(r)), (i = this.svg) == null || i.prepend(this.image), this;
+    return this.image = G.createElementNS(rt, "image"), this.image.setAttributeNS(on, "href", t), this.imageSizes.width = e, this.imageSizes.height = r, e && this.image.setAttribute("width", String(e)), r && this.image.setAttribute("height", String(r)), (i = this.svg) == null || i.prepend(this.image), this;
   }
   setStyle(t) {
     return this.style = Wt(this.style, t), this;
@@ -3848,13 +3856,13 @@ class Me {
     return tt(this.svg, t, e), this;
   }
   off(t, e) {
-    return un(this.svg, t, e), this;
+    return an(this.svg, t, e), this;
   }
   getComponentById(t) {
     return this._cacheElementMapping && this._cacheElementMapping[t];
   }
   import(t, e) {
-    const r = JSON.parse(t);
+    const r = typeof t == "string" ? JSON.parse(t) : t;
     return this._idCounter = r.idCounter, r.components.map((i) => {
       const s = e ? e(i.id) : i.id;
       switch (i.type) {
@@ -3875,15 +3883,14 @@ class Me {
     });
   }
   export(t) {
-    const e = {
+    return {
       idCounter: this._idCounter,
-      components: Object.entries(this._cacheElementMapping).filter(([i, s]) => !(s instanceof B)).map(([i, s]) => ({
-        id: i,
-        type: s.element.tagName,
-        data: s.export()
+      components: Object.entries(this._cacheElementMapping).filter(([r, i]) => !(i instanceof B)).map(([r, i]) => ({
+        id: r,
+        type: i.element.tagName,
+        data: i.export()
       }))
-    }, r = JSON.stringify(e);
-    return t ? r.replace(/[\"]/g, '\\"') : r;
+    };
   }
   createRectangle(t, e) {
     const { x: r, y: i, width: s, height: o, ...u } = t;
@@ -3909,16 +3916,13 @@ class Me {
   createPolygon(t, e) {
     const { points: r, ...i } = t;
     return this.registerComponent(
-      new Oe(this, r).setStyle(this.style).setDataAttributes(i),
+      new vr(this, r).setStyle(this.style).setDataAttributes(i),
       e
     );
   }
   registerComponent(t, e) {
     var r;
-    return t instanceof B ? e = "handle_" + this._handleIdCounter++ : e = e || ((r = this.idGenerator) == null ? void 0 : r.call(this)) || t.element.tagName + "_" + this._idCounter++, this.initialSizes.has(e) || this.initialSizes.set(
-      e,
-      t instanceof Oe ? [...t.points.map((i) => ({ ...i }))] : Object.assign({}, t.dim)
-    ), this._cacheElementMapping[e] = t, t.element.id = e, t;
+    return t instanceof B ? e = "handle_" + this._handleIdCounter++ : e = e || ((r = this.idGenerator) == null ? void 0 : r.call(this)) || t.element.tagName + "_" + this._idCounter++, this._cacheElementMapping[e] = t, t.element.id = e, t;
   }
   registerComponentHandle(t) {
     return this.registerComponent(t.setStyle(this.style.handle, this.style.handleHover));
@@ -4006,15 +4010,15 @@ const mr = (n) => {
   return Object.entries(e).forEach(([r, i]) => {
     Object.getPrototypeOf(i) === Object.prototype ? Wt(n[r], i) : n[r] = i;
   }), Wt(n, ...t);
-}, rn = (n) => function(e, r = {}, i) {
-  return n ? wr(new Me(e, r, i)) : mr(new Me(e, r, i));
-}, Sr = rn(!1), br = rn(!0), xr = {
+}, nn = (n) => function(e, r = {}, i) {
+  return n ? wr(new Ae(e, r, i)) : mr(new Ae(e, r, i));
+}, Sr = nn(!1), br = nn(!0), xr = {
   editor: Sr,
   view: br,
-  MouseButtons: Dt
+  MouseButtons: Mt
 };
 export {
-  Dt as MouseButtons,
+  Mt as MouseButtons,
   xr as default,
   Sr as editor,
   br as view
