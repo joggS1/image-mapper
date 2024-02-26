@@ -15,7 +15,8 @@ import {
   FigureOptions,
   MouseButtons,
   PolygonOptions,
-  Style
+  Style,
+  SVGTagNames
 } from './types';
 import { SVG_NS, XLINK_NS } from './constants';
 import { deCamelCase } from './utils';
@@ -167,29 +168,27 @@ export class Editor {
     this.scale = scale;
   }
 
-  public rect() {
-    this.mode = 'rect';
-    this.fsmService.send('MODE_DRAW_RECT');
-  }
-
-  public polygon() {
-    this.mode = 'polygon';
-    this.fsmService.send('MODE_DRAW_POLYGON');
-  }
-
-  public circle() {
-    this.mode = 'circle';
-    this.fsmService.send('MODE_DRAW_CIRCLE');
-  }
-
-  public ellipse() {
-    this.mode = 'ellipse';
-    this.fsmService.send('MODE_DRAW_ELLIPSE');
-  }
-
-  public selectMode() {
-    this.mode = 'select';
-    this.fsmService.send('MODE_SELECT');
+  public setEditorMode(mode: SVGTagNames) {
+    switch (mode) {
+      case 'circle': {
+        this.fsmService.send('MODE_DRAW_CIRCLE');
+        break;
+      }
+      case 'ellipse': {
+        this.fsmService.send('MODE_DRAW_ELLIPSE');
+        break;
+      }
+      case 'polygon': {
+        this.fsmService.send('MODE_DRAW_POLYGON');
+        break;
+      }
+      case 'rect': {
+        this.fsmService.send('MODE_DRAW_RECT');
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   public selectComponent(component: Component | string) {
