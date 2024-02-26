@@ -3832,7 +3832,7 @@ class De {
     this.scale = t;
   }
   setEditorMode(t) {
-    switch (t) {
+    switch (this.mode = t, t) {
       case "circle": {
         this.fsmService.send("MODE_DRAW_CIRCLE");
         break;
