@@ -169,6 +169,7 @@ export class Editor {
   }
 
   public setEditorMode(mode: SVGTagNames) {
+    this.mode = mode;
     switch (mode) {
       case 'circle': {
         this.fsmService.send('MODE_DRAW_CIRCLE');
