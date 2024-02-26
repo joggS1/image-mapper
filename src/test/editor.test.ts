@@ -3,7 +3,7 @@
  */
 
 import { jest } from '@jest/globals';
-import editorFactory from '../editor';
+import editorFactory, { Editor } from '../editor';
 import { SVG_NS } from '../constants';
 import { doc } from '../globals';
 
@@ -11,8 +11,8 @@ describe('Editor', () => {
   //@ts-ignore
   const editorConstr = editorFactory();
 
-  const makeValidPolygon = (editor: any) => {
-    editor.polygon();
+  const makeValidPolygon = (editor: Editor) => {
+    editor.setEditorMode('polygon');
 
     // Making valid polygon (having at least three points)
     editor.svg.dispatchEvent(new MouseEvent('mousedown'));
@@ -77,7 +77,7 @@ describe('Editor', () => {
     const selectModeHandler = jest.fn();
     const editor = editorConstr('svgid', { selectModeHandler });
 
-    editor.rect();
+    editor.setEditorMode('rect');
     editor.fsmService.send('KEYDOWN_ESC'); // TODO: should preferably simulate keydown with key="Escape"
     expect(selectModeHandler).toBeCalledTimes(2); // called initially by fsm too
   });
@@ -118,7 +118,7 @@ describe('View', () => {
     const view = viewConstr('view');
 
     // First create some data
-    editor.rect();
+    editor.setEditorMode('rect');
     // can't use MouseEvent as offsetX and offsetY properties are readonly
     editor.fsmService.send({
       type: 'MT_DOWN',
