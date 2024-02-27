@@ -162,8 +162,8 @@ export class Editor {
     }
     if (this.image && this.image.getAttribute('width') && this.image.getAttribute('height')) {
       const { width, height } = this.imageSizes;
-      width && this.image.setAttribute('width', String(width * scale));
-      height && this.image.setAttribute('height', String(height * scale));
+      width && this.image.setAttribute('width', (width * scale).toFixed(2));
+      height && this.image.setAttribute('height', (height * scale).toFixed(2));
     }
     this.scale = scale;
   }
