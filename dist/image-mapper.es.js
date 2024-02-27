@@ -3849,6 +3849,10 @@ class De {
         this.fsmService.send("MODE_DRAW_RECT");
         break;
       }
+      case "select": {
+        this.fsmService.send("MODE_SELECT");
+        break;
+      }
     }
   }
   selectComponent(t) {
