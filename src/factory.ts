@@ -218,10 +218,10 @@ export class CornerShapedElement {
   }
 
   public scale(scale: number) {
-    this.dim.width = this.dim.width * scale;
-    this.dim.height = this.dim.height * scale;
-    this.dim.x = this.dim.x * scale;
-    this.dim.y = this.dim.y * scale;
+    this.dim.width = Number((this.dim.width * scale).toFixed(2));
+    this.dim.height = Number((this.dim.height * scale).toFixed(2));
+    this.dim.x = Number((this.dim.x * scale).toFixed(2));
+    this.dim.y = Number((this.dim.y * scale).toFixed(2));
     return this;
   }
   public setStyle(style: Style) {
