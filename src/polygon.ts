@@ -4,7 +4,7 @@ import { doc } from './globals';
 import { Handle } from './handle';
 import { onChange } from './onChangeProxy';
 import { addHover, setStyle } from './style';
-import { Component, PolygonOptions, PolygonPoint } from './types/editor';
+import { Component, PolygonOptions, PolygonPoint } from './types';
 import { Style } from './types';
 
 function generateHandle(this: Polygon, x: number, y: number, point: PolygonPoint) {

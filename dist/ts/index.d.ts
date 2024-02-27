@@ -1,5 +1,5 @@
 import { Editor } from './editor';
-import { FigureOptions, MouseButtons, PolygonOptions, Style, SVGTagNames } from './types';
+import { FigureOptions, MouseButtons, PolygonOptions, Style, EditorMode, Schema } from './types';
 declare const editor: (svgEl: string | SVGSVGElement, options?: import("./types").EditorOptions, style?: Style | undefined) => Editor;
 declare const view: (svgEl: string | SVGSVGElement, options?: import("./types").EditorOptions, style?: Style | undefined) => Editor;
 declare const _default: {
@@ -9,4 +9,4 @@ declare const _default: {
 };
 export default _default;
 export { editor, view, MouseButtons };
-export type { PolygonOptions, FigureOptions, Editor, Style, SVGTagNames as EditorMode };
+export type { PolygonOptions, FigureOptions, Editor, Style, EditorMode, Schema };

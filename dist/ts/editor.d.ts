@@ -1,6 +1,6 @@
 import { createFSMService } from './fsm';
 import { Handle } from './handle';
-import { Component, EditorMode, EditorOptions, FigureOptions, MouseButtons, PolygonOptions, Style, SVGTagNames } from './types';
+import { Component, EditorMode, EditorOptions, FigureOptions, MouseButtons, PolygonOptions, Style } from './types';
 export declare class Editor {
     width: number;
     height: number;
@@ -29,7 +29,7 @@ export declare class Editor {
     loadImage(path: string, width: number, height: number): this;
     setStyle(style: object): this;
     setScale(scale: number): void;
-    setEditorMode(mode: SVGTagNames): void;
+    setEditorMode(mode: EditorMode): void;
     selectComponent(component: Component | string): Component;
     removeComponent(component: string | any): SVGAElement | undefined;
     on(eventTypes: string, handler: (e: Event) => any): this;

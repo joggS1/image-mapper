@@ -168,7 +168,7 @@ export class Editor {
     this.scale = scale;
   }
 
-  public setEditorMode(mode: SVGTagNames) {
+  public setEditorMode(mode: EditorMode) {
     this.mode = mode;
     switch (mode) {
       case 'circle': {
@@ -185,6 +185,10 @@ export class Editor {
       }
       case 'rect': {
         this.fsmService.send('MODE_DRAW_RECT');
+        break;
+      }
+      case 'select': {
+        this.fsmService.send('MODE_SELECT');
         break;
       }
       default:

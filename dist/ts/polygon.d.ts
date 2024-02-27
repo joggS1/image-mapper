@@ -1,6 +1,6 @@
 import { Editor } from './editor';
 import { Handle } from './handle';
-import { PolygonOptions, PolygonPoint } from './types/editor';
+import { PolygonOptions, PolygonPoint } from './types';
 import { Style } from './types';
 declare class Polygon {
     editorOwner: Editor;
