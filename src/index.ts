@@ -1,6 +1,6 @@
 import editorFactory, { Editor } from './editor';
 
-import { FigureOptions, MouseButtons, PolygonOptions, Style, SVGTagNames } from './types';
+import { FigureOptions, MouseButtons, PolygonOptions, Style, EditorMode, Schema } from './types';
 
 const editor = editorFactory(false);
 
@@ -14,4 +14,4 @@ export default {
 
 export { editor, view, MouseButtons };
 
-export type { PolygonOptions, FigureOptions, Editor, Style, SVGTagNames as EditorMode };
+export type { PolygonOptions, FigureOptions, Editor, Style, EditorMode, Schema };

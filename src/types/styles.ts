@@ -34,6 +34,5 @@ export type {
   HandleStylesHover,
   ComponentStylesSelect,
   HandleStyles,
-  StylesUnion,
-  SvgPropertiesHyphen as SVGstyles
+  StylesUnion
 };
