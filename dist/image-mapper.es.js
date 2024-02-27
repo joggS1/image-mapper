@@ -1,4 +1,4 @@
-const Me = window || void 0, G = Me.window.document, rt = "http://www.w3.org/2000/svg", an = "http://www.w3.org/1999/xlink", Ce = new RegExp(/^data-[a-zA-Z]+/), tt = function(n, t, e) {
+const Me = window || void 0, G = Me.window.document, rt = "http://www.w3.org/2000/svg", an = "http://www.w3.org/1999/xlink", Ne = new RegExp(/^data-[a-zA-Z]+/), tt = function(n, t, e) {
   [n].flat().forEach((r) => {
     t.split(" ").forEach((i) => {
       r.addEventListener(i, e, {
@@ -153,15 +153,15 @@ function j(n, t, e) {
       (s || !(r in t)) && (s || (s = Array.prototype.slice.call(t, 0, r)), s[r] = t[r]);
   return n.concat(s || Array.prototype.slice.call(t));
 }
-var _;
+var C;
 (function(n) {
   n.Start = "xstate.start", n.Stop = "xstate.stop", n.Raise = "xstate.raise", n.Send = "xstate.send", n.Cancel = "xstate.cancel", n.NullEvent = "", n.Assign = "xstate.assign", n.After = "xstate.after", n.DoneState = "done.state", n.DoneInvoke = "done.invoke", n.Log = "xstate.log", n.Init = "xstate.init", n.Invoke = "xstate.invoke", n.ErrorExecution = "error.execution", n.ErrorCommunication = "error.communication", n.ErrorPlatform = "error.platform", n.ErrorCustom = "xstate.error", n.Update = "xstate.update", n.Pure = "xstate.pure", n.Choose = "xstate.choose";
-})(_ || (_ = {}));
+})(C || (C = {}));
 var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var kt = _.Start, Xt = _.Stop, yt = _.Raise, Nt = _.Send, ae = _.Cancel, _e = _.NullEvent, $t = _.Assign, pn = _.After, yn = _.DoneState, Vt = _.Log, Ne = _.Init, Yt = _.Invoke, gn = _.ErrorExecution, Zt = _.ErrorPlatform, ue = _.ErrorCustom, Bt = _.Update, Te = _.Choose, Pe = _.Pure;
+var kt = C.Start, Xt = C.Stop, yt = C.Raise, _t = C.Send, ae = C.Cancel, Ce = C.NullEvent, $t = C.Assign, pn = C.After, yn = C.DoneState, Vt = C.Log, _e = C.Init, Ft = C.Invoke, gn = C.ErrorExecution, Zt = C.ErrorPlatform, ue = C.ErrorCustom, Bt = C.Update, Te = C.Choose, Pe = C.Pure;
 const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   after: pn,
@@ -172,13 +172,13 @@ const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   error: ue,
   errorExecution: gn,
   errorPlatform: Zt,
-  init: Ne,
-  invoke: Yt,
+  init: _e,
+  invoke: Ft,
   log: Vt,
-  nullEvent: _e,
+  nullEvent: Ce,
   pure: Pe,
   raise: yt,
-  send: Nt,
+  send: _t,
   start: kt,
   stop: Xt,
   update: Bt
@@ -212,13 +212,13 @@ function At(n, t) {
   if (Sn(n))
     return n.value;
   if (gt(n))
-    return zt(n);
+    return Yt(n);
   if (typeof n != "string")
     return n;
   var e = ee(n, t);
-  return zt(e);
+  return Yt(e);
 }
-function zt(n) {
+function Yt(n) {
   if (n.length === 1)
     return n[0];
   for (var t = {}, e = t, r = 0; r < n.length - 1; r++)
@@ -322,15 +322,15 @@ function Re(n) {
 function V(n) {
   return n === void 0 ? [] : Re(n);
 }
-function Ft(n, t, e) {
+function zt(n, t, e) {
   var r, i;
-  if (C(n))
+  if (N(n))
     return n(t, e.data);
   var s = {};
   try {
     for (var o = E(Object.keys(n)), u = o.next(); !u.done; u = o.next()) {
       var a = u.value, h = n[a];
-      C(h) ? s[a] = h(t, e.data) : s[a] = h;
+      N(h) ? s[a] = h(t, e.data) : s[a] = h;
     }
   } catch (c) {
     r = {
@@ -350,7 +350,7 @@ function En(n) {
   return /^(done|error)\./.test(n);
 }
 function ge(n) {
-  return !!(n instanceof Promise || n !== null && (C(n) || typeof n == "object") && C(n.then));
+  return !!(n instanceof Promise || n !== null && (N(n) || typeof n == "object") && N(n.then));
 }
 function On(n) {
   return n !== null && typeof n == "object" && "transition" in n && typeof n.transition == "function";
@@ -402,13 +402,13 @@ function me(n, t, e, r) {
       action: o,
       _event: t
     }, f = {};
-    if (C(h))
+    if (N(h))
       f = h(s, t.data, c);
     else
       try {
         for (var l = E(Object.keys(h)), v = l.next(); !v.done; v = l.next()) {
           var y = v.value, p = h[y];
-          f[y] = C(p) ? p(s, t.data, c) : p;
+          f[y] = N(p) ? p(s, t.data, c) : p;
         }
       } catch (S) {
         u = {
@@ -438,7 +438,7 @@ L || (H = function(n, t) {
 function gt(n) {
   return Array.isArray(n);
 }
-function C(n) {
+function N(n) {
   return typeof n == "function";
 }
 function M(n) {
@@ -450,7 +450,7 @@ function ke(n, t) {
       type: te,
       name: n,
       predicate: t ? t[n] : void 0
-    } : C(n) ? {
+    } : N(n) ? {
       type: te,
       name: n.name,
       predicate: n
@@ -458,7 +458,7 @@ function ke(n, t) {
 }
 function Mn(n) {
   try {
-    return "subscribe" in n && C(n.subscribe);
+    return "subscribe" in n && N(n.subscribe);
   } catch {
     return !1;
   }
@@ -474,7 +474,7 @@ Tt = {}, Tt[Z] = function() {
 function st(n) {
   return !!n && "__xstatenode" in n;
 }
-function Cn(n) {
+function Nn(n) {
   return !!n && typeof n.send == "function";
 }
 function Kt(n, t) {
@@ -482,7 +482,7 @@ function Kt(n, t) {
     type: n
   }, t) : n;
 }
-function F(n, t) {
+function z(n, t) {
   if (!M(n) && "$$type" in n && n.$$type === "scxml")
     return n;
   var e = Kt(n);
@@ -504,11 +504,11 @@ function ut(n, t) {
   });
   return e;
 }
-function _n(n) {
+function Cn(n) {
   if (!(n === void 0 || n === wn))
     return V(n);
 }
-function Nn(n, t, e) {
+function _n(n, t, e) {
   if (!L) {
     var r = n.stack ? " Stacktrace was '".concat(n.stack, "'") : "";
     if (n === t)
@@ -519,7 +519,7 @@ function Nn(n, t, e) {
     }
   }
 }
-function Ye(n, t, e, r, i) {
+function Fe(n, t, e, r, i) {
   var s = n.options.guards, o = {
     state: i,
     cond: t,
@@ -532,7 +532,7 @@ function Ye(n, t, e, r, i) {
     throw new Error("Guard '".concat(t.type, "' is not implemented on machine '").concat(n.id, "'."));
   return u(e, r.data, o);
 }
-function ze(n) {
+function Ye(n) {
   return typeof n == "string" ? {
     type: n
   } : n;
@@ -550,10 +550,10 @@ function Pt(n, t) {
   return "".concat(n, ":invocation[").concat(t, "]");
 }
 function ne(n) {
-  return (n.type === yt || n.type === Nt && n.to === et.Internal) && typeof n.delay != "number";
+  return (n.type === yt || n.type === _t && n.to === et.Internal) && typeof n.delay != "number";
 }
-var it = /* @__PURE__ */ F({
-  type: Ne
+var it = /* @__PURE__ */ z({
+  type: _e
 });
 function Ht(n, t) {
   return t && t[n] || void 0;
@@ -562,14 +562,14 @@ function pt(n, t) {
   var e;
   if (M(n) || typeof n == "number") {
     var r = Ht(n, t);
-    C(r) ? e = {
+    N(r) ? e = {
       type: n,
       exec: r
     } : r ? e = r : e = {
       type: n,
       exec: void 0
     };
-  } else if (C(n))
+  } else if (N(n))
     e = {
       // Convert action to string if unnamed
       type: n.name || n.toString(),
@@ -577,7 +577,7 @@ function pt(n, t) {
     };
   else {
     var r = Ht(n.type, t);
-    if (C(r))
+    if (N(r))
       e = d(d({}, n), {
         exec: r
       });
@@ -607,7 +607,7 @@ function Jt(n) {
     type: t.type
   });
 }
-function Fe(n, t) {
+function ze(n, t) {
   return {
     type: yt,
     event: typeof n == "function" ? n : Kt(n),
@@ -618,12 +618,12 @@ function Fe(n, t) {
 function He(n, t, e, r) {
   var i = {
     _event: e
-  }, s = F(C(n.event) ? n.event(t, e.data, i) : n.event), o;
+  }, s = z(N(n.event) ? n.event(t, e.data, i) : n.event), o;
   if (M(n.delay)) {
     var u = r && r[n.delay];
-    o = C(u) ? u(t, e.data, i) : u;
+    o = N(u) ? u(t, e.data, i) : u;
   } else
-    o = C(n.delay) ? n.delay(t, e.data, i) : n.delay;
+    o = N(n.delay) ? n.delay(t, e.data, i) : n.delay;
   return d(d({}, n), {
     type: yt,
     _event: s,
@@ -633,24 +633,24 @@ function He(n, t, e, r) {
 function ot(n, t) {
   return {
     to: t ? t.to : void 0,
-    type: Nt,
-    event: C(n) ? n : Kt(n),
+    type: _t,
+    event: N(n) ? n : Kt(n),
     delay: t ? t.delay : void 0,
     // TODO: don't auto-generate IDs here like that
     // there is too big chance of the ID collision
-    id: t && t.id !== void 0 ? t.id : C(n) ? n.name : je(n)
+    id: t && t.id !== void 0 ? t.id : N(n) ? n.name : je(n)
   };
 }
 function Ue(n, t, e, r) {
   var i = {
     _event: e
-  }, s = F(C(n.event) ? n.event(t, e.data, i) : n.event), o;
+  }, s = z(N(n.event) ? n.event(t, e.data, i) : n.event), o;
   if (M(n.delay)) {
     var u = r && r[n.delay];
-    o = C(u) ? u(t, e.data, i) : u;
+    o = N(u) ? u(t, e.data, i) : u;
   } else
-    o = C(n.delay) ? n.delay(t, e.data, i) : n.delay;
-  var a = C(n.to) ? n.to(t, e.data, i) : n.to;
+    o = N(n.delay) ? n.delay(t, e.data, i) : n.delay;
+  var a = N(n.to) ? n.to(t, e.data, i) : n.to;
   return d(d({}, n), {
     to: a,
     _event: s,
@@ -707,24 +707,24 @@ var We = function(n, t, e) {
 function $e(n) {
   var t = Jt(n);
   return {
-    type: _.Start,
+    type: C.Start,
     activity: t,
     exec: void 0
   };
 }
 function Ve(n) {
-  var t = C(n) ? n : Jt(n);
+  var t = N(n) ? n : Jt(n);
   return {
-    type: _.Stop,
+    type: C.Stop,
     activity: t,
     exec: void 0
   };
 }
 function Be(n, t, e) {
-  var r = C(n.activity) ? n.activity(t, e.data) : n.activity, i = typeof r == "string" ? {
+  var r = N(n.activity) ? n.activity(t, e.data) : n.activity, i = typeof r == "string" ? {
     id: r
   } : r, s = {
-    type: _.Stop,
+    type: C.Stop,
     activity: i
   };
   return s;
@@ -740,10 +740,10 @@ function Ln(n) {
 }
 function Je(n, t) {
   var e = t ? "#".concat(t) : "";
-  return "".concat(_.After, "(").concat(n, ")").concat(e);
+  return "".concat(C.After, "(").concat(n, ")").concat(e);
 }
 function xt(n, t) {
-  var e = "".concat(_.DoneState, ".").concat(n), r = {
+  var e = "".concat(C.DoneState, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -752,7 +752,7 @@ function xt(n, t) {
   }, r;
 }
 function Dt(n, t) {
-  var e = "".concat(_.DoneInvoke, ".").concat(n), r = {
+  var e = "".concat(C.DoneInvoke, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -761,7 +761,7 @@ function Dt(n, t) {
   }, r;
 }
 function vt(n, t) {
-  var e = "".concat(_.ErrorPlatform, ".").concat(n), r = {
+  var e = "".concat(C.ErrorPlatform, ".").concat(n), r = {
     type: e,
     data: t
   };
@@ -771,11 +771,11 @@ function vt(n, t) {
 }
 function kn(n) {
   return {
-    type: _.Pure,
+    type: C.Pure,
     get: n
   };
 }
-function Yn(n, t) {
+function Fn(n, t) {
   if (!L && (!n || typeof n == "function")) {
     var e = n;
     n = function() {
@@ -793,19 +793,19 @@ function Yn(n, t) {
     to: n
   }));
 }
-function zn(n, t) {
+function Yn(n, t) {
   return ce(function(e, r, i) {
     return {
       type: ue,
-      data: C(n) ? n(e, r, i) : n
+      data: N(n) ? n(e, r, i) : n
     };
   }, d(d({}, t), {
     to: et.Parent
   }));
 }
-function Fn(n) {
+function zn(n) {
   return {
-    type: _.Choose,
+    type: C.Choose,
     conds: n
   };
 }
@@ -834,7 +834,7 @@ var Hn = function(n) {
   }
   return r;
 };
-function Ct(n, t, e, r, i, s, o) {
+function Nt(n, t, e, r, i, s, o) {
   o === void 0 && (o = !1);
   var u = o ? [] : Hn(i), a = u.length ? me(e, r, u, t) : e, h = o ? [e] : void 0, c = [];
   function f(y, p) {
@@ -844,7 +844,7 @@ function Ct(n, t, e, r, i, s, o) {
         var m = He(p, a, r, n.options.delays);
         return s && typeof m.delay == "number" && s(m, a, r), m;
       }
-      case Nt:
+      case _t:
         var g = Ue(p, a, r, n.options.delays);
         if (!L) {
           var w = p.delay;
@@ -860,25 +860,25 @@ function Ct(n, t, e, r, i, s, o) {
         return s == null || s(b, a, r), b;
       }
       case Te: {
-        var P = p, N = (S = P.conds.find(function(nt) {
+        var P = p, _ = (S = P.conds.find(function(nt) {
           var Q = ke(nt.cond, n.options.guards);
-          return !Q || Ye(n, Q, a, r, s ? void 0 : t);
+          return !Q || Fe(n, Q, a, r, s ? void 0 : t);
         })) === null || S === void 0 ? void 0 : S.actions;
-        if (!N)
+        if (!_)
           return [];
-        var D = A(Ct(n, t, a, r, [{
+        var D = A(Nt(n, t, a, r, [{
           type: y,
-          actions: q(V(N), n.options.actions)
+          actions: q(V(_), n.options.actions)
         }], s, o), 2), T = D[0], O = D[1];
         return a = O, h == null || h.push(a), T;
       }
       case Pe: {
-        var N = p.get(a, r.data);
-        if (!N)
+        var _ = p.get(a, r.data);
+        if (!_)
           return [];
-        var k = A(Ct(n, t, a, r, [{
+        var k = A(Nt(n, t, a, r, [{
           type: y,
-          actions: q(V(N), n.options.actions)
+          actions: q(V(_), n.options.actions)
         }], s, o), 2), x = k[0], I = k[1];
         return a = I, h == null || h.push(a), x;
       }
@@ -891,20 +891,20 @@ function Ct(n, t, e, r, i, s, o) {
         break;
       }
       default:
-        var z = pt(p, n.options.actions), U = z.exec;
+        var Y = pt(p, n.options.actions), U = Y.exec;
         if (s)
-          s(z, a, r);
+          s(Y, a, r);
         else if (U && h) {
-          var mt = h.length - 1, Gt = d(d({}, z), {
+          var mt = h.length - 1, Gt = d(d({}, Y), {
             exec: function(nt) {
               for (var Q = [], W = 1; W < arguments.length; W++)
                 Q[W - 1] = arguments[W];
               U.apply(void 0, j([h[mt]], A(Q), !1));
             }
           });
-          z = Gt;
+          Y = Gt;
         }
-        return z;
+        return Y;
     }
   }
   function l(y) {
@@ -914,9 +914,9 @@ function Ct(n, t, e, r, i, s, o) {
         var b = w.value, P = f(y.type, b);
         P && (m = m.concat(P));
       }
-    } catch (N) {
+    } catch (_) {
       p = {
-        error: N
+        error: _
       };
     } finally {
       try {
@@ -926,8 +926,8 @@ function Ct(n, t, e, r, i, s, o) {
           throw p.error;
       }
     }
-    return c.forEach(function(N) {
-      s(N, a, r);
+    return c.forEach(function(_) {
+      s(_, a, r);
     }), c.length = 0, m;
   }
   var v = R(i.map(l));
@@ -939,19 +939,19 @@ const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   after: Je,
   assign: Ke,
   cancel: Xe,
-  choose: Fn,
+  choose: zn,
   done: xt,
   doneInvoke: Dt,
   error: vt,
-  escalate: zn,
-  forwardTo: Yn,
+  escalate: Yn,
+  forwardTo: Fn,
   getActionFunction: Ht,
   initEvent: it,
   isActionObject: Ln,
   log: Rn,
   pure: kn,
-  raise: Fe,
-  resolveActions: Ct,
+  raise: ze,
+  resolveActions: Nt,
   resolveLog: We,
   resolveRaise: He,
   resolveSend: Ue,
@@ -996,7 +996,7 @@ function Ge(n) {
   }, t;
 }
 function Wn(n, t, e, r) {
-  var i, s = ze(n.src), o = (i = t == null ? void 0 : t.options.services) === null || i === void 0 ? void 0 : i[s.type], u = n.data ? Ft(n.data, e, r) : void 0, a = o ? qe(o, n.id, u) : Ge(n.id);
+  var i, s = Ye(n.src), o = (i = t == null ? void 0 : t.options.services) === null || i === void 0 ? void 0 : i[s.type], u = n.data ? zt(n.data, e, r) : void 0, a = o ? qe(o, n.id, u) : Ge(n.id);
   return a.meta = n, a;
 }
 function qe(n, t, e) {
@@ -1045,14 +1045,14 @@ function Qe(n) {
     return n.states[t];
   });
 }
-function _t(n) {
+function Ct(n) {
   return Qe(n).filter(function(t) {
     return t.type !== "history";
   });
 }
 function Ze(n) {
   var t = [n];
-  return Ut(n) ? t : t.concat(R(_t(n).map(Ze)));
+  return Ut(n) ? t : t.concat(R(Ct(n).map(Ze)));
 }
 function Et(n, t) {
   var e, r, i, s, o, u, a, h, c = new Set(n), f = re(c), l = new Set(t);
@@ -1084,11 +1084,11 @@ function Et(n, t) {
         });
       else if (p.type === "parallel")
         try {
-          for (var b = (o = void 0, E(_t(p))), P = b.next(); !P.done; P = b.next()) {
-            var N = P.value;
-            l.has(N) || (l.add(N), f.get(N) ? f.get(N).forEach(function(k) {
+          for (var b = (o = void 0, E(Ct(p))), P = b.next(); !P.done; P = b.next()) {
+            var _ = P.value;
+            l.has(_) || (l.add(_), f.get(_) ? f.get(_).forEach(function(k) {
               return l.add(k);
-            }) : N.initialStateNodes.forEach(function(k) {
+            }) : _.initialStateNodes.forEach(function(k) {
               return l.add(k);
             }));
           }
@@ -1188,9 +1188,9 @@ function Kn(n) {
   })), !1)))), !1);
 }
 function Lt(n, t) {
-  return t.type === "compound" ? _t(t).some(function(e) {
+  return t.type === "compound" ? Ct(t).some(function(e) {
     return e.type === "final" && Ot(n, e);
-  }) : t.type === "parallel" ? _t(t).every(function(e) {
+  }) : t.type === "parallel" ? Ct(t).every(function(e) {
     return Lt(n, e);
   }) : !1;
 }
@@ -1445,24 +1445,24 @@ function nr(n, t) {
 var rr = {
   sync: !1,
   autoForward: !1
-}, Y;
+}, F;
 (function(n) {
   n[n.NotStarted = 0] = "NotStarted", n[n.Running = 1] = "Running", n[n.Stopped = 2] = "Stopped";
-})(Y || (Y = {}));
+})(F || (F = {}));
 var ir = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t, e) {
       e === void 0 && (e = n.defaultOptions);
       var r = this;
-      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = Y.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
+      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = F.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
         if (gt(c))
           return r.batch(c), r.state;
-        var l = F(Kt(c, f));
-        if (r.status === Y.Stopped)
+        var l = z(Kt(c, f));
+        if (r.status === F.Stopped)
           return L || H(!1, 'Event "'.concat(l.name, '" was sent to stopped service "').concat(r.machine.id, `". This service has already reached its final state, and will not transition.
 Event: `).concat(JSON.stringify(l.data))), r.state;
-        if (r.status !== Y.Running && !r.options.deferEvents)
+        if (r.status !== F.Running && !r.options.deferEvents)
           throw new Error('Event "'.concat(l.name, '" was sent to uninitialized service "').concat(
             r.machine.id,
             `". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.
@@ -1474,7 +1474,7 @@ Event: `
           r.update(v, l);
         }), r._state;
       }, this.sendTo = function(c, f, l) {
-        var v = r.parent && (f === et.Parent || r.parent.id === f), y = v ? r.parent : M(f) ? f === et.Internal ? r : r.children.get(f) || wt.get(f) : Cn(f) ? f : void 0;
+        var v = r.parent && (f === et.Parent || r.parent.id === f), y = v ? r.parent : M(f) ? f === et.Internal ? r : r.children.get(f) || wt.get(f) : Nn(f) ? f : void 0;
         if (!y) {
           if (!v)
             throw new Error("Unable to send event to child '".concat(f, "' from service '").concat(r.id, "'."));
@@ -1482,7 +1482,7 @@ Event: `
           return;
         }
         if ("machine" in y) {
-          if (r.status !== Y.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
+          if (r.status !== F.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
           r.state.done) {
             var p = d(d({}, c), {
               name: c.name === ue ? "".concat(vt(r.id)) : c.name,
@@ -1494,7 +1494,7 @@ Event: `
           !l && r.machine.config.predictableActionArguments ? r._outgoingQueue.push([y, c.data]) : y.send(c.data);
       }, this._exec = function(c, f, l, v) {
         v === void 0 && (v = r.machine.options.actions);
-        var y = c.exec || Ht(c.type, v), p = C(y) ? y : y ? y.exec : c.exec;
+        var y = c.exec || Ht(c.type, v), p = N(y) ? y : y ? y.exec : c.exec;
         if (p)
           try {
             return p(f, l.data, r.machine.config.predictableActionArguments ? {
@@ -1517,7 +1517,7 @@ Event: `
             r.defer(S);
             break;
           }
-          case Nt:
+          case _t:
             var m = c;
             if (typeof m.delay == "number") {
               r.defer(m);
@@ -1529,7 +1529,7 @@ Event: `
             r.cancel(c.sendId);
             break;
           case kt: {
-            if (r.status !== Y.Running)
+            if (r.status !== F.Running)
               return;
             var g = c.activity;
             if (
@@ -1537,8 +1537,8 @@ Event: `
               !r.machine.config.predictableActionArguments && !r.state.activities[g.id || g.type]
             )
               break;
-            if (g.type === _.Invoke) {
-              var w = ze(g.src), b = r.machine.options.services ? r.machine.options.services[w.type] : void 0, P = g.id, N = g.data;
+            if (g.type === C.Invoke) {
+              var w = Ye(g.src), b = r.machine.options.services ? r.machine.options.services[w.type] : void 0, P = g.id, _ = g.data;
               L || H(
                 !("forward" in g),
                 // tslint:disable-next-line:max-line-length
@@ -1549,10 +1549,10 @@ Event: `
                 L || H(!1, "No service found for invocation '".concat(g.src, "' in machine '").concat(r.machine.id, "'."));
                 return;
               }
-              var T = N ? Ft(N, f, l) : void 0;
+              var T = _ ? zt(_, f, l) : void 0;
               if (typeof b == "string")
                 return;
-              var O = C(b) ? b(f, l.data, {
+              var O = N(b) ? b(f, l.data, {
                 data: T,
                 src: w,
                 meta: g.meta
@@ -1572,8 +1572,8 @@ Event: `
             break;
           }
           case Vt:
-            var x = c, I = x.label, z = x.value;
-            I ? r.logger(I, z) : r.logger(z);
+            var x = c, I = x.label, Y = x.value;
+            I ? r.logger(I, Y) : r.logger(Y);
             break;
           default:
             L || H(!1, "No implementation found for action type '".concat(c.type, "'"));
@@ -1599,7 +1599,7 @@ Event: `
        * @deprecated Use `.getSnapshot()` instead.
        */
       get: function() {
-        return L || H(this.status !== Y.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
+        return L || H(this.status !== F.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
       },
       enumerable: !1,
       configurable: !0
@@ -1688,8 +1688,8 @@ Event: `
       if (this.state.done) {
         var P = t.configuration.find(function(O) {
           return O.type === "final" && O.parent === f.machine;
-        }), N = P && P.doneData ? Ft(P.doneData, t.context, e) : void 0;
-        this._doneEvent = Dt(this.id, N);
+        }), _ = P && P.doneData ? zt(P.doneData, t.context, e) : void 0;
+        this._doneEvent = Dt(this.id, _);
         try {
           for (var D = E(this.doneListeners), T = D.next(); !T.done; T = D.next()) {
             var p = T.value;
@@ -1710,14 +1710,14 @@ Event: `
         this._stop(), this._stopChildren(), wt.free(this.sessionId);
       }
     }, n.prototype.onTransition = function(t) {
-      return this.listeners.add(t), this.status === Y.Running && t(this.state, this.state.event), this;
+      return this.listeners.add(t), this.status === F.Running && t(this.state, this.state.event), this;
     }, n.prototype.subscribe = function(t, e, r) {
       var i = this, s = Rt(t, e, r);
-      this.listeners.add(s.next), this.status !== Y.NotStarted && s.next(this.state);
+      this.listeners.add(s.next), this.status !== F.NotStarted && s.next(this.state);
       var o = function() {
         i.doneListeners.delete(o), i.stopListeners.delete(o), s.complete();
       };
-      return this.status === Y.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
+      return this.status === F.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
         unsubscribe: function() {
           i.listeners.delete(s.next), i.doneListeners.delete(o), i.stopListeners.delete(o);
         }
@@ -1731,14 +1731,14 @@ Event: `
     }, n.prototype.onStop = function(t) {
       return this.stopListeners.add(t), this;
     }, n.prototype.onDone = function(t) {
-      return this.status === Y.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
+      return this.status === F.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
     }, n.prototype.off = function(t) {
       return this.listeners.delete(t), this.eventListeners.delete(t), this.sendListeners.delete(t), this.stopListeners.delete(t), this.doneListeners.delete(t), this.contextListeners.delete(t), this;
     }, n.prototype.start = function(t) {
       var e = this;
-      if (this.status === Y.Running)
+      if (this.status === F.Running)
         return this;
-      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = Y.Running;
+      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = F.Running;
       var r = t === void 0 ? this.initialState : ft(this, function() {
         return Gn(t) ? e.machine.resolveState(t) : e.machine.resolveState(J.from(t, e.machine.context));
       });
@@ -1747,7 +1747,7 @@ Event: `
       }), this;
     }, n.prototype._stopChildren = function() {
       this.children.forEach(function(t) {
-        C(t.stop) && t.stop();
+        N(t.stop) && t.stop();
       }), this.children.clear();
     }, n.prototype._stop = function() {
       var t, e, r, i, s, o, u, a, h, c;
@@ -1821,11 +1821,11 @@ Event: `
       }
       if (!this.initialized)
         return this;
-      this.initialized = !1, this.status = Y.Stopped, this._initialState = void 0;
+      this.initialized = !1, this.status = F.Stopped, this._initialState = void 0;
       try {
         for (var b = E(Object.keys(this.delayedEventsMap)), P = b.next(); !P.done; P = b.next()) {
-          var N = P.value;
-          this.clock.clearTimeout(this.delayedEventsMap[N]);
+          var _ = P.value;
+          this.clock.clearTimeout(this.delayedEventsMap[_]);
         }
       } catch (D) {
         h = {
@@ -1847,14 +1847,14 @@ Event: `
       return this._stop(), e.schedule(function() {
         var r;
         if (!(!((r = t._state) === null || r === void 0) && r.done)) {
-          var i = F({
+          var i = z({
             type: "xstate.stop"
           }), s = ft(t, function() {
             var o = R(j([], A(t.state.configuration), !1).sort(function(f, l) {
               return l.order - f.order;
             }).map(function(f) {
               return q(f.onExit, t.machine.options.actions);
-            })), u = A(Ct(t.machine, t.state, t.state.context, i, [{
+            })), u = A(Nt(t.machine, t.state, t.state.context, i, [{
               type: "exit",
               actions: o
             }], t.machine.config.predictableActionArguments ? t._exec : void 0, t.machine.config.predictableActionArguments || t.machine.config.preserveActionOrder), 2), a = u[0], h = u[1], c = new J({
@@ -1883,10 +1883,10 @@ Event: `
       }), this;
     }, n.prototype.batch = function(t) {
       var e = this;
-      if (this.status === Y.NotStarted && this.options.deferEvents)
+      if (this.status === F.NotStarted && this.options.deferEvents)
         L || H(!1, "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, `" and are deferred. Make sure .start() is called for this service.
 Event: `).concat(JSON.stringify(event)));
-      else if (this.status !== Y.Running)
+      else if (this.status !== F.Running)
         throw new Error(
           // tslint:disable-next-line:max-line-length
           "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, '". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.')
@@ -1895,7 +1895,7 @@ Event: `).concat(JSON.stringify(event)));
         var r = !!this.machine.config.predictableActionArguments && this._exec;
         this.scheduler.schedule(function() {
           var i, s, o = e.state, u = !1, a = [], h = function(v) {
-            var y = F(v);
+            var y = z(v);
             e.forward(y), o = ft(e, function() {
               return e.machine.transition(o, y, void 0, r || void 0);
             }), a.push.apply(a, j([], A(e.machine.config.predictableActionArguments ? o.actions : o.actions.map(function(p) {
@@ -1919,7 +1919,7 @@ Event: `).concat(JSON.stringify(event)));
                 throw i.error;
             }
           }
-          o.changed = u, o.actions = a, e.update(o, F(t[t.length - 1]));
+          o.changed = u, o.actions = a, e.update(o, z(t[t.length - 1]));
         });
       }
     }, n.prototype.sender = function(t) {
@@ -1927,7 +1927,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype._nextState = function(t, e) {
       var r = this;
       e === void 0 && (e = !!this.machine.config.predictableActionArguments && this._exec);
-      var i = F(t);
+      var i = z(t);
       if (i.name.indexOf(Zt) === 0 && !this.state.nextEvents.some(function(o) {
         return o.indexOf(Zt) === 0;
       }))
@@ -1973,13 +1973,13 @@ Event: `).concat(JSON.stringify(event)));
       this.children.delete(t), this.forwardTo.delete(t), (e = this.state) === null || e === void 0 || delete e.children[t];
     }, n.prototype.stopChild = function(t) {
       var e = this.children.get(t);
-      e && (this.removeChild(t), C(e.stop) && e.stop());
+      e && (this.removeChild(t), N(e.stop) && e.stop());
     }, n.prototype.spawn = function(t, e, r) {
-      if (this.status !== Y.Running)
+      if (this.status !== F.Running)
         return qe(t, e);
       if (ge(t))
         return this.spawnPromise(Promise.resolve(t), e);
-      if (C(t))
+      if (N(t))
         return this.spawnCallback(t, e);
       if ($n(t))
         return this.spawnActor(t, e);
@@ -2007,7 +2007,7 @@ Event: `).concat(JSON.stringify(event)));
       });
       var o = i;
       return this.children.set(i.id, o), s.autoForward && this.forwardTo.add(i.id), i.onDone(function(u) {
-        r.removeChild(i.id), r.send(F(u, {
+        r.removeChild(i.id), r.send(z(u, {
           origin: i.id
         }));
       }).start(), o;
@@ -2020,7 +2020,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype.spawnPromise = function(t, e) {
       var r, i = this, s = !1, o;
       t.then(function(a) {
-        s || (o = a, i.removeChild(e), i.send(F(Dt(e, a), {
+        s || (o = a, i.removeChild(e), i.send(z(Dt(e, a), {
           origin: e
         })));
       }, function(a) {
@@ -2028,11 +2028,11 @@ Event: `).concat(JSON.stringify(event)));
           i.removeChild(e);
           var h = vt(e, a);
           try {
-            i.send(F(h, {
+            i.send(z(h, {
               origin: e
             }));
           } catch (c) {
-            Nn(a, c, e), i.devTools && i.devTools.send(h, i.state), i.machine.strict && i.stop();
+            _n(a, c, e), i.devTools && i.devTools.send(h, i.state), i.machine.strict && i.stop();
           }
         }
       });
@@ -2071,7 +2071,7 @@ Event: `).concat(JSON.stringify(event)));
       var r, i = this, s = !1, o = /* @__PURE__ */ new Set(), u = /* @__PURE__ */ new Set(), a, h = function(l) {
         a = l, u.forEach(function(v) {
           return v(l);
-        }), !s && i.send(F(l, {
+        }), !s && i.send(z(l, {
           origin: e
         }));
       }, c;
@@ -2100,7 +2100,7 @@ Event: `).concat(JSON.stringify(event)));
           };
         },
         stop: function() {
-          s = !0, C(c) && c();
+          s = !0, N(c) && c();
         },
         toJSON: function() {
           return {
@@ -2116,15 +2116,15 @@ Event: `).concat(JSON.stringify(event)));
       return this.children.set(e, f), f;
     }, n.prototype.spawnObservable = function(t, e) {
       var r, i = this, s, o = t.subscribe(function(a) {
-        s = a, i.send(F(a, {
+        s = a, i.send(z(a, {
           origin: e
         }));
       }, function(a) {
-        i.removeChild(e), i.send(F(vt(e, a), {
+        i.removeChild(e), i.send(z(vt(e, a), {
           origin: e
         }));
       }, function() {
-        i.removeChild(e), i.send(F(Dt(e), {
+        i.removeChild(e), i.send(z(Dt(e), {
           origin: e
         }));
       }), u = (r = {
@@ -2213,7 +2213,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype[Z] = function() {
       return this;
     }, n.prototype.getSnapshot = function() {
-      return this.status === Y.NotStarted ? this.initialState : this._state;
+      return this.status === F.NotStarted ? this.initialState : this._state;
     }, n.defaultOptions = {
       execute: !0,
       deferEvents: !0,
@@ -2247,13 +2247,13 @@ function sr(n) {
 }
 function It(n) {
   return d(d({
-    type: Yt
+    type: Ft
   }, n), {
     toJSON: function() {
       n.onDone, n.onError;
       var t = oe(n, ["onDone", "onError"]);
       return d(d({}, t), {
-        type: Yt,
+        type: Ft,
         src: sr(n.src)
       });
     }
@@ -2339,7 +2339,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             id: v,
             src: h.src
           }));
-        } else if (st(h.src) || C(h.src)) {
+        } else if (st(h.src) || N(h.src)) {
           var v = h.id || Pt(s.id, c);
           return s.machine.options.services = d((l = {}, l[v] = h.src, l), s.machine.options.services), It(d(d({
             id: v
@@ -2375,7 +2375,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       return new n(this.config, this.options, t);
     }, Object.defineProperty(n.prototype, "context", {
       get: function() {
-        return C(this._context) ? this._context() : this._context;
+        return N(this._context) ? this._context() : this._context;
       },
       enumerable: !1,
       configurable: !0
@@ -2454,7 +2454,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       if (!e)
         return [];
       var r = function(s, o) {
-        var u = C(s) ? "".concat(t.id, ":delay[").concat(o, "]") : s, a = Je(u, t.id);
+        var u = N(s) ? "".concat(t.id, ":delay[").concat(o, "]") : s, a = Je(u, t.id);
         return t.onEntry.push(ot(a, {
           delay: s
         })), t.onExit.push(Xe(a)), a;
@@ -2559,7 +2559,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
     }, n.prototype._transition = function(t, e, r) {
       return M(t) ? this.transitionLeafNode(t, e, r) : Object.keys(t).length === 1 ? this.transitionCompoundNode(t, e, r) : this.transitionParallelNode(t, e, r);
     }, n.prototype.getTransitionData = function(t, e) {
-      return this._transition(t.value, t, F(e));
+      return this._transition(t.value, t, z(e));
     }, n.prototype.next = function(t, e) {
       var r, i, s = this, o = e.name, u = [], a = [], h;
       try {
@@ -2572,7 +2572,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             he(At(y, this.delimiter), bn(this.path.slice(0, -2))(t.value))
           ) : !0, m = !1;
           try {
-            m = !v || Ye(this.machine, v, p, e, t);
+            m = !v || Fe(this.machine, v, p, e, t);
           } catch (b) {
             throw new Error("Unable to evaluate guard '".concat(v.name || v.type, "' in transition for event '").concat(o, "' in state node '").concat(this.id, `':
 `).concat(b.message));
@@ -2665,34 +2665,34 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       });
       var b = Array.from(y).sort(function(x, I) {
         return x.order - I.order;
-      }), P = new Set(r.exitSet), N = R(b.map(function(x) {
+      }), P = new Set(r.exitSet), _ = R(b.map(function(x) {
         var I = [];
         if (x.type !== "final")
           return I;
-        var z = x.parent;
-        if (!z.parent)
+        var Y = x.parent;
+        if (!Y.parent)
           return I;
         I.push(
           xt(x.id, x.doneData),
           // TODO: deprecate - final states should not emit done events for their own state.
-          xt(z.id, x.doneData ? Ft(x.doneData, i, s) : void 0)
+          xt(Y.id, x.doneData ? zt(x.doneData, i, s) : void 0)
         );
-        var U = z.parent;
-        return U.type === "parallel" && _t(U).every(function(mt) {
+        var U = Y.parent;
+        return U.type === "parallel" && Ct(U).every(function(mt) {
           return Lt(r.configuration, mt);
         }) && I.push(xt(U.id)), I;
       })), D = b.map(function(x) {
-        var I = x.onEntry, z = x.activities.map(function(U) {
+        var I = x.onEntry, Y = x.activities.map(function(U) {
           return $e(U);
         });
         return {
           type: "entry",
-          actions: q(u ? j(j([], A(I), !1), A(z), !1) : j(j([], A(z), !1), A(I), !1), l.machine.options.actions)
+          actions: q(u ? j(j([], A(I), !1), A(Y), !1) : j(j([], A(Y), !1), A(I), !1), l.machine.options.actions)
         };
       }).concat({
         type: "state_done",
-        actions: N.map(function(x) {
-          return Fe(x);
+        actions: _.map(function(x) {
+          return ze(x);
         })
       }), T = Array.from(P).map(function(x) {
         return {
@@ -2721,11 +2721,11 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       return O;
     }, n.prototype.transition = function(t, e, r, i) {
       t === void 0 && (t = this.initialState);
-      var s = F(e), o;
+      var s = z(e), o;
       if (t instanceof J)
         o = r === void 0 ? t : this.resolveState(J.from(t, r));
       else {
-        var u = M(t) ? this.resolve(zt(this.getResolvedPath(t))) : this.resolve(t), a = r ?? this.machine.context;
+        var u = M(t) ? this.resolve(Yt(this.getResolvedPath(t))) : this.resolve(t), a = r ?? this.machine.context;
         o = this.resolveState(J.from(u, a));
       }
       if (!L && s.name === St)
@@ -2751,7 +2751,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         for (var w = E(m), b = w.next(); !b.done; b = w.next()) {
           var P = b.value;
           try {
-            for (var N = (a = void 0, E(P.actions)), D = N.next(); !D.done; D = N.next()) {
+            for (var _ = (a = void 0, E(P.actions)), D = _.next(); !D.done; D = _.next()) {
               var T = D.value;
               T.type === kt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
             }
@@ -2761,7 +2761,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             };
           } finally {
             try {
-              D && !D.done && (h = N.return) && h.call(N);
+              D && !D.done && (h = _.return) && h.call(_);
             } finally {
               if (a)
                 throw a.error;
@@ -2780,9 +2780,9 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             throw o.error;
         }
       }
-      var O = A(Ct(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), k = O[0], x = O[1], I = A(An(k, ne), 2), z = I[0], U = I[1], mt = k.filter(function($) {
+      var O = A(Nt(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), k = O[0], x = O[1], I = A(An(k, ne), 2), Y = I[0], U = I[1], mt = k.filter(function($) {
         var at;
-        return $.type === kt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === Yt;
+        return $.type === kt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === Ft;
       }), Gt = mt.reduce(function($, at) {
         return $[at.activity.id] = Wn(at.activity, c.machine, x, s), $;
       }, e ? d({}, e.children) : {}), nt = new J({
@@ -2814,9 +2814,9 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
       var X = nt;
       if (!y)
         for (ve && (X = this.resolveRaisedTransition(X, {
-          type: _e
-        }, s, i)); z.length; ) {
-          var sn = z.shift();
+          type: Ce
+        }, s, i)); Y.length; ) {
+          var sn = Y.shift();
           X = this.resolveRaisedTransition(X, sn._event, s, i);
         }
       var on = X.changed || (W ? !!X.actions.length || Q || typeof W.value != typeof X.value || !en(X.value, W.value) : void 0);
@@ -2933,7 +2933,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         var t;
         if (this.type === "history") {
           var e = this.config;
-          M(e.target) ? t = ct(e.target) ? zt(this.machine.getStateNodeById(e.target).path.slice(this.path.length - 1)) : e.target : t = e.target;
+          M(e.target) ? t = ct(e.target) ? Yt(this.machine.getStateNodeById(e.target).path.slice(this.path.length - 1)) : e.target : t = e.target;
         }
         return t;
       },
@@ -3093,7 +3093,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             return e.getStateNodeByPath(s);
         });
     }, n.prototype.formatTransition = function(t) {
-      var e = this, r = _n(t.target), i = "internal" in t ? t.internal : r ? r.some(function(a) {
+      var e = this, r = Cn(t.target), i = "internal" in t ? t.internal : r ? r.some(function(a) {
         return M(a) && a[0] === e.delimiter;
       }) : !0, s = this.machine.options.guards, o = this.resolveTarget(r), u = d(d({}, t), {
         actions: q(V(t.actions)),
@@ -3515,13 +3515,13 @@ class pr {
       points: this.points.map((e) => {
         var r, i;
         return {
-          x: e.x / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1),
-          y: e.y / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1)
+          x: Number((e.x / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1)).toFixed(2)),
+          y: Number((e.y / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1)).toFixed(2))
         };
       })
     };
     for (let e of this.element.attributes)
-      (e.name in this.includeAttributes || Ce.test(e.name)) && (t[e.name] = e.value);
+      (e.name in this.includeAttributes || Ne.test(e.name)) && (t[e.name] = e.value);
     return t;
   }
   _logWarnOnOpOnFrozen(t) {
@@ -3667,13 +3667,13 @@ class de {
   export() {
     var e, r, i, s, o;
     const t = {
-      width: this.dim.width / (((e = this.editorOwner) == null ? void 0 : e.scale) || 1),
-      height: this.dim.height / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1),
-      x: this.dim.x / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1),
-      y: this.dim.y / (((s = this.editorOwner) == null ? void 0 : s.scale) || 1)
+      width: Number((this.dim.width / (((e = this.editorOwner) == null ? void 0 : e.scale) || 1)).toFixed(2)),
+      height: Number((this.dim.height / (((r = this.editorOwner) == null ? void 0 : r.scale) || 1)).toFixed(2)),
+      x: Number((this.dim.x / (((i = this.editorOwner) == null ? void 0 : i.scale) || 1)).toFixed(2)),
+      y: Number((this.dim.y / (((s = this.editorOwner) == null ? void 0 : s.scale) || 1)).toFixed(2))
     };
     for (let u of (o = this.element) == null ? void 0 : o.attributes)
-      (u.name in this.includeAttributes || Ce.test(u.name)) && (t[u.name] = u.value);
+      (u.name in this.includeAttributes || Ne.test(u.name)) && (t[u.name] = u.value);
     return t;
   }
   _logWarnOnOpOnFrozen(t) {

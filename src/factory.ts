@@ -242,10 +242,10 @@ export class CornerShapedElement {
 
   public export() {
     const data: FigureOptions = {
-      width: this.dim.width / (this.editorOwner?.scale || 1),
-      height: this.dim.height / (this.editorOwner?.scale || 1),
-      x: this.dim.x / (this.editorOwner?.scale || 1),
-      y: this.dim.y / (this.editorOwner?.scale || 1)
+      width: Number((this.dim.width / (this.editorOwner?.scale || 1)).toFixed(2)),
+      height: Number((this.dim.height / (this.editorOwner?.scale || 1)).toFixed(2)),
+      x: Number((this.dim.x / (this.editorOwner?.scale || 1)).toFixed(2)),
+      y: Number((this.dim.y / (this.editorOwner?.scale || 1)).toFixed(2))
     };
     for (let attribute of this.element?.attributes) {
       if (attribute.name in this.includeAttributes || dataRegex.test(attribute.name)) {

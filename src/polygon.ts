@@ -164,8 +164,8 @@ class Polygon {
     //@ts-ignore
     const data: PolygonOptions = {
       points: this.points.map((point) => ({
-        x: point.x / (this.editorOwner?.scale || 1),
-        y: point.y / (this.editorOwner?.scale || 1)
+        x: Number((point.x / (this.editorOwner?.scale || 1)).toFixed(2)),
+        y: Number((point.y / (this.editorOwner?.scale || 1)).toFixed(2))
       }))
     };
     for (let attribute of this.element.attributes) {
