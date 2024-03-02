@@ -20,6 +20,8 @@ export declare class Editor {
     _cacheElementMapping: Record<string, Component>;
     deleteHandler?: EditorOptions['deleteHandler'];
     idGenerator: EditorOptions['idGenerator'];
+    onMouseOut: EditorOptions['onMouseOut'];
+    onMouseOver: EditorOptions['onMouseOver'];
     scale: number;
     private imageSizes;
     _idCounter: number;

@@ -7,10 +7,17 @@ export interface EditorOptions {
     /** applies to Editor only  */
     selectModeHandler?: () => void;
     /** View mode click handler */
-    clickHandler?: (component: Event, componentId: string, centerCoords: {
+    clickHandler?: (event: DocumentEventMap['mousedown'], componentId: string, centerCoords: {
         x: number;
         y: number;
     }) => void;
+    /** View hover handler */
+    onMouseOver?: (e: DocumentEventMap['mouseover'], componentId: string, centerCoords: {
+        x: number;
+        y: number;
+    }) => void;
+    /** View hover handler */
+    onMouseOut?: (e: DocumentEventMap['mouseout'], componentId: string) => void;
     idGenerator?: () => string;
     deleteHandler?: (componentId: string, component: Component) => void;
     selectHandler?: (componentId: string, component: Component) => void;
