@@ -9,10 +9,18 @@ export interface EditorOptions {
   selectModeHandler?: () => void;
   /** View mode click handler */
   clickHandler?: (
-    component: Event,
+    event: DocumentEventMap['mousedown'],
     componentId: string,
     centerCoords: { x: number; y: number }
   ) => void;
+  /** View hover handler */
+  onMouseOver?: (
+    e: DocumentEventMap['mouseover'],
+    componentId: string,
+    centerCoords: { x: number; y: number }
+  ) => void;
+  /** View hover handler */
+  onMouseOut?: (e: DocumentEventMap['mouseout'], componentId: string) => void;
   idGenerator?: () => string;
   deleteHandler?: (componentId: string, component: Component) => void;
   selectHandler?: (componentId: string, component: Component) => void;

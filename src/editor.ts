@@ -15,8 +15,7 @@ import {
   FigureOptions,
   MouseButtons,
   PolygonOptions,
-  Style,
-  SVGTagNames
+  Style
 } from './types';
 import { SVG_NS, XLINK_NS } from './constants';
 import { deCamelCase } from './utils';
@@ -41,6 +40,8 @@ export class Editor {
   _cacheElementMapping: Record<string, Component>;
   deleteHandler?: EditorOptions['deleteHandler'];
   idGenerator: EditorOptions['idGenerator'];
+  onMouseOut: EditorOptions['onMouseOut'];
+  onMouseOver: EditorOptions['onMouseOver'];
   public scale = 1;
   private imageSizes = {
     width: 0,
@@ -59,7 +60,9 @@ export class Editor {
       this.clickHandler,
       this.selectHandler,
       this.idGenerator,
-      this.deleteHandler
+      this.deleteHandler,
+      this.onMouseOver,
+      this.onMouseOut
     ] = [
       options.width,
       options.height,
@@ -68,7 +71,9 @@ export class Editor {
       options.clickHandler, // applies to View only
       options.selectHandler,
       options.idGenerator,
-      options.deleteHandler
+      options.deleteHandler,
+      options.onMouseOver,
+      options.onMouseOut
     ];
     options.mouseButtons && (this.mouseButtons = options.mouseButtons);
 
@@ -460,6 +465,15 @@ const addViewListeners = (view: Editor) => {
 
     view.clickHandler &&
       view.clickHandler(e, e.target.id, view.selectComponent(e.target.id)?.getCenterCoords());
+  });
+  addEventListeners(view.cgroup, 'mouseover', (e: any) => {
+    e.preventDefault();
+    console.log(1);
+    view.onMouseOver?.(e, e.target.id, view.selectComponent(e.target.id)?.getCenterCoords());
+  });
+  addEventListeners(view.cgroup, 'mouseout', (e: any) => {
+    e.preventDefault();
+    view.onMouseOut?.(e, e.target.id);
   });
 
   return view;
