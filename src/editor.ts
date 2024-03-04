@@ -244,6 +244,21 @@ export class Editor {
     return this;
   }
 
+  public addFiguresEventListener<T extends keyof DocumentEventMap>(
+    eventType: T,
+    handler: (e: DocumentEventMap[T]) => any
+  ) {
+    addEventListeners(this.cgroup, eventType, handler);
+    return this;
+  }
+  public removeFiguresEventListener<T extends keyof DocumentEventMap>(
+    eventType: T,
+    handler: (e: DocumentEventMap[T]) => any
+  ) {
+    removeEventListeners(this.cgroup, eventType, handler);
+    return this;
+  }
+
   public off(eventTypes: string, handler: (e: Event) => {}) {
     removeEventListeners(this.svg, eventTypes, handler);
     return this;
@@ -468,7 +483,6 @@ const addViewListeners = (view: Editor) => {
   });
   addEventListeners(view.cgroup, 'mouseover', (e: any) => {
     e.preventDefault();
-    console.log(1);
     view.onMouseOver?.(e, e.target.id, view.selectComponent(e.target.id)?.getCenterCoords());
   });
   addEventListeners(view.cgroup, 'mouseout', (e: any) => {

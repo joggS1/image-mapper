@@ -35,6 +35,8 @@ export declare class Editor {
     selectComponent(component: Component | string): Component;
     removeComponent(component: string | any): SVGAElement | undefined;
     on(eventTypes: string, handler: (e: Event) => any): this;
+    addFiguresEventListener<T extends keyof DocumentEventMap>(eventType: T, handler: (e: DocumentEventMap[T]) => any): this;
+    removeFiguresEventListener<T extends keyof DocumentEventMap>(eventType: T, handler: (e: DocumentEventMap[T]) => any): this;
     off(eventTypes: string, handler: (e: Event) => {}): this;
     getComponentById(id: string): Component;
     import(data: any, idInterceptor?: (id: string) => string): any;
