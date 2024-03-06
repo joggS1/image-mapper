@@ -3808,7 +3808,7 @@ class De {
       t && t.tagName === "svg" && (this.svg = t);
     if (!this.svg)
       throw new Error("No SVG element provided");
-    this.cgroup = q.createElementNS(rt, "g"), this.hgroup = q.createElementNS(rt, "g"), this.svg.appendChild(this.cgroup), this.svg.appendChild(this.hgroup), this._cacheElementMapping = fe(
+    this.cgroup = q.createElementNS(rt, "g"), this.hgroup = q.createElementNS(rt, "g"), this.svg.replaceChildren(this.cgroup, this.hgroup), this._cacheElementMapping = fe(
       {},
       (i, s, o) => {
         s ? s instanceof B ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof B ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((u) => {
