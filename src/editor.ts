@@ -109,11 +109,9 @@ export class Editor {
     }
 
     if (!this.svg) throw new Error('No SVG element provided');
-
     this.cgroup = doc.createElementNS(SVG_NS, 'g');
     this.hgroup = doc.createElementNS(SVG_NS, 'g');
-    this.svg.appendChild(this.cgroup);
-    this.svg.appendChild(this.hgroup);
+    this.svg.replaceChildren(...[this.cgroup, this.hgroup]);
 
     //@ts-ignore
     this._cacheElementMapping = onChange(
