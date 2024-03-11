@@ -16,6 +16,7 @@ export type FigureOptions = {
   y: number;
   width: number;
   height: number;
+  fill?: string;
 } & Record<string, string | number>;
 
 export type PolygonOptions = {
