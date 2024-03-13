@@ -17,7 +17,7 @@ import {
   PolygonOptions,
   Style
 } from './types';
-import { SVG_NS, XLINK_NS } from './constants';
+import { SVG_NS } from './constants';
 import { deCamelCase } from './utils';
 
 export class Editor {
@@ -96,13 +96,14 @@ export class Editor {
         this.svg.setAttribute('preserveAspectRatio', 'xMinYMin');
 
         const svg = this.svg;
-        window.addEventListener(
-          'load',
-          function load() {
-            doc.body.appendChild(svg);
-          },
-          { once: true }
-        );
+        if (!options.isBuilderMode)
+          window.addEventListener(
+            'load',
+            function load() {
+              doc.body.appendChild(svg);
+            },
+            { once: true }
+          );
       }
     } else if (svgEl && svgEl.tagName === 'svg') {
       this.svg = svgEl;
@@ -143,7 +144,7 @@ export class Editor {
 
   public loadImage(path: string, width: number, height: number) {
     this.image = doc.createElementNS(SVG_NS, 'image');
-    this.image.setAttributeNS(XLINK_NS, 'href', path);
+    this.image.setAttribute('href', path);
     this.imageSizes.width = width;
     this.imageSizes.height = height;
     width && this.image.setAttribute('width', String(width));
@@ -312,6 +313,11 @@ export class Editor {
 
     return data;
   }
+  public exportAsString() {
+    const XML = new XMLSerializer().serializeToString(this.svg);
+    console.log(this.svg.outerHTML);
+    return btoa(XML);
+  }
 
   public createRectangle(dim: FigureOptions, id: string) {
     const { x, y, width, height, ...attributes } = dim;
@@ -371,6 +377,12 @@ export class Editor {
     //@ts-ignore
     this._cacheElementMapping[component.element.id] = null; // tell observer
     delete this._cacheElementMapping[component.element.id];
+  }
+  destroy() {
+    this.svg.remove();
+    for (let key in this) {
+      delete this[key];
+    }
   }
 }
 

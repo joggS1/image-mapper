@@ -1,5 +1,4 @@
 import { doc } from '../globals';
-import { deCamelCase } from '../utils';
 import { FigureOptions, PolygonOptions } from '../types';
 import { getDefaultStyle } from '../style';
 import { CanvasRectangle } from './CanvasRectangle';
@@ -7,83 +6,60 @@ import { CanvasCircle } from './CanvasCircle';
 import { CanvasEllipse } from './CanvasEllipse';
 import { CanvasPolygon } from './CanvasPolygon';
 import { addEventListeners } from '../events';
+import { Editor } from '../editor';
 
 export class CanvasViewer {
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
+  // canvas: HTMLCanvasElement;
+  // ctx: CanvasRenderingContext2D;
+  img: HTMLImageElement;
   scale: number = 1;
   style = getDefaultStyle();
-  alpha = 0.15;
+  background = '';
+  // w: number;
+  // h: number;
+  alpha = 1;
 
-  constructor(canvasEl: HTMLCanvasElement | string, options: any = {}) {
+  constructor(
+    canvasEl: HTMLCanvasElement | string,
+    data: any,
+    background: string,
+    options: any = {}
+  ) {
     const { width, height } = options;
-    if (typeof canvasEl === 'string') {
-      this.canvas = doc.getElementById(canvasEl) as unknown as HTMLCanvasElement;
-      if (!this.canvas) {
-        this.canvas = doc.createElement('canvas');
-        window.addEventListener(
-          'load',
-          () => {
-            doc.body.appendChild(this.canvas);
-          },
-          { once: true }
-        );
-      }
-    } else {
-      this.canvas = canvasEl as unknown as HTMLCanvasElement;
-    }
-    this.canvas.width = width || 600;
-    this.canvas.height = height || 600;
-    this.ctx = this.canvas.getContext('2d')!;
-    this.ctx.globalAlpha = 0.5;
-    this.ctx.fillStyle = this.style.component.fill!;
-    this.ctx.lineWidth = 1;
-    this.ctx.strokeStyle = this.style.component.stroke!;
-    this.canvas.onclick = (e) => {
-      const rect = this.canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-    };
+    console.log(data);
+    this.img = new Image();
+    this.img.width = width || 1200;
+    this.img.height = height || 600;
+    let editor = new Editor('builder', {
+      isBuilderMode: true,
+      width: this.img.width,
+      height: this.img.width
+    });
+    editor.loadImage(background, this.img.width, this.img.height);
+    editor.import(data);
+    const SVG = editor.exportAsString();
+    this.background = 'data:image/svg+xml;base64,' + SVG;
+    this.img.src = 'test.svg';
+
+    window.addEventListener(
+      'load',
+      () => {
+        doc.body.appendChild(this.img);
+      },
+      { once: true }
+    );
   }
   on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any) {
-    addEventListeners(this.canvas, eventTypes, handler);
+    addEventListeners(this.img, eventTypes, handler);
     return this;
   }
   setScale(scale: number) {
     this.scale = scale;
-    this.canvas.style.transform = `scale(${scale})`;
-  }
-  loadImage(imgURL: string, width: number, height: number) {
-    this.canvas.style.background = `url(${imgURL}) no-repeat`;
-    this.canvas.style.backgroundSize = `${width * this.scale}px ${height * this.scale}px`;
-  }
-  public import(data: any, idInterceptor?: (id: string) => string) {
-    const jsData = typeof data === 'string' ? JSON.parse(data) : data;
+    this.img.style.transform = `scale(${scale * 100}%, ${scale * 100}%)`;
 
-    return jsData.components
-      .map((c: any) => {
-        const id = idInterceptor ? idInterceptor(c.id) : c.id;
-        const data: any = {};
-        for (let key in c.data) {
-          data[deCamelCase(key)] = c.data[key];
-        }
-        switch (c.type) {
-          case 'rect':
-            return this.createRectangle(data, id);
-          case 'circle':
-            return this.createCircle(data, id);
-          case 'ellipse':
-            return this.createEllipse(data, id);
-          case 'polygon':
-            return this.createPolygon(data, id);
-          default:
-            console.error('Unknown type', c.type);
-            return null;
-        }
-      })
-      .filter((c: any) => {
-        return !!c;
-      });
+    // this.loadImage(this.background, this.w * 2 * this.scale, this.h * 2 * this.scale)
+
+    this;
   }
 
   public createRectangle(dim: FigureOptions, id: string) {

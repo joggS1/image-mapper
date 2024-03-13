@@ -8,6 +8,7 @@ export class CanvasFactory<T> {
 
   constructor(rootClass: CanvasViewer, data: T, id: string) {
     this.rootClass = rootClass;
+    //@ts-ignore
     this.ctx = rootClass.ctx;
     this.id = id;
     this.data = data;
