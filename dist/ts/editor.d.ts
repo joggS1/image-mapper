@@ -48,6 +48,7 @@ export declare class Editor {
             data: FigureOptions | PolygonOptions;
         }[];
     };
+    exportAsString(): string;
     createRectangle(dim: FigureOptions, id: string): Component;
     createCircle(dim: FigureOptions, id: string): Component;
     createEllipse(dim: FigureOptions, id: string): Component;
@@ -55,6 +56,7 @@ export declare class Editor {
     registerComponent(component: Component, id?: string): Component;
     registerComponentHandle(handle: Handle): Component;
     unregisterComponent(component: string | Component): void;
+    destroy(): void;
 }
 declare const _default: (isView?: boolean) => (svgEl: SVGSVGElement | string, options?: EditorOptions, style?: Style) => Editor;
 export default _default;
