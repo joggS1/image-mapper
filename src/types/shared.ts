@@ -33,13 +33,20 @@ export enum MouseButtons {
 
 export type SVGTagNames = 'circle' | 'ellipse' | 'polygon' | 'rect';
 
-type SchemaComponents<T> = Array<{
-  type: SVGTagNames;
-  id: string | number;
-  data: (FigureOptions & T) | (PolygonOptions & T);
+interface ComponentDataMapping {
+  polygon: PolygonOptions;
+  rect: FigureOptions;
+  circle: FigureOptions;
+  ellipse: FigureOptions;
+}
+
+type SchemaComponents<T extends SVGTagNames> = Array<{
+  type: T;
+  id: string;
+  data: ComponentDataMapping[T];
 }>;
 
-export type Schema<T = void> = Prettify<{
-  id?: string | number;
-  components: SchemaComponents<T>;
+export type Schema = Prettify<{
+  id?: string;
+  components: SchemaComponents<SVGTagNames>;
 }>;
