@@ -33,6 +33,7 @@ import { build, createServer } from 'vite';
     configFile: false,
     server: {
       hmr: true,
+      host: true,
       port: 3000
     }
   });

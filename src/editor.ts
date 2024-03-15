@@ -16,7 +16,8 @@ import {
   MouseButtons,
   PolygonOptions,
   Schema,
-  Style
+  Style,
+  SVGTagNames
 } from './types';
 import { SVG_NS } from './constants';
 import { deCamelCase } from './utils';
@@ -291,7 +292,7 @@ export class Editor {
     return this._cacheElementMapping && this._cacheElementMapping[id];
   }
 
-  public import(data: Schema, idInterceptor?: (id: string) => string) {
+  public import(data: Schema | string, idInterceptor?: (id: string) => string) {
     const jsData = typeof data === 'string' ? JSON.parse(data) : data;
     this._idCounter = jsData.idCounter;
 
@@ -330,7 +331,7 @@ export class Editor {
         .filter(([id, component]) => !(component instanceof Handle))
         .map(([id, component]) => ({
           id,
-          type: component.element.tagName,
+          type: component.element.tagName as SVGTagNames,
           data: component.export()
         }))
     };

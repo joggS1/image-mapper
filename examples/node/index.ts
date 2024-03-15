@@ -30,17 +30,21 @@ console.log('123123123');
 
 const myView = new MobileViewer(
   'Mobile_viewer',
-  'image.png',
   {
     width: 700,
-    height: 350
+    height: 350,
+    clickHandler: (e, id, centerCoords) => {
+      console.log('User clicked on', id);
+    }
   },
+  'image.png',
+
   4
 );
 // myView.loadImage('image.png', 700, 350);
 let scale = 1;
 
-myView.initComponents({
+myView.import({
   idCounter: 4,
   components: [
     {

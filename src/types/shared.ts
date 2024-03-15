@@ -46,7 +46,7 @@ type SchemaComponents<T extends SVGTagNames> = Array<{
   data: ComponentDataMapping[T];
 }>;
 
-export type Schema = Prettify<{
+export type Schema = {
   id?: string;
   components: SchemaComponents<SVGTagNames>;
-}>;
+};

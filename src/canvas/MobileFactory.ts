@@ -1,4 +1,4 @@
-import { Dimensions, FigureOptions, PolygonOptions } from 'src/types';
+import { Dimensions, FigureOptions, PolygonOptions, PolygonPoint } from 'src/types';
 
 const polyOptGuard = (data: any): data is PolygonOptions => 'points' in data;
 
@@ -6,6 +6,7 @@ export class MobileFactory<T extends PolygonOptions | FigureOptions> {
   id: string;
   data: T;
   dim: Dimensions = { x: 0, y: 0, width: 0, height: 0 };
+  center: PolygonPoint = { x: 0, y: 0 };
 
   constructor(data: T, id: string) {
     this.id = id;
@@ -36,5 +37,9 @@ export class MobileFactory<T extends PolygonOptions | FigureOptions> {
         width: data.width,
         height: data.height
       };
+    this.center = {
+      x: this.dim.x + this.dim.width / 2,
+      y: this.dim.y + this.dim.height / 2
+    };
   }
 }
