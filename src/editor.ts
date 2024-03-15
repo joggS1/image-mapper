@@ -15,9 +15,11 @@ import {
   FigureOptions,
   MouseButtons,
   PolygonOptions,
-  Style
+  Schema,
+  Style,
+  SVGTagNames
 } from './types';
-import { SVG_NS, XLINK_NS } from './constants';
+import { SVG_NS } from './constants';
 import { deCamelCase } from './utils';
 
 export class Editor {
@@ -96,13 +98,14 @@ export class Editor {
         this.svg.setAttribute('preserveAspectRatio', 'xMinYMin');
 
         const svg = this.svg;
-        window.addEventListener(
-          'load',
-          function load() {
-            doc.body.appendChild(svg);
-          },
-          { once: true }
-        );
+        if (!options.isBuilderMode)
+          window.addEventListener(
+            'load',
+            function load() {
+              doc.body.appendChild(svg);
+            },
+            { once: true }
+          );
       }
     } else if (svgEl && svgEl.tagName === 'svg') {
       this.svg = svgEl;
@@ -141,16 +144,39 @@ export class Editor {
     this._handleIdCounter = 1;
   }
 
-  public loadImage(path: string, width: number, height: number) {
-    this.image = doc.createElementNS(SVG_NS, 'image');
-    this.image.setAttributeNS(XLINK_NS, 'href', path);
-    this.imageSizes.width = width;
-    this.imageSizes.height = height;
-    width && this.image.setAttribute('width', String(width));
-    height && this.image.setAttribute('height', String(height));
-
-    this.svg?.prepend(this.image);
-    return this;
+  public async loadImage(path: string, width: number, height: number) {
+    const toDataURL = async (url: string) => {
+      return new Promise<string>((res, rej) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          const reader = new FileReader();
+          reader.onloadend = function () {
+            res(reader.result as string);
+          };
+          reader.readAsDataURL(xhr.response);
+        };
+        xhr.onerror = () => {
+          rej(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+      });
+    };
+    try {
+      const data = await toDataURL(path);
+      this.image = doc.createElementNS(SVG_NS, 'image');
+      this.image.setAttribute('href', data);
+      this.imageSizes.width = width;
+      this.imageSizes.height = height;
+      width && this.image.setAttribute('width', String(width));
+      height && this.image.setAttribute('height', String(height));
+      this.svg?.prepend(this.image);
+      return this;
+    } catch (error) {
+      console.error(error);
+      return this;
+    }
   }
 
   public setStyle(style: object) {
@@ -266,7 +292,7 @@ export class Editor {
     return this._cacheElementMapping && this._cacheElementMapping[id];
   }
 
-  public import(data: any, idInterceptor?: (id: string) => string) {
+  public import(data: Schema | string, idInterceptor?: (id: string) => string) {
     const jsData = typeof data === 'string' ? JSON.parse(data) : data;
     this._idCounter = jsData.idCounter;
 
@@ -305,12 +331,16 @@ export class Editor {
         .filter(([id, component]) => !(component instanceof Handle))
         .map(([id, component]) => ({
           id,
-          type: component.element.tagName,
+          type: component.element.tagName as SVGTagNames,
           data: component.export()
         }))
     };
 
     return data;
+  }
+  public exportAsString() {
+    const XML = new XMLSerializer().serializeToString(this.svg);
+    return btoa(XML);
   }
 
   public createRectangle(dim: FigureOptions, id: string) {
@@ -371,6 +401,12 @@ export class Editor {
     //@ts-ignore
     this._cacheElementMapping[component.element.id] = null; // tell observer
     delete this._cacheElementMapping[component.element.id];
+  }
+  destroy() {
+    this.svg.remove();
+    for (let key in this) {
+      delete this[key];
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import { Component, MouseButtons, SVGTagNames } from './shared';
 export interface EditorOptions {
     width?: number;
     height?: number;
+    isBuilderMode?: boolean;
     /** applies to Editor only */
     componentDrawnHandler?: (component: SVGElement, componentId: string) => void;
     /** applies to Editor only  */

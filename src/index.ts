@@ -14,4 +14,6 @@ export default {
 
 export { editor, view, MouseButtons };
 
+export * from './canvas';
+
 export type { PolygonOptions, FigureOptions, Editor, Style, EditorMode, Schema };
