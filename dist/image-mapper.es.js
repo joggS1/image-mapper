@@ -161,7 +161,7 @@ var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var kt = N.Start, Xt = N.Stop, yt = N.Raise, _t = N.Send, ae = N.Cancel, _e = N.NullEvent, $t = N.Assign, vn = N.After, pn = N.DoneState, Vt = N.Log, Te = N.Init, Ft = N.Invoke, yn = N.ErrorExecution, Zt = N.ErrorPlatform, ue = N.ErrorCustom, Bt = N.Update, Pe = N.Choose, Ie = N.Pure;
+var Ft = N.Start, Xt = N.Stop, yt = N.Raise, _t = N.Send, ae = N.Cancel, _e = N.NullEvent, $t = N.Assign, vn = N.After, pn = N.DoneState, Vt = N.Log, Te = N.Init, kt = N.Invoke, yn = N.ErrorExecution, Zt = N.ErrorPlatform, ue = N.ErrorCustom, Bt = N.Update, Pe = N.Choose, Ie = N.Pure;
 const gn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   after: vn,
@@ -173,13 +173,13 @@ const gn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   errorExecution: yn,
   errorPlatform: Zt,
   init: Te,
-  invoke: Ft,
+  invoke: kt,
   log: Vt,
   nullEvent: _e,
   pure: Ie,
   raise: yt,
   send: _t,
-  start: kt,
+  start: Ft,
   stop: Xt,
   update: Bt
 }, Symbol.toStringTag, { value: "Module" }));
@@ -376,14 +376,14 @@ function On(n, t) {
   }
   return [s, o];
 }
-function ke(n, t) {
+function Fe(n, t) {
   return bt(n.states, function(e, r) {
     if (e) {
       var i = (D(t) ? void 0 : t[r]) || (e ? e.current : void 0);
       if (i)
         return {
           current: i,
-          states: ke(e, i)
+          states: Fe(e, i)
         };
     }
   });
@@ -391,7 +391,7 @@ function ke(n, t) {
 function An(n, t) {
   return {
     current: t,
-    states: ke(n, t)
+    states: Fe(n, t)
   };
 }
 function we(n, t, e, r) {
@@ -444,7 +444,7 @@ function C(n) {
 function D(n) {
   return typeof n == "string";
 }
-function Fe(n, t) {
+function ke(n, t) {
   if (n)
     return D(n) ? {
       type: te,
@@ -775,7 +775,7 @@ function Rn(n) {
     get: n
   };
 }
-function kn(n, t) {
+function Fn(n, t) {
   if (!R && (!n || typeof n == "function")) {
     var e = n;
     n = function() {
@@ -793,7 +793,7 @@ function kn(n, t) {
     to: n
   }));
 }
-function Fn(n, t) {
+function kn(n, t) {
   return ce(function(e, r, i) {
     return {
       type: ue,
@@ -861,7 +861,7 @@ function Ct(n, t, e, r, i, s, o) {
       }
       case Pe: {
         var P = p, _ = (S = P.conds.find(function(nt) {
-          var Z = Fe(nt.cond, n.options.guards);
+          var Z = ke(nt.cond, n.options.guards);
           return !Z || Ye(n, Z, a, r, s ? void 0 : t);
         })) === null || S === void 0 ? void 0 : S.actions;
         if (!_)
@@ -876,10 +876,10 @@ function Ct(n, t, e, r, i, s, o) {
         var _ = p.get(a, r.data);
         if (!_)
           return [];
-        var k = A(Ct(n, t, a, r, [{
+        var F = A(Ct(n, t, a, r, [{
           type: y,
           actions: Q(V(_), n.options.actions)
-        }], s, o), 2), x = k[0], I = k[1];
+        }], s, o), 2), x = F[0], I = F[1];
         return a = I, h == null || h.push(a), x;
       }
       case Xt: {
@@ -943,8 +943,8 @@ const Hn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   done: xt,
   doneInvoke: Mt,
   error: vt,
-  escalate: Fn,
-  forwardTo: kn,
+  escalate: kn,
+  forwardTo: Fn,
   getActionFunction: Ht,
   initEvent: it,
   isActionObject: Ln,
@@ -1077,24 +1077,24 @@ function Et(n, t) {
     for (var g = E(l), w = g.next(); !w.done; w = g.next()) {
       var p = w.value;
       if (p.type === "compound" && (!m.get(p) || !m.get(p).length))
-        f.get(p) ? f.get(p).forEach(function(k) {
-          return l.add(k);
-        }) : p.initialStateNodes.forEach(function(k) {
-          return l.add(k);
+        f.get(p) ? f.get(p).forEach(function(F) {
+          return l.add(F);
+        }) : p.initialStateNodes.forEach(function(F) {
+          return l.add(F);
         });
       else if (p.type === "parallel")
         try {
           for (var b = (o = void 0, E(Nt(p))), P = b.next(); !P.done; P = b.next()) {
             var _ = P.value;
-            l.has(_) || (l.add(_), f.get(_) ? f.get(_).forEach(function(k) {
-              return l.add(k);
-            }) : _.initialStateNodes.forEach(function(k) {
-              return l.add(k);
+            l.has(_) || (l.add(_), f.get(_) ? f.get(_).forEach(function(F) {
+              return l.add(F);
+            }) : _.initialStateNodes.forEach(function(F) {
+              return l.add(F);
             }));
           }
-        } catch (k) {
+        } catch (F) {
           o = {
-            error: k
+            error: F
           };
         } finally {
           try {
@@ -1445,24 +1445,24 @@ function er(n, t) {
 var nr = {
   sync: !1,
   autoForward: !1
-}, F;
+}, k;
 (function(n) {
   n[n.NotStarted = 0] = "NotStarted", n[n.Running = 1] = "Running", n[n.Stopped = 2] = "Stopped";
-})(F || (F = {}));
+})(k || (k = {}));
 var rr = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t, e) {
       e === void 0 && (e = n.defaultOptions);
       var r = this;
-      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = F.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
+      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = k.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, f) {
         if (gt(c))
           return r.batch(c), r.state;
         var l = z(Jt(c, f));
-        if (r.status === F.Stopped)
+        if (r.status === k.Stopped)
           return R || H(!1, 'Event "'.concat(l.name, '" was sent to stopped service "').concat(r.machine.id, `". This service has already reached its final state, and will not transition.
 Event: `).concat(JSON.stringify(l.data))), r.state;
-        if (r.status !== F.Running && !r.options.deferEvents)
+        if (r.status !== k.Running && !r.options.deferEvents)
           throw new Error('Event "'.concat(l.name, '" was sent to uninitialized service "').concat(
             r.machine.id,
             `". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.
@@ -1482,7 +1482,7 @@ Event: `
           return;
         }
         if ("machine" in y) {
-          if (r.status !== F.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
+          if (r.status !== k.Stopped || r.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
           r.state.done) {
             var p = d(d({}, c), {
               name: c.name === ue ? "".concat(vt(r.id)) : c.name,
@@ -1528,8 +1528,8 @@ Event: `
           case ae:
             r.cancel(c.sendId);
             break;
-          case kt: {
-            if (r.status !== F.Running)
+          case Ft: {
+            if (r.status !== k.Running)
               return;
             var g = c.activity;
             if (
@@ -1559,10 +1559,10 @@ Event: `
               }) : b;
               if (!O)
                 return;
-              var k = void 0;
-              st(O) && (O = T ? O.withContext(T) : O, k = {
+              var F = void 0;
+              st(O) && (O = T ? O.withContext(T) : O, F = {
                 autoForward: M
-              }), r.spawn(O, P, k);
+              }), r.spawn(O, P, F);
             } else
               r.spawnActivity(g);
             break;
@@ -1599,7 +1599,7 @@ Event: `
        * @deprecated Use `.getSnapshot()` instead.
        */
       get: function() {
-        return R || H(this.status !== F.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
+        return R || H(this.status !== k.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
       },
       enumerable: !1,
       configurable: !0
@@ -1710,14 +1710,14 @@ Event: `
         this._stop(), this._stopChildren(), wt.free(this.sessionId);
       }
     }, n.prototype.onTransition = function(t) {
-      return this.listeners.add(t), this.status === F.Running && t(this.state, this.state.event), this;
+      return this.listeners.add(t), this.status === k.Running && t(this.state, this.state.event), this;
     }, n.prototype.subscribe = function(t, e, r) {
       var i = this, s = Lt(t, e, r);
-      this.listeners.add(s.next), this.status !== F.NotStarted && s.next(this.state);
+      this.listeners.add(s.next), this.status !== k.NotStarted && s.next(this.state);
       var o = function() {
         i.doneListeners.delete(o), i.stopListeners.delete(o), s.complete();
       };
-      return this.status === F.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
+      return this.status === k.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
         unsubscribe: function() {
           i.listeners.delete(s.next), i.doneListeners.delete(o), i.stopListeners.delete(o);
         }
@@ -1731,14 +1731,14 @@ Event: `
     }, n.prototype.onStop = function(t) {
       return this.stopListeners.add(t), this;
     }, n.prototype.onDone = function(t) {
-      return this.status === F.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
+      return this.status === k.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
     }, n.prototype.off = function(t) {
       return this.listeners.delete(t), this.eventListeners.delete(t), this.sendListeners.delete(t), this.stopListeners.delete(t), this.doneListeners.delete(t), this.contextListeners.delete(t), this;
     }, n.prototype.start = function(t) {
       var e = this;
-      if (this.status === F.Running)
+      if (this.status === k.Running)
         return this;
-      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = F.Running;
+      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = k.Running;
       var r = t === void 0 ? this.initialState : ft(this, function() {
         return Kn(t) ? e.machine.resolveState(t) : e.machine.resolveState(G.from(t, e.machine.context));
       });
@@ -1821,7 +1821,7 @@ Event: `
       }
       if (!this.initialized)
         return this;
-      this.initialized = !1, this.status = F.Stopped, this._initialState = void 0;
+      this.initialized = !1, this.status = k.Stopped, this._initialState = void 0;
       try {
         for (var b = E(Object.keys(this.delayedEventsMap)), P = b.next(); !P.done; P = b.next()) {
           var _ = P.value;
@@ -1883,10 +1883,10 @@ Event: `
       }), this;
     }, n.prototype.batch = function(t) {
       var e = this;
-      if (this.status === F.NotStarted && this.options.deferEvents)
+      if (this.status === k.NotStarted && this.options.deferEvents)
         R || H(!1, "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, `" and are deferred. Make sure .start() is called for this service.
 Event: `).concat(JSON.stringify(event)));
-      else if (this.status !== F.Running)
+      else if (this.status !== k.Running)
         throw new Error(
           // tslint:disable-next-line:max-line-length
           "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, '". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.')
@@ -1975,7 +1975,7 @@ Event: `).concat(JSON.stringify(event)));
       var e = this.children.get(t);
       e && (this.removeChild(t), C(e.stop) && e.stop());
     }, n.prototype.spawn = function(t, e, r) {
-      if (this.status !== F.Running)
+      if (this.status !== k.Running)
         return Qe(t, e);
       if (me(t))
         return this.spawnPromise(Promise.resolve(t), e);
@@ -2213,7 +2213,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype[tt] = function() {
       return this;
     }, n.prototype.getSnapshot = function() {
-      return this.status === F.NotStarted ? this.initialState : this._state;
+      return this.status === k.NotStarted ? this.initialState : this._state;
     }, n.defaultOptions = {
       execute: !0,
       deferEvents: !0,
@@ -2247,13 +2247,13 @@ function ir(n) {
 }
 function It(n) {
   return d(d({
-    type: Ft
+    type: kt
   }, n), {
     toJSON: function() {
       n.onDone, n.onError;
       var t = oe(n, ["onDone", "onError"]);
       return d(d({}, t), {
-        type: Ft,
+        type: kt,
         src: ir(n.src)
       });
     }
@@ -2706,7 +2706,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         actions: Q(r.actions, this.machine.options.actions)
       }).concat(M);
       if (e) {
-        var k = Q(L(j([], A(t), !1).sort(function(x, I) {
+        var F = Q(L(j([], A(t), !1).sort(function(x, I) {
           return I.order - x.order;
         }).map(function(x) {
           return x.onExit;
@@ -2715,7 +2715,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         });
         return O.concat({
           type: "stop",
-          actions: k
+          actions: F
         });
       }
       return O;
@@ -2753,7 +2753,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
           try {
             for (var _ = (a = void 0, E(P.actions)), M = _.next(); !M.done; M = _.next()) {
               var T = M.value;
-              T.type === kt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
+              T.type === Ft ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
             }
           } catch ($) {
             a = {
@@ -2780,9 +2780,9 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
             throw o.error;
         }
       }
-      var O = A(Ct(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), k = O[0], x = O[1], I = A(On(k, ne), 2), Y = I[0], U = I[1], mt = k.filter(function($) {
+      var O = A(Ct(this, e, r, s, m, i, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), F = O[0], x = O[1], I = A(On(F, ne), 2), Y = I[0], U = I[1], mt = F.filter(function($) {
         var at;
-        return $.type === kt && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === Ft;
+        return $.type === Ft && ((at = $.activity) === null || at === void 0 ? void 0 : at.type) === kt;
       }), Gt = mt.reduce(function($, at) {
         return $[at.activity.id] = Un(at.activity, c.machine, x, s), $;
       }, e ? d({}, e.children) : {}), nt = new G({
@@ -3097,7 +3097,7 @@ var dt = "", ie = "#", St = "*", ht = {}, ct = function(n) {
         return D(a) && a[0] === e.delimiter;
       }) : !0, s = this.machine.options.guards, o = this.resolveTarget(r), u = d(d({}, t), {
         actions: Q(V(t.actions)),
-        cond: Fe(t.cond, s),
+        cond: ke(t.cond, s),
         target: o,
         source: this,
         internal: i,
@@ -3817,9 +3817,25 @@ class De {
       }
     ), this._idCounter = 1, this._handleIdCounter = 1;
   }
-  loadImage(t, e, r) {
-    var i;
-    return this.image = q.createElementNS(rt, "image"), this.image.setAttribute("href", t), this.imageSizes.width = e, this.imageSizes.height = r, e && this.image.setAttribute("width", String(e)), r && this.image.setAttribute("height", String(r)), (i = this.svg) == null || i.prepend(this.image), this;
+  async loadImage(t, e, r) {
+    var s;
+    const i = async (o) => new Promise((u, a) => {
+      const h = new XMLHttpRequest();
+      h.onload = function() {
+        const c = new FileReader();
+        c.onloadend = function() {
+          u(c.result);
+        }, c.readAsDataURL(h.response);
+      }, h.onerror = () => {
+        a(h.response);
+      }, h.open("GET", o), h.responseType = "blob", h.send();
+    });
+    try {
+      const o = await i(t);
+      return this.image = q.createElementNS(rt, "image"), this.image.setAttribute("href", o), this.imageSizes.width = e, this.imageSizes.height = r, e && this.image.setAttribute("width", String(e)), r && this.image.setAttribute("height", String(r)), (s = this.svg) == null || s.prepend(this.image), this;
+    } catch (o) {
+      return console.error(o), this;
+    }
   }
   setStyle(t) {
     return this.style = Wt(this.style, t), this;
@@ -3922,7 +3938,7 @@ class De {
   }
   exportAsString() {
     const t = new XMLSerializer().serializeToString(this.svg);
-    return console.log(this.svg.outerHTML), btoa(t);
+    return btoa(t);
   }
   createRectangle(t, e) {
     const { x: r, y: i, width: s, height: o, ...u } = t;
