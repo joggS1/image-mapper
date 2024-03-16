@@ -1,4 +1,4 @@
-import { MobileViewer } from './../../src/canvas/MobileViewer';
+import { MobileViewer } from '../../src/mobile/MobileViewer';
 // $ npm run demo
 
 import { editor, view, MouseButtons } from '../../src';
