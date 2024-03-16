@@ -9,5 +9,5 @@ declare const _default: {
 };
 export default _default;
 export { editor, view, MouseButtons };
-export * from './canvas';
+export * from './mobile';
 export type { PolygonOptions, FigureOptions, Editor, Style, EditorMode, Schema };
