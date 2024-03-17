@@ -12,7 +12,6 @@ import { TouchHandler } from './TouchHandler';
 export class MobileViewer {
   img: HTMLImageElement;
   scale = 1;
-  background = '';
   alpha = 1;
   componentsMap = new Map<MobileComponent['id'], MobileComponent>();
   zonesMap = new Map<number, Set<MobileComponent>>();
@@ -27,7 +26,6 @@ export class MobileViewer {
   ) {
     const { width, height } = options;
     this.clickHandler = options.clickHandler;
-    this.background = backgroundURL;
     splitToZonesCount && this.initZones(splitToZonesCount);
     if (typeof imgEl === 'string') {
       this.img = new Image();
@@ -56,12 +54,7 @@ export class MobileViewer {
     return this;
   }
 
-  loadImage(url: string) {
-    this.background = url;
-  }
-
-  async import(data: Schema) {
-    if (!this.background) throw new Error('Background is not set');
+  async import(data: Schema, img: string) {
     let editor = new Editor('builder', {
       isBuilderMode: true,
       width: this.img.width,
@@ -99,12 +92,14 @@ export class MobileViewer {
           break;
       }
     });
-    await editor.loadImage(this.background, this.img.width, this.img.height).then(() => {
-      editor.import(data);
-      const SVG = editor.exportAsString();
-      this.background = 'data:image/svg+xml;base64,' + SVG;
-      this.img.src = this.background;
-    });
+    await editor
+      .loadImage(img, this.img.width, this.img.height)
+      .then(() => {
+        editor.import(data);
+        const SVG = editor.exportAsString();
+        this.img.src = 'data:image/svg+xml;base64,' + SVG;
+      })
+      .catch(console.error);
   }
   selectComponent(id: MobileComponent['id']) {
     return this.componentsMap.get(id);

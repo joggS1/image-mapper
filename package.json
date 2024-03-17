@@ -1,6 +1,6 @@
 {
   "name": "@joggs1/image-mapper",
-  "version": "1.2.4-beta",
+  "version": "1.2.5-beta",
   "description": "Adds SVG drawing capability (rectangles, circles, ellipses and polygons) on top of your image to let you make image maps",
   "type": "module",
   "license": "MIT",
