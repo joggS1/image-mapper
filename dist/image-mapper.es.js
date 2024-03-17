@@ -4169,7 +4169,7 @@ class _i {
       return d + (l - 1) * this.zonesCount - 1;
     };
     const { width: s, height: o } = e;
-    this.clickHandler = e.clickHandler, this.background = i, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
+    this.clickHandler = e.clickHandler, this.wrapperComponent = e.wrapperComponent, this.background = i, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
       "load",
       () => {
         Z.body.appendChild(this.img);
@@ -4178,7 +4178,7 @@ class _i {
     )) : this.img = t, this.initEventListeners();
   }
   on(t, e) {
-    return W(this.img, t, e), this;
+    return W(this.wrapperComponent || this.img, t, e), this;
   }
   setScale(t) {
     return this.scale = t, this.img.style.transform = `scale(${t * 100})`, this;
@@ -4248,20 +4248,21 @@ class _i {
     });
   }
   initEventListeners() {
+    const t = this.wrapperComponent || this.img;
     if (!this.clickHandler)
       return;
-    const t = new Ci();
-    this.img.ontouchstart = (e) => {
-      e.preventDefault(), e.stopPropagation(), t.onTouchStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-    }, this.img.ontouchend = (e) => {
-      if (console.log(t.isDoubleClicked()), t.onTouchEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY), t.isClicked()) {
-        const i = e.changedTouches[0].clientX - this.img.offsetLeft, r = e.changedTouches[0].clientY - this.img.offsetTop, s = this.getZone(i, r), o = this.zonesMap.get(s);
-        o == null || o.forEach((a) => {
-          var h;
-          a.click(i, r) && ((h = this.clickHandler) == null || h.call(this, e, a));
+    const e = new Ci();
+    t.addEventListener("touchstart", (i) => {
+      i.preventDefault(), i.stopPropagation(), e.onTouchStart(i.changedTouches[0].clientX, i.changedTouches[0].clientY);
+    }), t.addEventListener("touchend", (i) => {
+      if (e.onTouchEnd(i.changedTouches[0].clientX, i.changedTouches[0].clientY), e.isClicked()) {
+        const r = i.changedTouches[0].clientX - this.img.offsetLeft, s = i.changedTouches[0].clientY - this.img.offsetTop, o = this.getZone(r, s), a = this.zonesMap.get(o);
+        a == null || a.forEach((h) => {
+          var u;
+          h.click(r, s) && ((u = this.clickHandler) == null || u.call(this, i, h));
         });
       }
-    };
+    });
   }
 }
 const Di = on(!1), Ti = on(!0), Ni = {
