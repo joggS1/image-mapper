@@ -3,10 +3,6 @@ import { MobileComponent, MobileViewerOptions } from './types';
 export declare class MobileViewer {
     img: HTMLImageElement;
     scale: number;
-    /**
-     * wrapper if img events is not propagating
-     */
-    wrapperComponent: MobileViewerOptions['wrapperComponent'];
     background: string;
     alpha: number;
     componentsMap: Map<string, MobileComponent>;

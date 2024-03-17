@@ -3831,7 +3831,7 @@ class oe {
       }, u.open("GET", o), u.responseType = "blob", u.send();
     });
     try {
-      const o = await r(t);
+      const o = t.startsWith("data:image/") ? t : await r(t);
       return this.image = Z.createElementNS(it, "image"), this.image.setAttribute("href", o), this.imageSizes.width = e, this.imageSizes.height = i, e && this.image.setAttribute("width", String(e)), i && this.image.setAttribute("height", String(i)), (s = this.svg) == null || s.prepend(this.image), this;
     } catch (o) {
       return console.error(o), this;
@@ -4169,7 +4169,7 @@ class _i {
       return d + (l - 1) * this.zonesCount - 1;
     };
     const { width: s, height: o } = e;
-    this.clickHandler = e.clickHandler, this.wrapperComponent = e.wrapperComponent, this.background = i, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
+    this.clickHandler = e.clickHandler, this.background = i, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
       "load",
       () => {
         Z.body.appendChild(this.img);
@@ -4178,7 +4178,7 @@ class _i {
     )) : this.img = t, this.initEventListeners();
   }
   on(t, e) {
-    return W(this.wrapperComponent || this.img, t, e), this;
+    return W(this.img, t, e), this;
   }
   setScale(t) {
     return this.scale = t, this.img.style.transform = `scale(${t * 100})`, this;
@@ -4248,7 +4248,7 @@ class _i {
     });
   }
   initEventListeners() {
-    const t = this.wrapperComponent || this.img;
+    const t = this.img;
     if (!this.clickHandler)
       return;
     const e = new Ci();
