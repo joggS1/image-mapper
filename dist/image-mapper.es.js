@@ -4164,12 +4164,12 @@ class Ci {
 }
 class _i {
   constructor(t, e = {}, i = "", r) {
-    this.scale = 1, this.background = "", this.alpha = 1, this.componentsMap = /* @__PURE__ */ new Map(), this.zonesMap = /* @__PURE__ */ new Map(), this.zonesCount = 4, this.getZone = (a, h) => {
+    this.scale = 1, this.alpha = 1, this.componentsMap = /* @__PURE__ */ new Map(), this.zonesMap = /* @__PURE__ */ new Map(), this.zonesCount = 4, this.getZone = (a, h) => {
       const u = this.img.width / this.zonesCount, c = this.img.height / this.zonesCount, d = Math.ceil(a / u), l = Math.ceil(h / c);
       return d + (l - 1) * this.zonesCount - 1;
     };
     const { width: s, height: o } = e;
-    this.clickHandler = e.clickHandler, this.background = i, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
+    this.clickHandler = e.clickHandler, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
       "load",
       () => {
         Z.body.appendChild(this.img);
@@ -4183,41 +4183,36 @@ class _i {
   setScale(t) {
     return this.scale = t, this.img.style.transform = `scale(${t * 100})`, this;
   }
-  loadImage(t) {
-    this.background = t;
-  }
-  async import(t) {
-    if (!this.background)
-      throw new Error("Background is not set");
-    let e = new oe("builder", {
+  async import(t, e) {
+    let i = new oe("builder", {
       isBuilderMode: !0,
       width: this.img.width,
       height: this.img.height
     });
-    t.components.forEach((i) => {
-      switch (i.type === "polygon" && i.data, i.type) {
+    t.components.forEach((r) => {
+      switch (r.type === "polygon" && r.data, r.type) {
         case "rect":
-          const r = this.createRectangle(i.data, i.id);
-          this.componentsMap.set(r.id, r), this.zonesCount && this.setToZones(r), this.componentsMap.set(i.id, r);
+          const s = this.createRectangle(r.data, r.id);
+          this.componentsMap.set(s.id, s), this.zonesCount && this.setToZones(s), this.componentsMap.set(r.id, s);
           break;
         case "circle":
-          const s = this.createCircle(i.data, i.id);
-          this.componentsMap.set(s.id, s), this.zonesCount && this.setToZones(s), this.componentsMap.set(i.id, s);
+          const o = this.createCircle(r.data, r.id);
+          this.componentsMap.set(o.id, o), this.zonesCount && this.setToZones(o), this.componentsMap.set(r.id, o);
           break;
         case "ellipse":
-          const o = this.createEllipse(i.data, i.id);
-          this.componentsMap.set(o.id, o), this.zonesCount && this.setToZones(o), this.componentsMap.set(i.id, o);
+          const a = this.createEllipse(r.data, r.id);
+          this.componentsMap.set(a.id, a), this.zonesCount && this.setToZones(a), this.componentsMap.set(r.id, a);
           break;
         case "polygon":
-          const a = this.createPolygon(i.data, i.id);
-          this.componentsMap.set(a.id, a), this.zonesCount && this.setToZones(a), this.componentsMap.set(i.id, a);
+          const h = this.createPolygon(r.data, r.id);
+          this.componentsMap.set(h.id, h), this.zonesCount && this.setToZones(h), this.componentsMap.set(r.id, h);
           break;
       }
-    }), await e.loadImage(this.background, this.img.width, this.img.height).then(() => {
-      e.import(t);
-      const i = e.exportAsString();
-      this.background = "data:image/svg+xml;base64," + i, this.img.src = this.background;
-    });
+    }), await i.loadImage(e, this.img.width, this.img.height).then(() => {
+      i.import(t);
+      const r = i.exportAsString();
+      this.img.src = "data:image/svg+xml;base64," + r;
+    }).catch(console.error);
   }
   selectComponent(t) {
     return this.componentsMap.get(t);
