@@ -11,11 +11,7 @@ import { TouchHandler } from './TouchHandler';
 
 export class MobileViewer {
   img: HTMLImageElement;
-  scale: number = 1;
-  /**
-   * wrapper if img events is not propagating
-   */
-  wrapperComponent: MobileViewerOptions['wrapperComponent'];
+  scale = 1;
   background = '';
   alpha = 1;
   componentsMap = new Map<MobileComponent['id'], MobileComponent>();
@@ -31,7 +27,6 @@ export class MobileViewer {
   ) {
     const { width, height } = options;
     this.clickHandler = options.clickHandler;
-    this.wrapperComponent = options.wrapperComponent;
     this.background = backgroundURL;
     splitToZonesCount && this.initZones(splitToZonesCount);
     if (typeof imgEl === 'string') {
@@ -52,7 +47,7 @@ export class MobileViewer {
     this.initEventListeners();
   }
   on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any) {
-    addEventListeners(this.wrapperComponent || this.img, eventTypes, handler);
+    addEventListeners(this.img, eventTypes, handler);
     return this;
   }
   setScale(scale: number) {
@@ -159,7 +154,7 @@ export class MobileViewer {
     });
   }
   private initEventListeners() {
-    const element = this.wrapperComponent || this.img;
+    const element = this.img;
     if (!this.clickHandler) return;
     const touchHandler = new TouchHandler();
     element.addEventListener('touchstart', (e) => {
