@@ -154,16 +154,16 @@ export class MobileViewer {
     const element = this.img;
     if (!this.clickHandler) return;
     const touchHandler = new TouchHandler();
-    element.addEventListener('touchstart', (e) => {
+    element.addEventListener('pointerdown', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      touchHandler.onTouchStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      touchHandler.onTouchStart(e.clientX, e.clientY);
     });
-    element.addEventListener('touchend', (e) => {
-      touchHandler.onTouchEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    element.addEventListener('pointerup', (e) => {
+      touchHandler.onTouchEnd(e.clientX, e.clientY);
       if (touchHandler.isClicked()) {
-        const clickX = e.changedTouches[0].clientX - this.img.offsetLeft;
-        const clickY = e.changedTouches[0].clientY - this.img.offsetTop;
+        const clickX = e.clientX - this.img.offsetLeft;
+        const clickY = e.clientY - this.img.offsetTop;
         const zoneId = this.getZone(clickX, clickY);
         const zoneFigures = this.zonesMap.get(zoneId);
         zoneFigures?.forEach((c) => {

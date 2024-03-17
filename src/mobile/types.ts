@@ -9,5 +9,5 @@ export type MobileViewerOptions = Partial<{
   width: number;
   height: number;
   scale: number;
-  clickHandler: (e: TouchEvent, c: MobileComponent) => void;
+  clickHandler: (e: PointerEvent, c: MobileComponent) => void;
 }>;
