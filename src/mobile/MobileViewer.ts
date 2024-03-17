@@ -14,7 +14,7 @@ export class MobileViewer {
   scale: number = 1;
   background = '';
   alpha = 1;
-  componentsMap = new Map();
+  componentsMap = new Map<MobileComponent['id'], MobileComponent>();
   zonesMap = new Map<number, Set<MobileComponent>>();
   clickHandler: MobileViewerOptions['clickHandler'];
   zonesCount = 4;
@@ -53,7 +53,7 @@ export class MobileViewer {
   setScale(scale: number) {
     this.scale = scale;
     this.img.style.transform = `scale(${scale * 100})`;
-    this;
+    return this;
   }
 
   loadImage(url: string) {
@@ -75,21 +75,25 @@ export class MobileViewer {
       switch (c.type) {
         case 'rect':
           const rect = this.createRectangle(c.data, c.id);
+          this.componentsMap.set(rect.id, rect);
           this.zonesCount && this.setToZones(rect);
           this.componentsMap.set(c.id, rect);
           break;
         case 'circle':
           const circle = this.createCircle(c.data, c.id);
+          this.componentsMap.set(circle.id, circle);
           this.zonesCount && this.setToZones(circle);
           this.componentsMap.set(c.id, circle);
           break;
         case 'ellipse':
           const ellipse = this.createEllipse(c.data, c.id);
+          this.componentsMap.set(ellipse.id, ellipse);
           this.zonesCount && this.setToZones(ellipse);
           this.componentsMap.set(c.id, ellipse);
           break;
         case 'polygon':
           const polygon = this.createPolygon(c.data, c.id);
+          this.componentsMap.set(polygon.id, polygon);
           this.zonesCount && this.setToZones(polygon);
           this.componentsMap.set(c.id, polygon);
           break;
@@ -102,7 +106,9 @@ export class MobileViewer {
       this.img.src = this.background;
     });
   }
-
+  selectComponent(id: MobileComponent['id']) {
+    return this.componentsMap.get(id);
+  }
   private createRectangle(data: any, id: string) {
     return new MobileRectangle(data, id);
   }
@@ -165,7 +171,7 @@ export class MobileViewer {
         const zoneFigures = this.zonesMap.get(zoneId);
         zoneFigures?.forEach((c) => {
           if (c.click(clickX, clickY)) {
-            this.clickHandler?.(e, c.id, c.center);
+            this.clickHandler?.(e, c);
           }
         });
       }
