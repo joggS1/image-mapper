@@ -164,7 +164,7 @@ export class Editor {
       });
     };
     try {
-      const data = await toDataURL(path);
+      const data = path.startsWith('data:image/') ? path : await toDataURL(path);
       this.image = doc.createElementNS(SVG_NS, 'image');
       this.image.setAttribute('href', data);
       this.imageSizes.width = width;
