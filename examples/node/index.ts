@@ -31,13 +31,8 @@ const myView = new MobileViewer(
   'Mobile_viewer',
   {
     width: 700,
-    height: 350,
-    clickHandler: (e, c) => {
-      console.log('User clicked on', c);
-    }
+    height: 350
   },
-  'image.png',
-
   4
 );
 // myView.loadImage('image.png', 700, 350);
@@ -84,6 +79,16 @@ myView.import(
   },
   'image.png'
 );
+const touch = myView.TouchHandler;
+myView.on('pointerdown', (e) => {
+  touch.onTouchStart(e.clientX, e.clientY);
+});
+myView.on('pointerup', (e) => {
+  touch.onTouchEnd(e.clientX, e.clientY);
+  if (touch.isClicked()) {
+    console.log(myView.getClickedComponent(e.clientX, e.clientY), '123');
+  }
+});
 setInterval(() => {
   // myView.setScale(scale);
   // scale += 0.01;

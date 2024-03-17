@@ -14,7 +14,14 @@ export declare class MobileViewer {
     setScale(scale: number): this;
     import(data: Schema, img: string): Promise<void>;
     selectComponent(id: MobileComponent['id']): MobileComponent | undefined;
-    getClickedComponent(clientX: number, clientY: number): MobileComponent | undefined;
+    getClickedComponent(clientX: number, clientY: number): {
+        clientY: number;
+        clientX: number;
+        rect: DOMRect;
+        clickY: number;
+        clickX: number;
+        c: MobileComponent;
+    } | undefined;
     private createRectangle;
     private createCircle;
     private createEllipse;

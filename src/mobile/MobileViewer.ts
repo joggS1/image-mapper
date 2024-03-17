@@ -107,14 +107,17 @@ export class MobileViewer {
   }
 
   getClickedComponent(clientX: number, clientY: number) {
-    const clickX = clientX - this.img.offsetLeft;
-    const clickY = clientY - this.img.offsetTop;
+    const rect = this.img.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
+    console.log({ clientY, clientX, rect, clickY, clickX });
+
     const zoneId = this.getZone(clickX, clickY);
     const zoneFigures = this.zonesMap.get(zoneId);
     if (zoneFigures)
       for (const c of zoneFigures) {
         if (c.click(clickX, clickY)) {
-          return c;
+          return { clientY, clientX, rect, clickY, clickX, c };
         }
       }
   }
