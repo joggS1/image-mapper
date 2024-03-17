@@ -4181,7 +4181,7 @@ class _i {
     return W(this.img, t, e), this;
   }
   setScale(t) {
-    this.scale = t, this.img.style.transform = `scale(${t * 100})`;
+    return this.scale = t, this.img.style.transform = `scale(${t * 100})`, this;
   }
   loadImage(t) {
     this.background = t;
@@ -4198,19 +4198,19 @@ class _i {
       switch (i.type === "polygon" && i.data, i.type) {
         case "rect":
           const r = this.createRectangle(i.data, i.id);
-          this.zonesCount && this.setToZones(r), this.componentsMap.set(i.id, r);
+          this.componentsMap.set(r.id, r), this.zonesCount && this.setToZones(r), this.componentsMap.set(i.id, r);
           break;
         case "circle":
           const s = this.createCircle(i.data, i.id);
-          this.zonesCount && this.setToZones(s), this.componentsMap.set(i.id, s);
+          this.componentsMap.set(s.id, s), this.zonesCount && this.setToZones(s), this.componentsMap.set(i.id, s);
           break;
         case "ellipse":
           const o = this.createEllipse(i.data, i.id);
-          this.zonesCount && this.setToZones(o), this.componentsMap.set(i.id, o);
+          this.componentsMap.set(o.id, o), this.zonesCount && this.setToZones(o), this.componentsMap.set(i.id, o);
           break;
         case "polygon":
           const a = this.createPolygon(i.data, i.id);
-          this.zonesCount && this.setToZones(a), this.componentsMap.set(i.id, a);
+          this.componentsMap.set(a.id, a), this.zonesCount && this.setToZones(a), this.componentsMap.set(i.id, a);
           break;
       }
     }), await e.loadImage(this.background, this.img.width, this.img.height).then(() => {
@@ -4218,6 +4218,9 @@ class _i {
       const i = e.exportAsString();
       this.background = "data:image/svg+xml;base64," + i, this.img.src = this.background;
     });
+  }
+  selectComponent(t) {
+    return this.componentsMap.get(t);
   }
   createRectangle(t, e) {
     return new Ei(t, e);
@@ -4255,7 +4258,7 @@ class _i {
         const i = e.changedTouches[0].clientX - this.img.offsetLeft, r = e.changedTouches[0].clientY - this.img.offsetTop, s = this.getZone(i, r), o = this.zonesMap.get(s);
         o == null || o.forEach((a) => {
           var h;
-          a.click(i, r) && ((h = this.clickHandler) == null || h.call(this, e, a.id, a.center));
+          a.click(i, r) && ((h = this.clickHandler) == null || h.call(this, e, a));
         });
       }
     };
