@@ -12,20 +12,17 @@ import { TouchHandler } from './TouchHandler';
 export class MobileViewer {
   img: HTMLImageElement;
   scale = 1;
-  alpha = 1;
+  touchHandler: TouchHandler;
   componentsMap = new Map<MobileComponent['id'], MobileComponent>();
   zonesMap = new Map<number, Set<MobileComponent>>();
-  clickHandler: MobileViewerOptions['clickHandler'];
   zonesCount = 4;
-
   constructor(
     imgEl: HTMLImageElement | string,
     options: MobileViewerOptions = {},
-    backgroundURL: string = '',
     splitToZonesCount?: number
   ) {
     const { width, height } = options;
-    this.clickHandler = options.clickHandler;
+    this.touchHandler = new TouchHandler();
     splitToZonesCount && this.initZones(splitToZonesCount);
     if (typeof imgEl === 'string') {
       this.img = new Image();
@@ -44,7 +41,9 @@ export class MobileViewer {
       this.img.width = width || 1200;
       this.img.height = height || 600;
     }
-    this.initEventListeners();
+  }
+  get TouchHandler() {
+    return this.touchHandler;
   }
   on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any) {
     addEventListeners(this.img, eventTypes, handler);
@@ -106,6 +105,20 @@ export class MobileViewer {
   selectComponent(id: MobileComponent['id']) {
     return this.componentsMap.get(id);
   }
+
+  getClickedComponent(clientX: number, clientY: number) {
+    const clickX = clientX - this.img.offsetLeft;
+    const clickY = clientY - this.img.offsetTop;
+    const zoneId = this.getZone(clickX, clickY);
+    const zoneFigures = this.zonesMap.get(zoneId);
+    if (zoneFigures)
+      for (const c of zoneFigures) {
+        if (c.click(clickX, clickY)) {
+          return c;
+        }
+      }
+  }
+
   private createRectangle(data: any, id: string) {
     return new MobileRectangle(data, id);
   }
@@ -148,30 +161,6 @@ export class MobileViewer {
       const zoneId = this.getZone(p.x, p.y);
       const zone = this.zonesMap.get(zoneId);
       zone?.add(component);
-    });
-  }
-  private initEventListeners() {
-    const element = this.img;
-    if (!this.clickHandler) return;
-    const touchHandler = new TouchHandler();
-    element.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      touchHandler.onTouchStart(e.clientX, e.clientY);
-    });
-    element.addEventListener('pointerup', (e) => {
-      touchHandler.onTouchEnd(e.clientX, e.clientY);
-      if (touchHandler.isClicked()) {
-        const clickX = e.clientX - this.img.offsetLeft;
-        const clickY = e.clientY - this.img.offsetTop;
-        const zoneId = this.getZone(clickX, clickY);
-        const zoneFigures = this.zonesMap.get(zoneId);
-        zoneFigures?.forEach((c) => {
-          if (c.click(clickX, clickY)) {
-            this.clickHandler?.(e, c);
-          }
-        });
-      }
     });
   }
 }

@@ -161,7 +161,7 @@ var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var kt = _.Start, Xt = _.Stop, yt = _.Raise, Nt = _.Send, ue = _.Cancel, Te = _.NullEvent, $t = _.Assign, pn = _.After, yn = _.DoneState, Vt = _.Log, Pe = _.Init, zt = _.Invoke, gn = _.ErrorExecution, te = _.ErrorPlatform, ce = _.ErrorCustom, Bt = _.Update, Ie = _.Choose, Le = _.Pure;
+var zt = _.Start, Xt = _.Stop, yt = _.Raise, Nt = _.Send, ue = _.Cancel, Te = _.NullEvent, $t = _.Assign, pn = _.After, yn = _.DoneState, Vt = _.Log, Pe = _.Init, kt = _.Invoke, gn = _.ErrorExecution, te = _.ErrorPlatform, ce = _.ErrorCustom, Bt = _.Update, Ie = _.Choose, Le = _.Pure;
 const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   after: pn,
@@ -173,13 +173,13 @@ const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   errorExecution: gn,
   errorPlatform: te,
   init: Pe,
-  invoke: zt,
+  invoke: kt,
   log: Vt,
   nullEvent: Te,
   pure: Le,
   raise: yt,
   send: Nt,
-  start: kt,
+  start: zt,
   stop: Xt,
   update: Bt
 }, Symbol.toStringTag, { value: "Module" }));
@@ -316,11 +316,11 @@ function R(n) {
   var t;
   return (t = []).concat.apply(t, L([], M(n), !1));
 }
-function ke(n) {
+function ze(n) {
   return gt(n) ? n : [n];
 }
 function B(n) {
-  return n === void 0 ? [] : ke(n);
+  return n === void 0 ? [] : ze(n);
 }
 function Ht(n, t, e) {
   var i, r;
@@ -376,14 +376,14 @@ function Mn(n, t) {
   }
   return [s, o];
 }
-function ze(n, t) {
+function ke(n, t) {
   return bt(n.states, function(e, i) {
     if (e) {
       var r = (C(t) ? void 0 : t[i]) || (e ? e.current : void 0);
       if (r)
         return {
           current: r,
-          states: ze(e, r)
+          states: ke(e, r)
         };
     }
   });
@@ -391,7 +391,7 @@ function ze(n, t) {
 function An(n, t) {
   return {
     current: t,
-    states: ze(n, t)
+    states: ke(n, t)
   };
 }
 function be(n, t, e, i) {
@@ -494,7 +494,7 @@ function H(n, t) {
   }, t);
 }
 function ht(n, t) {
-  var e = ke(t).map(function(i) {
+  var e = ze(t).map(function(i) {
     return typeof i > "u" || typeof i == "string" || st(i) ? {
       target: i,
       event: n
@@ -769,13 +769,13 @@ function vt(n, t) {
     return e;
   }, i;
 }
-function kn(n) {
+function zn(n) {
   return {
     type: _.Pure,
     get: n
   };
 }
-function zn(n, t) {
+function kn(n, t) {
   if (!j && (!n || typeof n == "function")) {
     var e = n;
     n = function() {
@@ -876,10 +876,10 @@ function Dt(n, t, e, i, r, s, o) {
         var N = p.get(h, i.data);
         if (!N)
           return [];
-        var k = M(Dt(n, t, h, i, [{
+        var z = M(Dt(n, t, h, i, [{
           type: y,
           actions: q(B(N), n.options.actions)
-        }], s, o), 2), x = k[0], I = k[1];
+        }], s, o), 2), x = z[0], I = z[1];
         return h = I, u == null || u.push(h), x;
       }
       case Xt: {
@@ -944,12 +944,12 @@ const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   doneInvoke: At,
   error: vt,
   escalate: Fn,
-  forwardTo: zn,
+  forwardTo: kn,
   getActionFunction: Yt,
   initEvent: rt,
   isActionObject: jn,
   log: Rn,
-  pure: kn,
+  pure: zn,
   raise: Ue,
   resolveActions: Dt,
   resolveLog: $e,
@@ -1077,24 +1077,24 @@ function Et(n, t) {
     for (var g = E(l), w = g.next(); !w.done; w = g.next()) {
       var p = w.value;
       if (p.type === "compound" && (!m.get(p) || !m.get(p).length))
-        d.get(p) ? d.get(p).forEach(function(k) {
-          return l.add(k);
-        }) : p.initialStateNodes.forEach(function(k) {
-          return l.add(k);
+        d.get(p) ? d.get(p).forEach(function(z) {
+          return l.add(z);
+        }) : p.initialStateNodes.forEach(function(z) {
+          return l.add(z);
         });
       else if (p.type === "parallel")
         try {
           for (var b = (o = void 0, E(_t(p))), P = b.next(); !P.done; P = b.next()) {
             var N = P.value;
-            l.has(N) || (l.add(N), d.get(N) ? d.get(N).forEach(function(k) {
-              return l.add(k);
-            }) : N.initialStateNodes.forEach(function(k) {
-              return l.add(k);
+            l.has(N) || (l.add(N), d.get(N) ? d.get(N).forEach(function(z) {
+              return l.add(z);
+            }) : N.initialStateNodes.forEach(function(z) {
+              return l.add(z);
             }));
           }
-        } catch (k) {
+        } catch (z) {
           o = {
-            error: k
+            error: z
           };
         } finally {
           try {
@@ -1445,24 +1445,24 @@ function ni(n, t) {
 var ii = {
   sync: !1,
   autoForward: !1
-}, z;
+}, k;
 (function(n) {
   n[n.NotStarted = 0] = "NotStarted", n[n.Running = 1] = "Running", n[n.Stopped = 2] = "Stopped";
-})(z || (z = {}));
+})(k || (k = {}));
 var ri = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t, e) {
       e === void 0 && (e = n.defaultOptions);
       var i = this;
-      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = z.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, d) {
+      this.machine = t, this.delayedEventsMap = {}, this.listeners = /* @__PURE__ */ new Set(), this.contextListeners = /* @__PURE__ */ new Set(), this.stopListeners = /* @__PURE__ */ new Set(), this.doneListeners = /* @__PURE__ */ new Set(), this.eventListeners = /* @__PURE__ */ new Set(), this.sendListeners = /* @__PURE__ */ new Set(), this.initialized = !1, this.status = k.NotStarted, this.children = /* @__PURE__ */ new Map(), this.forwardTo = /* @__PURE__ */ new Set(), this._outgoingQueue = [], this.init = this.start, this.send = function(c, d) {
         if (gt(c))
           return i.batch(c), i.state;
         var l = H(Gt(c, d));
-        if (i.status === z.Stopped)
+        if (i.status === k.Stopped)
           return j || Y(!1, 'Event "'.concat(l.name, '" was sent to stopped service "').concat(i.machine.id, `". This service has already reached its final state, and will not transition.
 Event: `).concat(JSON.stringify(l.data))), i.state;
-        if (i.status !== z.Running && !i.options.deferEvents)
+        if (i.status !== k.Running && !i.options.deferEvents)
           throw new Error('Event "'.concat(l.name, '" was sent to uninitialized service "').concat(
             i.machine.id,
             `". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.
@@ -1482,7 +1482,7 @@ Event: `
           return;
         }
         if ("machine" in y) {
-          if (i.status !== z.Stopped || i.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
+          if (i.status !== k.Stopped || i.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
           i.state.done) {
             var p = f(f({}, c), {
               name: c.name === ce ? "".concat(vt(i.id)) : c.name,
@@ -1528,8 +1528,8 @@ Event: `
           case ue:
             i.cancel(c.sendId);
             break;
-          case kt: {
-            if (i.status !== z.Running)
+          case zt: {
+            if (i.status !== k.Running)
               return;
             var g = c.activity;
             if (
@@ -1559,10 +1559,10 @@ Event: `
               }) : b;
               if (!O)
                 return;
-              var k = void 0;
-              st(O) && (O = T ? O.withContext(T) : O, k = {
+              var z = void 0;
+              st(O) && (O = T ? O.withContext(T) : O, z = {
                 autoForward: A
-              }), i.spawn(O, P, k);
+              }), i.spawn(O, P, z);
             } else
               i.spawnActivity(g);
             break;
@@ -1599,7 +1599,7 @@ Event: `
        * @deprecated Use `.getSnapshot()` instead.
        */
       get: function() {
-        return j || Y(this.status !== z.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
+        return j || Y(this.status !== k.NotStarted, "Attempted to read state from uninitialized service '".concat(this.id, "'. Make sure the service is started first.")), this._state;
       },
       enumerable: !1,
       configurable: !0
@@ -1710,14 +1710,14 @@ Event: `
         this._stop(), this._stopChildren(), wt.free(this.sessionId);
       }
     }, n.prototype.onTransition = function(t) {
-      return this.listeners.add(t), this.status === z.Running && t(this.state, this.state.event), this;
+      return this.listeners.add(t), this.status === k.Running && t(this.state, this.state.event), this;
     }, n.prototype.subscribe = function(t, e, i) {
       var r = this, s = Rt(t, e, i);
-      this.listeners.add(s.next), this.status !== z.NotStarted && s.next(this.state);
+      this.listeners.add(s.next), this.status !== k.NotStarted && s.next(this.state);
       var o = function() {
         r.doneListeners.delete(o), r.stopListeners.delete(o), s.complete();
       };
-      return this.status === z.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
+      return this.status === k.Stopped ? s.complete() : (this.onDone(o), this.onStop(o)), {
         unsubscribe: function() {
           r.listeners.delete(s.next), r.doneListeners.delete(o), r.stopListeners.delete(o);
         }
@@ -1731,14 +1731,14 @@ Event: `
     }, n.prototype.onStop = function(t) {
       return this.stopListeners.add(t), this;
     }, n.prototype.onDone = function(t) {
-      return this.status === z.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
+      return this.status === k.Stopped && this._doneEvent ? t(this._doneEvent) : this.doneListeners.add(t), this;
     }, n.prototype.off = function(t) {
       return this.listeners.delete(t), this.eventListeners.delete(t), this.sendListeners.delete(t), this.stopListeners.delete(t), this.doneListeners.delete(t), this.contextListeners.delete(t), this;
     }, n.prototype.start = function(t) {
       var e = this;
-      if (this.status === z.Running)
+      if (this.status === k.Running)
         return this;
-      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = z.Running;
+      this.machine._init(), wt.register(this.sessionId, this), this.initialized = !0, this.status = k.Running;
       var i = t === void 0 ? this.initialState : dt(this, function() {
         return Kn(t) ? e.machine.resolveState(t) : e.machine.resolveState(K.from(t, e.machine.context));
       });
@@ -1821,7 +1821,7 @@ Event: `
       }
       if (!this.initialized)
         return this;
-      this.initialized = !1, this.status = z.Stopped, this._initialState = void 0;
+      this.initialized = !1, this.status = k.Stopped, this._initialState = void 0;
       try {
         for (var b = E(Object.keys(this.delayedEventsMap)), P = b.next(); !P.done; P = b.next()) {
           var N = P.value;
@@ -1883,10 +1883,10 @@ Event: `
       }), this;
     }, n.prototype.batch = function(t) {
       var e = this;
-      if (this.status === z.NotStarted && this.options.deferEvents)
+      if (this.status === k.NotStarted && this.options.deferEvents)
         j || Y(!1, "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, `" and are deferred. Make sure .start() is called for this service.
 Event: `).concat(JSON.stringify(event)));
-      else if (this.status !== z.Running)
+      else if (this.status !== k.Running)
         throw new Error(
           // tslint:disable-next-line:max-line-length
           "".concat(t.length, ' event(s) were sent to uninitialized service "').concat(this.machine.id, '". Make sure .start() is called for this service, or set { deferEvents: true } in the service options.')
@@ -1975,7 +1975,7 @@ Event: `).concat(JSON.stringify(event)));
       var e = this.children.get(t);
       e && (this.removeChild(t), D(e.stop) && e.stop());
     }, n.prototype.spawn = function(t, e, i) {
-      if (this.status !== z.Running)
+      if (this.status !== k.Running)
         return Qe(t, e);
       if (Se(t))
         return this.spawnPromise(Promise.resolve(t), e);
@@ -2213,7 +2213,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype[tt] = function() {
       return this;
     }, n.prototype.getSnapshot = function() {
-      return this.status === z.NotStarted ? this.initialState : this._state;
+      return this.status === k.NotStarted ? this.initialState : this._state;
     }, n.defaultOptions = {
       execute: !0,
       deferEvents: !0,
@@ -2247,13 +2247,13 @@ function si(n) {
 }
 function It(n) {
   return f(f({
-    type: zt
+    type: kt
   }, n), {
     toJSON: function() {
       n.onDone, n.onError;
       var t = he(n, ["onDone", "onError"]);
       return f(f({}, t), {
-        type: zt,
+        type: kt,
         src: si(n.src)
       });
     }
@@ -2706,7 +2706,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
         actions: q(i.actions, this.machine.options.actions)
       }).concat(A);
       if (e) {
-        var k = q(R(L([], M(t), !1).sort(function(x, I) {
+        var z = q(R(L([], M(t), !1).sort(function(x, I) {
           return I.order - x.order;
         }).map(function(x) {
           return x.onExit;
@@ -2715,7 +2715,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
         });
         return O.concat({
           type: "stop",
-          actions: k
+          actions: z
         });
       }
       return O;
@@ -2753,7 +2753,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
           try {
             for (var N = (h = void 0, E(P.actions)), A = N.next(); !A.done; A = N.next()) {
               var T = A.value;
-              T.type === kt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
+              T.type === zt ? g[T.activity.id || T.activity.type] = T : T.type === Xt && (g[T.activity.id || T.activity.type] = !1);
             }
           } catch (V) {
             h = {
@@ -2780,9 +2780,9 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
             throw o.error;
         }
       }
-      var O = M(Dt(this, e, i, s, m, r, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), k = O[0], x = O[1], I = M(Mn(k, ie), 2), F = I[0], U = I[1], mt = k.filter(function(V) {
+      var O = M(Dt(this, e, i, s, m, r, this.machine.config.predictableActionArguments || this.machine.config.preserveActionOrder), 2), z = O[0], x = O[1], I = M(Mn(z, ie), 2), F = I[0], U = I[1], mt = z.filter(function(V) {
         var at;
-        return V.type === kt && ((at = V.activity) === null || at === void 0 ? void 0 : at.type) === zt;
+        return V.type === zt && ((at = V.activity) === null || at === void 0 ? void 0 : at.type) === kt;
       }), Zt = mt.reduce(function(V, at) {
         return V[at.activity.id] = Wn(at.activity, c.machine, x, s), V;
       }, e ? f({}, e.children) : {}), nt = new K({
@@ -4163,19 +4163,22 @@ class Ci {
   }
 }
 class Ni {
-  constructor(t, e = {}, i = "", r) {
-    this.scale = 1, this.alpha = 1, this.componentsMap = /* @__PURE__ */ new Map(), this.zonesMap = /* @__PURE__ */ new Map(), this.zonesCount = 4, this.getZone = (a, h) => {
-      const u = this.img.width / this.zonesCount, c = this.img.height / this.zonesCount, d = Math.ceil(a / u), l = Math.ceil(h / c);
-      return d + (l - 1) * this.zonesCount - 1;
+  constructor(t, e = {}, i) {
+    this.scale = 1, this.componentsMap = /* @__PURE__ */ new Map(), this.zonesMap = /* @__PURE__ */ new Map(), this.zonesCount = 4, this.getZone = (o, a) => {
+      const h = this.img.width / this.zonesCount, u = this.img.height / this.zonesCount, c = Math.ceil(o / h), d = Math.ceil(a / u);
+      return c + (d - 1) * this.zonesCount - 1;
     };
-    const { width: s, height: o } = e;
-    this.clickHandler = e.clickHandler, r && this.initZones(r), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = s || 1200, this.img.height = o || 600, window.addEventListener(
+    const { width: r, height: s } = e;
+    this.touchHandler = new Ci(), i && this.initZones(i), typeof t == "string" ? (this.img = new Image(), this.img.id = t, this.img.width = r || 1200, this.img.height = s || 600, window.addEventListener(
       "load",
       () => {
         Z.body.appendChild(this.img);
       },
       { once: !0 }
-    )) : (this.img = t, this.img.width = s || 1200, this.img.height = o || 600), this.initEventListeners();
+    )) : (this.img = t, this.img.width = r || 1200, this.img.height = s || 600);
+  }
+  get TouchHandler() {
+    return this.touchHandler;
   }
   on(t, e) {
     return W(this.img, t, e), this;
@@ -4217,6 +4220,14 @@ class Ni {
   selectComponent(t) {
     return this.componentsMap.get(t);
   }
+  getClickedComponent(t, e) {
+    const i = t - this.img.offsetLeft, r = e - this.img.offsetTop, s = this.getZone(i, r), o = this.zonesMap.get(s);
+    if (o) {
+      for (const a of o)
+        if (a.click(i, r))
+          return a;
+    }
+  }
   createRectangle(t, e) {
     return new Ei(t, e);
   }
@@ -4240,23 +4251,6 @@ class Ni {
     e = { x: o, y: a }, i = { x: o + h, y: a }, r = { x: o + h, y: a + u }, s = { x: o, y: a + u }, [e, i, r, s].forEach((c) => {
       const d = this.getZone(c.x, c.y), l = this.zonesMap.get(d);
       l == null || l.add(t);
-    });
-  }
-  initEventListeners() {
-    const t = this.img;
-    if (!this.clickHandler)
-      return;
-    const e = new Ci();
-    t.addEventListener("pointerdown", (i) => {
-      i.preventDefault(), i.stopPropagation(), e.onTouchStart(i.clientX, i.clientY);
-    }), t.addEventListener("pointerup", (i) => {
-      if (e.onTouchEnd(i.clientX, i.clientY), e.isClicked()) {
-        const r = i.clientX - this.img.offsetLeft, s = i.clientY - this.img.offsetTop, o = this.getZone(r, s), a = this.zonesMap.get(o);
-        a == null || a.forEach((h) => {
-          var u;
-          h.click(r, s) && ((u = this.clickHandler) == null || u.call(this, i, h));
-        });
-      }
     });
   }
 }
