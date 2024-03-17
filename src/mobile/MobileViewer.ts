@@ -41,6 +41,8 @@ export class MobileViewer {
       );
     } else {
       this.img = imgEl;
+      this.img.width = width || 1200;
+      this.img.height = height || 600;
     }
     this.initEventListeners();
   }

@@ -4175,7 +4175,7 @@ class _i {
         Z.body.appendChild(this.img);
       },
       { once: !0 }
-    )) : this.img = t, this.initEventListeners();
+    )) : (this.img = t, this.img.width = s || 1200, this.img.height = o || 600), this.initEventListeners();
   }
   on(t, e) {
     return W(this.img, t, e), this;
