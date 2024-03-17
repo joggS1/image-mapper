@@ -12,6 +12,10 @@ import { TouchHandler } from './TouchHandler';
 export class MobileViewer {
   img: HTMLImageElement;
   scale: number = 1;
+  /**
+   * wrapper if img events is not propagating
+   */
+  wrapperComponent: MobileViewerOptions['wrapperComponent'];
   background = '';
   alpha = 1;
   componentsMap = new Map<MobileComponent['id'], MobileComponent>();
@@ -27,6 +31,7 @@ export class MobileViewer {
   ) {
     const { width, height } = options;
     this.clickHandler = options.clickHandler;
+    this.wrapperComponent = options.wrapperComponent;
     this.background = backgroundURL;
     splitToZonesCount && this.initZones(splitToZonesCount);
     if (typeof imgEl === 'string') {
@@ -47,7 +52,7 @@ export class MobileViewer {
     this.initEventListeners();
   }
   on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any) {
-    addEventListeners(this.img, eventTypes, handler);
+    addEventListeners(this.wrapperComponent || this.img, eventTypes, handler);
     return this;
   }
   setScale(scale: number) {
@@ -154,15 +159,15 @@ export class MobileViewer {
     });
   }
   private initEventListeners() {
+    const element = this.wrapperComponent || this.img;
     if (!this.clickHandler) return;
     const touchHandler = new TouchHandler();
-    this.img.ontouchstart = (e) => {
+    element.addEventListener('touchstart', (e) => {
       e.preventDefault();
       e.stopPropagation();
       touchHandler.onTouchStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-    };
-    this.img.ontouchend = (e) => {
-      console.log(touchHandler.isDoubleClicked());
+    });
+    element.addEventListener('touchend', (e) => {
       touchHandler.onTouchEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
       if (touchHandler.isClicked()) {
         const clickX = e.changedTouches[0].clientX - this.img.offsetLeft;
@@ -175,6 +180,6 @@ export class MobileViewer {
           }
         });
       }
-    };
+    });
   }
 }
