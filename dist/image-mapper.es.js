@@ -4183,9 +4183,6 @@ class Ni {
   on(t, e) {
     return W(this.img, t, e), this;
   }
-  setScale(t) {
-    return this.scale = t, this.img.style.transform = `scale(${t * 100})`, this;
-  }
   async import(t, e) {
     let i = new oe("builder", {
       isBuilderMode: !0,
@@ -4220,14 +4217,18 @@ class Ni {
   selectComponent(t) {
     return this.componentsMap.get(t);
   }
+  setScale(t) {
+    this.scale = +t.toFixed(2);
+  }
   getClickedComponent(t, e) {
-    const i = this.img.getBoundingClientRect(), r = t - i.left, s = e - i.top;
+    t = t / this.scale, e = e / this.scale;
+    const i = this.img.getBoundingClientRect(), r = t - i.left / this.scale, s = e - i.top / this.scale;
     console.log({ clientY: e, clientX: t, rect: i, clickY: s, clickX: r });
     const o = this.getZone(r, s), h = this.zonesMap.get(o);
     if (h) {
       for (const a of h)
         if (a.click(r, s))
-          return { clientY: e, clientX: t, rect: i, clickY: s, clickX: r, c: a };
+          return a;
     }
   }
   createRectangle(t, e) {

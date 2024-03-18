@@ -11,17 +11,10 @@ export declare class MobileViewer {
     constructor(imgEl: HTMLImageElement | string, options?: MobileViewerOptions, splitToZonesCount?: number);
     get TouchHandler(): TouchHandler;
     on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any): this;
-    setScale(scale: number): this;
     import(data: Schema, img: string): Promise<void>;
     selectComponent(id: MobileComponent['id']): MobileComponent | undefined;
-    getClickedComponent(clientX: number, clientY: number): {
-        clientY: number;
-        clientX: number;
-        rect: DOMRect;
-        clickY: number;
-        clickX: number;
-        c: MobileComponent;
-    } | undefined;
+    setScale(scale: number): void;
+    getClickedComponent(clientX: number, clientY: number): MobileComponent | undefined;
     private createRectangle;
     private createCircle;
     private createEllipse;
