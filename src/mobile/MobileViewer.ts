@@ -8,6 +8,7 @@ import { addEventListeners } from '../events';
 import { Editor } from '../editor';
 import { MobileComponent, MobileViewerOptions } from './types';
 import { TouchHandler } from './TouchHandler';
+import { deCamelCase } from '../utils';
 
 export class MobileViewer {
   img: HTMLImageElement;
@@ -70,28 +71,32 @@ export class MobileViewer {
       if (c.type === 'polygon') {
         c.data;
       }
+      const componentsData: any = {};
+      for (let key in c.data) {
+        componentsData[deCamelCase(key)] = c.data[key];
+      }
 
       switch (c.type) {
         case 'rect':
-          const rect = this.createRectangle(c.data, c.id);
+          const rect = this.createRectangle(componentsData, c.id);
           this.componentsMap.set(rect.id, rect);
           this.zonesCount && this.setToZones(rect);
           this.componentsMap.set(c.id, rect);
           break;
         case 'circle':
-          const circle = this.createCircle(c.data, c.id);
+          const circle = this.createCircle(componentsData, c.id);
           this.componentsMap.set(circle.id, circle);
           this.zonesCount && this.setToZones(circle);
           this.componentsMap.set(c.id, circle);
           break;
         case 'ellipse':
-          const ellipse = this.createEllipse(c.data, c.id);
+          const ellipse = this.createEllipse(componentsData, c.id);
           this.componentsMap.set(ellipse.id, ellipse);
           this.zonesCount && this.setToZones(ellipse);
           this.componentsMap.set(c.id, ellipse);
           break;
         case 'polygon':
-          const polygon = this.createPolygon(c.data, c.id);
+          const polygon = this.createPolygon(componentsData, c.id);
           this.componentsMap.set(polygon.id, polygon);
           this.zonesCount && this.setToZones(polygon);
           this.componentsMap.set(c.id, polygon);

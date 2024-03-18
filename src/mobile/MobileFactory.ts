@@ -1,4 +1,5 @@
 import { Dimensions, FigureOptions, PolygonOptions, PolygonPoint } from 'src/types';
+import { deCamelCase } from '../utils';
 
 const polyOptGuard = (data: any): data is PolygonOptions => 'points' in data;
 
@@ -11,6 +12,7 @@ export class MobileFactory<T extends PolygonOptions | FigureOptions> {
   constructor(data: T, id: string) {
     this.id = id;
     this.data = data;
+
     if (polyOptGuard(data)) {
       const borderPoints = {
         t: data.points[0],
