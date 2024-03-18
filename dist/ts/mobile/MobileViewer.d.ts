@@ -6,7 +6,10 @@ export declare class MobileViewer {
     scale: number;
     touchHandler: TouchHandler;
     componentsMap: Map<string, MobileComponent>;
+    width: number;
+    height: number;
     zonesMap: Map<number, Set<MobileComponent>>;
+    clickHandler: MobileViewerOptions['clickHandler'];
     zonesCount: number;
     constructor(imgEl: HTMLImageElement | string, options?: MobileViewerOptions, splitToZonesCount?: number);
     get TouchHandler(): TouchHandler;
@@ -22,4 +25,5 @@ export declare class MobileViewer {
     private initZones;
     private getZone;
     private setToZones;
+    private initEvents;
 }
