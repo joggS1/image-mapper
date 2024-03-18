@@ -110,12 +110,13 @@ export class MobileViewer {
     const rect = this.img.getBoundingClientRect();
     const clickX = clientX - rect.left / this.scale;
     const clickY = clientY - rect.top / this.scale;
-    console.log({ clientY, clientX, rect, clickY, clickX });
 
     const zoneId = this.getZone(clickX, clickY);
     const zoneFigures = this.zonesMap.get(zoneId);
+    console.log({ clientY, clientX, rect, clickY, clickX, zoneId, zoneFigures });
     if (zoneFigures)
       for (const c of zoneFigures) {
+        console.log({ c });
         if (c.click(clickX, clickY)) {
           return c;
         }
