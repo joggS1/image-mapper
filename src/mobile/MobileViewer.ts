@@ -146,8 +146,8 @@ export class MobileViewer {
   }
 
   private getZone = (x: number, y: number) => {
-    const cutX = this.img.width / this.zonesCount;
-    const cutY = this.img.height / this.zonesCount;
+    const cutX = this.img.width / this.scale / this.zonesCount;
+    const cutY = this.img.height / this.scale / this.zonesCount;
     const x_zone = Math.ceil(x / cutX);
     const y_zone = Math.ceil(y / cutY);
     return x_zone + (y_zone - 1) * this.zonesCount - 1;
