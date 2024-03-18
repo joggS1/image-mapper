@@ -14,16 +14,21 @@ export class MobileViewer {
   scale = 1;
   touchHandler: TouchHandler;
   componentsMap = new Map<MobileComponent['id'], MobileComponent>();
+  width: number;
+  height: number;
   zonesMap = new Map<number, Set<MobileComponent>>();
+  clickHandler: MobileViewerOptions['clickHandler'];
   zonesCount = 4;
+
   constructor(
     imgEl: HTMLImageElement | string,
     options: MobileViewerOptions = {},
-    splitToZonesCount?: number
+    splitToZonesCount: number = 4
   ) {
     const { width, height } = options;
     this.touchHandler = new TouchHandler();
-    splitToZonesCount && this.initZones(splitToZonesCount);
+    this.clickHandler = options.clickHandler;
+    this.initZones(splitToZonesCount);
     if (typeof imgEl === 'string') {
       this.img = new Image();
       this.img.id = imgEl;
@@ -41,14 +46,19 @@ export class MobileViewer {
       this.img.width = width || 1200;
       this.img.height = height || 600;
     }
+    this.width = width || 1200;
+    this.height = height || 600;
   }
+
   get TouchHandler() {
     return this.touchHandler;
   }
+
   on<T extends keyof DocumentEventMap>(eventTypes: T, handler: (e: DocumentEventMap[T]) => any) {
     addEventListeners(this.img, eventTypes, handler);
     return this;
   }
+
   async import(data: Schema, img: string) {
     let editor = new Editor('builder', {
       isBuilderMode: true,
@@ -96,6 +106,7 @@ export class MobileViewer {
       })
       .catch(console.error);
   }
+
   selectComponent(id: MobileComponent['id']) {
     return this.componentsMap.get(id);
   }
@@ -138,20 +149,22 @@ export class MobileViewer {
   private createPolygon(data: any, id: string) {
     return new MobilePolygon(data, id);
   }
+
   private initZones(count: number) {
-    this.zonesCount = Math.ceil(Math.sqrt(count));
+    this.zonesCount = Math.ceil(Math.sqrt(Math.max(count, 1)));
     for (let i = 0; i < Math.pow(this.zonesCount, 2); i++) {
       this.zonesMap.set(i, new Set());
     }
   }
 
   private getZone = (x: number, y: number) => {
-    const cutX = this.img.width / this.scale / this.zonesCount;
-    const cutY = this.img.height / this.scale / this.zonesCount;
+    const cutX = this.width / this.zonesCount;
+    const cutY = this.height / this.zonesCount;
     const x_zone = Math.ceil(x / cutX);
     const y_zone = Math.ceil(y / cutY);
     return x_zone + (y_zone - 1) * this.zonesCount - 1;
   };
+
   private setToZones(component: MobileComponent) {
     let tl, tr, br, bl;
 
@@ -165,6 +178,20 @@ export class MobileViewer {
       const zoneId = this.getZone(p.x, p.y);
       const zone = this.zonesMap.get(zoneId);
       zone?.add(component);
+    });
+  }
+
+  private initEvents() {
+    if (!this.clickHandler) return;
+    addEventListeners(this.img, 'pointerdown', (e) => {
+      this.touchHandler.onTouchStart(e.clientX, e.clientY);
+    });
+    addEventListeners(this.img, 'pointerup', (e) => {
+      this.touchHandler.onTouchEnd(e.clientX, e.clientY);
+      if (this.touchHandler.isClicked()) {
+        const component = this.getClickedComponent(e.clientX, e.clientY);
+        if (component) this.clickHandler?.(e, component);
+      }
     });
   }
 }
