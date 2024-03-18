@@ -4165,7 +4165,7 @@ class Ci {
 class Ni {
   constructor(t, e = {}, i) {
     this.scale = 1, this.componentsMap = /* @__PURE__ */ new Map(), this.zonesMap = /* @__PURE__ */ new Map(), this.zonesCount = 4, this.getZone = (o, h) => {
-      const a = this.img.width / this.zonesCount, u = this.img.height / this.zonesCount, c = Math.ceil(o / a), d = Math.ceil(h / u);
+      const a = this.img.width / this.scale / this.zonesCount, u = this.img.height / this.scale / this.zonesCount, c = Math.ceil(o / a), d = Math.ceil(h / u);
       return c + (d - 1) * this.zonesCount - 1;
     };
     const { width: r, height: s } = e;
