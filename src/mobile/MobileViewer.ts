@@ -49,12 +49,6 @@ export class MobileViewer {
     addEventListeners(this.img, eventTypes, handler);
     return this;
   }
-  setScale(scale: number) {
-    this.scale = scale;
-    this.img.style.transform = `scale(${scale * 100})`;
-    return this;
-  }
-
   async import(data: Schema, img: string) {
     let editor = new Editor('builder', {
       isBuilderMode: true,
@@ -106,10 +100,16 @@ export class MobileViewer {
     return this.componentsMap.get(id);
   }
 
+  setScale(scale: number) {
+    this.scale = +scale.toFixed(2);
+  }
+
   getClickedComponent(clientX: number, clientY: number) {
+    clientX = clientX / this.scale;
+    clientY = clientY / this.scale;
     const rect = this.img.getBoundingClientRect();
-    const clickX = clientX - rect.left;
-    const clickY = clientY - rect.top;
+    const clickX = clientX - rect.left / this.scale;
+    const clickY = clientY - rect.top / this.scale;
     console.log({ clientY, clientX, rect, clickY, clickX });
 
     const zoneId = this.getZone(clickX, clickY);
@@ -117,7 +117,7 @@ export class MobileViewer {
     if (zoneFigures)
       for (const c of zoneFigures) {
         if (c.click(clickX, clickY)) {
-          return { clientY, clientX, rect, clickY, clickX, c };
+          return c;
         }
       }
   }

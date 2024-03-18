@@ -89,14 +89,8 @@ myView.on('pointerup', (e) => {
     console.log(myView.getClickedComponent(e.clientX, e.clientY), '123');
   }
 });
-setInterval(() => {
-  // myView.setScale(scale);
-  // scale += 0.01;
-}, 1000);
 
-// myView.import(
-
-// );
+myView.setScale(1.2);
 
 export function onSelect(mode: string) {
   myEditor.setEditorMode(mode as any);
