@@ -6,7 +6,7 @@ const _e = window || void 0, Z = _e.window.document, it = "http://www.w3.org/200
       });
     });
   });
-}, ge = function(n, t, e) {
+}, me = function(n, t, e) {
   [n].flat().forEach((i) => {
     t.split(" ").forEach((r) => {
       i.removeEventListener(r, e);
@@ -49,7 +49,7 @@ const _e = window || void 0, Z = _e.window.document, it = "http://www.w3.org/200
   componentSelect: Object.assign({}, ln),
   handle: Object.assign({}, dn),
   handleHover: Object.assign({}, fn)
-}), J = (n, t) => Object.entries(t).forEach(([e, i]) => n.setAttribute(e, String(i))), ae = (n, t, e) => {
+}), J = (n, t) => Object.entries(t).forEach(([e, i]) => n.setAttribute(e, String(i))), he = (n, t, e) => {
   U(n, "mouseenter touchstart", () => J(n, e)), U(
     n,
     "mouseleave touchend touchleave",
@@ -79,7 +79,7 @@ class G {
     return t = t !== void 0 ? !!t : !0, this.element.setAttribute("visibility", t ? "visible" : "hidden"), this;
   }
   setStyle(t, e) {
-    return J(this.element, t), ae(this.element, t, e), this;
+    return J(this.element, t), he(this.element, t, e), this;
   }
 }
 /*! *****************************************************************************
@@ -106,7 +106,7 @@ var f = function() {
     return t;
   }, f.apply(this, arguments);
 };
-function he(n, t) {
+function ue(n, t) {
   var e = {};
   for (var i in n)
     Object.prototype.hasOwnProperty.call(n, i) && t.indexOf(i) < 0 && (e[i] = n[i]);
@@ -161,15 +161,15 @@ var et;
 (function(n) {
   n.Parent = "#_parent", n.Internal = "#_internal";
 })(et || (et = {}));
-var kt = _.Start, Xt = _.Stop, yt = _.Raise, Tt = _.Send, ue = _.Cancel, Ne = _.NullEvent, $t = _.Assign, pn = _.After, yn = _.DoneState, Vt = _.Log, Pe = _.Init, zt = _.Invoke, gn = _.ErrorExecution, te = _.ErrorPlatform, ce = _.ErrorCustom, Bt = _.Update, Ie = _.Choose, Le = _.Pure;
+var kt = _.Start, Xt = _.Stop, yt = _.Raise, Tt = _.Send, ce = _.Cancel, Ne = _.NullEvent, $t = _.Assign, pn = _.After, yn = _.DoneState, Vt = _.Log, Pe = _.Init, zt = _.Invoke, gn = _.ErrorExecution, te = _.ErrorPlatform, le = _.ErrorCustom, Bt = _.Update, Ie = _.Choose, Le = _.Pure;
 const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   after: pn,
   assign: $t,
-  cancel: ue,
+  cancel: ce,
   choose: Ie,
   doneState: yn,
-  error: ce,
+  error: le,
   errorExecution: gn,
   errorPlatform: te,
   init: Pe,
@@ -183,12 +183,12 @@ const mn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   stop: Xt,
   update: Bt
 }, Symbol.toStringTag, { value: "Module" }));
-var Re = ".", me = {}, ee = "xstate.guard", wn = "", j = process.env.NODE_ENV === "production", Nt;
-function le(n, t, e) {
+var Re = ".", we = {}, ee = "xstate.guard", wn = "", j = process.env.NODE_ENV === "production", Nt;
+function de(n, t, e) {
   e === void 0 && (e = Re);
   var i = Mt(n, e), r = Mt(t, e);
   return C(r) ? C(i) ? r === i : !1 : C(i) ? i in r : Object.keys(i).every(function(s) {
-    return s in r ? le(i[s], r[s]) : !1;
+    return s in r ? de(i[s], r[s]) : !1;
   });
 }
 function je(n) {
@@ -232,7 +232,7 @@ function bt(n, t) {
   }
   return e;
 }
-function we(n, t, e) {
+function Se(n, t, e) {
   var i, r, s = {};
   try {
     for (var o = E(Object.keys(n)), h = o.next(); !h.done; h = o.next()) {
@@ -349,7 +349,7 @@ function Ht(n, t, e) {
 function En(n) {
   return /^(done|error)\./.test(n);
 }
-function Se(n) {
+function be(n) {
   return !!(n instanceof Promise || n !== null && (D(n) || typeof n == "object") && D(n.then));
 }
 function On(n) {
@@ -394,7 +394,7 @@ function An(n, t) {
     states: ze(n, t)
   };
 }
-function be(n, t, e, i) {
+function xe(n, t, e, i) {
   j || Y(!!n, "Attempting to update undefined context");
   var r = n && e.reduce(function(s, o) {
     var h, a, u = o.assignment, c = {
@@ -658,7 +658,7 @@ function Xe(n, t, e, i) {
     delay: o
   });
 }
-function de(n, t) {
+function fe(n, t) {
   return ot(n, f(f({}, t), {
     to: et.Parent
   }));
@@ -669,7 +669,7 @@ function Nn(n, t, e) {
   }));
 }
 function Pn() {
-  return de(Bt);
+  return fe(Bt);
 }
 function In(n, t) {
   return ot(n, f(f({}, t), {
@@ -700,7 +700,7 @@ var $e = function(n, t, e) {
   });
 }, Ve = function(n) {
   return {
-    type: ue,
+    type: ce,
     sendId: n
   };
 };
@@ -794,9 +794,9 @@ function zn(n, t) {
   }));
 }
 function Fn(n, t) {
-  return de(function(e, i, r) {
+  return fe(function(e, i, r) {
     return {
-      type: ce,
+      type: le,
       data: D(n) ? n(e, i, r) : n
     };
   }, f(f({}, t), {
@@ -836,7 +836,7 @@ var Yn = function(n) {
 };
 function Dt(n, t, e, i, r, s, o) {
   o === void 0 && (o = !1);
-  var h = o ? [] : Yn(r), a = h.length ? be(e, i, h, t) : e, u = o ? [e] : void 0, c = [];
+  var h = o ? [] : Yn(r), a = h.length ? xe(e, i, h, t) : e, u = o ? [e] : void 0, c = [];
   function d(y, p) {
     var S;
     switch (p.type) {
@@ -887,7 +887,7 @@ function Dt(n, t, e, i, r, s, o) {
         return s == null || s(b, e, i), b;
       }
       case $t: {
-        a = be(a, i, [p], s ? void 0 : t), u == null || u.push(a);
+        a = xe(a, i, [p], s ? void 0 : t), u == null || u.push(a);
         break;
       }
       default:
@@ -958,7 +958,7 @@ const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   resolveStop: Je,
   respond: In,
   send: ot,
-  sendParent: de,
+  sendParent: fe,
   sendTo: Nn,
   sendUpdate: Pn,
   start: Be,
@@ -967,10 +967,10 @@ const Un = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   toActionObjects: q,
   toActivityDefinition: Jt
 }, Symbol.toStringTag, { value: "Module" }));
-var xe = [], dt = function(n, t) {
-  xe.push(n);
+var Ee = [], dt = function(n, t) {
+  Ee.push(n);
   var e = t(n);
-  return xe.pop(), e;
+  return Ee.pop(), e;
 };
 function qe(n) {
   var t;
@@ -1199,7 +1199,7 @@ function Jn(n) {
     return e.meta !== void 0 && (t[e.id] = e.meta), t;
   }, {});
 }
-function Ee(n) {
+function Oe(n) {
   return new Set(R(n.map(function(t) {
     return t.tags;
   })));
@@ -1236,7 +1236,7 @@ var K = (
   /* @__PURE__ */ function() {
     function n(t) {
       var e = this, i;
-      this.actions = [], this.activities = me, this.meta = {}, this.events = [], this.value = t.value, this.context = t.context, this._event = t._event, this._sessionid = t._sessionid, this.event = this._event.data, this.historyValue = t.historyValue, this.history = t.history, this.actions = t.actions || [], this.activities = t.activities || me, this.meta = Jn(t.configuration), this.events = t.events || [], this.matches = this.matches.bind(this), this.toStrings = this.toStrings.bind(this), this.configuration = t.configuration, this.transitions = t.transitions, this.children = t.children, this.done = !!t.done, this.tags = (i = Array.isArray(t.tags) ? new Set(t.tags) : t.tags) !== null && i !== void 0 ? i : /* @__PURE__ */ new Set(), this.machine = t.machine, Object.defineProperty(this, "nextEvents", {
+      this.actions = [], this.activities = we, this.meta = {}, this.events = [], this.value = t.value, this.context = t.context, this._event = t._event, this._sessionid = t._sessionid, this.event = this._event.data, this.historyValue = t.historyValue, this.history = t.history, this.actions = t.actions || [], this.activities = t.activities || we, this.meta = Jn(t.configuration), this.events = t.events || [], this.matches = this.matches.bind(this), this.toStrings = this.toStrings.bind(this), this.configuration = t.configuration, this.transitions = t.transitions, this.children = t.children, this.done = !!t.done, this.tags = (i = Array.isArray(t.tags) ? new Set(t.tags) : t.tags) !== null && i !== void 0 ? i : /* @__PURE__ */ new Set(), this.machine = t.machine, Object.defineProperty(this, "nextEvents", {
         get: function() {
           return Gn(e.configuration);
         }
@@ -1311,12 +1311,12 @@ var K = (
       t.configuration, t.transitions;
       var e = t.tags;
       t.machine;
-      var i = he(t, ["configuration", "transitions", "tags", "machine"]);
+      var i = ue(t, ["configuration", "transitions", "tags", "machine"]);
       return f(f({}, i), {
         tags: Array.from(e)
       });
     }, n.prototype.matches = function(t) {
-      return le(t, this.value);
+      return de(t, this.value);
     }, n.prototype.hasTag = function(t) {
       return this.tags.has(t);
     }, n.prototype.can = function(t) {
@@ -1331,7 +1331,7 @@ var K = (
   }()
 ), qn = {
   deferEvents: !1
-}, Oe = (
+}, Me = (
   /** @class */
   /* @__PURE__ */ function() {
     function n(t) {
@@ -1384,7 +1384,7 @@ var K = (
     qt.delete(n);
   }
 };
-function fe() {
+function ve() {
   if (typeof globalThis < "u")
     return globalThis;
   if (typeof self < "u")
@@ -1396,12 +1396,12 @@ function fe() {
   j || console.warn("XState could not find a global object in this environment. Please let the maintainers know and raise an issue here: https://github.com/statelyai/xstate/issues");
 }
 function ti() {
-  var n = fe();
+  var n = ve();
   if (n && "__xstate__" in n)
     return n.__xstate__;
 }
 function ei(n) {
-  if (fe()) {
+  if (ve()) {
     var t = ti();
     t && t.register(n);
   }
@@ -1485,7 +1485,7 @@ Event: `
           if (i.status !== z.Stopped || i.parent !== y || // we need to send events to the parent from exit handlers of a machine that reached its final state
           i.state.done) {
             var p = f(f({}, c), {
-              name: c.name === ce ? "".concat(vt(i.id)) : c.name,
+              name: c.name === le ? "".concat(vt(i.id)) : c.name,
               origin: i.sessionId
             });
             !l && i.machine.config.predictableActionArguments ? i._outgoingQueue.push([y, p]) : y.send(p);
@@ -1525,7 +1525,7 @@ Event: `
             } else
               m.to ? i.sendTo(m._event, m.to, l === rt) : i.send(m._event);
             break;
-          case ue:
+          case ce:
             i.cancel(c.sendId);
             break;
           case kt: {
@@ -1581,7 +1581,7 @@ Event: `
         }
       };
       var r = f(f({}, n.defaultOptions), e), s = r.clock, o = r.logger, h = r.parent, a = r.id, u = a !== void 0 ? a : t.id;
-      this.id = u, this.logger = o, this.clock = s, this.parent = h, this.options = r, this.scheduler = new Oe({
+      this.id = u, this.logger = o, this.clock = s, this.parent = h, this.options = r, this.scheduler = new Me({
         deferEvents: this.options.deferEvents
       }), this.sessionId = wt.bookId();
     }
@@ -1839,7 +1839,7 @@ Event: `
             throw u.error;
         }
       }
-      this.scheduler.clear(), this.scheduler = new Oe({
+      this.scheduler.clear(), this.scheduler = new Me({
         deferEvents: this.options.deferEvents
       });
     }, n.prototype.stop = function() {
@@ -1977,7 +1977,7 @@ Event: `).concat(JSON.stringify(event)));
     }, n.prototype.spawn = function(t, e, i) {
       if (this.status !== z.Running)
         return Qe(t, e);
-      if (Se(t))
+      if (be(t))
         return this.spawnPromise(Promise.resolve(t), e);
       if (D(t))
         return this.spawnCallback(t, e);
@@ -2082,7 +2082,7 @@ Event: `).concat(JSON.stringify(event)));
       } catch (l) {
         this.send(vt(e, l));
       }
-      if (Se(c))
+      if (be(c))
         return this.spawnPromise(c, e);
       var d = (i = {
         id: e,
@@ -2183,7 +2183,7 @@ Event: `).concat(JSON.stringify(event)));
         return this;
       }, i));
     }, n.prototype.attachDev = function() {
-      var t = fe();
+      var t = ve();
       if (this.options.devTools && t) {
         if (t.__REDUX_DEVTOOLS_EXTENSION__) {
           var e = typeof this.options.devTools == "object" ? this.options.devTools : void 0;
@@ -2251,7 +2251,7 @@ function It(n) {
   }, n), {
     toJSON: function() {
       n.onDone, n.onError;
-      var t = he(n, ["onDone", "onError"]);
+      var t = ue(n, ["onDone", "onError"]);
       return f(f({}, t), {
         type: zt,
         src: si(n.src)
@@ -2502,7 +2502,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
         value: this.resolve(e.value),
         configuration: i,
         done: jt(i, this),
-        tags: Ee(i),
+        tags: Oe(i),
         machine: this.machine
       }));
     }, n.prototype.transitionLeafNode = function(t, e, i) {
@@ -2569,7 +2569,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
             t.matches(Mt(this.getStateNodeById(y).path, this.delimiter))
           ) : (
             // Check if in state by relative grandparent
-            le(Mt(y, this.delimiter), bn(this.path.slice(0, -2))(t.value))
+            de(Mt(y, this.delimiter), bn(this.path.slice(0, -2))(t.value))
           ) : !0, m = !1;
           try {
             m = !v || He(this.machine, v, p, e, t);
@@ -2800,20 +2800,20 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
         transitions: t.transitions,
         children: Zt,
         done: y,
-        tags: Ee(v),
+        tags: Oe(v),
         machine: this
       }), Q = i !== x;
       nt.changed = s.name === Bt || Q;
       var X = nt.history;
       X && delete X.history;
-      var ye = !y && (this._transient || d.some(function(V) {
+      var ge = !y && (this._transient || d.some(function(V) {
         return V._transient;
       }));
-      if (!l && (!ye || s.name === ft))
+      if (!l && (!ge || s.name === ft))
         return nt;
       var $ = nt;
       if (!y)
-        for (ye && ($ = this.resolveRaisedTransition($, {
+        for (ge && ($ = this.resolveRaisedTransition($, {
           type: Ne
         }, s, r)); F.length; ) {
           var an = F.shift();
@@ -2886,7 +2886,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
           return this.__cache.initialStateValue;
         var e;
         if (this.type === "parallel")
-          e = we(this.states, function(i) {
+          e = Se(this.states, function(i) {
             return i.initialStateValue || ut;
           }, function(i) {
             return i.type !== "history";
@@ -2971,7 +2971,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
       if (Object.keys(this.states).length)
         return {
           current: t || this.initialStateValue,
-          states: we(this.states, function(e, i) {
+          states: Se(this.states, function(e, i) {
             if (!t)
               return e.historyValue();
             var r = C(t) ? void 0 : t[i];
@@ -3119,7 +3119,7 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
       else if (Array.isArray(this.config.on))
         r = this.config.on;
       else {
-        var s = this.config.on, o = St, h = s[o], a = h === void 0 ? [] : h, u = he(s, [typeof o == "symbol" ? o : o + ""]);
+        var s = this.config.on, o = St, h = s[o], a = h === void 0 ? [] : h, u = ue(s, [typeof o == "symbol" ? o : o + ""]);
         r = R(Object.keys(u).map(function(g) {
           !j && g === ft && Y(!1, "Empty string transition configs (e.g., `{ on: { '': ... }}`) for transient transitions are deprecated. Specify the transition in the `{ always: ... }` property instead. " + 'Please check the `on` configuration for "#'.concat(i.id, '".'));
           var w = ht(g, u[g]);
@@ -3156,9 +3156,9 @@ var ft = "", se = "#", St = "*", ut = {}, ct = function(n) {
       return y;
     }, n;
   }()
-), Me = !1;
+), Ae = !1;
 function ui(n, t) {
-  return !j && !("predictableActionArguments" in n) && !Me && (Me = !0, console.warn("It is highly recommended to set `predictableActionArguments` to `true` when using `createMachine`. https://xstate.js.org/docs/guides/actions.html")), new hi(n, t);
+  return !j && !("predictableActionArguments" in n) && !Ae && (Ae = !0, console.warn("It is highly recommended to set `predictableActionArguments` to `true` when using `createMachine`. https://xstate.js.org/docs/guides/actions.html")), new hi(n, t);
 }
 var lt = Ke, Qt = ot;
 const { choose: ci } = Un, li = {
@@ -3419,7 +3419,7 @@ const { choose: ci } = Un, li = {
       unfinishedIsValid: (t, e) => t.unfinishedComponent.isValid()
     }
   }
-), vi = (n) => sn(fi(n)), ve = (n, t, e) => {
+), vi = (n) => sn(fi(n)), pe = (n, t, e) => {
   const i = {
     defineProperty(r, s, o) {
       return Object.is(o.value, r[s]) || (typeof t == "function" ? t.call(e || this, s, o.value, r[s], n) : t[s].call(e || this, o.value, r[s], n)), Reflect.defineProperty(r, s, o);
@@ -3427,7 +3427,7 @@ const { choose: ci } = Un, li = {
   };
   return new Proxy(n, i);
 };
-function Ae(n, t, e) {
+function Ce(n, t, e) {
   return new G(
     n,
     t,
@@ -3448,11 +3448,11 @@ class pi {
     return this.element.setAttribute("points", this.points.map((t) => `${t.x},${t.y}`).join(" ")), this;
   }
   addPoint(t, e) {
-    const i = { x: t, y: e }, r = ve(i, (s, o, h, a) => {
+    const i = { x: t, y: e }, r = pe(i, (s, o, h, a) => {
       var u, c;
       s !== "handle" && (this._logWarnOnOpOnFrozen("Point moved on"), this.updateElementPoints(), (c = (u = a.handle) == null ? void 0 : u["setAttr" + s.toUpperCase()]) == null || c.call(u, o));
     });
-    return i.handle = Ae.call(this, t, e, r), this.editorOwner.registerComponentHandle(i.handle), this.points.push(r), this.updateElementPoints(), this;
+    return i.handle = Ce.call(this, t, e, r), this.editorOwner.registerComponentHandle(i.handle), this.points.push(r), this.updateElementPoints(), this;
   }
   moveLastPoint(t, e) {
     const i = this.points[this.points.length - 1];
@@ -3470,7 +3470,7 @@ class pi {
     return this.points.forEach((e) => {
       var i;
       if (!e.handle) {
-        const r = Ae.call(this, e.x, e.y, e);
+        const r = Ce.call(this, e.x, e.y, e);
         e.handle = r, (i = this.editorOwner) == null || i.registerComponentHandle(r);
       }
       e.handle.setVisible(t);
@@ -3503,7 +3503,7 @@ class pi {
     });
   }
   setStyle(t) {
-    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), ae(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), he(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     for (let e in t)
@@ -3528,7 +3528,7 @@ class pi {
     this.isFrozen && console.warn(`${t} frozen ${this.element.tagName} with id ${this.element.id}`);
   }
 }
-function Ce() {
+function De() {
   const { x: n, y: t, width: e, height: i } = this.dim;
   this.handles = [
     new G(
@@ -3568,7 +3568,7 @@ function Ce() {
     (s = this.editorOwner) == null || s.registerComponentHandle(r);
   });
 }
-class pe {
+class ye {
   constructor(t, e) {
     this.editorOwner = null, this.includeAttributes = ["fill", "stroke", "opacity", "stroke-width"], this.dim = {
       x: 0,
@@ -3578,7 +3578,7 @@ class pe {
     }, this.handles = [], this.isSelected = !1, this.isFrozen = !1, this.propChangeListener = e, this.svgElementName = t, this.element = Z.createElementNS(it, this.svgElementName);
   }
   add(t, e, i, r = 0, s = 0) {
-    this.editorOwner = t, this.dim = ve(
+    this.editorOwner = t, this.dim = pe(
       {
         x: e,
         y: i,
@@ -3613,7 +3613,7 @@ class pe {
         }
       },
       this
-    ), Ce.call(this), [this.dim.width, this.dim.height] = [r, s], this.isSelected = !1, this.isFrozen = !1;
+    ), De.call(this), [this.dim.width, this.dim.height] = [r, s], this.isSelected = !1, this.isFrozen = !1;
   }
   freeze(t) {
     return this.isFrozen = t !== void 0 ? !!t : !0, this.handles.forEach((e) => e.freeze(t)), this;
@@ -3629,7 +3629,7 @@ class pe {
   }
   setHandlesVisibility(t) {
     var e, i;
-    return t && !((e = this.handles) != null && e.length) && Ce.call(this), (i = this.handles) == null || i.forEach((r) => r == null ? void 0 : r.setVisible(t)), this;
+    return t && !((e = this.handles) != null && e.length) && De.call(this), (i = this.handles) == null || i.forEach((r) => r == null ? void 0 : r.setVisible(t)), this;
   }
   setIsSelected(t) {
     return this._logWarnOnOpOnFrozen("Select/unselect performed on"), this.isSelected = t = t !== void 0 ? !!t : !0, this.setHandlesVisibility(t), this.style && J(
@@ -3656,7 +3656,7 @@ class pe {
     return this.dim.width = Number((this.dim.width * t).toFixed(2)), this.dim.height = Number((this.dim.height * t).toFixed(2)), this.dim.x = Number((this.dim.x * t).toFixed(2)), this.dim.y = Number((this.dim.y * t).toFixed(2)), this;
   }
   setStyle(t) {
-    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), ae(this.element, t.componentHover.off, t.componentHover.on), this;
+    return this.style = t, J(this.element, t.component), J(this.element, t.componentHover.off), J(this.element, t.componentSelect.off), he(this.element, t.componentHover.off, t.componentHover.on), this;
   }
   setDataAttributes(t) {
     var e;
@@ -3681,7 +3681,7 @@ class pe {
     this.isFrozen && console.warn(`${t} frozen ${(e = this.element) == null ? void 0 : e.tagName} with id ${(i = this.element) == null ? void 0 : i.id}`);
   }
 }
-class yi extends pe {
+class yi extends ye {
   constructor(t, e, i, r, s) {
     super("rect", {
       x: (o, h, a) => {
@@ -3702,7 +3702,7 @@ class yi extends pe {
     }), this.add(t, e, i, r, s);
   }
 }
-class gi extends pe {
+class gi extends ye {
   constructor(t, e, i, r, s) {
     super("circle", {
       // move
@@ -3734,7 +3734,7 @@ class gi extends pe {
     }), this.add(t, e, i, r, s);
   }
 }
-class mi extends pe {
+class mi extends ye {
   constructor(t, e, i, r, s) {
     super("ellipse", {
       x: (o, h, a) => {
@@ -3756,13 +3756,13 @@ class mi extends pe {
   }
 }
 var Ct = /* @__PURE__ */ ((n) => (n[n.LMB = 1] = "LMB", n[n.RMB = 2] = "RMB", n[n.MMB = 4] = "MMB", n))(Ct || {});
-const wi = new RegExp(/[A-Z]+/g), De = (n) => {
+const wi = new RegExp(/[A-Z]+/g), oe = (n) => {
   const t = n.matchAll(wi);
   for (let e of t)
     e.index && (n = n.replace(e[0], "-" + e[0].toLowerCase()));
   return n;
 };
-class oe {
+class ae {
   constructor(t, e = {}, i) {
     if (this.scale = 1, this.imageSizes = {
       width: 0,
@@ -3808,7 +3808,7 @@ class oe {
       t && t.tagName === "svg" && (this.svg = t);
     if (!this.svg)
       throw new Error("No SVG element provided");
-    this.cgroup = Z.createElementNS(it, "g"), this.hgroup = Z.createElementNS(it, "g"), this.svg.replaceChildren(this.cgroup, this.hgroup), this._cacheElementMapping = ve(
+    this.cgroup = Z.createElementNS(it, "g"), this.hgroup = Z.createElementNS(it, "g"), this.svg.replaceChildren(this.cgroup, this.hgroup), this._cacheElementMapping = pe(
       {},
       (r, s, o) => {
         s ? s instanceof G ? this.hgroup.appendChild(s.element) : this.cgroup.appendChild(s.element) : o instanceof G ? this.hgroup.removeChild(o.element) : o && (this.cgroup.removeChild(o.element), o.getHandles().forEach((h) => {
@@ -3894,10 +3894,10 @@ class oe {
     return U(this.cgroup, t, e), this;
   }
   removeFiguresEventListener(t, e) {
-    return ge(this.cgroup, t, e), this;
+    return me(this.cgroup, t, e), this;
   }
   off(t, e) {
-    return ge(this.svg, t, e), this;
+    return me(this.svg, t, e), this;
   }
   getComponentById(t) {
     return this._cacheElementMapping && this._cacheElementMapping[t];
@@ -3908,8 +3908,8 @@ class oe {
       var h, a;
       const s = e ? e(r.id) : r.id, o = {};
       for (let u in r.data)
-        o[De(u)] = r.data[u];
-      switch ((a = (h = r.data) == null ? void 0 : h.entries) == null || a.call(h).map(([u, c]) => ({ [De(u)]: c })), r.type) {
+        o[oe(u)] = r.data[u];
+      switch ((a = (h = r.data) == null ? void 0 : h.entries) == null || a.call(h).map(([u, c]) => ({ [oe(u)]: c })), r.type) {
         case "rect":
           return this.createRectangle(o, s);
         case "circle":
@@ -4070,7 +4070,7 @@ const Si = (n) => {
     Object.getPrototypeOf(r) === Object.prototype ? Wt(n[i], r) : n[i] = r;
   }), Wt(n, ...t);
 }, on = (n) => function(e, i = {}, r) {
-  return n ? bi(new oe(e, i, r)) : Si(new oe(e, i, r));
+  return n ? bi(new ae(e, i, r)) : Si(new ae(e, i, r));
 }, xi = (n) => "points" in n;
 class Kt {
   constructor(t, e) {
@@ -4184,28 +4184,32 @@ class Ti {
     return U(this.img, t, e), this;
   }
   async import(t, e) {
-    let i = new oe("builder", {
+    let i = new ae("builder", {
       isBuilderMode: !0,
       width: this.img.width,
       height: this.img.height
     });
     t.components.forEach((r) => {
-      switch (r.type === "polygon" && r.data, r.type) {
+      r.type === "polygon" && r.data;
+      const s = {};
+      for (let o in r.data)
+        s[oe(o)] = r.data[o];
+      switch (r.type) {
         case "rect":
-          const s = this.createRectangle(r.data, r.id);
-          this.componentsMap.set(s.id, s), this.zonesCount && this.setToZones(s), this.componentsMap.set(r.id, s);
-          break;
-        case "circle":
-          const o = this.createCircle(r.data, r.id);
+          const o = this.createRectangle(s, r.id);
           this.componentsMap.set(o.id, o), this.zonesCount && this.setToZones(o), this.componentsMap.set(r.id, o);
           break;
-        case "ellipse":
-          const h = this.createEllipse(r.data, r.id);
+        case "circle":
+          const h = this.createCircle(s, r.id);
           this.componentsMap.set(h.id, h), this.zonesCount && this.setToZones(h), this.componentsMap.set(r.id, h);
           break;
-        case "polygon":
-          const a = this.createPolygon(r.data, r.id);
+        case "ellipse":
+          const a = this.createEllipse(s, r.id);
           this.componentsMap.set(a.id, a), this.zonesCount && this.setToZones(a), this.componentsMap.set(r.id, a);
+          break;
+        case "polygon":
+          const u = this.createPolygon(s, r.id);
+          this.componentsMap.set(u.id, u), this.zonesCount && this.setToZones(u), this.componentsMap.set(r.id, u);
           break;
       }
     }), await i.loadImage(e, this.img.width, this.img.height).then(() => {
