@@ -48,6 +48,7 @@ export class MobileViewer {
     }
     this.width = width || 1200;
     this.height = height || 600;
+    this.initEvents();
   }
 
   get TouchHandler() {
@@ -124,10 +125,8 @@ export class MobileViewer {
 
     const zoneId = this.getZone(clickX, clickY);
     const zoneFigures = this.zonesMap.get(zoneId);
-    console.log({ clientY, clientX, rect, clickY, clickX, zoneId, zoneFigures });
     if (zoneFigures)
       for (const c of zoneFigures) {
-        console.log({ c });
         if (c.click(clickX, clickY)) {
           return c;
         }
