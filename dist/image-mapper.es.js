@@ -4175,7 +4175,7 @@ class Ti {
         Z.body.appendChild(this.img);
       },
       { once: !0 }
-    )) : (this.img = t, this.img.width = r || 1200, this.img.height = s || 600), this.width = r || 1200, this.height = s || 600;
+    )) : (this.img = t, this.img.width = r || 1200, this.img.height = s || 600), this.width = r || 1200, this.height = s || 600, this.initEvents();
   }
   get TouchHandler() {
     return this.touchHandler;
@@ -4223,9 +4223,9 @@ class Ti {
   getClickedComponent(t, e) {
     t = t / this.scale, e = e / this.scale;
     const i = this.img.getBoundingClientRect(), r = t - i.left / this.scale, s = e - i.top / this.scale, o = this.getZone(r, s), h = this.zonesMap.get(o);
-    if (console.log({ clientY: e, clientX: t, rect: i, clickY: s, clickX: r, zoneId: o, zoneFigures: h }), h) {
+    if (h) {
       for (const a of h)
-        if (console.log({ c: a }), a.click(r, s))
+        if (a.click(r, s))
           return a;
     }
   }
