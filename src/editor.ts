@@ -324,7 +324,7 @@ export class Editor {
       });
   }
 
-  public export(escape?: boolean) {
+  public export(escape?: boolean): Schema {
     const data = {
       idCounter: this._idCounter,
       components: Object.entries(this._cacheElementMapping)
@@ -336,7 +336,7 @@ export class Editor {
         }))
     };
 
-    return data;
+    return data as Schema;
   }
   public exportAsString() {
     const XML = new XMLSerializer().serializeToString(this.svg);
