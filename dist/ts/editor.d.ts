@@ -1,6 +1,6 @@
 import { createFSMService } from './fsm';
 import { Handle } from './handle';
-import { Component, EditorMode, EditorOptions, FigureOptions, MouseButtons, PolygonOptions, Schema, Style, SVGTagNames } from './types';
+import { Component, EditorMode, EditorOptions, FigureOptions, MouseButtons, PolygonOptions, Schema, Style } from './types';
 export declare class Editor {
     width: number;
     height: number;
@@ -40,14 +40,7 @@ export declare class Editor {
     off(eventTypes: string, handler: (e: Event) => {}): this;
     getComponentById(id: string): Component;
     import(data: Schema | string, idInterceptor?: (id: string) => string): any;
-    export(escape?: boolean): {
-        idCounter: number;
-        components: {
-            id: string;
-            type: SVGTagNames;
-            data: FigureOptions | PolygonOptions;
-        }[];
-    };
+    export(escape?: boolean): Schema;
     exportAsString(): string;
     createRectangle(dim: FigureOptions, id: string): Component;
     createCircle(dim: FigureOptions, id: string): Component;

@@ -17,7 +17,7 @@ export type FigureOptions = {
 } & Record<string, string | number>;
 export type PolygonOptions = {
     points: Array<PolygonPoint>;
-} & Record<string, string | number>;
+} & Record<string, any>;
 export type Component = Circle | Rectangle | Polygon | Ellipse;
 export declare enum MouseButtons {
     LMB = 1,
@@ -25,19 +25,17 @@ export declare enum MouseButtons {
     MMB = 4
 }
 export type SVGTagNames = 'circle' | 'ellipse' | 'polygon' | 'rect';
-interface ComponentDataMapping {
-    polygon: PolygonOptions;
-    rect: FigureOptions;
-    circle: FigureOptions;
-    ellipse: FigureOptions;
-}
-type SchemaComponents<T extends SVGTagNames> = Array<{
+type SchemaComponents<T = SVGTagNames> = Array<T extends 'polygon' ? {
     type: T;
     id: string;
-    data: ComponentDataMapping[T];
+    data: PolygonOptions;
+} : {
+    type: T;
+    id: string;
+    data: FigureOptions;
 }>;
 export type Schema = {
     id?: string;
-    components: SchemaComponents<SVGTagNames>;
+    components: SchemaComponents;
 };
 export {};
