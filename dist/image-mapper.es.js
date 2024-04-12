@@ -4091,10 +4091,10 @@ class Kt {
       };
     } else
       this.dim = {
-        x: t.x,
-        y: t.y,
-        width: t.width,
-        height: t.height
+        x: t.width < 0 ? t.x + t.width : t.x,
+        y: t.height < 0 ? t.y + t.height : t.y,
+        width: Math.abs(t.width),
+        height: Math.abs(t.height)
       };
     this.center = {
       x: this.dim.x + this.dim.width / 2,
@@ -4107,7 +4107,7 @@ class Ei extends Kt {
     super(t, e);
   }
   click(t, e) {
-    return t >= this.data.x && t <= this.data.x + this.data.width && e >= this.data.y && e <= this.data.y + this.data.height;
+    return t >= this.dim.x && t <= this.dim.x + this.dim.width && e >= this.dim.y && e <= this.dim.y + this.dim.height;
   }
 }
 class Oi extends Kt {
@@ -4115,7 +4115,7 @@ class Oi extends Kt {
     super(t, e);
   }
   click(t, e) {
-    const i = { x: this.data.x + this.data.width / 2, y: this.data.y + this.data.height / 2 };
+    const i = { x: this.dim.x + this.dim.width / 2, y: this.dim.y + this.dim.height / 2 };
     return Math.pow(t - i.x, 2) + Math.pow(e - i.y, 2) < Math.pow(this.data.width / 2, 2);
   }
 }
@@ -4124,7 +4124,7 @@ class Mi extends Kt {
     super(t, e);
   }
   click(t, e) {
-    const i = { x: this.data.x + this.data.width / 2, y: this.data.y + this.data.height / 2 };
+    const i = { x: this.dim.x + this.dim.width / 2, y: this.dim.y + this.dim.height / 2 };
     return Math.pow(t - i.x, 2) / Math.pow(this.data.width / 2, 2) + Math.pow(e - i.y, 2) / Math.pow(this.data.height / 2, 2) <= 1;
   }
 }
