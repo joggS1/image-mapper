@@ -8,10 +8,10 @@ export class MobileRectangle extends MobileFactory<FigureOptions> {
 
   click(clickX: number, clickY: number) {
     return (
-      clickX >= this.data.x &&
-      clickX <= this.data.x + this.data.width &&
-      clickY >= this.data.y &&
-      clickY <= this.data.y + this.data.height
+      clickX >= this.dim.x &&
+      clickX <= this.dim.x + this.dim.width &&
+      clickY >= this.dim.y &&
+      clickY <= this.dim.y + this.dim.height
     );
   }
 }

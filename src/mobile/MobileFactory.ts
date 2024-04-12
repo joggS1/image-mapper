@@ -34,10 +34,10 @@ export class MobileFactory<T extends PolygonOptions | FigureOptions> {
       };
     } else
       this.dim = {
-        x: data.x,
-        y: data.y,
-        width: data.width,
-        height: data.height
+        x: data.width < 0 ? data.x + data.width : data.x,
+        y: data.height < 0 ? data.y + data.height : data.y,
+        width: Math.abs(data.width),
+        height: Math.abs(data.height)
       };
     this.center = {
       x: this.dim.x + this.dim.width / 2,

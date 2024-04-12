@@ -127,7 +127,6 @@ export class MobileViewer {
     const rect = this.img.getBoundingClientRect();
     const clickX = clientX - rect.left / this.scale;
     const clickY = clientY - rect.top / this.scale;
-
     const zoneId = this.getZone(clickX, clickY);
     const zoneFigures = this.zonesMap.get(zoneId);
     if (zoneFigures)
@@ -171,7 +170,6 @@ export class MobileViewer {
 
   private setToZones(component: MobileComponent) {
     let tl, tr, br, bl;
-
     const { x, y, width, height } = component.dim;
     tl = { x, y };
     tr = { x: x + width, y };
